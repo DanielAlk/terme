@@ -1,0 +1,32 @@
+<% content_for :extra_js do %>
+  $('.slider.owl-carousel').owlCarousel({
+    loop:true,
+    items:1,
+    margin:0,
+    nav:true,
+    dots:true,
+    responsive:{
+        0:{ items:1}
+    }
+  });	
+<% end %>
+
+<div class="slider owl-carousel">
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_1.jpg' %>" alt="Slider 1"> <img class="mobile" src="<%= asset_path 'slider/Slider_1_mobile.jpg' %>" alt="Slider 1 Mobile">
+    <div class="info-slider">
+      <h2>ELEGÍ TU<br>
+        <span>equipo</span></h2>
+      <p>Preparate para vivir la experiencia<br>
+        INVERTER. Máximo Confort y máximo ahorro.</p>
+      <div class="cucarda">3 Años<br>
+        <span>de garantía</span></div>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_2.jpg' %>" alt="Slider 2"> <img class="mobile" src="<%= asset_path 'slider/Slider_2_mobile.jpg' %>" alt="Slider 2 Mobile">
+    <div class="info-slider">
+      <h2>EXPERTOS<br>
+        <span>en INSTALACIÓN Y MANTENIENTO</span></h2>
+      <p>Te asesoramos para que tengas la mejor experiencia, optimizando el uso de espacios según el cliente.</p>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+</div>
