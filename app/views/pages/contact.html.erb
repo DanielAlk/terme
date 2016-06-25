@@ -1,0 +1,111 @@
+<% content_for :body_class do %>
+	contacto
+<% end %>
+
+<% content_for :extra_js do %>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    items:1,
+    margin:0,
+    nav:true,
+    dots:true,
+    responsive:{
+        0:{ items:1}
+    }
+  });
+<% end %>
+
+<div class="slider owl-carousel">
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_1.jpg' %>" alt="Slider 1"> <img class="mobile" src="<%= asset_path 'slider/Slider_1_mobile.jpg' %>" alt="Slider 1 Mobile">
+    <div class="info-slider">
+      <h2>ELEGÍ TU<br>
+        <span>equipo</span></h2>
+      <p>Preparate para vivir la experiencia<br>
+        INVERTER. Máximo Confort y máximo ahorro.</p>
+      <div class="cucarda">3 Años<br>
+        <span>de garantía</span></div>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_2.jpg' %>" alt="Slider 2"> <img class="mobile" src="<%= asset_path 'slider/Slider_2_mobile.jpg' %>" alt="Slider 2 Mobile">
+    <div class="info-slider">
+      <h2>EXPERTOS<br>
+        <span>en INSTALACIÓN Y MANTENIENTO</span></h2>
+      <p>Te asesoramos para que tengas la mejor experiencia, optimizando el uso de espacios según el cliente.</p>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content-info">
+    <div class="breadcrumbs">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li>Contacto</li>
+      </ul>
+    </div>
+    <section class="contact">
+      <h2 class="no-display">Contacto</h2>
+      <div class="col-left">
+        <form name="contacto">
+          <ul class="form-list">
+            <li class="wide">
+              <div class="field">
+                <label class="requerido">Nombre Completo</label>
+                <input type="text" placeholder="ej.  roberto martinez" required>
+              </div>
+            </li>
+            <li class="wide">
+              <div class="field">
+                <label class="requerido">Email</label>
+                <input type="email" placeholder="ej.  nombre@mail.com" required>
+              </div>
+            </li>
+            <li class="wide">
+              <div class="field">
+                <label>Compañía</label>
+                <input type="text" placeholder="ej. tu compania (opcional)">
+              </div>
+            </li>
+            <li class="wide">
+              <div class="field">
+                <label class="requerido">Asunto</label>
+                <input type="text" placeholder="Solicitar Presupuesto" required>
+              </div>
+            </li>
+            <li class="wide">
+              <div class="field">
+                <label class="requerido">Mensaje</label>
+                <textarea name="msj"></textarea>
+              </div>
+            </li>
+          </ul>
+          <div class="btn">
+            <input type="submit" value="Enviar" name="enviar">
+          </div>
+        </form>
+      </div>
+      <div class="col-right">
+        <h2>Dirección</h2>
+        <div class="direccion"> <span class="icon"></span>
+          <p>Av San Martín 1545, Adrogué,<br>
+            Buenos Aires</p>
+        </div>
+        <p class="info">Lorem Ipsum is simply dummy<br>
+          text of the printing and over</p>
+        <div class="telefonos"> <span class="icon"></span> <span class="numeros">(+ 54 11) 4214.1345 <br>
+          (+54 11) 15.3126.3521</span> </div>
+        <div class="email"> <span class="icon"></span> <a href="mailto:info@ariaweb.com.ar">info@ariaweb.com.ar</a> </div>
+        <div class="info"> Si tenes preguntas sobre tu orden o necesitas informacion general nuestro servicio al cliente te respondera a la brevedad. </div>
+      </div>
+    </section>
+    <div class="partner-bottom">
+      <div class="partner"><img src="<%= asset_path 'partner/carrier.jpg' %>" alt=""></div>
+      <div class="partner"><img src="<%= asset_path 'partner/toshiba.jpg' %>" alt=""></div>
+      <div class="partner"><img src="<%= asset_path 'partner/midea.jpg' %>" alt=""></div>
+    </div>
+    <div class="socialmedia-bottom">
+      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
+      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
+      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
+    </div>
+  </div>
+</div>

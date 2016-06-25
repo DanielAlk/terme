@@ -1,0 +1,90 @@
+<% content_for :body_class do %>
+	club-partners
+<% end %>
+
+<% content_for :extra_js do %>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    items:1,
+    margin:0,
+    nav:true,
+    dots:true,
+    responsive:{
+        0:{ items:1}
+    }
+  });
+<% end %>
+
+<div class="slider owl-carousel">
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_1.jpg' %>" alt="Slider 1"> <img class="mobile" src="<%= asset_path 'slider/Slider_1_mobile.jpg' %>" alt="Slider 1 Mobile">
+    <div class="info-slider">
+      <h2>ELEGÍ TU<br>
+        <span>equipo</span></h2>
+      <p>Preparate para vivir la experiencia<br>
+        INVERTER. Máximo Confort y máximo ahorro.</p>
+      <div class="cucarda">3 Años<br>
+        <span>de garantía</span></div>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_2.jpg' %>" alt="Slider 2"> <img class="mobile" src="<%= asset_path 'slider/Slider_2_mobile.jpg' %>" alt="Slider 2 Mobile">
+    <div class="info-slider">
+      <h2>EXPERTOS<br>
+        <span>en INSTALACIÓN Y MANTENIENTO</span></h2>
+      <p>Te asesoramos para que tengas la mejor experiencia, optimizando el uso de espacios según el cliente.</p>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content-info">
+    <section class="clubpartners">
+      <h1>club de partners aria:</h1>
+      <div class="col-left">
+        <h2>¿Qué es el Club de Partners Aria (CPA)?</h2>
+        <p>Es un programa de membresía sin cargo para los Partners (miembros participantes), con grandes beneficios exclusivos,para profesionales vinculados con la construcción y remodelación de hogares y empresas.</p>
+        <h2>¿Quiénes pueden ser parte del Club?</h2>
+        <p>Se consideran Partners a todos aquellos profesionales que se encuentren dirigiendo proyectos de diseño, construcción y remodelación de hogares, comercios y empresas, tales como Arquitectos, Ingenieros Civiles, Diseñadores de Interiores, MMdeO, o directamente, propietarios.</p>
+        <h2>¿En qué consiste el CPA?</h2>
+        <p>Ser Partner significa poder acceder a los beneficios exclusivos de contar con Aria como socio  estratégico para todos aquellos proyectos de climatización de obras civiles y comerciales, sin importar la magnitud de la misma. Funciona de manera muy simple: Un Partner, que cuente con una necesidad de climatización de un proyecto y lo presente en el CPA para que ARIA se convierta en el proveedor que realice dicho proyecto y lo realice efectivamente, obtiene los Beneficios Exclusivos del CPA.</p>
+        <a href="#">Participar</a> </div>
+      <div class="col-right"> <img src="<%= asset_path 'club-partners/clubpartners.jpg' %>" alt="Club Partners Aria"> </div>
+    </section>
+    <section class="beneficios">
+      <h2>¿Cuáles son los Beneficios Exclusivos del CPA?</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td class="left"><h2>INSTANT <span>REBATE:</span></h2>
+              <p>Todo proyecto de climatización que un Partner presente en el CPA y que cuente con la aprobación de la contratación de Aria para realizarlo, por parte del propietario o contratista en la obra, generará un “INSTANT REBATE” (reembolso inmediato) para el Partner, constituido por un porcentaje del valor total del proyecto de climatización (en base a una escala), que se hará efectivo al momento de finalizar y cobrar el proyecto total.</p></td>
+            <td class="right"><h2><span>BONUS:</span></h2>
+              <p>Los Partners que mayor volumen de obras aportan, reciben además un premio adicional, según la escala vigente.</p></td>
+          </tr>
+          <tr>
+            <td class="left"><h2>DESCUENTOS Y <span>BONIFICACIONES:</span></h2>
+              <p>También los clientes de los Partners se benefician, ya que obtienen descuentos y bonificaciones en toda la línea de productos y servicios de ARIA, para las obras que contraten a través del CPA.</p></td>
+            <td class="right"><h2>ASESORAMIENTO <span>SIN CARGO: </span></h2>
+              <p>La planificación de la climatización de un proyecto de construcción o remodelación, no es para nada sencillo. Por eso, los Partners de CPA pueden solicitar asesoramiento sin cargo por parte de ARIA para su obra.</p></td>
+          </tr>
+          <tr>
+            <td class="left"><h2><span>DISPONIBILIDAD:</span></h2>
+              <p>En el sector de climatización, conseguir un proveedor que comience rápidamente a trabajar en un proyecto, es una tarea difícil, por la demanda que se genera en determinados momentos del año. Pero los Partners de CPA cuentan con  disponibilidad inmediata para sumarse al proyecto por parte de ARIA y su personal.</p></td>
+            <td class="right"><h2>¿Cómo participar <span>del CPA?</span></h2>
+              <p>a) Completar el formulario de Admisión. <br>
+                b) Y confirmar la recepción del email de aceptación y bienvenida como Partners enviado por ARIA. </p>
+              <p>A partir de ese momento, el Partner puede comenzar a presentar proyecto ¡y a disfrutar de los Beneficios Exclusivos!</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="button-set"> <a href="#">HAZ CLICK AQUí para empezar a participar del club de partners aria</a> </div>
+    <div class="partner-bottom">
+      <div class="partner"><img src="<%= asset_path 'partner/carrier.jpg' %>" alt=""></div>
+      <div class="partner"><img src="<%= asset_path 'partner/toshiba.jpg' %>" alt=""></div>
+      <div class="partner"><img src="<%= asset_path 'partner/midea.jpg' %>" alt=""></div>
+    </div>
+    <div class="socialmedia-bottom">
+      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
+      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
+      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
+    </div>
+  </div>
+</div>

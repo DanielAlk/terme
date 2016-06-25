@@ -1,0 +1,115 @@
+<% content_for :body_class do %>
+  checkout
+<% end %>
+
+<div class="slider">
+  <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
+</div>
+<div class="content">
+  <div class="content-info">
+    <div class="breadcrumbs">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li>Carrito</li>
+      </ul>
+    </div>
+    <section class="check">
+      <div class="pasos-checkout">
+        <h2><span>1</span> Carrito</h2>
+        <h1><span>2</span> Checkout</h1>
+        <h2><span>3</span> Confirma tu orden</h2>
+      </div>
+      <div class="col-left">
+        <div class="column-left">
+          <h2>CONTINUAR COMO <br>
+            <span>INVITADO!</span> </h2>
+          <div class="info">
+            <p>Registrate para obtener beneficios:</p>
+            <p><strong>Podes guardar tu informacion para agilizar  tu proxima compra y recibir descuentos.</strong></p>
+          </div>
+          <form>
+            <div class="action">
+              <ul class="seleccione">
+                <li>
+                  <input type="radio" name="seleccione-uss" value="invitado">
+                  <label >Checkout como invitado</label>
+                </li>
+                <li>
+                  <input type="radio" name="seleccione-uss" value="registrado">
+                  <label >Registrarse</label>
+                </li>
+              </ul>
+            </div>
+            <div class="info">
+              <ul class="inform">
+                <li>Checkout fácil y rápido.</li>
+                <li>Cupones de descuento vía Email. </li>
+              </ul>
+            </div>
+            <div class="btn">
+              <input type="submit" value="llenar formulario" name="llenar formulario">
+            </div>
+          </form>
+        </div>
+        <div class="column-right">
+          <h2>estas <br>
+            <span>REGISTRADO?</span> </h2>
+          <div class="info">
+            <p>Sos miembro?</p>
+            <p class="datos">ingresa tus datos:</p>
+          </div>
+          <form>
+            <div class="action">
+              <ul class="form-list formulario">
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido">Email</label>
+                    <input type="email" required name="email">
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido">Password</label>
+                    <input type="password" required name="email">
+                  </div>
+                </li>
+              </ul>
+              <div class="passw">
+                <p>* Campos requeridos</p>
+                <a href="#">Olvidaste tu password?</a> </div>
+            </div>
+            <div class="btn">
+              <input type="submit" name="Ingresar" value="Ingresar">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-right">
+        <h2>REVISA TU ORDEN</h2>
+        <div class="resumen">
+          <div class="label items">tu carrito</div>
+          <div class="item right">2 Items</div>
+          <div class="label totales">TOTAL</div>
+          <div class="total right">$14,824.50</div>
+        </div>
+        <div class="action">
+          <button class="checkout"> checkout con<br>
+          mercadopago </button>
+        </div>
+      </div>
+    </section>
+    <div class="separador"></div>
+    <section class="mercadopago">
+      <h2 class="no-display">Mercado Pago</h2>
+      <div class="info-mp"> <img src="<%= asset_path 'referencia.jpg' %>" alt="MP"> </div>
+      <div class="confir-compra">
+        <p>La instalación de los equipos y repuestos adquiridos no está incluida en este valor, deberá presupuestarse aparte y en el lugar de montaje de los mismos. Los valores no incluyen IVA y están expresados en Pesos Argentinos. La empresa se reserva el derecho de modificarlos sin previo aviso.</p>
+        <a href="#" class="confirmar"> confirmar compra </a> </div>
+    </section>
+    <div class="socialmedia-bottom">
+      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
+      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
+      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
+    </div>
+  </div>
+</div>

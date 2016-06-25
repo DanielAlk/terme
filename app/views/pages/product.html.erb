@@ -1,0 +1,257 @@
+<% content_for :body_class do %>
+	product-view-page
+<% end %>
+
+<% content_for :extra_js do %>
+  $('#galeria-thumbs.owl-carousel').owlCarousel({
+    loop:false,
+    items:3,
+    margin:0,
+    nav:true,
+    dots:false,
+    responsive:{
+        0:{ items:3}
+    }
+  });
+
+  $(document).ready( function() { 
+    var el = $('.qty'); 
+    function change( amt ) { 
+      el.val( parseInt( el.val(), 10 ) + amt ); 
+    } 
+
+    $('.mas').click( function() { 
+      change( 1 ); 
+    } ); 
+  } );
+  
+  $('section.relacionados .owl-carousel').owlCarousel({
+    loop:false,
+    items:1,
+    slideBy:1,
+    margin:0,
+    nav: true,
+    dots: false,
+    responsive:{
+      0:{items:1},
+      650:{items:2},
+      800:{items:3},
+      1025:{items:4},
+      1251:{items:5}
+    }
+  });
+<% end %>
+
+<div class="slider">
+  <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
+</div>
+<div class="content">
+  <div class="content-info">
+    <div class="breadcrumbs">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Productos y Servicios</a></li>
+        <li><a href="">Equipos</a></li>
+        <li>Comercial</li>
+      </ul>
+    </div>
+    <section>
+      <div class="product-view">
+        <div class="product-imagen">
+          <div class="image"> <img id="img_01" src="<%= asset_path 'product-imgs/product_001_small.jpg' %>" alt="Producto Imagen" data-zoom-image="<%= asset_path 'product-imgs/product_001_big.jpg' %>"/> </div>
+          <div id="galeria-thumbs"  class="galeria owl-carousel"> <a href="#" data-image="<%= asset_path 'product-imgs/product_001_small.jpg' %>" data-zoom-image="<%= asset_path 'product-imgs/product_001_big.jpg' %>"> <img id="img_001" src="<%= asset_path 'product-imgs/product_001_thumb.jpg' %>" alt="Producto Imagen" /> </a> <a href="#" data-image="<%= asset_path 'product-imgs/product_002_small.jpg' %>" data-zoom-image="<%= asset_path 'product-imgs/product_002_big.jpg' %>"> <img id="img_02" src="<%= asset_path 'product-imgs/product_002_thumb.jpg' %>" alt="Producto Imagen" /> </a> <a href="#" data-image="<%= asset_path 'product-imgs/product_003_small.jpg' %>" data-zoom-image="<%= asset_path 'product-imgs/product_003_big.jpg' %>"> <img id="img_03" src="<%= asset_path 'product-imgs/product_003_thumb.jpg' %>" alt="Producto Imagen" /> </a> <a href="#" data-image="<%= asset_path 'product-imgs/product_004_small.jpg' %>" data-zoom-image="<%= asset_path 'product-imgs/product_004_big.jpg' %>"> <img id="img_04" src="<%= asset_path 'product-imgs/product_004_thumb.jpg' %>" alt="Producto Imagen" /> </a> <a href="#" data-image="<%= asset_path 'product-imgs/product_005_small.jpg' %>" data-zoom-image="<%= asset_path 'product-imgs/product_005_big.jpg' %>"> <img id="img_05" src="<%= asset_path 'product-imgs/product_005_thumb.jpg' %>" alt="Producto Imagen" /> </a> </div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">
+            <h1 class="title">Carrier Nexgen LL F/C 5550 Cal.</h1>
+            <div class="reviews">
+              <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                <input type="radio" id="star4half" name="rating" value="4 and a half" />
+                <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                <input type="radio" id="star3half" name="rating" value="3 and a half" />
+                <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                <input type="radio" id="star2half" name="rating" value="2 and a half" />
+                <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                <input type="radio" id="star1half" name="rating" value="1 and a half" />
+                <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                <input type="radio" id="starhalf" name="rating" value="half" />
+                <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+              </div>
+              <label>1 Review(s)</label>
+            </div>
+          </div>
+          <div class="product-price">
+            <div class="price"> $ 15.978,50 </div>
+            <div class="code-stock">
+              <div class="sku"> Código de Producto: <span>257</span> </div>
+              <div class="stock"> En stock </div>
+            </div>
+          </div>
+          <div class="separador"></div>
+          <div class="caracteristicas">
+            <h3>Características</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled  it to make a type specimen book. When an unknown printer took a galley of type.</p>
+          </div>
+          <div class="separador"></div>
+          <div class="dimensiones">
+            <h3>Dimensiones</h3>
+            <p>60X23X21 CM.</p>
+          </div>
+          <a href="#" class="ver-ficha"> ver ficha oficial Carrier </a>
+          <div class="separador"></div>
+          <div class="agregar-carrito">
+            <form>
+              <div class="cantidad">
+                <label >Catidad:</label>
+                <input type="text" class="qty" name="cantidad" value="1"/>
+                <span class="mas">+</span> </div>
+              <div class="agregar-boton">
+                <button>Agregar al Carrito</button>
+              </div>
+              <div class="compartir-product">
+                <ul>
+                  <li><a href="#">+ Email a un amigo</a></li>
+                  <li><a href="#">+ Compartir en Facebook</a></li>
+                  <li><a href="#">+ Compartir en Twitter</a></li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="product-descripcion">
+      <label class="tab1 active">Ficha Técnica</label>
+      <div class="content-tab1" style="display:block;">
+        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+        <p> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+        <ul>
+          <li>- 6.1 oz. 100% preshrunk heavyweight cotton</li>
+          <li>- Shoulder-to-shoulder taping</li>
+          <li>- Double-needle sleeves and bottom hem</li>
+        </ul>
+        <p>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. </p>
+      </div>
+      <label class="tab2">información adicional</label>
+      <div class="content-tab2"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis laboriosam, pariatur ipsam, provident voluptatum dignissimos quod ducimus quo praesentium, obcaecati ut libero soluta sequi repudiandae, beatae expedita nesciunt saepe aliquid? </div>
+      <label class="tab3">tags</label>
+      <div class="content-tab3">
+        <p><a href="#">Aire acondicionado</a></p>
+        <p><a href="#">Anafes</a></p>
+        <p><a href="#">Carrier</a></p>
+        <p><a href="#">Domec</a></p>
+        <p><a href="#">Midea</a></p>
+        <p><a href="#">Pisos</a></p>
+        <p><a href="#">Calefón</a></p>
+        <p><a href="#">Hornos</a></p>
+        <p><a href="#">Campanas</a></p>
+        <p><a href="#">Cintas</a></p>
+        <p><a href="#">Aislantes</a></p>
+      </div>
+    </div>
+    <section class="relacionados">
+      <h2>Productos Relacionados</h2>
+      <ul id="relacionados" class="carrusel owl-carousel">
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="#" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="#" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="#" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="#" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <div class="socialmedia-bottom">
+      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
+      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
+      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
+    </div>
+  </div>
+</div>
