@@ -3,6 +3,8 @@
 <% end %>
 
 <% content_for :extra_js do %>
+  AriaProductInit();
+
   $('#galeria-thumbs.owl-carousel').owlCarousel({
     loop:false,
     items:3,

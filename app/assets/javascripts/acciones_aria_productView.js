@@ -1,4 +1,4 @@
-$(document).ready(function(){
+var AriaProductInit = function() {
 
 // ------------------------------------------>
      (function($){
@@ -74,4 +74,4 @@ $(document).ready(function(){
     
     
     
-});
+};
