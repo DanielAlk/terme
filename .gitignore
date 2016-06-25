@@ -30,6 +30,7 @@
 /public/system/*
 /public/sitemap*
 /public/assets/*
+/public/fileserver/*
 /vendor/bundle/*
 /private_paperclip/
 
