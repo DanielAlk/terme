@@ -1,4 +1,4 @@
-$(document).ready(function(){
+var AriaInit = function() {
     
 
 
@@ -256,4 +256,4 @@ $(document).ready(function(){
     
     
     
-});
+};

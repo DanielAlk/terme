@@ -13,6 +13,7 @@
 	<%= render 'layouts/footer' %>
 	<script>
 		$(function() {
+			AriaInit();
 			<%= yield :extra_js if content_for? :extra_js %>
 		});
 	</script>

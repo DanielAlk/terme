@@ -40,30 +40,30 @@
         <div class="menu-mobile"></div>
         <nav>
           <ul class="level0">
-            <li><a href="#">home</a></li>
-            <li><a href="catalogo.html">La Empresa</a></li>
-            <li> <a href="catalogo.html">Productos y Servicios</a>
+            <li><a href="<%= root_path %>">home</a></li>
+            <li><a href="<%= about_page_path %>">La Empresa</a></li>
+            <li> <a href="<%= catalog_page_path %>">Productos y Servicios</a>
               <ul class="level1">
-                <li> <a href="catalogo.html">item 1</a>
+                <li> <a href="<%= catalog_page_path %>">item 1</a>
                   <ul class="level2">
-                    <li><a href="catalogo.html">item1 - 2</a></li>
-                    <li><a href="catalogo.html">item1 - 2</a></li>
-                    <li><a href="catalogo.html">item1 - 2</a></li>
+                    <li><a href="<%= catalog_page_path %>">item1 - 2</a></li>
+                    <li><a href="<%= catalog_page_path %>">item1 - 2</a></li>
+                    <li><a href="<%= catalog_page_path %>">item1 - 2</a></li>
                   </ul>
                 </li>
-                <li> <a href="catalogo.html">item 2</a>
+                <li> <a href="<%= catalog_page_path %>">item 2</a>
                   <ul class="level2">
-                    <li><a href="catalogo.html">item2 - 2</a></li>
-                    <li><a href="catalogo.html">item2 - 2</a></li>
-                    <li><a href="catalogo.html">item2 - 2</a></li>
+                    <li><a href="<%= catalog_page_path %>">item2 - 2</a></li>
+                    <li><a href="<%= catalog_page_path %>">item2 - 2</a></li>
+                    <li><a href="<%= catalog_page_path %>">item2 - 2</a></li>
                   </ul>
                 </li>
-                <li><a href="catalogo.html">item 3</a></li>
+                <li><a href="<%= catalog_page_path %>">item 3</a></li>
               </ul>
             </li>
-            <li><a href="catalogo.html">Clubs de Partners Aria</a></li>
-            <li><a href="catalogo.html">Noticias</a></li>
-            <li><a href="catalogo.html">Contacto</a></li>
+            <li><a href="<%= partners_page_path %>">Clubs de Partners Aria</a></li>
+            <li><a href="<%= news_page_path %>">Noticias</a></li>
+            <li><a href="<%= contact_page_path %>">Contacto</a></li>
           </ul>
         </nav>
         <div class="carrito" title="Carrit Aria">
@@ -79,8 +79,8 @@
             <div class="editar"> <a href="#"> <span class="icon"></span> <span class="edit">editar</span> </a> </div>
           </div>
           <div class="acciones">
-            <div class="ver-carrito"> <a href="#"> ver carrito </a> </div>
-            <div class="completar"> <a href="#"> completar compra </a> </div>
+            <div class="ver-carrito"> <a href="<%= cart_page_path %>"> ver carrito </a> </div>
+            <div class="completar"> <a href="<%= checkout_page_path %>"> completar compra </a> </div>
           </div>
         </div>
       </div>
