@@ -1,0 +1,566 @@
+/*  Carrito */
+
+.carrito {
+    .content .content-info {
+        section{
+            .col-left{
+                float: left;
+                width: percentage(1000px / 1500px);
+                
+                .carrito-tabla{
+                    empty-cells: hide;
+                    border-spacing:0;
+                    th{
+                        border-bottom: 1px solid $c-gris-submenu-icon-mobile;
+                        padding: 10px;
+                        vertical-align: top;
+                        font-family: Aria-Book;
+                        font-size: $f-size-xl;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        &.center{
+                            text-align: center;
+                        }
+                        &.right{
+                            text-align: right;
+                        }
+                    }
+                    td{
+                        padding: 40px 10px;
+                        vertical-align: top;
+                        border-bottom: 1px solid $c-gris-submenu-icon-mobile;
+                        
+                        &.img-pruduct{
+                            padding-left: 0;
+                            img{
+                                width: 100px;
+                            }
+                        }
+                         &.nombre-product{
+                             h3.product-name{
+                                 font-size: 18px;
+                                 font-family: Aria-Medium;
+                                 color: $c-gris-oscuro2;
+                                 padding: 0;
+                                 margin: 0 0 4px 0;
+                             }
+                             .descripcion{
+                                 font-family: Roboto;
+                                 font-weight: 300;
+                                 color: $c-gris-h2;
+                                 line-height: 1.3;
+                                 font-size: $f-size;
+                             }
+                             .compartir{
+                                 font: 0/0 a;
+                                 margin-top: 20px;
+                                 a{
+                                     display: inline-block;
+                                     vertical-align: top;
+                                     width: 27px;
+                                     height: 27px;
+                                     @include iconsprite;
+                                     
+                                     &.facebook{
+                                         background-position: 6px -906px;
+                                         margin-right: 15px;
+                                     }
+                                     &.twitter{
+                                         background-position: -50px -907px;
+                                     }
+                                     &:hover{
+                                         opacity: 0.6;
+                                     }
+                                 }
+                             }
+                        }
+                        &.precio-product{
+                            width: 120px;
+                            text-align: right;
+                            font-size: 18px;
+                             font-family: Aria-Medium;
+                             color: $c-gris-oscuro2;
+                        }
+                        
+                        &.cantidad-product{
+                            text-align: center;
+                            padding-top: 38px;
+                            span, input{
+                                display: inline-block;
+                                vertical-align: middle;
+                                text-align: center;
+                            }
+                            
+                            span{
+                                height: 25px;
+                                width: 15px;
+                                line-height: 25px;
+                                background: $c-blanco;
+                                font-family: Roboto;
+                                font-weight: 300;
+                                cursor: pointer;
+                                
+                                &:hover{
+                                    background: $c-verde-link;
+                                }
+                            }
+                            
+                            input{
+                                width: 40px;
+                                height: 30px;
+                                text-align: center;
+                            }
+                        }
+                        
+                        &.subtotal-product{
+                            width: 120px;
+                            text-align: right;
+                            font-size: 18px;
+                             font-family: Aria-Medium;
+                             color: $c-gris-oscuro2;
+                        }
+                        &.borrar-product{
+                            text-align: right;
+                            padding-top: 36px;
+                            padding-right: 0;
+                            padding-left: 0;
+                            
+                            span{
+                                display: inline-block;
+                                vertical-align: top;
+                                width: 20px;
+                                height: 20px;
+                                background: url(<%= asset_path 'eliminar_cart.png' %>);
+                                background-size: 100% 100%;
+                                font: 0/0 a;
+                            }
+                        }
+                    }
+                }
+                .cupon-btn{
+                    padding: 30px 0;
+                    @include clear;
+                    
+                    .cupon-descuento{
+                        width: percentage(750px / 1500px);
+                        max-width: 430px;
+                        float: left;
+                        padding-right: 25px;
+                        
+                        label{
+                            display: block;
+                            line-height: 1;
+                            font-family: Aria-Medium;
+                            font-size: 25px;
+                            margin-bottom: 10px;
+                            text-transform: uppercase;
+                        }
+                        
+                        input{
+                            
+                            &::-webkit-input-placeholder { font-size: $f-size-xl;font-family: Roboto;font-weight: 300; text-transform: uppercase;color:$c-gris-menu-mobile; } /* WebKit */
+                            &:-moz-placeholder {font-size: $f-size-xl;font-family: Roboto;font-weight: 300; text-transform: uppercase;color:$c-gris-menu-mobile;} /* Firefox 18- */
+                            &::-moz-placeholder {font-size: $f-size-xl;font-family: Roboto;font-weight: 300; text-transform: uppercase;color:$c-gris-menu-mobile;} /* Firefox 19+ */
+                            &:-ms-input-placeholder {font-size: $f-size-xl;font-family: Roboto;font-weight: 300; text-transform: uppercase;color:$c-gris-menu-mobile;} /* IE 10+ */
+                        }
+                    }
+                    .btn-actualizar{
+                        width: percentage(750px / 1500px);
+                        max-width: 350px;
+                        float: right;
+                        padding-left: 25px;
+                        padding-top: 35px;
+                        
+                        input[type=submit]{
+                            line-height: 46px;
+                            font-family: Aria-Medium;
+                            color: $c-blanco;
+                            font-size: 19px;
+                            margin-bottom: 2px;
+                            text-transform: uppercase;
+                            background: $c-gris-menu;
+                            border: 0;
+                            letter-spacing: 0.05em;
+                            cursor: pointer;
+                            @include transicion-rapida;
+                            
+                            &:hover{
+                                background: $c-verde-link;
+                            }
+                        }
+                        
+                        a.comprar{
+                            float: right;
+                            font-family: Roboto;
+                            font-size: 20px;
+                            font-style: italic;
+                            color: $c-gris-oscuro;
+                            text-decoration: underline;
+                            font-weight: 300;
+                        }
+                    }
+                }
+            }
+            .col-right{
+                float: right;
+                width: percentage(460px / 1500px);
+                color: $c-blanco;
+                background: $c-gris-menu;
+                padding: 30px;
+                
+                h2{
+                    font-family: Aria-Medium;
+                    font-size: 22px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                    color: $c-blanco;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                }
+                .resumen{
+                    font-family: Aria-Medium;
+                    font-size: 0;
+                    @include clear;
+                    
+                    div{
+                        display: inline-block;
+                        vertical-align: top;
+                        font-size: $f-size;
+                        font-family: Roboto;
+                        margin-bottom: 30px;
+                        
+                        &.right{
+                            text-align: right;
+                            padding-left: 10px;
+                            width: percentage(650px / 1500px);
+                            font-size: 18px;
+                        }
+                        
+                        &.label{
+                            font-family: Aria-Book;
+                            font-size: 17px;
+                            letter-spacing: 0.05em;
+                            text-transform: uppercase;
+                            padding-right: 10px;
+                            width: percentage(850px / 1500px);
+                        }
+                        
+                        &.envios{
+                            width: percentage(1100px / 1500px);
+                            span.link{
+                                display: block;
+                                cursor: pointer;
+                                
+                                &:after{
+                                    content: ' ';
+                                    display: inline-block;
+                                    border-style: solid;
+                                    border-width: 12px 7.5px 0 7.5px;
+                                    border-color: $c-blanco transparent transparent transparent;
+                                    margin-left: 12px;
+                                }
+                                
+                                &:hover{
+                                    color: $c-verde-link;
+                                    
+                                    &:after{
+                                        border-color: $c-verde-link transparent transparent transparent;
+                                    }
+                                }
+                            }
+                            
+                            ul.lista-envios{
+                                margin-top: 10px;
+                                margin-right: -60px;
+                                display: none;
+                                max-width: 400px;
+                                li{
+                                    @include clear;
+                                    background: $c-gris-menu-hover;
+                                    a{
+                                        color: $c-blanco;
+                                        display: block;
+                                        padding: 10px 5px;
+                                        @include clear;
+                                        div{
+                                            margin: 0;
+
+
+                                            &.ciudad{
+                                                float: left;
+                                            }
+                                            &.costo{
+                                                float: right;
+                                            }
+                                        }
+                                        
+                                        &:hover{
+                                            background: $c-gris-oscuro;
+                                        }
+                                    }
+                                    
+                                    &:nth-child(odd){
+                                        background: $c-verde-link;
+                                    }
+                                }
+                            }
+                        }
+                        &.envio{width: percentage(400px / 1500px);}
+                        &.totales{
+                            width: percentage(450px / 1500px);
+                        }
+                        &.total{
+                            width: percentage(1050px / 1500px);
+                        }
+                        &.total, &.totales{
+                            font-size: 24px;
+                        }
+                    }
+                }
+                @media only screen and (min-width: $bp970 + 1) and (max-width: 1170px) {
+                    .resumen div.label.items,
+                    .resumen div.item.right,
+                    .resumen div.label.envios,
+                    .resumen div.envio.right{
+                        font-size: 13px;
+                    }
+                    
+                }
+                .action{
+                    margin: 30px 0;
+                    
+                    button{
+                        width: $w-full;
+                        max-width: 400px;
+                        display: block;
+                        float: none;
+                        font-size: 30px;
+                        text-align: center;
+                        padding: 18px 5px 10px;
+                        line-height: 1;
+                        margin: 0 auto;
+                        
+                        &:hover{
+                            background: $c-gris-oscuro;
+                        }
+                    }
+                }
+            }
+            
+            &.cart{
+                padding-bottom: 40px;
+                border-bottom: 1px solid $c-gris-submenu-icon-mobile;
+            }
+            @include clear;
+        }
+        
+            section.relacionados{
+                margin-top: 40px;
+                margin-bottom: 80px;
+                h2{
+                    font-family: Aria-Medium;
+                    font-size: 28px;
+                    letter-spacing: 0.02em;
+                    margin-bottom: 20px;
+                }
+             .owl-carousel{
+                .owl-nav{
+                    top:50%;
+                    width: 100%;
+                    right: inherit;
+                    left: 0;
+                    margin-top: -25px;
+                    height: 1px;
+                    .owl-prev, .owl-next{
+                        width: 50px;
+                        height: 50px;
+                        background-color: $c-verde-link;
+                        @include iconsprite;
+                    }
+                    .owl-prev{
+                        margin-left: -15px;
+                        float: left;
+                           background-position: -69px -761px;
+
+                        &:hover{
+                            background-color: $c-gris-menu;
+                        }
+                    }
+                    .owl-next{
+                        float: right;
+                        margin-right: -15px;
+                            background-position: -68px -829px;
+
+                        &:hover{
+                            background-color: $c-gris-menu;
+                        }
+                    }
+                }
+                &.owl-drag .owl-item{
+                    padding: 0 10px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: $bp970 + 1) and (max-width: 1100px) {
+            .carrito {
+                .content .content-info {
+                    section{
+                        .col-left{
+                            .carrito-tabla{
+                                 td{
+                                    &.img-pruduct{
+                                        padding-left: 0;
+                                        img{
+                                            width: 70px;
+                                        }
+                                    }
+                                    &.nombre-product{
+                                         h3.product-name{
+                                             font-size: 16px;
+                                         }
+                                         .descripcion{
+                                             font-size: $f-size-s;
+                                         }
+                                    }
+                                    &.precio-product{
+                                        font-size: $f-size-xl;
+                                    }
+                                    &.cantidad-product{
+
+                                    }
+                                    &.subtotal-product{
+                                        font-size: $f-size-xl;
+                                    }
+                                    &.borrar-product{
+                                        span{
+                                            width: 15px;
+                                            height: 15px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+}
+
+@media only screen and (max-width: $bp970) {
+    .carrito {
+        .content .content-info {
+            section{
+                .col-left{
+                    width: $w-full;
+                }
+                .col-right{
+                    width: $w-full;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp760) {
+    .carrito {
+        .content .content-info {
+            section{
+                .col-left{
+                    .carrito-tabla{
+                        thead{
+                            display: none;
+                        }
+                        tbody tr{
+                            display: block;
+                            width: $w-full;
+                            padding: 30px 0 15px;
+                            border-bottom: 1px solid $c-gris-submenu-icon-mobile;
+                            position: relative;
+                            td,
+                            td.nombre-product,
+                            td.precio-product,
+                            td.subtotal-product,
+                            td.borrar-product,
+                            td.cantidad-product{
+                                display: block;
+                                width: $w-full;
+                                border-bottom: 0;
+                                padding: 0 0 15px 0;
+                                margin: 0;
+                                padding-top: 0;
+                                text-align: left;
+                                
+                                .compartir{
+                                    margin-top: 10px;
+                                }
+                            }
+                            td.borrar-product{
+                                padding: 0;
+                                span{
+                                    position: absolute;
+                                    top: 30px;
+                                    right: 10px;
+                                }
+                            }
+                            
+                            &:first-child{
+                                border-top: 1px solid $c-gris-submenu-icon-mobile;
+                            }
+                        }
+                    }
+                }
+                .col-right{
+                    width: $w-full;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .carrito {
+        .content .content-info {
+            section{
+                .col-left{
+                    .cupon-btn{
+                        .cupon-descuento{
+                            width: $w-full;
+                            max-width: $w-full;
+                            padding-right: 0;
+                            padding-bottom: 35px;
+                        }
+                        .btn-actualizar{
+                            width: $w-full;
+                            max-width: $w-full;
+                            border-top: 1px solid $c-gris-submenu-icon-mobile;
+                            padding-left: 0;
+                            margin-bottom: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp479) {
+     .carrito {
+        .content .content-info {
+            section{
+                .col-right{
+                    padding: 15px;
+                    
+                    .resumen div.label.items,
+                    .resumen div.item.right,
+                    .resumen div.label.envios,
+                    .resumen div.envio.right{
+                        font-size: 13px;
+                    }
+                }
+            }
+         }
+    }
+}
+

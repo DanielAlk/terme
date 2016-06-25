@@ -1,0 +1,223 @@
+/* Club Partners */
+
+body.club-partners{
+    .partner-bottom{
+        margin-bottom: 30px;
+    }
+    section.clubpartners{
+        padding: 50px;
+        margin-top: -20px;
+        background: $c-blanco;
+        @include clear;
+            
+            h1{
+                font-family: Aria-Medium;
+                padding: 0 0 30px;
+            }
+        
+        .col-left{
+            display: table-cell;
+            vertical-align: top;
+            width: percentage(600px/1000px);
+            padding-right: 15px;
+            
+            h2{
+                font-family: Aria-Medium;
+                color: $c-verde-link;
+                padding: 20px 0;
+            }
+            p{
+                color: $c-gris-menu;
+                font-size: $f-size-l;
+                font-weight: 300;
+                margin-bottom: 15px;
+                line-height: 1.3;
+            }
+            
+            a{
+                display: inline-block;
+                padding: 15px 25px;
+                background: $c-verde-link;
+                color: $c-blanco;
+                font-family: Aria-Medium;
+                font-size: $f-size-l;
+                line-height: 1;
+                text-transform: uppercase;
+                margin: 15px 0;
+                letter-spacing: 0.05em;
+                @include transicion-rapida;
+                
+                &:hover{
+                    background: $c-gris-oscuro;
+                }
+            }
+        }
+        .col-right{
+            display: table-cell;
+            vertical-align: top;
+            width: percentage(400px/1000px);
+            padding-left: 15px;
+            text-align: right;
+            
+        }
+
+        article{}
+
+    }
+    
+    section.beneficios{
+        h2{
+            font-family: Aria-Medium;
+            color: $c-verde-link;
+        }
+        table,tbody{
+            width: 100%;
+            display: block;
+            tr{
+                width: 100%;
+                display: block;
+                margin-bottom: 16px;
+                td{
+                    background: $c-blanco;
+                    padding: 20px;
+                    width: 50%;
+                    vertical-align: top;
+                    
+                    &.left{
+                        border-right: 8px solid $c-gris-claro-carrito;
+                    }
+                    &.right{
+                        border-left: 8px solid $c-gris-claro-carrito;
+                    }
+                    
+                    h2{
+                        font-family: Aria-Light;
+                        color: $c-verde-link;
+                        padding: 20px 0;
+                        
+                        span{
+                             font-family: Aria-Medium;
+                        }
+                    }
+                    p{
+                        color: $c-gris-menu;
+                        font-size: $f-size-l;
+                        font-weight: 300;
+                        margin-bottom: 15px;
+                        line-height: 1.3;
+                    }
+                }
+            }
+        }
+    }
+    
+    .button-set{
+        margin: 30px 0 40px;
+         width: $w-full;
+        
+        a{
+            display: block;
+             width: $w-full;
+            text-align: center;
+            padding: 26px 10px;
+            font-family: Aria-Medium;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: $c-verde-link;
+            color: $c-blanco;
+            line-height: 1.2;
+            @include transicion-rapida;
+            
+            &:hover{
+                background: $c-gris-oscuro;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp1250) {
+    body.club-partners{
+        section.clubpartners{
+            .col-left{
+            }
+            .col-right{
+                img{
+                    width: 400px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp970) {
+    body.club-partners{
+        section.clubpartners{
+            .col-left{
+                display: block;
+                float: left;
+            }
+            .col-right{
+                display: block;
+                float: left;
+                
+                img{
+                    display: block;
+                    width: $w-full;
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: $bp760) {
+    body.club-partners{
+        section.clubpartners{
+            margin-top: 30px;
+            padding: 20px;
+            h1{
+                font-family: Aria-Medium;
+                padding: 10px 0 20px;
+            }
+            .col-left{
+                width: $w-full;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            .col-right{
+                width: $w-full;
+                padding-left: 0;
+                
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp550) {
+    body.club-partners{
+        section.beneficios{
+
+            table,tbody{
+                width: 100%;
+                display: block;
+                tr{
+                    width: 100%;
+                    display: block;
+                    margin-bottom: 0;
+                    td{
+                        display: block;
+                        width: $w-full;
+                        margin-bottom: 16px;
+
+                        &.left{
+                            border-right: 0;
+                        }
+                        &.right{
+                            border-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

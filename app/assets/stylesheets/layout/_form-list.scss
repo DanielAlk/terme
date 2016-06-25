@@ -1,0 +1,104 @@
+/*  Form-List */
+.form-list{
+    font-family: Roboto;
+    li{
+        margin-bottom: 30px;
+        @include clear;
+        
+        input + input,
+        input + select{
+            margin-top: 15px;
+        }
+        
+        select{
+             border: 1px solid $c-gris-menu-mobile;
+            height: 40px;
+            padding: 0 10px;
+            font-size: $f-size;
+            color: $c-gris-oscuro;
+            font-family: Roboto;
+            width: $w-full;
+            background-color: $c-blanco;
+            outline: none;
+            
+            option{
+                padding: 5px10px;
+            }
+            
+            &:focus{
+                outline: none;
+            }
+        }
+        
+        label{
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: inline-block;
+            
+            &.requerido{
+                &:after{
+                    content: '*';
+                    display: inline-block;
+                    color: $c-rojo;
+                    font-size: 19px;
+                    margin-left: 4px;
+                    font-weight: 400;
+                }
+            }
+        }
+        
+        &.wide{
+            .field{
+                width: 100%;
+                margin-bottom: 0;
+                @include clear;
+            }
+        }
+        &.fields{
+            .field{
+                width: 50%;
+                margin-bottom: 0;
+                float: left;
+                
+                &:first-child{
+                    padding-right: 10px;
+                }
+                &:last-child{
+                    padding-left: 10px;
+                }
+            }
+        }
+        
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: $bp760) {
+    .form-list{
+        li{
+            margin-bottom: 0px;
+
+            &.wide{
+                .field{
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+            }
+            &.fields{
+                .field{
+                    width: 100%;
+                    margin-bottom: 20px;
+
+                    &:first-child{
+                        padding-right: 0px;
+                    }
+                    &:first-child{
+                        padding-left: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

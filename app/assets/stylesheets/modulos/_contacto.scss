@@ -1,0 +1,172 @@
+/* Contacto */
+
+.contacto{
+    .breadcrumbs{
+        margin-bottom: 50px;
+    }
+    .partner-bottom{
+        margin-bottom: 30px;
+    }
+}
+
+section.contact{
+    h2{
+        text-transform: none;
+        color: $c-gris-oscuro;
+        padding: 0;
+        margin: 0 0 25px 0;
+        font-size: 26px;
+    }
+    @include clear;
+    .col-left{
+        float: left;
+        width: percentage(700px / 1500px);
+        padding-right: 30px;
+        border-right: 1px solid $c-gris-submenu-icon-mobile;
+        
+        .form-list li{
+            label{
+                text-transform: uppercase;
+            }
+        }
+        
+        .btn{
+            margin-top: 25px;
+            
+            input[type=submit]{
+                display: inline-block;
+                background: $c-verde-link;
+                padding: 20px 40px;
+                color: $c-blanco;
+                text-transform: uppercase;
+                height: auto;
+                width: auto;
+                @include transicion-rapida;
+                
+                &:hover{
+                    background: $c-gris-oscuro;
+                }
+            }
+        }
+    }
+    .col-right{
+        float: left;
+        width: percentage(800px / 1500px);
+        padding-left: 30px;
+        max-width: 380px;
+        p.info{
+            color: $c-gris-h2;
+            font-size: $f-size-xl;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        .direccion{
+            margin-bottom: 15px;
+            span.icon{
+                width: 30px;
+                height: 44px;
+                display: table-cell;
+                vertical-align: middle;
+                @include iconsprite;
+                background-position: -50px -911px;
+            }
+             p{
+                display: table-cell;
+                 vertical-align: middle;
+                 font-family: Roboto;
+                 font-weight: 500;
+                 color: $c-gris-oscuro;
+                 padding-left: 10px;
+            }
+        }
+        .telefonos{
+            margin-bottom: 15px;
+            span.icon{
+                width: 44px;
+                height: 44px;
+                display: table-cell;
+                vertical-align: middle;
+                @include iconsprite;
+                background-position: 0px -955px;
+            }
+             .numeros{
+                display: table-cell;
+                 vertical-align: middle;
+                 font-family: Roboto;
+                 font-weight: 500;
+                 color: $c-gris-oscuro;
+                 padding-left: 10px;
+                 line-height: 1.3;
+                 font-size: $f-size-xxl;
+            }
+        }
+        .email{
+            margin-bottom: 15px;
+            span.icon{
+                width: 44px;
+                height: 44px;
+                display: table-cell;
+                vertical-align: middle;
+                @include iconsprite;
+                background-position: -50px -957px;
+            }
+             a{
+                display: table-cell;
+                 vertical-align: middle;
+                 font-family: Aria-Demi;
+                 font-weight: normal;
+                 text-decoration: underline;
+                 color: $c-gris-oscuro;
+                 padding-left: 10px;
+                 line-height: 1.3;
+                 font-size: 20px;
+                 letter-spacing: 0.03em;
+                 
+                 &:hover{
+                     color: $c-verde-link;
+                 }
+            }
+        }
+        
+        div.info{
+            font-family: Roboto;
+             color: $c-gris-oscuro;
+             padding-left: 10px;
+             line-height: 1.3;
+             font-size: $f-size-xl;
+        }
+    }
+}
+
+
+@media only screen and (max-width: $bp760) {
+    section.contact{
+        padding-top: 50px;
+        .col-left{
+            float: left;
+            width: percentage(1500px / 1500px);
+            padding-right: 0px;
+            border-right: 0;
+            margin-bottom: 50px;
+        }
+
+        .col-right{
+            float: left;
+            width: percentage(1500px / 1500px);
+            padding-left: 0px;
+            max-width: $w-full;
+        }
+    }
+}
+
+@media only screen and (max-width: $bp479) {
+    section.contact{
+        .col-right{
+             .email{
+                a{
+                    font-size: $f-size-l;
+                 }
+            }
+        }
+    }
+}

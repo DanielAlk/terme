@@ -1,0 +1,145 @@
+/*  Carrito */
+
+.pasos-checkout{
+    margin: 0 0 40px 0;
+    h1,
+    h2{
+        font-family: Aria-Medium;
+        font-size: 35px;
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 40px;
+        color: $c-gris-titulo-checkout;
+        span{
+            font-family: Aria-Medium;
+            font-size: 35px;
+            display: inline-block;
+            vertical-align: middle;
+            @include border-radius(50%);
+            border: 2px solid $c-gris-titulo-checkout;
+            width: 45px;
+            height: 45px;
+            line-height: 49px;
+            text-align: center;
+            padding-left: 2px;
+            font-size: 27px;
+            margin-top: -4px;
+        }
+
+        &:last-child{
+            padding-right: 0;
+        }
+    }
+
+    h1{
+        color: $c-verde-link;
+        span{
+            color: $c-verde-link;
+            border-color: $c-verde-link;
+        }
+    }
+}
+        
+
+@media only screen and (max-width: 1100px) {     
+    .pasos-checkout{
+        h1,
+        h2{
+            font-size: 30px;
+            padding-right: 30px;
+            span{
+                font-size: 30px;
+                width: 45px;
+                height: 45px;
+                line-height: 49px;
+                text-align: center;
+                padding-left: 2px;
+                font-size: 27px;
+                margin-top: -4px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp970) {     
+    .pasos-checkout{
+        h1,
+        h2{
+            font-size: 22px;
+            padding-right: 20px;
+            span{
+                width: 45px;
+                height: 45px;
+                line-height: 49px;
+                text-align: center;
+                padding-left: 2px;
+                font-size: 20px;
+                margin-top: -4px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp760) {     
+    .pasos-checkout{
+        margin-top: 30px;
+        h1,
+        h2{
+            font-size: 16px;
+            padding-right: 8px;
+            span{
+                width: 30px;
+                height: 30px;
+                line-height: 31px;
+                text-align: center;
+                padding-left: 2px;
+                font-size: 15px;
+                margin-top: -4px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp550) {     
+    .pasos-checkout{
+        h1,
+        h2{
+            font-size: 28px;
+            padding-right: 0;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            display: block;
+            span{
+                width: 35px;
+                height: 35px;
+                line-height: 37px;
+                text-align: center;
+                padding-left: 2px;
+                font-size: 20px;
+                margin-top: -4px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp479) {     
+    .pasos-checkout{
+        h1,
+        h2{
+            font-size: 21px;
+            padding-right: 0;
+            span{
+                width: 30px;
+                height: 30px;
+                line-height: 31px;
+                text-align: center;
+                padding-left: 2px;
+                font-size: 15px;
+                margin-top: -4px;
+            }
+        }
+    }
+}
+
+
+

@@ -1,0 +1,79 @@
+/*  General */
+
+a{
+    text-decoration: none;
+    color: $c-verde-link;
+}
+
+.no-display{
+    display: none;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.page-title{
+    display: block;
+    width: $w-full;
+}
+
+input,
+input[type=text],
+input[type=search],
+input[type=number],
+input[type=email],
+textarea{
+    border: 1px solid $c-gris-menu-mobile;
+    height: 40px;
+    padding: 0 10px;
+    font-size: $f-size;
+    color: $c-gris-oscuro;
+    font-family: Roboto;
+    width: $w-full;
+}
+
+textarea{
+    min-height: 250px;
+    max-height: 400px;
+    max-width: $w-full;
+    padding: 10px;
+    resize: none;
+    
+    &:focus{
+        outline: none;
+    }
+}
+input[type=checkbox]{
+    -webkit-appearance:checkbox;
+}
+
+input:-webkit-autofill{
+    background-color: $c-blanco !important;
+    color: #2a2a2a !important;
+    -webkit-box-shadow: 0 0 0px 1000px $c-blanco inset;
+}
+
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
+}
+
+button{
+    font-family: Aria-Medium;
+    text-transform: uppercase;
+    background: $c-verde-link;
+    padding: 8px 12px 6px;
+    border: none;
+    outline: none;
+    font-size: $f-size-xl;
+    color: $c-blanco;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    @include transicion-rapida;
+    
+    &:hover{
+        background: $c-gris-menu;
+    }
+}

@@ -1,0 +1,371 @@
+<% content_for :body_class do %>
+	home
+<% end %>
+
+<% content_for :extra_js do %>
+	$('.owl-carousel').owlCarousel({
+		loop:true,
+		items:1,
+		margin:0,
+		nav:true,
+		dots:true,
+		responsive:{
+			0:{ items:1}
+		}
+	});
+	$('section .owl-carousel').owlCarousel({
+		loop:false,
+		items:1,
+		slideBy:1,
+		margin:0,
+		nav: true,
+		dots: false,
+		responsive:{
+			0:{items:1},
+			650:{items:2},
+			800:{items:3},
+			1025:{items:4},
+			1251:{items:5}
+		}
+	});
+	$('.slider-bottom .owl-carousel').owlCarousel({
+		loop:true,
+		items:1,
+		margin:0,
+		nav:true,
+		dots:true,
+		responsive:{
+			0:{ items:1}
+		}
+	});
+<% end %>
+
+<div class="slider owl-carousel">
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_1.jpg' %>" alt="Slider 1"> <img class="mobile" src="<%= asset_path 'slider/Slider_1_mobile.jpg' %>" alt="Slider 1 Mobile">
+    <div class="info-slider">
+      <h2>ELEGÍ TU<br>
+        <span>equipo</span></h2>
+      <p>Preparate para vivir la experiencia<br>
+        INVERTER. Máximo Confort y máximo ahorro.</p>
+      <div class="cucarda">3 Años<br>
+        <span>de garantía</span></div>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+  <div class="item"> <img class="desktop" src="<%= asset_path 'slider/Slider_2.jpg' %>" alt="Slider 2"> <img class="mobile" src="<%= asset_path 'slider/Slider_2_mobile.jpg' %>" alt="Slider 2 Mobile">
+    <div class="info-slider">
+      <h2>EXPERTOS<br>
+        <span>en INSTALACIÓN Y MANTENIENTO</span></h2>
+      <p>Te asesoramos para que tengas la mejor experiencia, optimizando el uso de espacios según el cliente.</p>
+      <a href="#" class="button">ver productos</a> </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content-info">
+    <section class="first">
+      <h2>residenciales</h2>
+      <ul id="residenciales" class="carrusel owl-carousel">
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>light Commercial</h2>
+      <ul id="light-commercial" class="carrusel owl-carousel">
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Commercial</h2>
+      <ul id="commercial" class="carrusel owl-carousel">
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+            <div class="img-product"> <a href="producto.html" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="caja-producto">
+            <div class="img-product"> <a href="producto.html" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
+            <div class="producto-info">
+              <div class="tipo-product">Split Piso Techo</div>
+              <div class="nombre-product"> <a href="producto.html"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
+              <div class="precio-product">US$ 2.458,27</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <div class="slider-bottom">
+      <div class="slider-bott owl-carousel">
+        <div class="item"> <img src="<%= asset_path 'slider/slider_bottom_1.jpg' %>" alt="Slider Bottom 1" class="desktop"> <img src="<%= asset_path 'slider/slider_bottom_1_mobile.jpg' %>" alt="Slider Bottom 1 Mobile" class="mobile">
+          <div class="info-slider-bott">
+            <h2>FILTROS<br>
+              <span>de Aire</span></h2>
+            <p>Cuando es tiempo de realizar una limpieza.</p>
+            <a href="#" class="button">ver Noticia</a> <a href="#" class="button mas">+</a> </div>
+        </div>
+        <div class="item"> <img src="<%= asset_path 'slider/slider_bottom_2.jpg' %>" alt="Slider Bottom 2" class="desktop"> <img src="<%= asset_path 'slider/slider_bottom_2_mobile.jpg' %>" alt="Slider Bottom 2 Mobile" class="mobile">
+          <div class="info-slider-bott">
+            <h2>FILTROS<br>
+              <span>de Aire</span></h2>
+            <p>Cuando es tiempo de realizar una limpieza.</p>
+            <a href="#" class="button">ver Noticia</a> <a href="#" class="button mas">+</a> </div>
+        </div>
+      </div>
+    </div>
+    <div class="partner-bottom">
+      <div class="partner"><img src="<%= asset_path 'partner/carrier.jpg' %>" alt=""></div>
+      <div class="partner"><img src="<%= asset_path 'partner/toshiba.jpg' %>" alt=""></div>
+      <div class="partner"><img src="<%= asset_path 'partner/midea.jpg' %>" alt=""></div>
+    </div>
+    <div class="galeria-bottom">
+      <div class="facebook-txt"> <span class="icon"></span> <a href="#" class="facelink">Facebook feed: /ariaweb2016</a> </div>
+      <div class="galeria">
+        <div class="imgs"><img src="<%= asset_path 'galeria-bottom/galeria1.jpg' %>" alt=""></div>
+        <div class="imgs"><img src="<%= asset_path 'galeria-bottom/galeria2.jpg' %>" alt=""></div>
+        <div class="imgs"><img src="<%= asset_path 'galeria-bottom/galeria3.jpg' %>" alt=""></div>
+        <div class="imgs"><img src="<%= asset_path 'galeria-bottom/galeria4.jpg' %>" alt=""></div>
+        <div class="imgs"><img src="<%= asset_path 'galeria-bottom/galeria5.jpg' %>" alt=""></div>
+        <div class="imgs"><img src="<%= asset_path 'galeria-bottom/galeria6.jpg' %>" alt=""></div>
+      </div>
+    </div>
+    <div class="socialmedia-bottom">
+      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
+      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
+      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
+    </div>
+  </div>
+</div>

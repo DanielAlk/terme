@@ -1,0 +1,68 @@
+/* Aria */
+
+body.aria{
+    .partner-bottom{
+        margin-bottom: 30px;
+    }
+    section.aria{
+        padding: 30px;
+        margin-top: -20px;
+        @include clear;
+            
+        h1{
+            font-family: Aria-Medium;
+            padding: 0 0 30px;
+        }
+        
+        .img-top{
+            margin: 0 0 50px 0;
+            
+            img{
+                width: $w-full;
+            }
+        }
+        
+        p{
+            color: $c-gris-menu;
+            font-size: $f-size-l;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        a{
+            display: inline-block;
+            text-align: center;
+            padding: 15px 20px;
+            font-family: Aria-Medium;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: $c-verde-link;
+            color: $c-blanco;
+            line-height: 1.2;
+            margin: 25px 0;
+            @include transicion-rapida;
+            
+            &:hover{
+                background: $c-gris-oscuro;
+            }
+        }   
+    }
+}
+
+
+@media only screen and (max-width: $bp760) {
+    body.aria{
+      section.aria{
+            margin-top: 0px;
+        }
+    }
+}
+
+@media only screen and (max-width: $bp550) {
+    body.aria{
+      section.aria{
+            padding: 15px;
+        }
+    }
+}

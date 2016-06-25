@@ -1,0 +1,284 @@
+/*  Checkout Confirmacion */
+
+.checkout-confirm {
+    .content .content-info {
+        section .col-right .action button{
+            padding: 18px 5px 10px;
+            font-size: 30px;
+        }
+        section.confirmacion{
+            margin-bottom: 60px;
+            .col-right, .col-left{
+                h2{
+                    padding: 0 0 60px 0;
+                    text-align: left;
+                    color: $c-gris-oscuro;
+                    margin: 0;
+                    font-size: 20px;
+                    letter-spacing: 0.04em;
+                    font-family: Aria-Demi;
+                }
+                
+                label{
+                    text-transform: uppercase;
+                    color: $c-gris-oscuro;
+                    font-family: Aria-Medium;
+                }
+                
+            }
+            .col-right{
+                background: transparent;
+                padding: 0;
+                color: $c-gris-oscuro;                
+            }
+            
+            .form-list.tarjeta-credito,
+            .form-list.confirmacion{
+                li.wide.celular{
+                    .field{
+                        label{
+                            display: block;
+                            width: 100%;
+                        }
+                        select{
+                            width: 20%;
+                            float: left;
+                        }
+                        input{
+                            width: 75%;
+                            float: right;
+                        }
+                    }
+                }
+                li.wide.fecha{
+                    .field{
+                        label{
+                            display: block;
+                            width: 100%;
+                        }
+                        select.mes{
+                            width: 48%;
+                            float: left;
+                        }
+                        select.anio{
+                            width: 48%;
+                            float: right;
+                        }
+                    }
+                }
+                li.tarjetas{
+                    font-size: 0;
+                    text-align: center;
+                    padding: 0 0 15px 0;
+                    span{
+                        display: inline-block;
+                        margin: 0 5px 5px;
+                        
+                        &:last-child{
+                            margin-right: 0;
+                        }
+                    }
+                }
+                li.wide.ccv{
+                     .field{
+                        label{
+                            display: block;
+                            width: 100%;
+                        }
+                         input{
+                             width: 100%;
+                             max-width: 150px;
+                             float: left;
+                         }
+                         a{
+                            margin-top: 11px;
+                             margin-left: 10px;
+                             display: inline-block;
+                             color: $c-gris-oscuro;
+                             text-decoration: underline;
+                             font-size: $f-size-s;
+                             font-style: italic;
+                             
+                             &:hover{
+                                 color: $c-verde-link;
+                             }
+                         }
+                    }
+                }
+            }
+            
+            span.info{
+                font-size: $f-size;
+                font-style: italic;
+                padding: 15px 0 0;
+                display: inline-block;
+            }
+            
+            .column-left{
+                clear: left;
+            }
+            
+            .column-right{
+                padding: 0 0 0 15px;
+            }
+            
+            div.field.celular{
+                margin-top: 24px;
+            }
+            .check-option{
+                margin-top: 40px;
+                .inputcheck{
+                    width: 30px;
+                    height: 30px;
+                    display: table-cell;
+                    vertical-align: middle;
+                    
+                     input[type="checkbox"] {
+                        display:none;
+                         
+                         & + label{
+                             display: block;
+                             width: $w-full;
+                             span {
+                                display:inline-block;
+                                width:30px;
+                                height:30px;
+                                margin:-1px 4px 0 0;
+                                vertical-align:middle;
+                                background-color: $c-gris-menu-hover;
+                                 @include iconsprite;
+                                 background-position: 999999999px 999999999px;
+                                cursor:pointer;
+                            }
+                         }
+                         
+                         &:checked + label span {
+                            background-color: $c-verde-link;
+                             background-position: -1px -914px;
+                        }
+                    }
+                    
+                    
+                }
+                
+                p{
+                    display: table-cell;
+                    vertical-align: middle;
+                    font-family: Aria-Book;
+                    text-transform: uppercase;
+                    line-height: 1.3;
+                    font-size: $f-size-l;
+                    padding-left: 10px;
+                }
+            }
+            
+            .control{
+                font-size: 0;
+                padding: 80px 0 50px;
+                clear: left;
+                float: left;
+                width: $w-full;
+                
+                p{
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 70%;
+                    font-size: $f-size;
+                    padding-right: 25px;
+                }
+               .btn-confirm-orden{
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 30%;
+                   text-align: center;
+                   
+                   button{
+                       font-size: 25px;
+                       padding: 18px 20px 12px;
+                   }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .checkout-confirm {
+    .content .content-info {
+        section.confirmacion{
+                .control{
+                   .btn-confirm-orden{                   
+                       button{
+                           font-size: 20px;
+                           padding: 18px 20px 12px;
+                       }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp970) {
+    .checkout-confirm {
+    .content .content-info {
+        section.confirmacion{
+                .control{
+                    padding: 40px 0 20px;
+                    p{
+                        width: 60%;
+                    }
+                   .btn-confirm-orden{     
+                       width: 40%;
+                       button{
+                           font-size: 20px;
+                           
+                       }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp760) {
+    .checkout-confirm {
+    .content .content-info {
+        section.confirmacion{
+            .column-left, .column-right{
+                padding-right: 0;
+                padding-left: 0;
+                padding-bottom: 0;
+                margin-bottom: 0;
+                border-top: 0;
+                
+            }
+            
+            span.info{
+                padding: 0 0 15px ;
+            }
+            
+            .check-option{
+                margin-top: 15px;
+            }
+            
+             .control{
+                    padding: 30px 0 ;
+                    p{
+                        width: 100%;
+                        padding-right: 0;
+                    }
+                   .btn-confirm-orden{     
+                       width: 100%;
+                       margin-top: 20px;
+                       button{
+                           font-size: 20px;
+                           
+                       }
+                    }
+                }
+        }
+    }
+    }
+}
+

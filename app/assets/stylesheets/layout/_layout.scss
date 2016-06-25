@@ -1,0 +1,51 @@
+/*  layout */
+body{
+    background: $c-gris-claro-carrito;
+    font-family: 'Roboto', sans-serif;
+
+    .content{
+        width: 100%;
+        padding: $pa-laterales-big;
+        
+         .content-info{
+            width: $w-full;
+            max-width: 1500px;
+            margin: 0 auto;
+             
+             section{
+                width: $w-full;
+                background: $c-gris-claro-carrito;
+                position: relative;
+                z-index: 2;
+                margin-bottom: 30px;
+                 
+                 &.first{
+                    padding-top: 15px;
+                    margin-top: -20px;
+                }
+                 
+                 @media only screen and (max-width: $bp760) {
+                     &.first{
+                        padding-top: 15px;
+                        margin-top: 0px;
+                    }
+                 }
+                 
+             }
+             
+             &:after{
+                display: block;
+                clear: both;
+                content: '';
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp550) {
+    body{
+        .content{
+            padding: $pa-laterales-small;
+        }
+    }
+}

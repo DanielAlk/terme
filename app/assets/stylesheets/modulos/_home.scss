@@ -1,0 +1,241 @@
+
+/*  home */
+
+.home{
+    .content{
+        width: $w-full;
+        padding: $pa-laterales-big;
+        
+        .content-info{
+            width: $w-full;
+            max-width: 1500px;
+            margin: 0 auto;
+            
+            section{
+                width: $w-full;
+                background: $c-gris-claro-carrito;
+                position: relative;
+                z-index: 2;
+                margin-bottom: 30px;
+                
+                h2{
+                    font-size: 21px;
+                    padding: 20px;
+                }
+                
+                .owl-carousel{
+                    .owl-nav{
+                        top:-50px;
+                        right: 20px;
+                        .owl-prev, .owl-next{
+                            width: 25px;
+                            height: 25px;
+                            background: transparent;
+                            @include iconsprite;
+                        }
+                        .owl-prev{
+                            background-position: 6px -660px;
+                            
+                            &:hover{
+                                background-position: -44px -660px;
+                            }
+                        }
+                        .owl-next{
+                            background-position: 9px -687px;
+                            
+                            &:hover{
+                                background-position: -41px -687px;
+                            }
+                        }
+                    }
+                    &.owl-drag .owl-item{
+                        padding: 0 10px;
+                    }
+                }
+            }
+            
+            
+           
+            
+            
+            .partner-bottom{
+                width: $w-full;
+                max-width: $w-aria;
+                margin: 20px auto 0;
+                background: $c-blanco;
+                position: relative;
+                z-index: 1;
+                padding: 40px 20px;
+                text-align: center;
+                
+                .partner{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin: 15px;
+                    
+                }
+            }
+            
+            .galeria-bottom{
+                width: $w-full;
+                max-width: $w-aria;
+                margin: 0 auto;
+                background: $c-gris-claro;
+                padding: 60px 0;
+                
+                .facebook-txt{
+                    width: $w-full;
+                    text-align: center;
+                    padding: 5px;
+                    margin-bottom: 20px;
+                    
+                    span.icon {
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 36px;
+                        height: 36px;
+                        @include iconsprite;
+                        background-position: 0px -490px;
+                    }
+                    a.facelink{
+                        display: inline-block;
+                        vertical-align: middle;
+                        font-style: italic;
+                        color: $c-gris-oscuro2;
+                        font-size:20px;
+                        margin-left: 8px;
+                    }
+                }
+                .galeria{
+                    width: 100%;
+                    
+                    .imgs{
+                        width: 15%;
+                        padding: 12px;
+                        background: $c-blanco;
+                        margin-right: 2%;
+                        float: left;
+                        
+                        &:last-child{
+                            margin-right: 0;
+                        }
+                        
+                        img{
+                            width: $w-full;
+                            display: block;
+                        }
+                    }
+                    
+                    &:after{
+                        display: block;
+                        clear: both;
+                        content: '';
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: $bp1250) {
+    .home .content .content-info{
+            .galeria-bottom{
+                .galeria{
+                        .imgs{
+                            width: 15.833%;
+                            margin-right: 1%;
+                           padding: 8px;
+                    }
+                }
+            }
+
+    }
+}
+
+
+@media only screen and (max-width: $bp760) {
+    .home .content .content-info{
+            .galeria-bottom{
+                .galeria{
+                        .imgs{
+                            width: 32%;
+                            margin-right: 2%;
+                           padding: 8px;
+                            margin-bottom: 12px;
+                            
+                            &:nth-child(3n+3){
+                                margin-right: 0;
+                            }
+                    }
+                }
+            }
+    }
+}
+
+@media only screen and (max-width: $bp550) {
+    .home .content{
+        padding: $pa-laterales-small;
+        .content-info{ 
+                section{
+                    h2{
+                        font-size: 17px;
+                    }
+                    .owl-carousel{
+                            .owl-nav{
+                                top:-44px;
+                                right: 0px;
+                        }
+                    }
+                }
+                .galeria-bottom{
+                    padding: 30px 0;
+                     .facebook-txt{
+                            a.facelink{
+                                font-size:15px;
+                            }
+                    }
+                }
+
+                .partner-bottom{
+                        padding: 15px;
+                        .partner{
+                            margin: 7px;
+                        }
+                }
+        }
+    }
+}
+
+
+@media only screen and (max-width: $bp479) {
+    .home{
+        .content{
+            padding: $pa-laterales-small;
+            .content-info{
+                .galeria-bottom{
+                    .galeria{
+                            .imgs{
+                                width: 49%;
+                                margin-right: 2%;
+                               padding: 8px;
+                                margin-bottom: 12px;
+
+                                &:nth-child(3n+3){
+                                    margin-right: 2%;
+                                }
+                                &:nth-child(2n+2){
+                                    margin-right: 0;
+                                }
+                        }
+                    }
+                }
+            } 
+        }
+    }
+}
+    
+    
+    

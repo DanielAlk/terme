@@ -1,0 +1,547 @@
+/*  Carrito */
+
+.checkout {
+    .separador{
+        width: 95%;
+        height: 1px;
+        background: $c-gris-submenu-icon-mobile;
+        margin: 60px auto;   
+        opacity: 0.5;
+    }
+    .content .content-info {
+        section{
+            @include clear;
+            .col-left{
+                 float: left;
+                width: percentage(1000px / 1500px);
+                .column-left,.column-right{
+                    h2{
+                            font-family: Aria-Book;
+                            font-size: 22px;
+                            text-transform: uppercase;
+                            line-height: 1;
+                            color: $c-gris-oscuro;
+                             padding: 15px 30px;
+                            span{
+                                font-family: Aria-Demi;
+                                font-size: 46px;
+                            }
+                    }
+                }
+                
+                .column-left{
+                    float: left;
+                    width: percentage(750px / 1500px);
+                    padding: 0 15px 0 0;
+                    .info{
+                        padding: 0 30px;
+                        font-size: $f-size-l;
+                        p{
+                            font-weight: 400;
+                            line-height: 1.2;
+                            margin-bottom: 4px;
+                            
+                            strong{
+                                font-weight: 700;
+                            }
+                        }
+                        
+                        ul{
+                            padding-left: 15px;
+                            li{
+                                list-style:url('<%= asset_path 'icon_list_circle.png' %>');
+                                font-weight: 700;
+                                margin-bottom: 6px;
+                            }
+                        }
+                    }
+                    
+                    .action{
+                        padding: 30px 30px 40px;
+                        border-top: 1px solid  $c-gris-claro;
+                        margin-top: 10px;
+                        
+                        .seleccione li{
+                            margin-bottom: 10px;
+                        }
+                    }
+                    
+                    .btn{
+                        padding: 40px 30px 0;
+                        margin-top: 30px;
+                        border-top: 1px solid  $c-gris-claro;
+                        
+                        input[type=submit]{
+                            font-family: Aria-Medium;
+                            font-size: 28px;
+                            text-transform: uppercase;
+                            color: $c-blanco;
+                            height: auto;
+                            padding: 12px 5px 7px;
+                            background: $c-gris-menu;
+                            cursor: pointer;
+                            @include transicion-rapida;
+                            
+                            &:hover{
+                                background: $c-verde-link;
+                            }
+                        }
+                    }
+                    
+                    .seleccione{
+                        li{
+                            display: block;
+                            width: $w-full;
+                            @include clear;
+                            input[type=radio]{
+                                -webkit-appearance: radio;
+                                float: left;
+                                width: auto;
+                                /* display: inline-block; */
+                                height: 18px;
+                                width: 18px;
+                                margin-right: 10px;
+                                line-height: 1;
+                            }
+                        }
+                    }
+                }
+                .column-right{
+                    float: left;
+                    width: percentage(750px / 1500px);
+                    
+                    .info{
+                        padding: 0 30px;
+                    }
+                    
+                    .action{
+                        .formulario{
+                            padding: 40px 30px 15px;
+                        }
+                        
+                        .passw{
+                             padding: 0 30px;
+                            @include clear;
+                            
+                            p{
+                                float: left;
+                                font-size: $f-size-s;
+                                color: $c-rojo;
+                            }
+                            a{
+                                display: block;
+                                float: right;
+                                font-size: $f-size;
+                                color: $c-gris-oscuro;
+                                text-decoration: underline;
+                                font-style: italic;
+                            }
+                        }
+                    }
+                    
+                    .btn{
+                        padding: 52px 30px 0;
+                        
+                        input[type=submit]{
+                            font-family: Aria-Medium;
+                            font-size: 28px;
+                            text-transform: uppercase;
+                            color: $c-blanco;
+                            height: auto;
+                            padding: 12px 5px 7px;
+                            background: $c-gris-menu-hover;
+                            cursor: pointer;
+                            max-width: 250px;
+                            margin: 0 auto;
+                            display: block;
+                            @include transicion-rapida;
+                            
+                            &:hover{
+                                background: $c-verde-link;
+                            }
+                        }
+                    }
+                }
+            
+            }
+            .col-right{
+                float: right;
+                width: percentage(460px / 1500px);
+                color: $c-blanco;
+                background: $c-gris-menu;
+                padding: 30px;
+                
+                h2{
+                    font-family: Aria-Medium;
+                    font-size: 22px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                    color: $c-blanco;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                }
+                .resumen{
+                    font-family: Aria-Medium;
+                    font-size: 0;
+                    @include clear;
+                    
+                    div{
+                        display: inline-block;
+                        vertical-align: top;
+                        font-size: $f-size;
+                        font-family: Roboto;
+                        margin-bottom: 30px;
+                        
+                        &.right{
+                            text-align: right;
+                            padding-left: 10px;
+                            width: percentage(650px / 1500px);
+                            font-size: 18px;
+                        }
+                        
+                        &.label{
+                            font-family: Aria-Book;
+                            font-size: 17px;
+                            letter-spacing: 0.05em;
+                            text-transform: uppercase;
+                            padding-right: 10px;
+                            width: percentage(850px / 1500px);
+                        }
+                        
+                        &.envios{
+                            width: percentage(1100px / 1500px);
+                            span.link{
+                                display: block;
+                                cursor: pointer;
+                                
+                                &:after{
+                                    content: ' ';
+                                    display: inline-block;
+                                    border-style: solid;
+                                    border-width: 12px 7.5px 0 7.5px;
+                                    border-color: $c-blanco transparent transparent transparent;
+                                    margin-left: 12px;
+                                }
+                                
+                                &:hover{
+                                    color: $c-verde-link;
+                                    
+                                    &:after{
+                                        border-color: $c-verde-link transparent transparent transparent;
+                                    }
+                                }
+                            }
+                            
+                            ul.lista-envios{
+                                margin-top: 10px;
+                                margin-right: -60px;
+                                display: none;
+                                max-width: 400px;
+                                li{
+                                    @include clear;
+                                    background: $c-gris-menu-hover;
+                                    a{
+                                        color: $c-blanco;
+                                        display: block;
+                                        padding: 10px 5px;
+                                        @include clear;
+                                        div{
+                                            margin: 0;
+
+
+                                            &.ciudad{
+                                                float: left;
+                                            }
+                                            &.costo{
+                                                float: right;
+                                            }
+                                        }
+                                        
+                                        &:hover{
+                                            background: $c-gris-oscuro;
+                                        }
+                                    }
+                                    
+                                    &:nth-child(odd){
+                                        background: $c-verde-link;
+                                    }
+                                }
+                            }
+                        }
+                        &.envio{width: percentage(400px / 1500px);}
+                        &.totales{
+                            width: percentage(450px / 1500px);
+                        }
+                        &.total{
+                            width: percentage(1050px / 1500px);
+                        }
+                        &.total, &.totales{
+                            font-size: 24px;
+                        }
+                    }
+                }
+                @media only screen and (min-width: $bp970 + 1) and (max-width: 1170px) {
+                    .resumen div.label.items,
+                    .resumen div.item.right,
+                    .resumen div.label.envios,
+                    .resumen div.envio.right{
+                        font-size: 13px;
+                    }
+                    
+                }
+                .action{
+                    margin: 30px 0;
+                    
+                    button{
+                        width: $w-full;
+                        max-width: 400px;
+                        display: block;
+                        float: none;
+                        font-size: 25px;
+                        text-align: center;
+                        padding: 23px 5px 15px;
+                        line-height: 1.2;
+                        margin: 0 auto;
+                        
+                        &:hover{
+                            background: $c-gris-oscuro;
+                        }
+                    }
+                }
+            }
+        }
+        
+        section.mercadopago{
+            margin-bottom: 90px;
+            .info-mp{
+                @include clear;
+                
+                img{
+                    width: $w-full;
+                    max-width: 1180px;
+                }
+            }
+            .confir-compra{
+                margin-top: 20px;
+                @include clear;
+                
+                p{
+                    display: block;
+                    float: left;
+                    font-size: $f-size-xl;
+                    width: 75%;
+                }
+               a{
+                    display: block;
+                    float: right;
+                    font-size: 22px;
+                   font-family: Aria-Medium;
+                   padding: 25px 10px 19px;
+                   background: $c-verde-link;
+                   color: $c-blanco;
+                   text-transform: uppercase;
+                   text-align: center;
+                   @include transicion-rapida;
+                   
+                   &:hover{
+                       background: $c-gris-oscuro;
+                   }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: $bp970 + 1) and (max-width: $bp1250) {
+            .checkout {
+    .content .content-info {
+        section{
+            @include clear;
+            .col-left{
+                 float: left;
+                width: percentage(1000px / 1500px);
+                .column-left,.column-right{
+                    h2{
+                            font-family: Aria-Book;
+                            font-size: 16px;
+                            text-transform: uppercase;
+                            line-height: 1;
+                            color: $c-gris-oscuro;
+                             padding: 15px 30px;
+                            span{
+                                font-family: Aria-Demi;
+                                font-size: 30px;
+                            }
+                    }
+                }
+                
+                .column-left{
+                    .btn{
+                        
+                        input[type=submit]{
+                            font-size: 20px;
+                        }
+                    }
+                }
+                .column-right{                    
+                    .action{
+                        
+                        .passw{
+                        
+                            p{
+                                font-size: $f-size-xxs;
+                            }
+                            a{
+                                font-size: $f-size-s;
+                            }
+                        }
+                    }
+                    
+                    .btn{
+                        input[type=submit]{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            
+            }
+            .col-right{
+                .action{
+                    button{
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+        
+        section.mercadopago{
+            margin-bottom: 90px;
+            .confir-compra{
+                p{
+                    width: 68%;
+                }
+            }
+        }
+    }
+}
+}
+
+@media only screen and (max-width: $bp970) {
+    .checkout {
+        .content .content-info {
+            section{
+                .col-left{
+                    width: $w-full;
+                    
+                     .column-left{
+                        .btn{
+
+                            input[type=submit]{
+                                font-size: 20px;
+                            }
+                        }
+                    }
+                      .column-right{       
+                            .btn{
+                                input[type=submit]{
+                                    font-size: 20px;
+                                }
+                            }
+                    }
+                }
+                .col-right{
+                    width: $w-full;
+                    margin-top: 60px;
+                }
+            }
+            
+            section.mercadopago{
+                .confir-compra{
+                    p{
+                        width: $w-full;
+                        margin-bottom: 20px;
+                    }
+                    a{
+                        float: none;
+                        margin: 0 auto;
+                        clear: left;
+                        max-width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp760)  {
+    .checkout{
+        .content .content-info {
+            section{
+                .col-left{
+                    .column-left{
+                        width: $w-full;
+                        margin-bottom: 40px;
+                    }
+                    .column-right{
+                        border-top: 1px solid  $c-gris-claro;
+                        width: $w-full;
+                        padding-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp550) {
+     .checkout{
+        .content .content-info {
+            section{
+                .col-left{
+                    .column-left,.column-right{
+                        h2{
+                                font-family: Aria-Book;
+                                font-size: 16px;
+                                text-transform: uppercase;
+                                line-height: 1;
+                                color: $c-gris-oscuro;
+                                 padding: 15px 0px;
+                                span{
+                                    font-family: Aria-Demi;
+                                    font-size: 30px;
+                                }
+                        }
+                    }
+                    .column-left{
+                        padding-right: 0;
+                        .info,
+                        .action,
+                        .btn{
+                            padding-left: 0;
+                            padding-right: 0;
+                        }
+                    }
+                    .column-right{
+                        padding-left: 0;
+                        .info,
+                        .btn{
+                            padding-left: 0;
+                            padding-right: 0;
+                        }
+                        .action{
+                            .formulario,
+                            .passw{
+                                padding-left: 0;
+                                padding-right: 0;
+                            }
+                        }
+                    }
+                }
+                .col-right .action button{
+                    font-size: 19px;
+                }
+            }
+        }
+    }
+}
+

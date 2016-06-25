@@ -1,0 +1,30 @@
+/* Partner */
+
+ .partner-bottom{
+    width: $w-full;
+    max-width: $w-aria;
+    margin: 20px auto 0;
+    background: $c-blanco;
+    position: relative;
+    z-index: 1;
+    padding: 40px 20px;
+    text-align: center;
+
+    .partner{
+        display: inline-block;
+        vertical-align: middle;
+        margin: 15px;
+
+    }
+}
+            
+
+
+@media only screen and (max-width: $bp550) {
+    .partner-bottom{
+        padding: 15px;
+        .partner{
+            margin: 7px;
+        }
+    }
+}

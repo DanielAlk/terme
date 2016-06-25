@@ -1,0 +1,101 @@
+
+/*  Caja de Producto */
+
+.caja-producto{
+    background: $c-blanco;
+    width: $w-full;
+    padding: 10px;
+    position: relative;
+    
+    .cucarda{
+        position: absolute;
+        top:0;
+        right: 0;
+        width: 70px;
+        height: 70px;
+        z-index: 2;
+        
+        span.triangulo{
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 70px 70px 0;
+            border-color: transparent $c-verde-link transparent transparent;
+            display: block;
+        }
+        span.txt{
+            position: absolute;
+            top: 0;
+            right: 0;
+            text-align: right;
+            width: 100%;
+            line-height: 1;
+            display: block;
+            font-weight: 400;
+            font-size: $f-size-xs;
+            letter-spacing: -0.01em;
+            padding: 10px 5px;
+            color: $c-blanco;
+            text-transform: uppercase;
+        }
+        
+        &.oferta span.triangulo{
+            border-color: transparent $c-gris-oscuro2 transparent transparent;
+        }
+    }
+    
+    .img-product{
+        width: $w-full;
+        margin-bottom: 12px;
+        
+        a{
+            display: block;
+            width: $w-full;
+            
+            img{
+                display: block;
+                width: $w-full;
+            }
+        }
+    }
+    .producto-info{
+        font-family: Aria-Book;
+        .tipo-product{
+            color: $c-verde-link;
+            line-height: 1.2;
+            font-size: $f-size;
+            font-family: Aria-Book;
+            margin-bottom: 2px;
+        }
+        .nombre-product{
+            height: 35px;
+            a{
+                color: $c-gris-oscuro2;
+                line-height: 1;
+                font-size: $f-size-xl;
+                margin-bottom: 2px;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                display: block;
+                
+                &:hover{
+                    color: $c-verde-link;
+                }
+            }
+        }
+        .precio-product{
+            padding: 10px 0;
+            font-size: 19px;
+            font-family: Aria-Bold;
+            color: $c-gris-oscuro2;
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: $bp479) {
+   
+}
+    

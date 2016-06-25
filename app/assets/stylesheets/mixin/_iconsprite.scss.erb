@@ -1,0 +1,15 @@
+// ==============================================
+// SASS IconSprite ARIA
+// ==============================================
+
+@mixin iconsprite {
+    background-image: url(<%= asset_path 'icon_sprite.png' %>);
+    background-repeat: no-repeat;
+    background-size: 100px 1000px;
+    
+    /*@media (-webkit-min-device-pixel-ratio: 2){
+        background-image: url(<%= asset_path 'icon_sprite@2x.png' %>);
+        background-repeat: no-repeat;
+        background-size: 100px 600px;
+    }*/
+}

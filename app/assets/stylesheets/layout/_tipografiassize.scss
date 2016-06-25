@@ -1,0 +1,31 @@
+/*  Tamaños Tipografias */
+h1{
+    font-size: 24px;
+    color: $c-gris-h2;
+    text-transform: uppercase;
+    font-family: Aria-Demi;
+    padding: 15px 0;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+}
+
+h2{
+    font-size: 20px;
+    color: $c-gris-h2;
+    text-transform: uppercase;
+    font-family: Aria-Demi;
+    padding: 15px 0;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+}
+
+h3{
+    font-size: $f-size-xl;
+    color: $c-gris-h2;
+    text-transform: uppercase;
+    font-family: Aria-Demi;
+    padding: 15px 0;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+}
+

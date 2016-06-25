@@ -1,0 +1,108 @@
+/* Noticias */
+
+.noticias{
+
+}
+section.news{
+    h1{
+        padding: 50px 20px 20px;
+        background: $c-gris-claro-carrito;
+        margin-top: -20px;
+    }
+    
+    article{
+        padding: 30px;
+        background: $c-blanco;
+        @include clear;
+        margin-bottom: 30px;
+        
+        .col-left{
+            width: percentage(500px/1000px);
+            float: left;
+            img{
+                display: block;
+                width: 100%;
+            }
+        }
+        .col-right{
+            width: percentage(500px/1000px);
+            float: left;
+            padding-left: 30px;
+            
+            p{
+                color: $c-gris-h2;
+                font-size: $f-size-l;
+                line-height: 1.4;
+                font-family: Roboto;
+                margin-bottom: 15px;
+                font-weight: 300;
+            }
+            
+            h2{
+                color: $c-gris-oscuro;
+                font-size: 28px;
+                padding: 0 0 15px 0;
+            }
+            
+            .mas-info{
+                display: none;
+            }
+            
+            .button-ver{
+                display: inline-block;
+                padding: 15px 0px;
+                width: 120px;
+                text-align: center;
+                text-transform: uppercase;
+                color: $c-blanco;
+                font-family: Aria-Medium;
+                font-size: $f-size;
+                letter-spacing: 0.04em;
+                background: $c-verde-link;
+                cursor: pointer;
+                @include transicion-rapida;
+                
+                &:hover{
+                    background: $c-gris-oscuro;
+                }
+            }
+        }
+        
+        &:last-child{
+            margin-bottom: 50px;
+        }
+    }
+}
+
+@media only screen and (max-width: 799px) {
+    section.news{
+        article{
+            .col-left{
+                margin-bottom: 25px;
+            }
+            .col-left,
+            .col-right{
+                width: percentage(1000px/1000px);
+                float: left;
+                padding-left: 0px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $bp760) {
+    section.news{
+        h1{
+            margin-top: 0;
+            padding: 30px 20px 30px;
+        }
+    }
+}
+
+@media only screen and (max-width: $bp550) {
+    section.news{
+        article{
+            padding: 15px;
+        }
+    }
+}
