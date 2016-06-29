@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  layout 'soon', only: :soon
+  
   def home
   end
   def product
@@ -22,5 +24,7 @@ class PagesController < ApplicationController
   def news
   end
   def contact
+  end
+  def soon
   end
 end

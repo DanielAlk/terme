@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head prefix="og: http://ogp.me/ns#">
+	<%= render 'layouts/head' %>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="<%= yield :body_class if content_for? :body_class %>">
+	<header>
+	  <div class="content-header" style="background:transparent;">
+	    <div class="info-head">
+	      <div class="logo" style="float:none;margin:0 auto;"> <a href="index.html" class="logo"> <img src="<%= asset_path 'Aria_Logo.png' %>" alt="Aria" title="Aria"> </a> </div>
+	    </div>
+	  </div>
+	</header>
+
+	<%= yield %>
+	
+	<footer>
+	  <div class="content-footer">
+	    <div class="contacto">
+	      <h2>Contacto</h2>
+	      <p>Av San Martín 1545, Adrogué - Buenos Aires</p>
+	      <div class="telefonos">
+	        <span class="icono"></span>
+	        <span class="numeros"><a href="+541142141345" style="color:#FFF;">(+54 11) 4214.1345</a> <br>
+	        <a href="+54111531263521" style="color:#FFF;">(+54 11) 15.3126.3521</a></span>
+	      </div>
+	      <div class="email"> <span class="icono"></span> <a href="mailto:info@ariaweb.com.ar">info@ariaweb.com.ar</a> </div>
+	    </div>
+	  </div>
+	</footer>
+	<div class="copyright">
+	  <div class="content-copy"><small>
+	    <div class="copy-aria"> &copy; 2016 ARIA. Todos los derechos reservados </div>
+	    <div class="powered"> <span>Powered by </span> <a href="#" title="Vertigo Design"> <img src="<%= asset_path 'Vertigo_Design.png' %>" alt="Vertigo Design" title="Vertigo Design"> </a> </div><small>
+	  </div>
+	</div>
+	<script>
+		$(function() {
+			AriaInit();
+			<%= yield :extra_js if content_for? :extra_js %>
+		});
+	</script>
+</body>
+</html>
