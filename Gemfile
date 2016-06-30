@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'figaro'
+gem 'devise', '3.4.1'
 gem 'compass-rails'
 
 group :development, :test do
