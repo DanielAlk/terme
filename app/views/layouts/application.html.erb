@@ -7,14 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body class="<%= yield :body_class if content_for? :body_class %>">
+<body class="<%= content_for :body_class %>">
 	<%= render 'layouts/navigation' %>
 	<%= yield %>
 	<%= render 'layouts/footer' %>
 	<script>
 		$(function() {
 			AriaInit();
-			<%= yield :extra_js if content_for? :extra_js %>
+			<%= content_for :extra_js %>
 		});
 	</script>
 </body>

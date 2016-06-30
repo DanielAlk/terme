@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body class="<%= yield :body_class if content_for? :body_class %>">
+<body class="<%= content_for :body_class %>">
 	<header>
 	  <div class="content-header" style="background:transparent;">
 	    <div class="info-head">
@@ -22,10 +22,10 @@
 	  <div class="content-footer">
 	    <div class="contacto">
 	      <h2>Contacto</h2>
-	      <p>Av San Martín 1545, Adrogué - Buenos Aires</p>
+	      <p>Jorge 408, Adrogué - Buenos Aires</p>
 	      <div class="telefonos">
 	        <span class="icono"></span>
-	        <span class="numeros"><a href="+541142141345" style="color:#FFF;">(+54 11) 4214.1345</a> <br>
+	        <span class="numeros"><a href="+541142141345" style="color:#FFF;">(+54 11) 3969.8286</a> <br>
 	        <a href="+54111531263521" style="color:#FFF;">(+54 11) 15.3126.3521</a></span>
 	      </div>
 	      <div class="email"> <span class="icono"></span> <a href="mailto:info@ariaweb.com.ar">info@ariaweb.com.ar</a> </div>
@@ -41,7 +41,7 @@
 	<script>
 		$(function() {
 			AriaInit();
-			<%= yield :extra_js if content_for? :extra_js %>
+			<%= content_for :extra_js %>
 		});
 	</script>
 </body>
