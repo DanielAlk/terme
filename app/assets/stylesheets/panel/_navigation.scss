@@ -1,0 +1,19 @@
+body.control-panel { padding-top: 30px; }
+.admin-navigation {
+	@include clear-both;
+	position: fixed;
+	background-color: #333;
+	color: #FFF;
+	padding: 5px 10px;
+	width: 100%;
+	z-index:9;
+	top: 0;
+	height: 30px;
+	&>div:first-child { float: left; }
+	&>div:last-child { float: right; }
+	.fa { color: #FFF; }
+	.dropdown-menu { background-color: #333; color: #FFF;
+		.fa { color: $brand-warning; }
+		a { color: inherit; padding: 3px 12px; }
+	}
+}

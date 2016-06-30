@@ -1,0 +1,13 @@
+form {
+	.field { @extend .form-group;
+		input:not([type="checkbox"]):not([type="radio"]), textarea, select { @extend .form-control; }
+		textarea { height: auto; }
+	}
+	.actions {
+		input { @extend .btn; 
+			&[type="submit"] { @extend .btn-success; }
+			&:not([type="submit"]) { @extend .btn-primary; }
+		}
+	}
+	br { display:none; }
+}

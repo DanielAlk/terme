@@ -1,0 +1,47 @@
+<% if request.subdomain[/panel/] %>
+	<div class="admin-navigation">
+		<div class="btn-group">
+			<% if admin_signed_in? %>
+				<%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, aria_haspopup: 'true', aria_expanded: false do -%>
+					<i class="fa fa-cog" aria-hidden="true"></i> &nbsp; Opciones
+				<% end %>
+				<ul class="dropdown-menu">
+					<li>
+						<%= link_to home_path do %>
+							<i class="fa fa-home fa-fw" aria-hidden="true"></i> &nbsp; Web
+						<% end %>
+					</li>
+					<li>
+						<%= link_to panel_path do %>
+							<i class="fa fa-sliders fa-fw" aria-hidden="true"></i> &nbsp; Panel
+						<% end %>
+					</li>
+					<li class="dropdown-header">Listas</li>
+				</ul>
+			<% end %>
+		</div>
+		<div class="btn-group">
+			<% if admin_signed_in? %>
+				<%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, aria_haspopup: 'true', aria_expanded: false do -%>
+					<%= current_admin.email %> &nbsp; <i class="fa fa-user" aria-hidden="true"></i>
+				<% end %>
+				<ul class="dropdown-menu">
+					<li>
+						<%= link_to edit_admin_registration_path do %>
+							<i class="fa fa-edit fa-fw" aria-hidden="true"></i> Editar
+						<% end %>
+					</li>
+			    <li>
+						<%= link_to destroy_admin_session_path, method: :delete do %>
+							<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Salir
+						<% end %>
+					</li>
+				</ul>
+			<% else %>
+				<%= link_to panel_path do %>
+					<i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

@@ -1,0 +1,14 @@
+a:hover, a:focus { text-decoration: none; }
+a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, button:focus, button:active:focus, button.active:focus { outline: none!important; }
+div.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 8; margin: 40px 10px 0 0; opacity: 0.93; white-space: nowrap; }
+section.page-top { text-align: center; background-image: url(<%= asset_path 'slider/Slider_1.jpg' %>); background-size: cover; background-repeat: no-repeat; height:200px; background-position: center -100px;
+	.logo { padding-top: 10px;
+		img { height: 60px; width: auto; }
+	}
+}
+
+body.control-panel { font-family: 'roboto', sans-serif;
+	&>.container { margin-top: -50px; background-color:#FFF; border-radius: 5px;
+		&.sessions, &.registrations, &.passwords { max-width: 600px; padding-left: 25px; padding-right: 25px; }
+	}
+}
