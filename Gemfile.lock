@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     arel (6.0.3)
     autonumeric-rails (1.9.43)
       jquery-rails (>= 2.0.2)
@@ -197,6 +199,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
   autonumeric-rails
   bootstrap-sass (= 3.2.0.0)
   bootstrap-select-rails
