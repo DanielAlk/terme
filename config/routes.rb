@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       sessions: 'admins/sessions', 
       passwords: 'admins/passwords'
     }
+
+    resources :categories
   end
   
   root 'pages#home'

@@ -1,6 +1,26 @@
+a small { color: inherit; }
 a:hover, a:focus { text-decoration: none; }
 a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, button:focus, button:active:focus, button.active:focus { outline: none!important; }
+
+.link-gray { color: $gray;
+	&:hover, &:focus { color: darken($gray, 15%); }
+}
+.link-primary { color: $brand-primary;
+	&:hover, &:focus { color: darken($brand-primary, 15%); }
+}
+.link-success { color: $brand-success;
+	&:hover, &:focus { color: darken($brand-success, 15%); }
+}
+.link-danger { color: $brand-danger;
+	&:hover, &:focus { color: darken($brand-danger, 15%); }
+}
+
+
 div.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 8; margin: 40px 10px 0 0; opacity: 0.93; white-space: nowrap; }
+.vertical-align { height: 100%; width: 100%; display: table;
+	>.middle { display: table-cell; vertical-align: middle; }
+}
+
 section.page-top { text-align: center; background-image: url(<%= asset_path 'slider/Slider_1.jpg' %>); background-size: cover; background-repeat: no-repeat; height:200px; background-position: center -100px;
 	.logo { padding-top: 10px;
 		img { height: 60px; width: auto; }
@@ -9,6 +29,36 @@ section.page-top { text-align: center; background-image: url(<%= asset_path 'sli
 
 body.control-panel { font-family: 'roboto', sans-serif;
 	&>.container { margin-top: -50px; background-color:#FFF; border-radius: 5px;
-		&.sessions, &.registrations, &.passwords { max-width: 600px; padding-left: 25px; padding-right: 25px; }
+		&.sessions, &.registrations, &.passwords, &.categories { max-width: 600px; padding-left: 25px; padding-right: 25px; }
 	}
+}
+
+.action-btn-group { @include clear-both; }
+.action-btn {
+	display: block; float: left; text-align: center;
+	color: inherit; border: 4px solid #8dc63f; width: 100px; height: 100px;
+	border-radius: 6px; background: #0b9444; color: #fff; font-weight: 300;
+	&:hover,&:focus { color: #fff; box-shadow: 0px 0px 5px 1px #8dc63f; }
+	&:active { color: #fff; box-shadow: inset 0px 0px 15px 5px #8dc63f; }
+	span { display: block; }
+	.fa { font-size: 1.8em; }
+}
+
+.panel-heading-actions {
+	float: right;
+}
+
+.title-editable	{
+	form { display: none; }
+	span { cursor: text;
+		&:hover { font-weight: bold; }
+	}
+}
+
+.panel-group.nested {
+	.panel-collapse { padding-left: 30px;
+		>div { margin: 0; }
+	}
+	.panel-heading { border-radius: 4px!important; }
+	.panel { border: 0; box-shadow: none; margin-top: 5px; }
 }

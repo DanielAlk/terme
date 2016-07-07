@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
 gem 'devise', '3.4.1'
 gem 'ancestry'
+gem 'friendly_id', '~> 5.1.0'
 gem 'compass-rails'
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'font-awesome-sass'

@@ -24,5 +24,7 @@
 //= require bootstrap-select
 //= require autonumeric
 //= require turbolinks
+//= require forms
 //= require alerts
+//= require modals
 //= require utils
