@@ -27,4 +27,6 @@
 //= require forms
 //= require alerts
 //= require modals
+//= require editable
 //= require utils
+//= require panel

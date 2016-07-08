@@ -1,30 +1,26 @@
-<div class="panel panel-default">
+<div class="panel panel-depth d<%= category.depth %>" id="<%= 'panel-template' if category.new_record? %>">
   <div class="panel-heading" role="tab">
     <div class="panel-heading-actions">
-      <% if category.has_children? %>
-      	<%= link_to '#group-' + category.id.to_s, class: 'link-gray', data: { toggle: 'collapse' }, role: 'button' do %>
-      		<i class="fa fa-caret-down fa-fw fa-flip-vertical" aria-hidden="true"></i>
-      	<% end %>
+      <%= link_to '#group-' + category.id.to_s, class: 'link-gray' + (category.is_not_new_and_has_children? ? '' : ' hidden'), data: { toggle: 'collapse' } do %>
+        <i class="fa fa-caret-down fa-fw" aria-hidden="true"></i>
       <% end %>
-      <%= link_to '#', class: 'link-success', data: { toggle: 'modal', target: '#modalCreateAncestry', ancestry: category.path_to_s } do %>
+      <%= link_to '#', class: 'link-success' + (category.new_record? ? ' hidden' : ''), data: { util: 'template', template: '#panel-template', target: '#group-' + category.id.to_s + '>.panel-group', inputs: { 'category[ancestry]' => category.path_to_s }.to_json } do %>
         <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
       <% end %>
-      <%= link_to category, class: 'link-danger', method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= link_to category, class: 'link-danger' + (category.new_record? ? ' hidden' : ''), data: { util: 'delete', confirm: 'Are you sure?', remove: '.panel' } do %>
         <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
       <% end %>
     </div>
-    <h4 class="panel-title title-editable" data-toggle="collapse" data-target="#group-<%= category.id %>">
+    <h4 class="panel-title editable <%= 'editing' if category.new_record? %>">
       <span><%= category.title %></span>
       <%= form_for(category) do |f| %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, id: ( category.new_record? ? 'new_category_title' : 'category_' + category.id.to_s + '_title'), placeholder: 'Título', required: true, autocomplete: 'off' %>
       <% end %>
     </h4>
   </div>
-  <% if category.has_children? %>
-	  <div id="group-<%= category.id %>" class="panel-collapse collapse in" role="tabpanel">
-	  	<div class="panel-group" role="tablist">
-	  	  <%= render category.children %>
-	  	</div>
-	  </div>
-  <% end %>
+  <div id="group-<%= category.id %>" class="panel-collapse collapse <%= category.is_not_new_and_has_children? ? '' : 'hidden' %>" role="tabpanel">
+    <div class="panel-group" role="tablist">
+      <%= render category.children if category.is_not_new_and_has_children? %>
+    </div>
+  </div>
 </div>

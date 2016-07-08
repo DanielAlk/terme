@@ -26,6 +26,9 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+    if params[:category].present? and params[:category][:ancestry_id]
+      @category.ancestry = Category.find(params[:category][:ancestry_id]).path_to_s
+    end
 
     respond_to do |format|
       if @category.save

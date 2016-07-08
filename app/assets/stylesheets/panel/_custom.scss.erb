@@ -48,17 +48,34 @@ body.control-panel { font-family: 'roboto', sans-serif;
 	float: right;
 }
 
-.title-editable	{
+.editable	{
 	form { display: none; }
 	span { cursor: text;
 		&:hover { font-weight: bold; }
+	}
+	input { height: 24px; margin: -4px 0; border: none; width: 300px; background-color: transparent;
+		&:focus { outline: none; }
+	}
+	&.editing {
+		form { display: block; }
+		span { display: none; }
 	}
 }
 
 .panel-group.nested {
 	.panel-collapse { padding-left: 30px;
 		>div { margin: 0; }
+		.panel-heading { padding: 5px 15px; }
+		.panel-title { font-size: .9em; line-height: inherit; }
 	}
 	.panel-heading { border-radius: 4px!important; }
 	.panel { border: 0; box-shadow: none; margin-top: 5px; }
+}
+
+.panel-depth {
+	&.d0 { @extend .panel-warning; }
+	&.d1 { @extend .panel-info; }
+	&.d2 { @extend .panel-success; }
+	&.d3 { @extend .panel-danger; }
+	&.d4, &.d4 .panel.panel-depth { @extend .panel-default; }
 }

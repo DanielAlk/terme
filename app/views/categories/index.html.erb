@@ -1,51 +1,18 @@
 <% content_for :extra_js do %>
-  Utils.collapseCaret();
-  Modals.contextForm('modalCreateAncestry', 'category');
-  $('#new_root_category').validate();
+  Panel.categories();
 <% end %>
 
 <h1>
   Categorías
-  <%= link_to '#modalCreateRoot', class: 'pull-right link-gray', data: { toggle: 'modal' } do %>
+  <%= link_to '#', class: 'pull-right link-gray', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
     <small><i class="fa fa-plus fa-fw" aria-hidden="true"></i></small>
   <% end %>
 </h1>
 
-<div class="panel-group nested" role="tablist">
+<div class="panel-group nested" role="tablist" id="group-root">
   <%= render @categories %>
 </div>
 
-<div class="modal modal-success fade" tabindex="-1" role="dialog" id="modalCreateAncestry">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <%= form_for(Category.new) do |f| %>
-        <div class="modal-body">
-          <%= f.hidden_field :ancestry %>
-          <div class="field">
-            <%= f.text_field :title, placeholder: 'Título de categoría', minlength: 5, required: true %>
-          </div>
-          <div class="actions">
-            <%= f.submit 'Crear categoría', class: 'btn-block' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="modal modal-success fade" tabindex="-1" role="dialog" id="modalCreateRoot">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <%= form_for(Category.new, html: {id: 'new_root_category'}) do |f| %>
-        <div class="modal-body">
-          <div class="field">
-            <%= f.text_field :title, placeholder: 'Título de categoría', minlength: 5, required: true %>
-          </div>
-          <div class="actions">
-            <%= f.submit 'Crear categoría', class: 'btn-block' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
+<div class="hidden">
+  <%= render 'categories/category', category: Category.new %>
 </div>
