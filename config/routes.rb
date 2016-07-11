@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'ingenieria', to: 'pages#engineering', as: :engineering_page
   get 'instalacion', to: 'pages#instalation', as: :instalation_page
   get 'la-empresa', to: 'pages#about', as: :about_page
-  get 'notiticas', to: 'pages#news', as: :news_page
+  get 'noticias', to: 'pages#news', as: :news_page
   get 'contacto', to: 'pages#contact', as: :contact_page
 
 end
