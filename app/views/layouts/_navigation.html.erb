@@ -19,9 +19,9 @@
       <div class="top-right">
         <% if user_signed_in? %>
           <div class="usuarios">
-            <a href="<%= edit_user_registration_path %>" class="ingrsar"><%= current_user.email %></a>
+            <a href="<%= profile_path %>" class="registro"><%= current_user.name %></a>
           </div>
-        <% else %>
+        <% elsif !request.subdomain[/panel/] %>
           <div class="usuarios">
             <a href="<%= new_user_session_path %>" class="ingrsar">Ingresar</a>
             <a href="<%= new_user_registration_path %>" class="registro">Registrarse</a>

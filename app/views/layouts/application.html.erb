@@ -14,8 +14,12 @@
 	<script>
 		$(function() {
 			AriaInit();
-			<%= %(Alerts.success('#{notice}');) if notice.present? %>
-			<%= %(Alerts.danger('#{alert}');) if alert.present? %>
+			<% if notice.present? %>
+				Alerts.success('<%= notice %>');
+			<% end %>
+			<% if alert.present? %>
+				Alerts.danger('<%= alert %>');
+			<% end %>
 			<%= content_for :extra_js %>
 		});
 	</script>

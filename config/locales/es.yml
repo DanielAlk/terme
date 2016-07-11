@@ -145,7 +145,7 @@ es:
       not_an_integer: debe ser un entero
       odd: debe ser un número non
       required: debe existir
-      taken: ya ha sido tomado
+      taken: ya existe
       too_long:
         one: es demasiado largo (máximo 1 caracter)
         other: es demasiado largo (máximo %{count} caracteres)

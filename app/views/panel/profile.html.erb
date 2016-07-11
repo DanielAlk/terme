@@ -1,0 +1,14 @@
+<% content_for :profile_subtitle, current_user.email %>
+
+<p>
+	<b>Nombre:</b>
+	<% if current_user.fname.present? && current_user.fname.present? %>
+		<%= current_user.name %>
+	<% else %>
+		<%= link_to 'Agregar mi nombre', edit_user_registration_path, class: 'link-primary' %>
+	<% end %>
+</p>
+<p>
+	<b>Email:</b>
+	<%= current_user.email %>
+</p>

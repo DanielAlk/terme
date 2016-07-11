@@ -61,16 +61,16 @@ Rails.application.configure do
   # config.action_controller.asset_host = 'http://assets.example.com'
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { host: ENV["WEBAPP_DOMAIN"] }
+  config.action_mailer.default_url_options = { host: ENV["webapp_domain"] }
   config.action_mailer.smtp_settings = {
-    address: ENV['NOTIFICATIONS_MAILER_ADDRESS'],
-    port: ENV['NOTIFICATIONS_MAILER_PORT'],
-    domain: ENV["WEBAPP_DOMAIN"],
+    address: ENV['notifications_mailer_address'],
+    port: ENV['notifications_mailer_port'],
+    domain: ENV["webapp_domain"],
     ssl: true,
     authentication: :login,
     enable_starttls_auto: true,
-    user_name: ENV['NOTIFICATIONS_MAILER_USERNAME'],
-    password: ENV['NOTIFICATIONS_MAILER_PASSWORD']
+    user_name: ENV['notifications_mailer_username'],
+    password: ENV['notifications_mailer_password']
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

@@ -1,15 +1,24 @@
 <div class="admin-navigation">
 	<div class="btn-group">
+		<% unless user_signed_in? %>
+			<%= link_to new_user_registration_path do %>
+				<i class="fa fa-edit fa-fw" aria-hidden="true"></i> Registrarse
+			<% end %>
+		<% else %>
+			<a href="#user_navigation" class="visible-xs" data-util="class" data-toggle="in">
+				<i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+			</a>
+		<% end %>
 	</div>
 	<div class="btn-group">
 		<% if user_signed_in? %>
 			<%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, aria_haspopup: 'true', aria_expanded: false do -%>
-				<%= current_user.email %> &nbsp; <i class="fa fa-user" aria-hidden="true"></i>
+				<%= current_user.name %> &nbsp; <i class="fa fa-user" aria-hidden="true"></i>
 			<% end %>
-			<ul class="dropdown-menu">
+			<ul class="dropdown-menu" style="left:auto;right:0;">
 				<li>
 					<%= link_to edit_user_registration_path do %>
-						<i class="fa fa-edit fa-fw" aria-hidden="true"></i> Editar
+						<i class="fa fa-edit fa-fw" aria-hidden="true"></i> Editar cuenta
 					<% end %>
 				</li>
 		    <li>
@@ -25,3 +34,17 @@
 		<% end %>
 	</div>
 </div>
+
+<% content_for :profile_nav do %>
+	<ul class="nav nav-pills nav-stacked">
+	  <li role="presentation" class="<%= profile_nav_class(profile_path) %>">
+	  	<%= link_to 'Perfil', profile_path %>
+	  </li>
+	  <li role="presentation" class="<%= profile_nav_class(edit_user_registration_path) %>">
+	  	<%= link_to 'Editar', edit_user_registration_path %>
+	  </li>
+	  <li role="presentation">
+	  	<%= link_to 'Cerrar sesión', destroy_user_session_path, class: 'link-danger', method: :delete %>
+	  </li>
+	</ul>
+<% end %>

@@ -1,5 +1,5 @@
 class Admins::PasswordsController < Devise::PasswordsController
-  layout 'panel'
+  layout 'admin'
   # GET /resource/password/new
   # def new
   #   super

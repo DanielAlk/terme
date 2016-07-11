@@ -67,10 +67,23 @@ Utils.handleAjaxErrors = function() {
 	});
 };
 
+Utils.class = function() {
+	$(document).on('click', '[data-util=class]', function(e) {
+		!!this.href && e.preventDefault();
+		var $this = $(this);
+		var options = $this.data();
+		var $target = options.target ? $(options.target) : $($this.attr('href'));
+		if (!!options.toggle) $target.toggleClass(options.toggle);
+		else if (!!options.remove) $target.removeClass(options.remove);
+		else if (!!options.add) $target.addClass(options.add);
+	});
+};
+
 Utils.onload = function() {
 	Utils.handleAjaxErrors();
 	Utils.collapseCaret();
 	Utils.templates();
+	Utils.class();
 	Utils.delete();
 };
 

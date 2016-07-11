@@ -10,7 +10,11 @@
 <body class="control-panel">
 	<%= render 'panel/navigation' %>
 	<section class="page-top">
-		<div class="logo"> <a href="<%= home_path %>"> <img src="<%= asset_path 'Aria_Logo.png' %>" alt="Aria" title="Aria"> </a> </div>
+		<div class="logo">
+			<a href="<%= request.subdomain[/panel/] ? home_path : root_path %>">
+				<img src="<%= asset_path 'Aria_Logo.png' %>" alt="Aria" title="Aria">
+			</a>
+		</div>
 	</section>
 	<div class="container <%= (controller_name != 'panel' ? controller_name : '' ) + ' ' + action_name %>">
 		<%= yield %>

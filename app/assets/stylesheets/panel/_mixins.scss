@@ -2,3 +2,10 @@
 	&:before, &:after {content: " "; display: table;}
 	&:after {clear: both;}
 }
+@mixin transition($property, $delay, $ease-function) {
+	-webkit-transition: $property $delay $ease-function;
+	-moz-transition: $property $delay $ease-function;
+	-ms-transition: $property $delay $ease-function;
+	-o-transition: $property $delay $ease-function;
+	transition: $property $delay $ease-function;
+}

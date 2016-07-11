@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   constraints subdomain: /panel/ do
-    get '/', to: 'panel#index', as: :panel
+    get '/', to: 'panel#admin', as: :panel
 
     devise_for :admins, controllers: {
       registrations: 'admins/registrations',
@@ -16,13 +16,17 @@ Rails.application.routes.draw do
     resources :categories
   end
 
+  constraints subdomain: lambda { |sd| !sd[/panel/] } do
+    devise_for :users, path: 'profile', controllers: {
+      registrations: 'users/registrations',
+      sessions: 'users/sessions',
+      passwords: 'users/passwords'
+    }
+  end
+
   root 'pages#home'
-  
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    passwords: 'users/passwords'
-  }
+
+  get 'profile', to: 'panel#profile', as: :profile
 
   get 'home', to: 'pages#home', as: :home
   get 'producto', to: 'pages#product', as: :product_page
