@@ -1,14 +1,6 @@
-<h1 class="text-center" style="margin-bottom:30px;">
-	<i class="fa fa-sliders fa-fh" aria-hidden="true"></i>
-	Panel Aria
-</h1>
-<div class="action-btn-group">
-	<a class="action-btn" href="<%= categories_path %>">
-		<div class="vertical-align">
-			<div class="middle">
-				<i class="fa fa-list fa-fw" aria-hidden="true"></i>
-				<span>Categorías</span>
-			</div>
-		</div>
-	</a>
-</div>
+<% content_for :admin_subtitle, current_admin.email %>
+
+<p>
+	<b>Email:</b>
+	<%= current_admin.email %>
+</p>

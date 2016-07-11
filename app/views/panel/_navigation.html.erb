@@ -2,33 +2,9 @@
 	<div class="admin-navigation">
 		<div class="btn-group">
 			<% if admin_signed_in? %>
-				<%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }, aria_haspopup: 'true', aria_expanded: false do -%>
-					<i class="fa fa-cog" aria-hidden="true"></i> &nbsp; Opciones
-				<% end %>
-				<ul class="dropdown-menu">
-					<li>
-						<%= link_to home_path do %>
-							<i class="fa fa-home fa-fw" aria-hidden="true"></i> &nbsp; Web
-						<% end %>
-					</li>
-					<li>
-						<%= link_to panel_path do %>
-							<i class="fa fa-sliders fa-fw" aria-hidden="true"></i> &nbsp; Panel
-						<% end %>
-					</li>
-					<li class="dropdown-header">Listas</li>
-					<li>
-						<%= link_to categories_path do %>
-							<i class="fa fa-list fa-fw" aria-hidden="true"></i> &nbsp; Categorias
-						<% end %>
-					</li>
-					<li class="dropdown-header">Crear</li>
-					<li>
-						<%= link_to new_category_path do %>
-							<i class="fa fa-list fa-fw" aria-hidden="true"></i> &nbsp; Categoria
-						<% end %>
-					</li>
-				</ul>
+				<a href="#admin_navigation" class="visible-xs" data-util="class" data-toggle="in">
+					<i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+				</a>
 			<% end %>
 		</div>
 		<div class="btn-group">
@@ -55,4 +31,29 @@
 			<% end %>
 		</div>
 	</div>
+
+	<% content_for :admin_nav do %>
+		<ul class="nav nav-pills nav-stacked">
+		  <li role="presentation" class="<%= admin_nav_class(:panel) %>">
+		  	<%= link_to panel_path do %>
+		  		<i class="fa fa-user fa-fw" aria-hidden="true"></i> Panel
+		  	<% end %>
+		  </li>
+		  <li role="presentation" class="<%= admin_nav_class(edit_admin_registration_path) %>">
+		  	<%= link_to edit_admin_registration_path do %>
+		  		<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar Admin
+		  	<% end %>
+		  </li>
+		  <li role="presentation" class="<%= admin_nav_class(:categories) %>">
+		  	<%= link_to categories_path do %>
+		  		<i class="fa fa-list fa-fw" aria-hidden="true"></i> Categorias
+		  	<% end %>
+		  </li>
+		  <li role="presentation">
+		  	<%= link_to destroy_user_session_path, class: 'link-danger', method: :delete do %>
+		  		<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Cerrar sesión
+		  	<% end %>
+		  </li>
+		</ul>
+	<% end %>
 <% end %>

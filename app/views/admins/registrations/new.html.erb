@@ -1,24 +1,28 @@
-<h2>Sign up</h2>
+<% content_for :extra_js do %>
+  $('form#new_admin').validate();
+<% end %>
+
+<% content_for :admin_subtitle, 'Sign up' %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(Minimo <%= @minimum_password_length %> caracteres)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", minlength: @minimum_password_length, required: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.label :password_confirmation, 'Confirmar password' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", required: true %>
   </div>
 
   <div class="actions">

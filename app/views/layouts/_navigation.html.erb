@@ -17,16 +17,20 @@
         </ul>
       </div>
       <div class="top-right">
-        <% if user_signed_in? %>
-          <div class="usuarios">
+        <div class="usuarios">
+          <% if user_signed_in? %>
             <a href="<%= profile_path %>" class="registro"><%= current_user.name %></a>
-          </div>
-        <% elsif !request.subdomain[/panel/] %>
-          <div class="usuarios">
+          <% elsif request.subdomain[/panel/] %>
+            <% if admin_signed_in? %>
+              <a href="<%= panel_path %>" class="registro"><%= current_admin.name %></a>
+            <% else %>
+              <a href="<%= panel_path %>" class="registro">Panel Aria</a>
+            <% end %>
+          <% else %>
             <a href="<%= new_user_session_path %>" class="ingrsar">Ingresar</a>
             <a href="<%= new_user_registration_path %>" class="registro">Registrarse</a>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
         <div class="menu-top"> <span class="icon">Menú Top</span>
           <ul class="topmenu">
             <li><a href="">Medios de Pago</a></li>

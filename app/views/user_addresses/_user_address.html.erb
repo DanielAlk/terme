@@ -7,7 +7,7 @@
       <%= link_to edit_user_address_path(user_address), title: 'Editar', class: 'link-warning' do %>
         <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
       <% end %>
-      <%= link_to user_address, title: 'Eliminar', class: 'link-danger' + (user_address.new_record? ? ' hidden' : ''), data: { util: 'delete', confirm: 'Are you sure?', remove: '.panel' } do %>
+      <%= link_to user_address, title: 'Eliminar', class: 'link-danger' + (user_address.new_record? ? ' hidden' : ''), data: { util: 'delete', confirm: '¿Seguro?', remove: '.panel' } do %>
         <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
       <% end %>
     </div>

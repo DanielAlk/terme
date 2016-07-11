@@ -11,4 +11,8 @@ class Admin < ActiveRecord::Base
   def regular?
   	self.profile == 'regular'
   end
+
+  def name
+    self.email[/[^@]+/]
+  end
 end

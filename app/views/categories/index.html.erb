@@ -2,12 +2,13 @@
   Panel.categories();
 <% end %>
 
-<h1>
-  Categorías
-  <%= link_to '#', class: 'pull-right link-gray', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
-    <small><i class="fa fa-plus fa-fw" aria-hidden="true"></i></small>
+<% content_for :admin_subtitle, 'Categorías' %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to '#', class: 'btn btn-success', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
+    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
   <% end %>
-</h1>
+</div>
 
 <div class="panel-group nested" role="tablist" id="group-root">
   <%= render @categories %>

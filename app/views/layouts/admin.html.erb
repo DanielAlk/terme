@@ -16,8 +16,31 @@
 			</a>
 		</div>
 	</section>
-	<div class="container <%= (controller_name != 'panel' ? controller_name : '' ) + ' ' + action_name %>">
-		<%= yield %>
+	<div class="container admin <%= (controller_name != 'panel' ? controller_name : '' ) + ' ' + action_name %>">
+		<% if admin_signed_in? %>
+			<h1 class="text-center">
+				<i class="fa fa-sliders fa-fh" aria-hidden="true"></i>
+				Panel Aria
+			</h1>
+			<h5 class="text-center" style="margin-bottom:30px;">
+				<% if content_for? :admin_subtitle %>
+					<%= yield :admin_subtitle %>
+				<% else %>
+					&nbsp;
+				<% end %>
+			</h5>
+			<section class="row">
+				<div class="col-sm-4 nav-xs" id="admin_navigation" data-util="class" data-remove="in" data-target="#admin_navigation">
+					<%= content_for :admin_nav %>
+				</div>
+				<div class="col-sm-8">
+					<%= yield %>
+				</div>
+			</section>
+		<% else %>
+			<h2><%= content_for :admin_subtitle %></h2>
+			<%= yield %>
+		<% end %>
 	</div>
 	<script>
 		$(function() {
