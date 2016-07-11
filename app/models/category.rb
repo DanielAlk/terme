@@ -3,6 +3,8 @@ class Category < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
 	has_ancestry
 
+	validates_presence_of :title
+
 	def path_to_s
 		self.path_ids.join '/'
 	end

@@ -8,7 +8,20 @@
 		<%= link_to 'Agregar mi nombre', edit_user_registration_path, class: 'link-primary' %>
 	<% end %>
 </p>
+
 <p>
 	<b>Email:</b>
 	<%= current_user.email %>
+</p>
+
+<p>
+	<b>Direccion principal:</b>
+	<% if current_user.user_addresses.present? %>
+		<%= current_user.addresses.first %>
+		<% if current_user.addresses.count-1 > 0 %>
+			&nbsp; <%= link_to '+ ' + (current_user.addresses.count - 1).to_s + ' más', user_addresses_path, class: 'btn btn-xs btn-success' %>
+		<% end %>
+	<% else %>
+		<%= link_to 'Agregar direcciones de envío', new_user_address_path, class: 'link-primary' %>
+	<% end %>
 </p>

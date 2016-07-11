@@ -1,0 +1,18 @@
+<div class="panel panel-success" id="<%= 'panel-template' if user_address.new_record? %>">
+  <div class="panel-heading" role="tab">
+    <div class="panel-heading-actions">
+      <%= link_to user_address, title: 'Marcar como principal', class: 'link-primary' + (user_address.first? ? ' hidden' : ''), data: { util: 'update', hash: { 'user_address[position]': 1 } } do %>
+        <i class="fa fa-star fa-fw" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to edit_user_address_path(user_address), title: 'Editar', class: 'link-warning' do %>
+        <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to user_address, title: 'Eliminar', class: 'link-danger' + (user_address.new_record? ? ' hidden' : ''), data: { util: 'delete', confirm: 'Are you sure?', remove: '.panel' } do %>
+        <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <h4 class="panel-title">
+      <%= link_to user_address.address, user_address %>
+    </h4>
+  </div>
+</div>

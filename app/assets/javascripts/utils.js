@@ -32,6 +32,19 @@ Utils.delete = function() {
 	$(document).on('click', '[data-util=delete]', triggerClick);
 };
 
+Utils.update = function() {
+	var triggerClick = function(e) {
+		e.preventDefault();
+		var $trigger = $(this);
+		var options = $trigger.data();
+		$.ajax({ url: $trigger.attr('href'), method: 'put', dataType: 'json', data: options.hash })
+		.done(function(response) {
+			$trigger.trigger('updated.util.update', [ response ]);
+		});
+	};
+	$(document).on('click', '[data-util=update]', triggerClick);
+};
+
 Utils.templates = function() {
 	var inputsFromData = function(data) {
 		if (!data) return null;
@@ -72,7 +85,7 @@ Utils.class = function() {
 		!!this.href && e.preventDefault();
 		var $this = $(this);
 		var options = $this.data();
-		var $target = options.target ? $(options.target) : $($this.attr('href'));
+		var $target = !!options.target ? $(options.target) : $($this.attr('href'));
 		if (!!options.toggle) $target.toggleClass(options.toggle);
 		else if (!!options.remove) $target.removeClass(options.remove);
 		else if (!!options.add) $target.addClass(options.add);
@@ -85,6 +98,7 @@ Utils.onload = function() {
 	Utils.templates();
 	Utils.class();
 	Utils.delete();
+	Utils.update();
 };
 
 $(Utils.onload);

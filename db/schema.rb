@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711151850) do
+ActiveRecord::Schema.define(version: 20160711155231) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",        null: false
@@ -55,6 +55,25 @@ ActiveRecord::Schema.define(version: 20160711151850) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "user_addresses", force: :cascade do |t|
+    t.string   "address",    limit: 255
+    t.integer  "user_id",    limit: 4
+    t.string   "email",      limit: 255
+    t.string   "fname",      limit: 255
+    t.string   "lname",      limit: 255
+    t.string   "company",    limit: 255
+    t.string   "zip_code",   limit: 255
+    t.string   "city",       limit: 255
+    t.string   "mobile",     limit: 255
+    t.integer  "zone_id",    limit: 4
+    t.integer  "position",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "user_addresses", ["user_id"], name: "index_user_addresses_on_user_id", using: :btree
+  add_index "user_addresses", ["zone_id"], name: "index_user_addresses_on_zone_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "fname",                  limit: 255
     t.string   "lname",                  limit: 255
@@ -82,4 +101,6 @@ ActiveRecord::Schema.define(version: 20160711151850) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "user_addresses", "users"
+  add_foreign_key "user_addresses", "zones"
 end

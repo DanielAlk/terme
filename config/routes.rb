@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       passwords: 'users/passwords'
     }
   end
+  resources :user_addresses, path: 'profile/direcciones-de-envio'
 
   root 'pages#home'
 

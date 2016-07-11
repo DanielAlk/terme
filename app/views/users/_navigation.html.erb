@@ -38,13 +38,24 @@
 <% content_for :profile_nav do %>
 	<ul class="nav nav-pills nav-stacked">
 	  <li role="presentation" class="<%= profile_nav_class(profile_path) %>">
-	  	<%= link_to 'Perfil', profile_path %>
+	  	<%= link_to profile_path do %>
+	  		<i class="fa fa-user fa-fw" aria-hidden="true"></i> Perfil
+	  	<% end %>
 	  </li>
 	  <li role="presentation" class="<%= profile_nav_class(edit_user_registration_path) %>">
-	  	<%= link_to 'Editar', edit_user_registration_path %>
+	  	<%= link_to edit_user_registration_path do %>
+	  		<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar
+	  	<% end %>
+	  </li>
+	  <li role="presentation" class="<%= profile_nav_class(:user_addresses) %>">
+	  	<%= link_to user_addresses_path do %>
+	  		<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i> Direcciones de envío
+	  	<% end %>
 	  </li>
 	  <li role="presentation">
-	  	<%= link_to 'Cerrar sesión', destroy_user_session_path, class: 'link-danger', method: :delete %>
+	  	<%= link_to destroy_user_session_path, class: 'link-danger', method: :delete do %>
+	  		<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Cerrar sesión
+	  	<% end %>
 	  </li>
 	</ul>
 <% end %>

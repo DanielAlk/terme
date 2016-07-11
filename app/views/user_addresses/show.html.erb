@@ -1,0 +1,50 @@
+<% content_for :profile_subtitle, 'Dirección de envío' %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to edit_user_address_path(@user_address), title: 'Editar', class: 'btn btn-warning' do %>
+    <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+  <% end %>
+  <%= link_to user_addresses_path, title: 'Listado', class: 'btn btn-success' do %>
+    <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @user_address.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user_address.email %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @user_address.fname + ' ' + @user_address.lname %>
+</p>
+
+<p>
+  <strong>Compañía:</strong>
+  <%= @user_address.company %>
+</p>
+
+<p>
+  <strong>Código postal:</strong>
+  <%= @user_address.zip_code %>
+</p>
+
+<p>
+  <strong>Ciudad:</strong>
+  <%= @user_address.city %>
+</p>
+
+<p>
+  <strong>Provincia:</strong>
+  <%= @user_address.zone.title %>
+</p>
+
+<p>
+  <strong>Teléfono celular:</strong>
+  <%= number_to_phone @user_address.mobile %>
+</p>

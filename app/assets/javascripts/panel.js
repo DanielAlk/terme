@@ -1,5 +1,15 @@
 var Panel = {};
 
+Panel.userAddresses = function() {
+	$(document).on('updated.util.update', '[data-util=update]', function(e, response) {
+		var $panel = $(this).closest('.panel');
+		var $group = $('#group-root');
+		$group.find('[data-util=update]').removeClass('hidden');
+		$panel.prependTo($group).find('[data-util=update]').addClass('hidden');
+		Alerts.success('Se marcó la dirección como principal');
+	});
+};
+
 Panel.categories = function() {
 	var insertedHandler = function(e, trigger, panel, target) {
 	  var $group = $(target).parent('.collapse');

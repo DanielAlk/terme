@@ -1,0 +1,15 @@
+<% content_for :extra_js do %>
+	Panel.userAddresses();
+<% end %>
+
+<% content_for :profile_subtitle, 'Direcciónes de envío' %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to new_user_address_path, title: 'Nueva', class: 'btn btn-success' do %>
+    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<div class="panel-group" role="tablist" id="group-root">
+  <%= render @user_addresses %>
+</div>

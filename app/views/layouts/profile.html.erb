@@ -22,13 +22,13 @@
 				<i class="fa fa-user fa-fh" aria-hidden="true"></i>
 				<%= current_user.name %>
 			</h1>
-			<h4 class="text-center" style="margin-bottom:30px;">
+			<h5 class="text-center" style="margin-bottom:30px;">
 				<% if content_for? :profile_subtitle %>
 					<%= yield :profile_subtitle %>
 				<% else %>
 					&nbsp;
 				<% end %>
-			</h4>
+			</h5>
 			<section class="row">
 				<div class="col-sm-4 nav-xs" id="user_navigation" data-util="class" data-remove="in" data-target="#user_navigation">
 					<%= content_for :profile_nav %>
@@ -51,6 +51,7 @@
 				Alerts.danger('<%= alert %>');
 			<% end %>
 			<%= content_for :extra_js %>
+			$('a[title], button[title]').tooltip();
 		});
 	</script>
 </body>
