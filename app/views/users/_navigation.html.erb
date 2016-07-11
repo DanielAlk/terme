@@ -37,17 +37,17 @@
 
 <% content_for :panel_navigation do %>
 	<ul class="nav nav-pills nav-stacked">
-	  <li role="presentation" class="<%= profile_nav_class(profile_path) %>">
+	  <li role="presentation" class="<%= panel_nav_class(profile_path) %>">
 	  	<%= link_to profile_path do %>
 	  		<i class="fa fa-user fa-fw" aria-hidden="true"></i> Perfil
 	  	<% end %>
 	  </li>
-	  <li role="presentation" class="<%= profile_nav_class(edit_user_registration_path) %>">
+	  <li role="presentation" class="<%= panel_nav_class(edit_user_registration_path) %>">
 	  	<%= link_to edit_user_registration_path do %>
 	  		<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar
 	  	<% end %>
 	  </li>
-	  <li role="presentation" class="<%= profile_nav_class(:user_addresses) %>">
+	  <li role="presentation" class="<%= panel_nav_class(:user_addresses) %>">
 	  	<%= link_to user_addresses_path do %>
 	  		<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i> Direcciones de envío
 	  	<% end %>
