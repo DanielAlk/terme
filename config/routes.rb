@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'panel/index'
-
   constraints subdomain: lambda { |sd| !sd[/stage/] && !sd[/panel/] } do
     get '(*soon)', to: 'pages#soon'
   end
@@ -9,16 +7,22 @@ Rails.application.routes.draw do
   constraints subdomain: /panel/ do
     get '/', to: 'panel#index', as: :panel
 
-    devise_for :admins, controllers: { 
-      registrations: 'admins/registrations', 
-      sessions: 'admins/sessions', 
+    devise_for :admins, controllers: {
+      registrations: 'admins/registrations',
+      sessions: 'admins/sessions',
       passwords: 'admins/passwords'
     }
 
     resources :categories
   end
-  
+
   root 'pages#home'
+  
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords'
+  }
 
   get 'home', to: 'pages#home', as: :home
   get 'producto', to: 'pages#product', as: :product_page
