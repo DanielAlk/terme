@@ -17,7 +17,16 @@
         </ul>
       </div>
       <div class="top-right">
-        <div class="usuarios"> <a href="" class="ingrsar">Ingresar</a> <a href="" class="registro">Registrarse</a> </div>
+        <% if user_signed_in? %>
+          <div class="usuarios">
+            <a href="<%= edit_user_registration_path %>" class="ingrsar"><%= current_user.email %></a>
+          </div>
+        <% else %>
+          <div class="usuarios">
+            <a href="<%= new_user_session_path %>" class="ingrsar">Ingresar</a>
+            <a href="<%= new_user_registration_path %>" class="registro">Registrarse</a>
+          </div>
+        <% end %>
         <div class="menu-top"> <span class="icon">Menú Top</span>
           <ul class="topmenu">
             <li><a href="">Medios de Pago</a></li>
