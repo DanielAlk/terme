@@ -15,8 +15,9 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, button:focus, button:
 	&:hover, &:focus { color: darken($brand-danger, 15%); }
 }
 
-
-div.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 8; margin: 40px 10px 0 0; opacity: 0.93; white-space: nowrap; }
+div.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 8; margin: 40px 10px 0 0; opacity: 0.93; max-width: calc(100% - 20px);
+	@media(min-width: $screen-sm-min) { white-space: nowrap; }
+}
 .vertical-align { height: 100%; width: 100%; display: table;
 	>.middle { display: table-cell; vertical-align: middle; }
 }

@@ -5,7 +5,7 @@
 				<i class="fa fa-edit fa-fw" aria-hidden="true"></i> Registrarse
 			<% end %>
 		<% else %>
-			<a href="#user_navigation" class="visible-xs" data-util="class" data-toggle="in">
+			<a href="#panel_navigation" class="visible-xs" data-util="class" data-toggle="in">
 				<i class="fa fa-bars fa-fw" aria-hidden="true"></i>
 			</a>
 		<% end %>
@@ -35,7 +35,7 @@
 	</div>
 </div>
 
-<% content_for :profile_nav do %>
+<% content_for :panel_navigation do %>
 	<ul class="nav nav-pills nav-stacked">
 	  <li role="presentation" class="<%= profile_nav_class(profile_path) %>">
 	  	<%= link_to profile_path do %>

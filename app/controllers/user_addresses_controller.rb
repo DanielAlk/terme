@@ -1,7 +1,7 @@
 class UserAddressesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_user_address, only: [:show, :edit, :update, :destroy]
-  layout 'profile'
+  layout 'panel'
 
   # GET /user_addresses
   # GET /user_addresses.json

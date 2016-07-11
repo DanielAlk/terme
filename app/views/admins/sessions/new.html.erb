@@ -2,7 +2,7 @@
   $('form#new_admin').validate();
 <% end %>
 
-<% content_for :admin_subtitle, 'Log in' %>
+<% content_for :panel_subtitle, 'Log in' %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">

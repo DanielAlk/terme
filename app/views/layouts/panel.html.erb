@@ -8,7 +8,11 @@
 </head>
 
 <body class="control-panel">
-	<%= render 'users/navigation' %>
+	<% if request.subdomain[/panel/] %>
+		<%= render 'admins/navigation' %>
+	<% else %>
+		<%= render 'users/navigation' %>
+	<% end %>
 	<section class="page-top">
 		<div class="logo">
 			<a href="<%= request.subdomain[/panel/] ? home_path : root_path %>">
@@ -16,29 +20,36 @@
 			</a>
 		</div>
 	</section>
-	<div class="container users <%= (controller_name != 'panel' ? controller_name : '' ) + ' ' + action_name %>">
-		<% if user_signed_in? %>
+	<div class="container <%= (controller_name != 'panel' ? controller_name : '' ) + ' ' + action_name %>">
+		<% if admin_signed_in? %>
+			<h1 class="text-center">
+				<i class="fa fa-sliders fa-fh" aria-hidden="true"></i>
+				Panel Aria
+			</h1>
+		<% elsif user_signed_in? %>
 			<h1 class="text-center">
 				<i class="fa fa-user fa-fh" aria-hidden="true"></i>
 				<%= current_user.name %>
 			</h1>
+		<% end %>
+		<% if admin_signed_in? || user_signed_in? %>
 			<h5 class="text-center" style="margin-bottom:30px;">
-				<% if content_for? :profile_subtitle %>
-					<%= yield :profile_subtitle %>
+				<% if content_for? :panel_subtitle %>
+					<%= yield :panel_subtitle %>
 				<% else %>
 					&nbsp;
 				<% end %>
 			</h5>
 			<section class="row">
-				<div class="col-sm-4 nav-xs" id="user_navigation" data-util="class" data-remove="in" data-target="#user_navigation">
-					<%= content_for :profile_nav %>
+				<div class="col-sm-4 nav-xs" id="panel_navigation" data-util="class" data-remove="in" data-target="#panel_navigation">
+					<%= content_for :panel_navigation %>
 				</div>
 				<div class="col-sm-8">
 					<%= yield %>
 				</div>
 			</section>
 		<% else %>
-			<h2><%= content_for :profile_subtitle %></h2>
+			<h2><%= content_for :panel_subtitle %></h2>
 			<%= yield %>
 		<% end %>
 	</div>

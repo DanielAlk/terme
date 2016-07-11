@@ -2,7 +2,7 @@
   $('form#new_admin').validate();
 <% end %>
 
-<% content_for :admin_subtitle, '¿Olvidaste tu password?' %>
+<% content_for :panel_subtitle, '¿Olvidaste tu password?' %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
