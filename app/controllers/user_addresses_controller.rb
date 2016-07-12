@@ -6,7 +6,7 @@ class UserAddressesController < ApplicationController
   # GET /user_addresses
   # GET /user_addresses.json
   def index
-    @user_addresses = current_user.user_addresses.order(position: :asc)
+    @user_addresses = current_user.user_addresses
   end
 
   # GET /user_addresses/1

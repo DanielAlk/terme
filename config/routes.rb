@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :reviews
+  resources :tags
   constraints subdomain: lambda { |sd| !sd[/stage/] && !sd[/panel/] } do
     get '(*soon)', to: 'pages#soon'
   end

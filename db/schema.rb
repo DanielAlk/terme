@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712021609) do
+ActiveRecord::Schema.define(version: 20160712032257) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",        null: false
@@ -70,6 +70,26 @@ ActiveRecord::Schema.define(version: 20160712021609) do
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id",        limit: 4
+    t.integer  "taggable_id",   limit: 4
+    t.string   "taggable_type", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "slug",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "tags", ["slug"], name: "index_tags_on_slug", unique: true, using: :btree
+
   create_table "user_addresses", force: :cascade do |t|
     t.string   "address",    limit: 255
     t.integer  "user_id",    limit: 4
@@ -116,6 +136,7 @@ ActiveRecord::Schema.define(version: 20160712021609) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "taggings", "tags"
   add_foreign_key "user_addresses", "users"
   add_foreign_key "user_addresses", "zones"
 end

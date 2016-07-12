@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :user_addresses
+  has_many :user_addresses, -> { order(position: :asc) }, :dependent => :destroy
+  has_many :reviews, :as => :reviewer, :dependent => :destroy
 
 	def name(option = nil)
 		if self.fname.present? && self.lname.present?
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
 	end
 
 	def addresses
-		user_addresses.order(position: :asc).map &:address
+		user_addresses.map &:address
 	end
 
 end
