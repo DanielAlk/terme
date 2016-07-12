@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :reviews
-  resources :tags
   constraints subdomain: lambda { |sd| !sd[/stage/] && !sd[/panel/] } do
     get '(*soon)', to: 'pages#soon'
   end
@@ -21,6 +19,7 @@ Rails.application.routes.draw do
         put '/', action: :update_many
       end
     end
+    resources :tags
   end
 
   constraints path: 'profile' do
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
     }
 
     resources :user_addresses, path: 'direcciones-de-envio'
+    resources :reviews
   end
 
   root 'pages#home'
