@@ -35,6 +35,7 @@ Alerts.generate = function(text, alertClass) {
 	alert+= '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 	alert+=	text;
 	alert+= '</div>';
+	$('#alertNotice').remove();
 	$('body').append(alert);
 	Alerts.notice();
 };

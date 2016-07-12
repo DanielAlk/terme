@@ -28,6 +28,7 @@
 //= require alerts
 //= require modals
 //= require editable
+//= require concat_fields
 //= require file_picker
 //= require utils
 //= require panel

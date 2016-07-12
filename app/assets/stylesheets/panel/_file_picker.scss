@@ -3,7 +3,7 @@ label.file-picker-label {@include filePickerBox; padding: 60px 15px 0; cursor: p
 	i.fa { font-size: 2.5em; }
 	span { display: block; }
 }
-.file-picker {@extend .clear-both; min-height: 265px;
+.file-picker {@include clear-both; min-height: 265px;
 	&+.actions { margin-top: 20px!important; }
 }
 .file-picker-image {@include filePickerBox; position: relative; padding-bottom: 28px;

@@ -1,0 +1,65 @@
+<% content_for :panel_subtitle, @product.title %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to edit_product_path(@product), title: 'Editar', class: 'btn btn-warning' do %>
+    <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+  <% end %>
+  <%= link_to products_path, title: 'Listado', class: 'btn btn-success' do %>
+    <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+  <small><%= @product.slug %></small>
+  <br>
+  <strong>Description:</strong>
+  <%= @product.description %>
+  <br>
+  <strong>Status:</strong>
+  <%= @product.status %>
+  <br>
+  <strong>Key code:</strong>
+  <%= @product.key_code %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @product.category.title %>
+  <br>
+  <strong>Brand:</strong>
+  <%= @product.brand %>
+  <br>
+  <strong>Tags:</strong>
+  <%= @product.tags.map(&:name).join(', ') %>
+  <br>
+  <strong>External link:</strong>
+  <%= link_to @product.external_link[0..30] + '…', @product.external_link, target: '_blank' if @product.external_link.present? %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@product.price, unit: @product.currency + " ", separator: ",", delimiter: ".") %>
+  <br>
+  <strong>Stock:</strong>
+  <%= @product.stock %>
+  <br>
+  <strong>Dimensions:</strong>
+  <%= @product.dimensions %>
+</p>
+
+<p class="well">
+  <strong>Characteristics:</strong><br>
+  <%= @product.characteristics.html_safe %>
+</p>
+
+<p class="well">
+  <strong>Data sheet:</strong><br>
+  <%= @product.data_sheet.html_safe %>
+</p>
+
+<p class="well">
+  <strong>Information:</strong><br>
+  <%= @product.information.html_safe %>
+</p>

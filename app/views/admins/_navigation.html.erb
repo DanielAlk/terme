@@ -48,6 +48,11 @@
 	  		<i class="fa fa-list fa-fw" aria-hidden="true"></i> Categorias
 	  	<% end %>
 	  </li>
+	  <li role="presentation" class="<%= panel_nav_class(:products) %>">
+	  	<%= link_to products_path do %>
+	  		<i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Productos
+	  	<% end %>
+	  </li>
 	  <li role="presentation">
 	  	<%= link_to destroy_admin_session_path, class: 'link-danger', method: :delete do %>
 	  		<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Cerrar sesión

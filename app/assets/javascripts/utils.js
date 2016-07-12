@@ -1,5 +1,44 @@
 var Utils = {};
 
+Utils.selectpicker = function() {
+	$('.selectpicker').selectpicker({size:10, selectOnTab:true});
+	$('.selectpicker-search').selectpicker({size:10, selectOnTab:true, liveSearch: true, liveSearchNormalize: true, liveSearchPlaceholder: 'Buscar'});
+	$('.selectpicker-submit').on('change.bs.select', function(e) {
+		$(this).closest('form').submit();
+	});
+};
+
+Utils.autonumeric = function() {
+	$('input.autonumeric').autoNumeric('init', { aSep: '.', aDec: ',', aPad: false });
+	$('input.autonumeric-price').autoNumeric('init', { aSep: '.', aDec: ',', aPad: 2 });
+};
+
+Utils.addOptionToSelect = function() {
+	$('form').each(function() {
+		if (!$(this).find('.add_option_to_select').length) return;
+		var form = this;
+		var $form = $(form);
+		$form.submit(function(e) {
+			var $input = $(this).find('.add_option_to_select:focus');
+			if (!$input.length) return;
+			var $select = $($input.data('select'));
+			var value = $input.val();
+			var $repeated = $select.find('option').filter(function() {
+				if (value.toLowerCase() == $(this).text().toLowerCase()) return this;
+			});
+			if ($repeated.length) Alerts.danger('Esa opción ya existe');
+			else if (value.length < 3) Alerts.danger('La opción debe tener al menos 3 caracteres');
+			else {
+				$select.append($('<option>', { text: value, selected: true }))
+				.selectpicker('refresh');
+				$input.val(null);
+				Alerts.success('Se agregó ' + value);
+			};
+			return false;
+		});
+	});
+};
+
 Utils.collapseCaret = function() {
 	var findFa = function(element) {
 		return $('[data-toggle="collapse"][href="#'+$(element).attr('id')+'"] .fa');

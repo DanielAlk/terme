@@ -20,19 +20,20 @@ Rails.application.routes.draw do
       end
     end
     resources :tags
+    resources :products
   end
 
-  constraints path: 'profile' do
-    get '/', to: 'panel#profile', as: :profile
+  constraints subdomain: lambda { |sd| !sd[/panel/] } do
+    get 'profile', to: 'panel#profile', as: :profile
 
-    devise_for :users, controllers: {
+    devise_for :users, path: 'profile', controllers: {
       registrations: 'users/registrations',
       sessions: 'users/sessions',
       passwords: 'users/passwords'
     }
 
-    resources :user_addresses, path: 'direcciones-de-envio'
-    resources :reviews
+    resources :user_addresses, path: 'profile/direcciones-de-envio'
+    resources :reviews, path: 'profile/reviews'
   end
 
   root 'pages#home'
