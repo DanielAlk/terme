@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711155231) do
+ActiveRecord::Schema.define(version: 20160712021609) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",        null: false
@@ -54,6 +54,21 @@ ActiveRecord::Schema.define(version: 20160711155231) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "images", force: :cascade do |t|
+    t.string   "title",             limit: 255
+    t.integer  "imageable_id",      limit: 4
+    t.string   "imageable_type",    limit: 255
+    t.string   "item_file_name",    limit: 255
+    t.string   "item_content_type", limit: 255
+    t.integer  "item_file_size",    limit: 4
+    t.datetime "item_updated_at"
+    t.integer  "position",          limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "user_addresses", force: :cascade do |t|
     t.string   "address",    limit: 255

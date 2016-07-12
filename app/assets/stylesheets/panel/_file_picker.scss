@@ -1,0 +1,28 @@
+@mixin filePickerBox { height: 175px; width: 175px; text-align: center; background-color: #EFEFEF; border: 1px solid; float:left;margin-right:20px;margin-bottom:20px; }
+label.file-picker-label {@include filePickerBox; padding: 60px 15px 0; cursor: pointer; position: absolute; z-index: 1; border-style: dotted; margin-top: 25px;
+	i.fa { font-size: 2.5em; }
+	span { display: block; }
+}
+.file-picker {@extend .clear-both; min-height: 265px;
+	&+.actions { margin-top: 20px!important; }
+}
+.file-picker-image {@include filePickerBox; position: relative; padding-bottom: 28px;
+	input[type=file] { display: none!important; }
+	.image {width:100%; height: 100%; background-size: cover; background-position: center center;}
+	a.delete { position: absolute; top: 0; right: 0; font-size: 24px; color: #FFF; line-height: 25px; margin: 2px; background-color: #9E0000; height: 29px; width: 29px; border-radius: 50%; display: block; }
+	.loader { display: none; position: absolute; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); color: #029351; }
+	&.loading .loader { display: block; }
+	div.input { position: absolute; bottom: 0; font-size: .9em; width: 100% !important;
+		input { padding: 0 8px !important; height: 28px !important; width: 100% !important; border: none!important; color:#000!important; }
+		input::-moz-placeholder { color: #7F8999!important; }
+		input:-ms-input-placeholder { color: #7F8999!important; }
+		input::-webkit-input-placeholder { color: #7F8999!important; }
+	}
+}
+.file-picker-image { display: none; }
+.file-picker-images { float: left; margin-top: 25px;
+	.file-picker-image { display: block;
+		&:first-child:before {content: 'Imágen principal';position: absolute;display: block;width: calc(100% + 2px);bottom: 100%;border: 1px dashed;margin-left: -1px;}
+	}
+	&:before {content: ' ';position: relative;display: block;margin-right: 20px;margin-bottom: 20px;width: 175px;height: 175px;float: left;}
+}

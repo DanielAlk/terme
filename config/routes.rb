@@ -14,20 +14,26 @@ Rails.application.routes.draw do
     }
 
     resources :categories
+    resources :images, :defaults => { :format => :json } do
+      collection do
+        put '/', action: :update_many
+      end
+    end
   end
 
-  constraints subdomain: lambda { |sd| !sd[/panel/] } do
-    devise_for :users, path: 'profile', controllers: {
+  constraints path: 'profile' do
+    get '/', to: 'panel#profile', as: :profile
+
+    devise_for :users, controllers: {
       registrations: 'users/registrations',
       sessions: 'users/sessions',
       passwords: 'users/passwords'
     }
+
+    resources :user_addresses, path: 'direcciones-de-envio'
   end
-  resources :user_addresses, path: 'profile/direcciones-de-envio'
 
   root 'pages#home'
-
-  get 'profile', to: 'panel#profile', as: :profile
 
   get 'home', to: 'pages#home', as: :home
   get 'producto', to: 'pages#product', as: :product_page
