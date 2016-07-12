@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712032257) do
+ActiveRecord::Schema.define(version: 20160712033224) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",        null: false
@@ -69,6 +69,19 @@ ActiveRecord::Schema.define(version: 20160712032257) do
   end
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
+
+  create_table "reviews", force: :cascade do |t|
+    t.decimal  "score",                       precision: 6, scale: 5
+    t.integer  "reviewer_id",     limit: 4
+    t.string   "reviewer_type",   limit: 255
+    t.integer  "reviewable_id",   limit: 4
+    t.string   "reviewable_type", limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
+
+  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
+  add_index "reviews", ["reviewer_type", "reviewer_id"], name: "index_reviews_on_reviewer_type_and_reviewer_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4
