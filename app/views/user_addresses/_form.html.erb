@@ -1,11 +1,5 @@
 <% content_for :extra_js do %>
-  $('form#new_user_address, form#edit_user_address').validate({
-    rules: {
-      'user_address[zone_id]': {
-        required: true
-      }
-    }
-  });
+  $('form#new_user_address, form#edit_user_address').validate();
 <% end %>
 
 <%= form_for(@user_address) do |f| %>
@@ -59,8 +53,9 @@
     <%= f.text_field :city, required: true %>
   </div>
   <div class="field">
+    <% zones = Zone.roots.map { |z| [z.title, z.id] } %>
     <%= f.label :zone_id, 'Provincia' %><br>
-    <%= f.select :zone_id, options_from_collection_for_select(Zone.roots, :id, :title, @user_address.zone_id), prompt: 'Seleccionar' %>
+    <%= f.select :zone_id, options_from_collection_for_select(Zone.roots, :id, :title, @user_address.zone_id), {prompt: 'Seleccioná una provincia'}, required: true %>
   </div>
   <div class="field">
     <%= f.label :mobile, 'Teléfono Celular' %><br>
