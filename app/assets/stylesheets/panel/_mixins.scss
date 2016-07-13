@@ -9,3 +9,13 @@
 	-o-transition: $property $delay $ease-function;
 	transition: $property $delay $ease-function;
 }
+@mixin scrollable($height) {
+	height: $height;
+	overflow-y: scroll;
+}
+@mixin radioBtn($size, $color) {
+	content: " ";display: inline-block;height: $size;width: $size;background-color: $color;border-radius: 50%;position: absolute;left: 0;top: 50%;
+}
+@mixin checkboxBtn($size, $color) {
+	content: " ";display: inline-block;height: $size;width: $size;background-color: $color;position: absolute;left: 0;top: 50%;
+}

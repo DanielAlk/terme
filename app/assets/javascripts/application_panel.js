@@ -24,11 +24,11 @@
 //= require bootstrap-select
 //= require autonumeric
 //= require turbolinks
-//= require forms
 //= require alerts
 //= require modals
 //= require editable
-//= require concat_fields
 //= require file_picker
 //= require utils
-//= require panel
+//= require user-addresses
+//= require categories
+//= require products

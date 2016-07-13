@@ -1,0 +1,28 @@
+<%= content_for :extra_js do %>
+	$('#file_picker').filePicker({
+	  imageable_id: <%= resource.id %>,
+	  imageable_type: '<%= resource.class.name %>'
+	});
+<% end %>
+
+<div class="hidden">
+  <%= file_field_tag 'file_picker', multiple: true, required: true, accept: 'image/*', data: { :images => '.file-picker-images', :template => '#file_picker_template' } %>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="field file-picker">
+      <%= label_tag 'file_picker', nil, class: 'file-picker-label' do %>
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span>Agregar imágenes</span>
+      <% end %>
+      <div class="file-picker-images">
+        <% resource.images.each_with_index do |image, index| %>
+          <%= render 'partials/file_picker_image', image: image, index: index %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% #template %>
+<%= render 'partials/file_picker_image' %>

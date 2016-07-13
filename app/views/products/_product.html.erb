@@ -1,0 +1,48 @@
+<div class="display" id="product_<%= product.id %>">
+	<div class="display-caption">
+		<div class="display-checkbox">
+			<label class="checkbox-inline">
+				<input class="checkbox-target" type="checkbox" name="product[ids][]" id="product_id_<%= product.id %>" value="<%= product.id %>">
+			</label>
+		</div>
+		<div class="display-actions">
+			<div class="btn-group btn-group-xs">
+				<%= link_to product, title: !product.active? ? 'Activar' : 'Pausar', class: 'tooltip-trigger btn btn-primary product-active-toggler', data: { util: 'update', hash: { product: { status: !product.active? ? 'active' : 'paused' } } } do %>
+				  <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+				  <i class="updated fa fa-fw fa-<%= !product.active? ? 'play' : 'pause' %>" aria-hidden="true"></i>
+				<% end %>
+				<%= link_to product, title: 'Ver', class: 'btn btn-success tooltip-trigger' do %>
+					<i class="fa fa-external-link fa-fw" aria-hidden="true"></i>
+				<% end %>
+				<%= link_to edit_product_path(product), title: 'Editar', class: 'btn btn-warning tooltip-trigger' do %>
+				  <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+				<% end %>
+				<%= link_to clone_product_path(product), title: 'Duplicar', method: :post, class: 'btn btn-info tooltip-trigger disable-after-click' do %>
+				  <i class="disabled fa fa-spinner fa-pulse fa-fw"></i>
+				  <i class="enabled fa fa-files-o fa-fw" aria-hidden="true"></i>
+				<% end %>
+	      <%= link_to product, title: 'Eliminar', class: 'tooltip-trigger btn btn-danger', method: :delete, data: { confirm: '¿Seguro?' } do %>
+	        <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+	      <% end %>
+			</div>
+		</div>
+		<a class="display-thumb" href="<%= product_path(product) %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
+		<div class="display-top-right">
+			<h4 style="margin:0;">
+				<span class="label label-success">
+					<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+				</span>
+			</h4>
+		</div>
+		<div class="display-bottom">
+			<span id="product_status_<%= product.id %>" class="label label-<%= product.active? ? 'success' : product.draft? ? 'info' : 'danger' %>"><%= product.status_translated %></span>
+			<span class="label label-primary"><%= product.category.title %></span>
+			<span class="label label-default">Stock: <%= product.stock %></span>
+			<span class="label label-warning">Código: <%= product.key_code %></span>
+		</div>
+		<div class="display-body">
+			<h3 class="display-title"><%= link_to product.title, product %></h3>
+			<h4 class="display-subtitle"><%= product.description %></h4>
+		</div>
+	</div>
+</div>

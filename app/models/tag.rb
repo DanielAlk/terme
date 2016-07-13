@@ -4,6 +4,10 @@ class Tag < ActiveRecord::Base
 	has_many :taggings, dependent: :destroy
 	validates_uniqueness_of :name
 
+	def self.list_to_s(joiner = ', ')
+		self.all.map(&:name).join(joiner)
+	end
+
 	def name=(name)
 		write_attribute(:name, name.titlecase)
 	end

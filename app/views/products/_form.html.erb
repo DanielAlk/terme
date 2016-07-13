@@ -1,15 +1,7 @@
 <%= tinymce_init %>
 
 <% content_for :extra_js do %>
-  $('form#new_product, form#edit_prodcut').validate();
-  Utils.selectpicker();
-  Utils.autonumeric();
-  Utils.addOptionToSelect();
-  $('.concat-fields').concatFields();
-  $('#tinymce_tabs a').click(function(e) {
-    e.preventDefault()
-    $(this).tab('show')
-  });
+  Products.form();
 <% end %>
 
 <%= form_for(@product) do |f| %>
@@ -36,7 +28,7 @@
     <div class="col-sm-6">
       <div class="field">
         <%= f.label :category_id, 'Categoría' %><br>
-        <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :title, @product.category_id), {}, prompt: 'Seleccionar', class: 'selectpicker' %>
+        <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :title, @product.category_id), {}, class: 'selectpicker' %>
       </div>
     </div>
     <div class="col-sm-6">
@@ -49,36 +41,53 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="field">
-        <%= f.label :dimensions, 'Dimensiones' %><br>
-        <div class="concat-fields" data-concat="{{width}}x{{height}}x{{depth}} cm." id="dimensions_concat_fields">
-          <%= f.hidden_field :dimensions %>
-        </div>
+        <%= f.label :brand, 'Marca' %><br>
+        <%= f.text_field :brand %>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="field">
-        <%= f.label :key_code, 'Código de producto' %><br>
-        <%= f.text_field :key_code %>
+        <%= f.label :width_cm, 'Dimensiones' %><br>
+        <div class="cols-6">
+          <div>
+            <%= f.text_field :width_cm, class: 'autonumeric' %>
+          </div>
+          <small style="text-align:center;line-height:34px;">x</small>
+          <div>
+            <%= f.text_field :height_cm, class: 'autonumeric' %>
+          </div>
+          <small style="text-align:center;line-height:34px;">x</small>
+          <div>
+            <%= f.text_field :depth_cm, class: 'autonumeric' %>
+          </div>
+          <small style="text-align:center;line-height:34px;">cm.</small>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-2">
       <div class="field">
-        <%= f.label :currency, 'Moneda' %><br>
+        <%= f.label :price, 'Precio <em>*</em>'.html_safe %><br>
         <%= f.select :currency, options_for_select(Product.currencies.keys, @product.currency), {}, class: 'selectpicker' %>
       </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
       <div class="field">
-        <%= f.label :price, 'Precio <em>*</em>'.html_safe %><br>
+        <%= f.label :currency, '&nbsp;'.html_safe %><br>
         <%= f.text_field :price, class: 'autonumeric-price', required: true %>
       </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-2">
       <div class="field">
         <%= f.label :stock %><br>
         <%= f.text_field :stock, class: 'autonumeric' %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="field">
+        <%= f.label :key_code, 'Código de producto' %><br>
+        <%= f.text_field :key_code %>
       </div>
     </div>
   </div>
@@ -88,19 +97,9 @@
     <%= select_tag 'product[tags]', options_from_collection_for_select(Tag.all, :name, :name, @product.tags.map(&:name)), class: 'selectpicker-search', multiple: true, title: 'Seleccioná tags para este producto' %>
     <%= text_field_tag 'new_tag', nil, class: 'add_option_to_select', data: { select: '#product_tags' }, placeholder: 'Crear Tag' %>
   </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="field">
-        <%= f.label :brand, 'Marca' %><br>
-        <%= f.text_field :brand %>
-      </div>
-    </div>
-    <div class="col-sm-8">
-      <div class="field">
-        <%= f.label :external_link, 'Ficha oficial carrier (link)' %><br>
-        <%= f.text_field :external_link %>
-      </div>
-    </div>
+  <div class="field">
+    <%= f.label :external_link, 'Ficha oficial carrier (link)' %><br>
+    <%= f.text_field :external_link %>
   </div>
   <div id="tinymce_tabs">
     <ul class="nav nav-tabs" role="tablist">

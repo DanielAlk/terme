@@ -41,10 +41,10 @@
 				<% end %>
 			</h5>
 			<section class="row">
-				<div class="col-sm-4 nav-xs" id="panel_navigation" data-util="class" data-remove="in" data-target="#panel_navigation">
+				<div class="sass-col-left nav-xs" id="panel_navigation" data-util="class" data-remove="in" data-target="#panel_navigation">
 					<%= content_for :panel_navigation %>
 				</div>
-				<div class="col-sm-8">
+				<div class="sass-col-right">
 					<%= yield %>
 				</div>
 			</section>
@@ -55,6 +55,7 @@
 	</div>
 	<script>
 		$(function() {
+			$('.tooltip-trigger').tooltip();
 			<% if notice.present? %>
 				Alerts.success('<%= notice %>');
 			<% end %>
@@ -62,7 +63,6 @@
 				Alerts.danger('<%= alert %>');
 			<% end %>
 			<%= content_for :extra_js %>
-			$('a[title]').tooltip();
 		});
 	</script>
 </body>

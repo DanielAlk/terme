@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_product, only: [:show, :edit, :destroy]
+  before_action :set_product, only: [:show, :edit, :clone, :destroy]
+  before_action :set_products, only: [:update_many, :destroy_many]
   before_action :related_objects, only: [:create, :update]
   layout 'panel'
 
@@ -38,6 +39,29 @@ class ProductsController < ApplicationController
     end
   end
 
+  # POST /products/1/clone
+  # POST /products/1/clone.json
+  def clone
+    product = @product.dup
+    @product.images.each do |img|
+      product.images.new(item: img.item)
+    end
+    @product.tags.each do |tag|
+      product.taggings.new(tag: tag)
+    end
+    product.status = :draft
+
+    respond_to do |format|
+      if product.save
+        format.html { redirect_to edit_product_url product, notice: 'Product was successfully cloned.' }
+        format.json { render :show, status: :created, location: product }
+      else
+        format.html { render :new }
+        format.json { render json: product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
@@ -58,6 +82,29 @@ class ProductsController < ApplicationController
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  # PATCH/PUT /products
+  # PATCH/PUT /products.json
+  def update_many
+    respond_to do |format|
+      if @products.update_all(product_params)
+        format.html { redirect_to products_url, notice: 'Products were successfully updated.' }
+        format.json { render :index, status: :ok, location: products_url }
+      else
+        format.html { render :index }
+        format.json { render json: @products.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /products.json
+  def destroy_many
+    @products.destroy_all
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: 'Products were successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,6 +136,11 @@ class ProductsController < ApplicationController
       end
       # Tags END
     end
+    
+    def set_products
+      @products = Product.where(id: params[:ids])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.friendly.find(params[:id])
@@ -96,6 +148,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :status, :key_code, :brand, :category_id, :stock, :price, :currency, :dimensions, :description, :characteristics, :data_sheet, :information, :external_link, :slug)
+      params.require(:product).permit(:title, :status, :key_code, :brand, :category_id, :stock, :price, :currency, :width_cm, :height_cm, :depth_cm, :description, :characteristics, :data_sheet, :information, :external_link, :slug)
     end
 end

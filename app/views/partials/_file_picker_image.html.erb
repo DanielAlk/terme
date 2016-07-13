@@ -1,0 +1,29 @@
+<% image = nil unless local_assigns.has_key? :image %>
+
+<div class="file-picker-image"
+	id="<%= image.present? ? "file_picker_#{index}" : 'file_picker_template' %>"
+	data-id="<%= image.id if image.present? %>"
+	data-position="<%= image.position if image.present? %>"
+	>
+	<div class="loader">
+		<div class="vertical-align">
+			<div class="middle">
+				<i class="fa fa-spinner fa-spin fa-3x fa-fw margin-bottom"></i>
+			</div>
+		</div>
+	</div>
+	<a href="#" class="delete" data-id="<%= index if image.present? %>">
+		<i class="fa fa-times" aria-hidden="true"></i>
+	</a>
+  <div class="image"
+  	style="background-image:url(<%= asset_path(image.item.url(:thumb)) if image.present? %>)">
+  </div>
+  <div class="input">
+		<input type="text"
+		 name="property[image_titles][<%= image.id if image.present? %>]"
+		 id="property_image_titles_<%= image.id if image.present? %>"
+		 value="<%= image.title if image.present? %>"
+		 placeholder="Pie de foto"
+		>
+	</div>
+</div>

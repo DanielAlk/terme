@@ -79,7 +79,9 @@ ActiveRecord::Schema.define(version: 20160712040241) do
     t.integer  "stock",           limit: 4
     t.decimal  "price",                         precision: 8, scale: 2
     t.integer  "currency",        limit: 4,                             default: 0
-    t.string   "dimensions",      limit: 255
+    t.integer  "width_cm",        limit: 4
+    t.integer  "height_cm",       limit: 4
+    t.integer  "depth_cm",        limit: 4
     t.string   "description",     limit: 255
     t.text     "characteristics", limit: 65535
     t.text     "data_sheet",      limit: 65535

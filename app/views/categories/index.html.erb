@@ -1,11 +1,11 @@
 <% content_for :extra_js do %>
-  Panel.categories();
+  Categories.index();
 <% end %>
 
 <% content_for :panel_subtitle, 'Categorías' %>
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
-  <%= link_to '#', class: 'btn btn-success', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
+  <%= link_to '#', class: 'category-util-template btn btn-success', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
     <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>

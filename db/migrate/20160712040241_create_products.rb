@@ -9,7 +9,9 @@ class CreateProducts < ActiveRecord::Migration
       t.integer :stock
       t.decimal :price, precision: 8, scale: 2
       t.integer :currency, default: 0
-      t.string :dimensions
+      t.integer :width_cm
+      t.integer :height_cm
+      t.integer :depth_cm
       t.string :description
       t.text :characteristics
       t.text :data_sheet

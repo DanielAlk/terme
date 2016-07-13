@@ -15,11 +15,25 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, button:focus, button:
 	&:hover, &:focus { color: darken($brand-danger, 15%); }
 }
 
+.tooltip-inner { white-space: nowrap; }
 div.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 8; margin: 40px 10px 0 0; opacity: 0.93; max-width: calc(100% - 20px);
 	@media(min-width: $screen-sm-min) { white-space: nowrap; }
 }
 .vertical-align { height: 100%; width: 100%; display: table;
 	>.middle { display: table-cell; vertical-align: middle; }
+}
+.scrollable-150 { @include scrollable(150px); }
+.cols-6 { @include clear-both;
+	&>* { float: left; width: calc(100% / 6); }
+}
+
+[data-util="update"], [data-util="updateMany"], [data-util="deleteMany"], [data-util="deleteManyForm"] {
+	&:not(.updating) .updating { display: none; }
+	&.updating .updated { display: none; }
+}
+.disable-after-click {
+	&:not(.disabled) .disabled { display: none; }
+	&.disabled .enabled { display: none; }
 }
 
 section.page-top { text-align: center; background-image: url(<%= asset_path 'slider/Slider_1.jpg' %>); background-size: cover; background-repeat: no-repeat; height:200px; background-position: center -100px;
@@ -31,9 +45,9 @@ section.page-top { text-align: center; background-image: url(<%= asset_path 'sli
 
 @media(max-width: $screen-xs-max) {
 	.nav-xs { @include transition(right, 200ms, ease-out);
-		position: fixed; top: 30px; right: 100%; background: rgba(0,0,0,0.2);
+		position: fixed !important; top: 30px; right: 100%; background: rgba(0,0,0,0.2);
 		width: 100%; height: calc(100% - 30px);
-		padding: 15px; z-index: 1;
+		padding: 15px !important; z-index: 1;
 		&.in { right: 0; }
 		ul.nav {
 			background-color: #FFF; margin: -15px; padding: 15px;
@@ -45,6 +59,21 @@ section.page-top { text-align: center; background-image: url(<%= asset_path 'sli
 body.control-panel { font-family: 'roboto', sans-serif;
 	&>.container { margin-top: -50px; background-color:#FFF; border-radius: 5px; padding-bottom: 50px; max-width: 800px;
 		&.sessions.new, &.registrations.new, &.passwords { max-width: 600px; padding-left: 25px; padding-right: 25px; }
+		section.row {
+			.sass-col-left { @extend .col-sm-4 }
+			.sass-col-right { @extend .col-sm-8 }
+		}
+		&.products section.row {
+			.sass-col-left { @extend .col-sm-1 }
+			.sass-col-right { @extend .col-sm-11 }
+			@media(min-width: $screen-sm-min) {
+				.nav-stacked {
+					a { white-space: nowrap; overflow: hidden; margin: 0 -5px;
+						&>i.fa { margin-right: 10px; }
+					}
+				}
+			}
+		}
 	}
 }
 

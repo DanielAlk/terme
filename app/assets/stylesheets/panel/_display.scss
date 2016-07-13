@@ -1,0 +1,15 @@
+.display { position: relative; padding: 5px; border: 1px solid #ccc; margin-bottom: 10px; }
+.display-caption { position: relative; padding-left: 145px; height: 60px; }
+.display-thumb { display: block; position: absolute; left: 20px; top: 0; width: 120px; height: 100%; overflow: hidden; background-size: cover; background-position: center center; }
+.display-title { margin: 0; font-size: 20px;
+	a { color: #333;
+		&:hover, &:focus { color: darken(#333, 15%); }
+	}
+}
+.display-subtitle { font-size: 12px; margin: 3px 0 0; }
+.display-bottom { position: absolute; bottom: 0; padding: 2px 0; 
+	&>* { margin-right: 10px; }
+}
+.display-top-right { position: absolute; top: 0; right: 0; }
+.display-checkbox { position: absolute; left: 0; top: 0; height: 100%; padding: 15px 0; }
+.display-actions { position: absolute; bottom: 0; right: 0; }

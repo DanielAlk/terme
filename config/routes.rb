@@ -20,7 +20,15 @@ Rails.application.routes.draw do
       end
     end
     resources :tags
-    resources :products
+    resources :products do
+      collection do
+        put '/', action: :update_many
+        delete '/', action: :destroy_many
+      end
+      member do
+        post '/clone', action: :clone
+      end
+    end
   end
 
   constraints subdomain: lambda { |sd| !sd[/panel/] } do

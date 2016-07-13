@@ -28,3 +28,22 @@ form {
 		&>input { float: left; padding-right: 5px !important; padding-left: 5px !important; }
 	}
 }
+
+.radio-inline { height: 32px; line-height: 32px; position: relative; font-size: .9em; padding-left: 17px;
+	&:before {@include radioBtn(10px, transparent); border: 1px solid #FFF;margin: -5px 0;}
+	&.active:after {@include radioBtn(6px, #fff); margin: -3px 2px;}
+	>input { display: none; }
+}
+.checkbox-inline { height: 32px; line-height: 32px; position: relative; font-size: .9em; padding-left: 17px;
+	&:before {@include checkboxBtn(14px, transparent); border: 2px solid #333;margin: -7px 0;}
+	&.active:after {@include checkboxBtn(6px, #333); margin: -3px 4px;}
+	>input { display: none; }
+}
+
+.resource-checkbox {
+	label { height: 14px; line-height: 14px; padding: 0 6px; margin: 0 2px; }
+	.checkbox-inline {
+		&:before { height: 12px; width: 12px; }
+		&:after { height: 4px; width: 4px; }
+	}
+}

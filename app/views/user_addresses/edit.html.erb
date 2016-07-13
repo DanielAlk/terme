@@ -1,10 +1,10 @@
 <% content_for :panel_subtitle, 'Editar dirección de envío' %>
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
-  <%= link_to @user_address, title: 'Ver', class: 'btn btn-warning' do %>
+  <%= link_to @user_address, title: 'Ver', class: 'tooltip-trigger btn btn-warning' do %>
     <i class="fa fa-external-link fa-fw" aria-hidden="true"></i>
   <% end %>
-  <%= link_to user_addresses_path, title: 'Listado', class: 'btn btn-success' do %>
+  <%= link_to user_addresses_path, title: 'Listado', class: 'tooltip-trigger btn btn-success' do %>
     <i class="fa fa-list fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>
