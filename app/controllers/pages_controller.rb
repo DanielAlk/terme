@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
   end
   def product
+    @product = Product.friendly.find(params[:id])
   end
   def cart
   end
