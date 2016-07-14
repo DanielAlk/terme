@@ -34,4 +34,6 @@
   <%= form_for products_path, html: { id: 'destroy_all' }, method: :delete, data: { confirm: '¿Seguro?' } {} %>
 </div>
 
-<%= render @products %>
+<div style="padding-top:10px; border-top:1px solid;">
+  <%= render @products %>
+</div>

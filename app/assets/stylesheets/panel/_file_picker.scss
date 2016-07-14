@@ -20,7 +20,7 @@ label.file-picker-label {@include filePickerBox; padding: 50px 15px 0; cursor: p
 	}
 }
 .file-picker-image { display: none; }
-.file-picker-images { float: left; margin-top: 25px;
+.file-picker-images { float: left; width: 100%; margin-top: 25px;
 	.file-picker-image { display: block;
 		&:first-child:before {content: 'Imágen principal';position: absolute;display: block;width: calc(100% + 2px);bottom: 100%;border: 1px dashed;margin-left: -1px;}
 	}

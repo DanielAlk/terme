@@ -87,8 +87,25 @@ FilePicker.plugin = function() {
 		});
 		items.update(data);
 	};
+	var dropHandler = function(e) {
+		ev = e.originalEvent;
+		ev.preventDefault();
+		var files = [];
+		var errors = '';
+		for (var key in ev.dataTransfer.files) {
+			var file = ev.dataTransfer.files[key];
+			if (typeof file.type == 'string' && file.type.match(/image\/(?:jpg|jpeg|gif|png)/)) files.push(file);
+			else if (typeof file != 'function' && !!file.name) errors += '<small>' + file.name + ': Tipo de archivo Inválido</small><br>';
+		}
+		if (!!errors) Alerts.danger(errors.substr(0, errors.length - 4));
+		if (!!files.length) user_selection.call({ files: files }, e);
+		return false;
+	};
 	$images_container.sortable({ update: updatePositions, placeholder: 'file-picker-image' });
 	$(picker).change(user_selection).ready(loadPicker);
+	$images_container.on('drop', dropHandler);
+	$images_container.on('dragover', function(e) { e.originalEvent.preventDefault(); return false; });
+	$images_container.on('dragenter', function(e) { e.originalEvent.preventDefault(); return false; });
 	$images_container.on('click', 'a.delete', deleteFile)
   $images_container.disableSelection();
 };
