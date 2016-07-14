@@ -34,6 +34,9 @@
   <%= form_for products_path, html: { id: 'destroy_all' }, method: :delete, data: { confirm: '¿Seguro?' } {} %>
 </div>
 
-<div style="padding-top:10px; border-top:1px solid;">
+<div style="height: calc(82px * <%= @products.per_page %>)">
   <%= render @products %>
+</div>
+<div class="will-paginate">
+  <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
 </div>

@@ -43,6 +43,9 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'paperclip', '~> 5.0.0'
 gem 'browser'
 
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
+
 gem 'compass-rails'
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'font-awesome-sass'
