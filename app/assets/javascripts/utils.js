@@ -273,19 +273,6 @@ Utils.templates = function() {
 	$(document).on('click', '[data-util=template]', triggerClick);
 };
 
-Utils.handleAjaxErrors = function() {
-	$(document).ajaxError(function(event, xhr, settings, thrownError) {
-		var string = '';
-		if (!!xhr && typeof xhr.responseJSON == 'object') {
-			for (var key in xhr.responseJSON) {
-				string += '<b>' + key + '<b>: <small>' + xhr.responseJSON[key].join(', ') + '</small><br>';
-			}
-		} else string = 'Ocurrió un error de conexión debido a: <small>' + thrownError.toString() + '</small>';
-		Alerts.danger(string);
-		console.log(arguments);
-	});
-};
-
 Utils.class = function() {
 	$(document).on('click', '[data-util=class]', function(e) {
 		!!this.href && e.preventDefault();
@@ -313,6 +300,19 @@ Utils.submitTriggers = function() {
 	$(document).on('click', '[data-submit]', function(e) {
 		e.preventDefault();
 		$($(this).data('submit')).submit();
+	});
+};
+
+Utils.handleAjaxErrors = function() {
+	$(document).ajaxError(function(event, xhr, settings, thrownError) {
+		var string = '';
+		if (!!xhr && typeof xhr.responseJSON == 'object') {
+			for (var key in xhr.responseJSON) {
+				string += '<b>' + key + '<b>: <small>' + xhr.responseJSON[key].join(', ') + '</small><br>';
+			}
+		} else string = 'Ocurrió un error: <small>' + thrownError.toString() + '</small>';
+		Alerts.danger(string);
+		console.log(arguments);
 	});
 };
 

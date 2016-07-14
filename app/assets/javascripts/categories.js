@@ -43,7 +43,7 @@ Categories.editableCallback = function(form, response) {
   .removeAttr('class').addClass('edit_category')
   .attr('id', 'edit_category_' + response.id)
   .find('#new_category_title').attr('id', 'category_' + response.id + '_title');
-  $panel.find('.link-danger, .link-success').removeClass('hidden');
+  $panel.find('.link-danger, .link-success').filter(':not(.stay-hidden)').removeClass('hidden');
   $panel.find('#group-').attr('id', 'group-' + response.id);
   $panel.find('[data-util=delete]').attr('href', url);
   $templateTrigger = $panel.find('.link-success');

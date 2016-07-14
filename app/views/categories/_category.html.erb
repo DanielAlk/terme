@@ -1,14 +1,24 @@
+<% # 'data-util=template' elements add category children to that category %>
+<% # 'stay-hidden' class makes the button not appear when category is saved %>
+<% # Using: (category.new_record? || !category.root? ? ' hidden' : '') %>
+<% # Makes this button only available to root categories %>
+<% # To enable children creation in not root categories %>
+<% # Use: (category.new_record? ? ' hidden' : '') instead %>
+<% # and remove 'stay-hidden' class %>
+
 <div class="panel panel-depth d<%= category.depth %>" id="<%= 'panel-template' if category.new_record? %>">
   <div class="panel-heading" role="tab">
     <div class="panel-heading-actions">
       <%= link_to '#group-' + category.id.to_s, class: 'link-gray' + (category.is_not_new_and_has_children? ? '' : ' hidden'), data: { toggle: 'collapse' } do %>
         <i class="fa fa-caret-down fa-fw" aria-hidden="true"></i>
       <% end %>
-      <%= link_to '#', class: 'category-util-template link-success' + (category.new_record? ? ' hidden' : ''), data: { util: 'template', template: '#panel-template', target: '#group-' + category.id.to_s + '>.panel-group', inputs: { 'category[ancestry]' => category.path_to_s } } do %>
+      <%= link_to '#', class: 'category-util-template stay-hidden link-success' + (category.new_record? || !category.root? ? ' hidden' : ''), data: { util: 'template', template: '#panel-template', target: '#group-' + category.id.to_s + '>.panel-group', inputs: { 'category[ancestry]' => category.path_to_s } } do %>
         <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
       <% end %>
-      <%= link_to category, class: 'link-danger' + (category.new_record? ? ' hidden' : ''), data: { util: 'delete', confirm: 'Are you sure?', remove: '.panel', event: '#group-root' } do %>
-        <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+      <% unless category.fixed %>
+        <%= link_to category, class: 'link-danger' + (category.new_record? ? ' hidden' : ''), data: { util: 'delete', confirm: 'Are you sure?', remove: '.panel', event: '#group-root' } do %>
+          <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+        <% end %>
       <% end %>
     </div>
     <h4 class="panel-title editable <%= 'editing' if category.new_record? %>">

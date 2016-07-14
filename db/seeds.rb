@@ -1,5 +1,7 @@
 Admin.create!(email: 'daniognr@hotmail.com', profile: 'administrator', password: '12345678')
 
+Category.create!({title: 'Products', fixed: 'true'})
+
 Zone.create!([
 	{title: 'Ciudad Autónoma de Buenos Aires'},
 	{title: 'GBA Norte'},

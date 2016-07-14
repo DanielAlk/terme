@@ -3,6 +3,7 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.string :title
       t.string :ancestry
+      t.boolean :fixed, default: false
       t.string :slug
 
       t.timestamps null: false

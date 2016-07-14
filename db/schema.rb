@@ -35,9 +35,10 @@ ActiveRecord::Schema.define(version: 20160712040241) do
   create_table "categories", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "ancestry",   limit: 255
+    t.boolean  "fixed",                  default: false
     t.string   "slug",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree

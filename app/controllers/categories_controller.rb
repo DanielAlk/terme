@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   layout 'panel'
 
@@ -58,10 +59,14 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+      if @category.destroy
+        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -73,6 +78,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:title, :ancestry)
+      params.require(:category).permit(:title, :ancestry, :fixed)
     end
 end

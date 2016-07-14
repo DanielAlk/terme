@@ -4,11 +4,13 @@
 
 <% content_for :panel_subtitle, 'Categorías' %>
 
-<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
-  <%= link_to '#', class: 'category-util-template btn btn-success', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
-    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
-  <% end %>
-</div>
+<% if false #Dont allow adding root categories. Define them in seeds.rb or create in console %>
+	<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+	  <%= link_to '#', class: 'category-util-template btn btn-success', data: { util: 'template', template: '#panel-template', target: '#group-root' } do %>
+	    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+	  <% end %>
+	</div>
+<% end %>
 
 <div class="panel-group nested" role="tablist" id="group-root">
   <%= render @categories %>

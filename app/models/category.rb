@@ -2,6 +2,8 @@ class Category < ActiveRecord::Base
 	extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 	has_ancestry
+  has_many :products
+  before_destroy :abort_if_fixed
 
 	validates_presence_of :title
 
@@ -14,6 +16,12 @@ class Category < ActiveRecord::Base
 	end
 
 	private
+		def abort_if_fixed
+			return true if !fixed
+			errors.add 'Categoría Fija', 'No se puede eliminar esta categoría'
+			false
+		end
+
 		def should_generate_new_friendly_id?
 		  title_changed?
 		end
