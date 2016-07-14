@@ -299,7 +299,7 @@ Utils.disableAfterClick = function() {
 		return false;
 	};
 	$(document).on('click', '.disable-after-click:not(.disabled)', clickHandler);
-	$(document).on('click', '.disable-after-click.disabled, disable-after-click-layer', clickHandlerDisabled);
+	$(document).on('click', '.disable-after-click.disabled, #disable-after-click-layer', clickHandlerDisabled);
 };
 
 Utils.submitTriggers = function() {
