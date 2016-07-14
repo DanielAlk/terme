@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
-	extend FriendlyId
+  extend FriendlyId
+  include Filterable
 	friendly_id :slug_candidates, use: :slugged
 	belongs_to :category
   has_many :images, -> { order(position: :asc) }, as: :imageable, dependent: :destroy
@@ -10,6 +11,13 @@ class Product < ActiveRecord::Base
   validates_presence_of :category_id
   validates_presence_of :price
   validates_presence_of :currency
+
+  filterable scopes: [ :status, :brand, :category ]
+  filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information ]
+  filterable range: { price: { scoped: :currency } }
+  filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
+  filterable_label scopes: {status: {draft: 'Borrador', active: 'Activa', paused: 'Pausada'}}
+  filterable_label order: {status: 'Status', title: 'Título', brand: 'Marca', category: 'Categoría', price: 'Precio', key_code: 'Código', created_at: 'Creación', updated_at: 'Modificación'}
 
   enum status: [ :draft, :active, :paused, :trash ]
   enum currency: [ '$', 'u$s' ]

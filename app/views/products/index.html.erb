@@ -1,16 +1,22 @@
 <% content_for :extra_js do %>
   Products.index();
+  Utils.selectpicker();
+  $('#filterable-product select').change(function(e) {
+    $(this).closest('form').submit();
+  });
 <% end %>
 
 <% content_for :panel_subtitle, 'Productos' %>
 
-<div class="btn-group pull-right btn-group-xs" style="margin-top: -60px;">
+<%= render 'partials/filterable', collection: @products %> 
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -70px;">
   <%= link_to new_product_path, title: 'Nuevo', class: 'btn btn-warning tooltip-trigger' do %>
     <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>
 
-<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -40px;">
   <%= link_to 'javascript:void(0);', class: 'btn btn-default resource-checkbox tooltip-trigger', title: 'Seleccionar todos' do %>
     <label class="checkbox-inline">
       <input type="checkbox" name="select_all" data-target=".checkbox-target">
@@ -34,7 +40,8 @@
   <%= form_for products_path, html: { id: 'destroy_all' }, method: :delete, data: { confirm: '¿Seguro?' } {} %>
 </div>
 
-<div style="height: calc(82px * <%= @products.per_page %>)">
+<!--div style="height: calc(82px * <%= @products.per_page %>)"-->
+<div>
   <%= render @products %>
 </div>
 <div class="will-paginate">

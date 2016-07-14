@@ -84,6 +84,12 @@
         <br>
         <strong>Dimensiones:</strong>
         <%= @product.dimensions %>
+        <br>
+        <strong>Creado:</strong>
+        <%= @product.created_at.strftime('%d %b %Y - %I:%M %p') %>
+        <br>
+        <strong>Modificado:</strong>
+        <%= @product.updated_at.strftime('%d %b %Y - %I:%M %p') %>
         <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;">
           <strong>Link externo:</strong>
           <%= link_to @product.external_link, @product.external_link, target: '_blank' if @product.external_link.present? %>

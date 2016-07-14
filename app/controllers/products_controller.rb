@@ -1,14 +1,18 @@
 class ProductsController < ApplicationController
+  include Filterize
   before_action :authenticate_admin!
   before_action :set_product, only: [:show, :edit, :clone, :destroy]
   before_action :set_products, only: [:update_many, :destroy_many]
   before_action :related_objects, only: [:create, :update]
+  before_action :filterize, only: :index
+  filterize_default order: :created_at_desc
   layout 'panel'
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.paginate(:page => params[:page], :per_page => 5)
+    @products = @products.paginate(:page => params[:page], :per_page => 7)
+    redirect_to new_product_url, notice: 'Completá el formulario para crear un producto' if Product.all.blank?
   end
 
   # GET /products/1

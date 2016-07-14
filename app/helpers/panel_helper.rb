@@ -7,23 +7,22 @@ module PanelHelper
 		end
 	end
 
-	def tinymce_init
+	def tinymce_init(height = 0)
 		content_for :extra_js do
 			"setTimeout(function() {
 				if (!$('.tinymce').prev().is('.mce-panel')) window.location.reload();
 			}, 500);".html_safe
 		end
-		'<script>
-			//<![CDATA[
+		"<script>
 			tinyMCE.init({
-				selector: "textarea.tinymce",
-				toolbar: "bold italic | undo redo | link",
+				selector: 'textarea.tinymce',
+				toolbar: 'bold italic | undo redo | link',
 				menubar: false,
 				statusbar: false,
+				height: #{height},
 				forced_root_block: false,
-				plugins: "link"
+				plugins: 'link'
 			});
-			//]]>
-		</script>'.html_safe
+		</script>".html_safe
 	end
 end

@@ -27,6 +27,11 @@ div.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 8; margin: 4
 		li > a, li > span { @extend .btn-sm; }
 	}
 }
+.filterable { margin-bottom: 12px;
+	input[type=search] { height: 26px !important; font-size: 12px !important; padding: 5px 12px !important; }
+	.form-control { height: 26px; font-size: 12px; padding: 5px 25px 5px 12px; }
+	.field { margin-bottom: 5px; }
+}
 
 .scrollable-150 { @include scrollable(150px); }
 .cols-6 { @include clear-both;

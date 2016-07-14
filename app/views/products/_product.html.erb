@@ -28,14 +28,16 @@
 		</div>
 		<a class="display-thumb" href="<%= product_path(product) %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
 		<div class="display-top-right">
-			<h4 style="margin:0;">
+			<h4 style="margin:0 -3px;">
 				<span class="label label-success">
 					<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
 				</span>
 			</h4>
 		</div>
 		<div class="display-bottom">
-			<span id="product_status_<%= product.id %>" class="label label-<%= product.active? ? 'success' : product.draft? ? 'info' : 'danger' %>"><%= product.status_translated %></span>
+			<span id="product_status_<%= product.id %>" class="label label-<%= product.active? ? 'success' : product.draft? ? 'info' : 'danger' %>">
+				<%= product.status_translated %>
+			</span>
 			<span class="label label-primary"><%= product.category.title %></span>
 			<span class="label label-default">Stock: <%= product.stock %></span>
 			<span class="label label-warning">Código: <%= product.key_code %></span>
