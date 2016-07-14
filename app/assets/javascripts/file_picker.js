@@ -89,7 +89,7 @@ FilePicker.plugin = function() {
 	};
 	$images_container.sortable({ update: updatePositions, placeholder: 'file-picker-image' });
 	$(picker).change(user_selection).ready(loadPicker);
-	$(document).on('click', images_container_selector + ' a.delete', deleteFile)
+	$images_container.on('click', 'a.delete', deleteFile)
   $images_container.disableSelection();
 };
 
