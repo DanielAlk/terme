@@ -145,6 +145,7 @@ Utils.updateMany = function() {
 	var clickHandler = function(e) {
 		e.preventDefault();
 		var $trigger = $(this);
+		if ($trigger.hasClass('updating')) return;
 		var options = $trigger.data();
 		var hash = options.hash;
 		var selector = options.ids;
@@ -180,6 +181,7 @@ Utils.deleteMany = function() {
 	var clickHandler = function(e) {
 		e.preventDefault();
 		var $trigger = $(this);
+		if ($trigger.hasClass('updating')) return;
 		var options = $trigger.data();
 		if (!options.confirmText || !window.confirm(options.confirmText)) return;
 		var selector = options.ids;
@@ -232,6 +234,7 @@ Utils.update = function() {
 	var triggerClick = function(e) {
 		e.preventDefault();
 		var $trigger = $(this);
+		if ($trigger.hasClass('updating')) return;
 		var options = $trigger.data();
 		$trigger.addClass('updating');
 		$.ajax({ url: $trigger.attr('href'), method: 'put', dataType: 'json', data: options.hash })
@@ -288,12 +291,15 @@ Utils.class = function() {
 Utils.disableAfterClick = function() {
 	var clickHandler = function(e) {
 		$(this).addClass('disabled').attr('disabled', true);
+		$('<div>', { id: 'disable-after-click-layer' })
+		.css({ position: 'absolute', top: 0, left: 0, zIndex: 99999999, width: '100%', height: '100%' })
+		.prependTo('body');
 	};
 	var clickHandlerDisabled = function(e) {
 		return false;
 	};
 	$(document).on('click', '.disable-after-click:not(.disabled)', clickHandler);
-	$(document).on('click', '.disable-after-click.disabled', clickHandlerDisabled);
+	$(document).on('click', '.disable-after-click.disabled, disable-after-click-layer', clickHandlerDisabled);
 };
 
 Utils.submitTriggers = function() {
