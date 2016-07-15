@@ -31,15 +31,18 @@
 <%= render 'partials/carousel' %>
 <div class="content">
   <div class="content-info">
-    <% @product_categories.each_with_index do |category, index| %>
-      <section class="<%= 'first' if index == 0 %>">
-        <h2><%= link_to category.title, products_page_path(category), style: 'color:inherit' %></h2>
-        <ul id="<%= category.slug %>" class="carrusel owl-carousel">
-          <% category.products.take(10).shuffle.each do |product| %>
-            <%= render 'products/box', product: product  %>
-          <% end %>
-        </ul>
-      </section>
+    <% @product_categories.each do |category| %>
+      <% products = category.products.active.take(10).shuffle %>
+      <% if products.present? %>
+        <section class="<%= 'first' if @first_category_rendered.blank? && (@first_category_rendered = true) %>">
+          <h2><%= link_to category.title, products_page_path(category), style: 'color:inherit' %></h2>
+          <ul id="<%= category.slug %>" class="carrusel owl-carousel">
+            <% products.each do |product| %>
+              <%= render 'products/box', product: product  %>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
     <% end %>
     <div class="slider-bottom">
       <div class="slider-bott owl-carousel">
