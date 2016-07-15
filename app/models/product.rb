@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   extend FriendlyId
   include Filterable
+  include Tinymce
 	friendly_id :slug_candidates, use: :slugged
 	belongs_to :category
   has_many :images, -> { order(position: :asc) }, as: :imageable, dependent: :destroy
@@ -11,6 +12,8 @@ class Product < ActiveRecord::Base
   validates_presence_of :category_id
   validates_presence_of :price
   validates_presence_of :currency
+
+  tinymce columns: [ :characteristics, :data_sheet, :information ]
 
   filterable scopes: [ :status, :brand, :category ]
   filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information ]
@@ -24,21 +27,6 @@ class Product < ActiveRecord::Base
 
   def price=(price)
     write_attribute(:price, price.gsub('.', '').gsub(',', '.'))
-  end
-  def characteristics=(characteristics)
-    sanitizer = Rails::Html::WhiteListSanitizer.new
-    sanitized = sanitizer.sanitize(characteristics, tags: %w(strong em br a), attributes: %w(href))
-    write_attribute(:characteristics, sanitized)
-  end
-  def data_sheet=(data_sheet)
-    sanitizer = Rails::Html::WhiteListSanitizer.new
-    sanitized = sanitizer.sanitize(data_sheet, tags: %w(strong em br a), attributes: %w(href))
-    write_attribute(:data_sheet, sanitized)
-  end
-  def information=(information)
-    sanitizer = Rails::Html::WhiteListSanitizer.new
-    sanitized = sanitizer.sanitize(information, tags: %w(strong em br a), attributes: %w(href))
-    write_attribute(:information, sanitized)
   end
 
   def dimensions
