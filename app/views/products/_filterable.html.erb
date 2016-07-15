@@ -1,5 +1,5 @@
-<div class="filterable" id="filterable-<%= collection.name.downcase %>">
-	<%= form_tag url_for(controller: collection.name.pluralize.downcase, only_path: true), method: :get do %>
+<div class="filterable" id="filterable-products">
+	<%= form_tag products_path, method: :get do %>
 		<div class="hidden">
 			<%= submit_tag %>
 		</div>
@@ -26,24 +26,24 @@
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[order]', filterable_select(collection, :order), prompt: 'Ordenar', class: 'selectpicker' %>
+					<%= select_tag 'filterable[order]', filterable_select(products, :order), prompt: 'Ordenar', class: 'selectpicker' %>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][status]', filterable_select(collection, :scopes, :status), prompt: 'Status', class: 'selectpicker' %>
+					<%= select_tag 'filterable[scopes][status]', filterable_select(products, :scopes, :status), prompt: 'Status', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][brand]', filterable_select(collection, :scopes, :brand), prompt: 'Marca', class: 'selectpicker' %>
+					<%= select_tag 'filterable[scopes][brand]', filterable_select(products, :scopes, :brand), prompt: 'Marca', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][category]', filterable_select(collection, :scopes, :category), prompt: 'Categoría', class: 'selectpicker' %>
+					<%= select_tag 'filterable[scopes][category]', filterable_select(products, :scopes, :category), prompt: 'Categoría', class: 'selectpicker' %>
 				</div>
 			</div>
 		</div>

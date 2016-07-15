@@ -1,14 +1,10 @@
 <% content_for :extra_js do %>
   Products.index();
-  Utils.selectpicker();
-  $('#filterable-product select').change(function(e) {
-    $(this).closest('form').submit();
-  });
 <% end %>
 
 <% content_for :panel_subtitle, 'Productos' %>
 
-<%= render 'partials/filterable', collection: @products %> 
+<%= render 'filterable', products: @products %> 
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -70px;">
   <%= link_to new_product_path, title: 'Nuevo', class: 'btn btn-warning tooltip-trigger' do %>

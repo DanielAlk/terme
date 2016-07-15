@@ -20,11 +20,16 @@ Products.index = function() {
 	  for (var key in response) updateToggle(e, response[key]);
 	  Alerts.success('Se cambiaron con exito los productos seleccionados');
 	};
+	var filterable_submit = function(e) {
+	  $(this).closest('form').submit();
+	};
 	$('[data-util=updateMany]').on('updated.util.updateMany', updatedMany);
 	$('.product-active-toggler').on('updated.util.update', updateToggle);
+	$('#filterable-products select').change(filterable_submit);
 	Utils.checkboxes();
 	Utils.updateMany();
 	Utils.deleteManyForm();
+	Utils.selectpicker();
 };
 
 Products.show = function() {
