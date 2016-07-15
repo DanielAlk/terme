@@ -16,7 +16,7 @@ class Product < ActiveRecord::Base
   tinymce columns: [ :characteristics, :data_sheet, :information ]
 
   filterable scopes: [ :status, :brand, :category ]
-  filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information ]
+  filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information, :description ]
   filterable range: { price: { scoped: :currency } }
   filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
   filterable_label scopes: {status: {draft: 'Borrador', active: 'Activa', paused: 'Pausada'}}
