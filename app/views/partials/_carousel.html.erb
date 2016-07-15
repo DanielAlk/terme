@@ -1,16 +1,5 @@
 <% content_for :extra_js do %>
-  $('.slider.owl-carousel').owlCarousel({
-    loop:true,
-    items:1,
-    margin:0,
-    nav:true,
-    dots:true,
-    autoPlay: 7000,
-    stopOnHover: true,
-    responsive:{
-        0:{ items:1}
-    }
-  });	
+  Pages.carousel();	
 <% end %>
 
 <div class="slider owl-carousel">

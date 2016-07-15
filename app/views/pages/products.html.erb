@@ -1,10 +1,8 @@
-<% content_for :extra_js do %>
-  $('.products-page-filters select').change(function(e) {
-    $(this).closest('form').submit();
-  });
-<% end %>
-
 <% content_for :body_class, 'catalogo' %>
+
+<% content_for :extra_js do %>
+  Pages.products();
+<% end %>
 
 <div class="slider">
   <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
