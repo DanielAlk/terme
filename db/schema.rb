@@ -97,13 +97,13 @@ ActiveRecord::Schema.define(version: 20160712040241) do
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
 
   create_table "reviews", force: :cascade do |t|
-    t.decimal  "score",                       precision: 6, scale: 5
+    t.integer  "score",           limit: 4
     t.integer  "reviewer_id",     limit: 4
     t.string   "reviewer_type",   limit: 255
     t.integer  "reviewable_id",   limit: 4
     t.string   "reviewable_type", limit: 255
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
