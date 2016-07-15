@@ -3,7 +3,7 @@
     <!--div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div-->
     <div class="img-product">
     	<%= link_to product_page_path(product), title: product.title do %>
-    		<img src="<%= product.image %>" alt="<%= product.title %>" title="<%= product.title %>">
+    		<img src="<%= product.image :small %>" alt="<%= product.title %>" title="<%= product.title %>">
   		<% end %>
     </div>
     <div class="producto-info">
