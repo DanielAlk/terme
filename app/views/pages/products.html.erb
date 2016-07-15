@@ -1,0 +1,46 @@
+<% content_for :extra_js do %>
+  $('.products-page-filters select').change(function(e) {
+    $(this).closest('form').submit();
+  });
+<% end %>
+
+<% content_for :body_class, 'catalogo' %>
+
+<div class="slider">
+  <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
+</div>
+<div class="content">
+  <div class="content-info">
+    <div class="breadcrumbs">
+      <ul>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <% if @category.present? %>
+          <li><a href="<%= products_page_path %>">Productos</a></li>
+          <li><%= @category.title %></li>
+        <% else %>
+          <li>Productos</li>
+        <% end %>
+      </ul>
+    </div>
+    <section>
+      <div class="filtros">
+        <%= render 'products/page_filters' %>
+      </div>
+      <div class="product-grid-col4">
+        <ul>
+          <% @products.each do |product| %>
+            <%= render 'products/box', product: product  %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="filtros bottom">
+        <%= render 'products/page_filters' %>
+      </div>
+    </section>
+    <div class="socialmedia-bottom">
+      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
+      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
+      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
+    </div>
+  </div>
+</div>

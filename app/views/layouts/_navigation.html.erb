@@ -55,23 +55,17 @@
           <ul class="level0">
             <li><a href="<%= root_path %>">home</a></li>
             <li><a href="<%= about_page_path %>">La Empresa</a></li>
-            <li> <a href="<%= catalog_page_path %>">Productos y Servicios</a>
+            <li> <a href="">Productos y Servicios</a>
               <ul class="level1">
-                <li> <a href="<%= catalog_page_path %>">item 1</a>
+                <li> <a href="<%= products_page_path %>">Equipos</a>
                   <ul class="level2">
-                    <li><a href="<%= catalog_page_path %>">item1 - 2</a></li>
-                    <li><a href="<%= catalog_page_path %>">item1 - 2</a></li>
-                    <li><a href="<%= catalog_page_path %>">item1 - 2</a></li>
+                    <% Category.friendly.find('products').children.each do |category| %>
+                      <li><a href="<%= products_page_path category %>"><%= category.title %></a></li>
+                    <% end %>
                   </ul>
                 </li>
-                <li> <a href="<%= catalog_page_path %>">item 2</a>
-                  <ul class="level2">
-                    <li><a href="<%= catalog_page_path %>">item2 - 2</a></li>
-                    <li><a href="<%= catalog_page_path %>">item2 - 2</a></li>
-                    <li><a href="<%= catalog_page_path %>">item2 - 2</a></li>
-                  </ul>
-                </li>
-                <li><a href="<%= catalog_page_path %>">item 3</a></li>
+                <li> <a href="<%= engineering_page_path %>">Ingeniería en climatización</a></li>
+                <li><a href="<%= instalation_page_path %>">Instalación y mantenimiento</a></li>
               </ul>
             </li>
             <li><a href="<%= partners_page_path %>">Clubs de Partners Aria</a></li>

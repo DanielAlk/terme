@@ -194,7 +194,7 @@
         .cantidad{
             display: inline-block;
             vertical-align: middle;
-            width: percentage(15px / 100px);
+            width: percentage(18px / 100px);
             
             label{
                 font-size: $f-size-xl;
@@ -231,7 +231,7 @@
             display: inline-block;
             vertical-align: middle;
             margin-left: -4px;
-             width: percentage(37px / 100px);
+             width: percentage(34px / 100px);
             text-align: right;
             ul{
                 display: inline-block;
@@ -476,7 +476,7 @@
     .product-view{
         .product-info{
             .cantidad{
-                width: percentage(18px / 100px);
+                width: percentage(20px / 100px);
             }
             .agregar-boton{
                 width: percentage(43px / 100px);
@@ -486,7 +486,7 @@
                 }
             }
             .compartir-product{
-                width: percentage(39px / 100px);
+                width: percentage(37px / 100px);
             }
         }
     }
@@ -508,7 +508,7 @@
             }
              
             .cantidad{
-                width: 80px;
+                width: 85px;
             }
             .agregar-boton{
                 width: 220px;

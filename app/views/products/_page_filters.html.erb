@@ -1,0 +1,26 @@
+<%= form_tag products_page_path, method: :get, class: 'products-page-filters' do %>
+	<div style="display:none;">
+		<%= submit_tag %>
+	</div>
+	<div class="ordenar">
+	  <label >Ordenar por</label>
+	  <select class="orden" name="filterable[order]">
+	    <option <%= 'selected' if filterable(:order) == 'price_asc' %> value="price_asc">Menor precio</option>
+	    <option <%= 'selected' if filterable(:order) == 'price_desc' %> value="price_desc">Mayor precio</option>
+	    <option <%= 'selected' if filterable(:order) == 'created_at_desc' %> value="created_at_desc">Más relevantes</option>
+	  </select>
+	</div>
+	<div class="cantidad">
+	  <label >Mostrar</label>
+	  <select class="cantidades" name="per_page">
+	    <option <%= 'selected' if params[:per_page].blank? || params[:per_page] == '12' %>>12</option>
+	    <option <%= 'selected' if params[:per_page].present? && params[:per_page] == '24' %>>24</option>
+	    <option <%= 'selected' if params[:per_page].present? && params[:per_page] == '36' %>>36</option>
+	  </select>
+	  <span>Por Página</span>
+	</div>
+	<div class="paginador">
+	  <!--label>Página</label-->
+	  <%= will_paginate @products, :renderer => PaginationHelper::LinkRenderer, outer_window: 0, inner_window: 1 %>
+	</div>
+<% end %>

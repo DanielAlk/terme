@@ -31,11 +31,11 @@
 <%= render 'partials/carousel' %>
 <div class="content">
   <div class="content-info">
-    <% Category.friendly.find('products').children.each_with_index do |category, index| %>
+    <% @product_categories.each_with_index do |category, index| %>
       <section class="<%= 'first' if index == 0 %>">
-        <h2><%= category.title %></h2>
+        <h2><%= link_to category.title, products_page_path(category), style: 'color:inherit' %></h2>
         <ul id="<%= category.slug %>" class="carrusel owl-carousel">
-          <% category.products.each do |product| %>
+          <% category.products.take(10).shuffle.each do |product| %>
             <%= render 'products/box', product: product  %>
           <% end %>
         </ul>

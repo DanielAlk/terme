@@ -1,45 +1,7 @@
 <% content_for :body_class, 'product-view-page' %>
 
 <% content_for :extra_js do %>
-  AriaProductInit();
-
-  $('#galeria-thumbs.owl-carousel').owlCarousel({
-    loop:false,
-    items:3,
-    margin:0,
-    nav:true,
-    dots:false,
-    responsive:{
-        0:{ items:3}
-    }
-  });
-
-  $(document).ready( function() { 
-    var el = $('.qty'); 
-    function change( amt ) { 
-      el.val( parseInt( el.val(), 10 ) + amt ); 
-    } 
-
-    $('.mas').click( function() { 
-      change( 1 ); 
-    } ); 
-  } );
-  
-  $('section.relacionados .owl-carousel').owlCarousel({
-    loop:false,
-    items:1,
-    slideBy:1,
-    margin:0,
-    nav: true,
-    dots: false,
-    responsive:{
-      0:{items:1},
-      650:{items:2},
-      800:{items:3},
-      1025:{items:4},
-      1251:{items:5}
-    }
-  });
+  Pages.product(<%= @product.stock %>);
 <% end %>
 
 <div class="slider">
@@ -49,10 +11,10 @@
   <div class="content-info">
     <div class="breadcrumbs">
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Productos y Servicios</a></li>
-        <li><a href="">Equipos</a></li>
-        <li>Comercial</li>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li><a href="<%= products_page_path %>">Productos</a></li>
+        <li><a href="<%= products_page_path @product.category %>"><%= @product.category.title %></a></li>
+        <li><%= @product.title %></li>
       </ul>
     </div>
     <section>
@@ -95,14 +57,16 @@
                 <input type="radio" id="starhalf" name="rating" value="half" />
                 <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
               </div>
-              <label>1 Review(s)</label>
+              <label><%= pluralize(@product.reviews.count, 'Review') %></label>
             </div>
           </div>
           <div class="product-price">
             <div class="price"><%= number_to_currency(@product.price, unit: @product.currency + " ", separator: ",", delimiter: ".") %></div>
             <div class="code-stock">
               <div class="sku">Código de Producto: <span><%= @product.key_code %></span></div>
-              <div class="stock"><%= @product.stock.present? ? 'En stock' : 'Sin Stock' %></div>
+              <div class="stock">
+                <%= @product.stock.present? && @product.stock > 0 ? 'En stock: ' + @product.stock.to_s + ' u.' : 'Sin Stock' %>
+              </div>
             </div>
           </div>
           <div class="separador"></div>
@@ -118,25 +82,29 @@
           <% if @product.external_link.present? %>
             <a href="<%= @product.external_link %>" target="_blank" class="ver-ficha"> ver ficha oficial Carrier </a>
           <% end %>
-          <div class="separador"></div>
-          <div class="agregar-carrito">
-            <form>
-              <div class="cantidad">
-                <label >Catidad:</label>
-                <input type="text" class="qty" name="cantidad" value="1"/>
-                <span class="mas">+</span> </div>
-              <div class="agregar-boton">
-                <button>Agregar al Carrito</button>
-              </div>
-              <div class="compartir-product">
-                <ul>
-                  <li><a href="#">+ Email a un amigo</a></li>
-                  <li><a href="#">+ Compartir en Facebook</a></li>
-                  <li><a href="#">+ Compartir en Twitter</a></li>
-                </ul>
-              </div>
-            </form>
-          </div>
+          <% if @product.stock.present? && @product.stock > 0 %>
+            <div class="separador"></div>
+            <div class="agregar-carrito">
+              <form>
+                <div class="cantidad" id="quantity">
+                  <label >Catidad:</label>
+                  <span class="menos">-</span>
+                  <input type="text" class="qty" name="cantidad" value="1" autocomplete="off"/>
+                  <span class="mas">+</span>
+                </div>
+                <div class="agregar-boton">
+                  <button>Agregar al Carrito</button>
+                </div>
+                <div class="compartir-product">
+                  <ul>
+                    <li><a href="#">+ Email a un amigo</a></li>
+                    <li><a href="#">+ Compartir en Facebook</a></li>
+                    <li><a href="#">+ Compartir en Twitter</a></li>
+                  </ul>
+                </div>
+              </form>
+            </div>
+          <% end %>
         </div>
       </div>
     </section>
@@ -159,7 +127,7 @@
     <section class="relacionados">
       <h2>Productos Relacionados</h2>
       <ul id="relacionados" class="carrusel owl-carousel">
-        <% @product.category.products.reject{ |p| p.id == @product.id }.each do |product| %>
+        <% @related_products.each do |product| %>
           <%= render 'products/box', product: product  %>
         <% end %>
       </ul>

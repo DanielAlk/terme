@@ -15,7 +15,8 @@ module Filterize
   end
 
 	def filterize
-		object = self.class.name.sub('Controller', '').singularize.constantize
+		object = self.class.filterize_defaults[:object].to_s.titlecase.constantize rescue false
+		object = object || self.class.name.sub('Controller', '').singularize.constantize
 		collection = object.where(nil)
 		if params[:filterable].present?
 			if params[:filterable][:scopes].present?
@@ -43,6 +44,9 @@ module Filterize
 		if (defaults = self.class.filterize_defaults).present?
 			if (order = defaults[:order]).present?
 				collection = collection.forder order
+			end
+			if (scope = defaults[:scope]).present?
+				collection = collection.send(scope.to_s)
 			end
 		end
 		instance_variable_set('@' + object.name.pluralize.downcase, collection)

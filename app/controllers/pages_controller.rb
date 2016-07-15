@@ -1,14 +1,24 @@
 class PagesController < ApplicationController
+  include Filterize
+  before_action :filterize, only: :products
+  filterize_default object: :product, order: :price_asc, scope: :active
   layout 'soon', only: :soon
   
   def home
+    @product_categories = Category.friendly.find('products').children
+  end
+  def products
+    @category = Category.friendly.find(params[:category_id]) rescue nil
+    @products = @products.where(category: @category) if @category.present?
+    @products = @products.paginate(:page => params[:page], :per_page => params[:per_page] || 12)
   end
   def product
-    @product = Product.friendly.find(params[:id])
+    unless (@product = Product.friendly.find(params[:product_id])).active?
+      raise ActionController::RoutingError.new("No route matches [GET] \"#{request.path}\"")
+    end
+    @related_products = @product.category.products.where.not(id: @product.id).limit(10).shuffle
   end
   def cart
-  end
-  def catalog
   end
   def checkout
   end

@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_es_AR
+//= require jquery-ui/sortable
+//= require jquery.elevatezoom
 //= require turbolinks
-//= require_tree .
+//= require owl.carousel
+//= require autonumeric
+//= require acciones_aria
+//= require acciones_aria_productView
+//= require pages
