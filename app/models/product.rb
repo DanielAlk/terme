@@ -40,6 +40,14 @@ class Product < ActiveRecord::Base
   def image(size = :thumb)
     self.images.first.item.url(size) rescue "product-imgs/p-#{size}.jpg"
   end
+
+  def score
+    score = 0
+    reviews.each do |review|
+      score += review.score
+    end
+    (score / reviews.count.to_f).round rescue false
+  end
   
   private
   	def should_generate_new_friendly_id?

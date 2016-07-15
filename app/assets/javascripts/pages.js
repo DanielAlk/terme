@@ -34,9 +34,13 @@ Pages.products = function() {
 	});
 };
 
-Pages.product = function(stock) {
+Pages.product = function(product) {
 	AriaProductInit();
-	Pages.quantityPicker(stock);
+	Pages.quantityPicker(product.stock);
+	$('#star_' + product.score).click();
+	$('.rating input').click(function(e) {
+	  e.preventDefault();
+	});
 	$('#galeria-thumbs.owl-carousel').owlCarousel({
 	  loop:false,
 	  items:3,

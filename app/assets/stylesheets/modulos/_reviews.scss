@@ -34,8 +34,8 @@
     /***** CSS Magic to Highlight Stars on Hover *****/
 
     .rating > input:checked ~ label, /* show gold star when clicked */
-    .rating:not(:checked) > label:hover, /* hover current star */
-    .rating:not(:checked) > label:hover ~ label { color: #333;  } /* hover previous stars in list */
+    .rating:not(.locked):not(:checked) > label:hover, /* hover current star */
+    .rating:not(.locked):not(:checked) > label:hover ~ label { color: #333;  } /* hover previous stars in list */
 
     .rating > input:checked + label:hover, /* hover current star when changing rating */
     .rating > input:checked ~ label:hover,
