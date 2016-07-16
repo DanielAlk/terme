@@ -54,9 +54,9 @@ Products.index = function() {
 };
 
 Products.show = function() {
-	$('#tabs-container a').click(function(e) {
-	  e.preventDefault()
-	  $(this).tab('show')
+	$('#tabs-container>nav>li>a').click(function(e) {
+	  e.preventDefault();
+	  $(this).tab('show');
 	});
 	$('#product_active_toggler').on('updated.util.update', function(e, response) {
 	  var $this = $(this);

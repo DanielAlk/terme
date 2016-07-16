@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
 
   filterable scopes: [ :status, :brand, :category, :special ]
   filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information, :description ]
-  filterable range: { price: { scoped: :currency } }
+  filterable range: [ :price ]
   filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
   filterable joins: [ :reviews ]
   filterable labels: {
@@ -32,7 +32,7 @@ class Product < ActiveRecord::Base
 
   enum status: [ :draft, :active, :paused ]
   enum special: [ :is_regular, :is_new, :is_offer ]
-  enum currency: [ '$', 'u$s' ]
+  enum currency: [ '$' ]
 
   def price=(price)
     write_attribute(:price, price.gsub('.', '').gsub(',', '.'))

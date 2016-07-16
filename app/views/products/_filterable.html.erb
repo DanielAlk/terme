@@ -4,20 +4,19 @@
 			<%= button_tag 'Buscar', type: :submit, class: 'btn btn-xs btn-success' %>
 			<div class="col-xs-6">
 				<div class="field">
-					<%= search_field_tag 'filterable[search]', filterable(:search), placeholder: 'Buscar' %>
+					<%= search_field_tag 'f[search]', filterable(:search), placeholder: 'Buscar' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="field">
-							<%= hidden_field_tag 'filterable[range][price][scoped]', 0 %>
-							<%= text_field_tag 'filterable[range][price][min]', filterable(:range, :price, :min), placeholder: '$ min', class: 'autonumeric-plain' %>
+							<%= text_field_tag 'f[range][price][min]', filterable(:range, :price, :min), placeholder: '$ min', class: 'autonumeric-plain' %>
 						</div>
 					</div>
 					<div class="col-xs-6">
 						<div class="field">
-							<%= text_field_tag 'filterable[range][price][max]', filterable(:range, :price, :max), placeholder: '$ max', class: 'autonumeric-plain' %>
+							<%= text_field_tag 'f[range][price][max]', filterable(:range, :price, :max), placeholder: '$ max', class: 'autonumeric-plain' %>
 						</div>
 					</div>
 				</div>
@@ -26,34 +25,34 @@
 		<div class="row">
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][status]', filterable_select(products, :scopes, :status), prompt: 'Status', class: 'selectpicker' %>
+					<%= select_tag 'f[scopes][status]', filterable_select(products, :scopes, :status), prompt: 'Status', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][special]', filterable_select(products, :scopes, :special), prompt: 'Marcado como', class: 'selectpicker' %>
+					<%= select_tag 'f[scopes][special]', filterable_select(products, :scopes, :special), prompt: 'Marcado como', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][brand]', filterable_select(products, :scopes, :brand), prompt: 'Marca', class: 'selectpicker' %>
+					<%= select_tag 'f[scopes][brand]', filterable_select(products, :scopes, :brand), prompt: 'Marca', class: 'selectpicker' %>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[scopes][category]', filterable_select(products, :scopes, :category), prompt: 'Categoría', class: 'selectpicker' %>
+					<%= select_tag 'f[scopes][category]', filterable_select(products, :scopes, :category), prompt: 'Categoría', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[joins]', filterable_select(products, :joins), prompt: 'Que contenga', class: 'selectpicker' %>
+					<%= select_tag 'f[joins]', filterable_select(products, :joins), prompt: 'Que contenga', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'filterable[order]', filterable_select(products, :order), prompt: 'Ordenar', class: 'selectpicker' %>
+					<%= select_tag 'f[order]', filterable_select(products, :order), prompt: 'Ordenar', class: 'selectpicker' %>
 				</div>
 			</div>
 		</div>

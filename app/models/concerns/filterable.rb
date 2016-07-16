@@ -25,18 +25,12 @@ module Filterable
   		self.order(arguments)
 	  end
 
-	  def frange(property, min, max, scoped_value = nil)
+	  def frange(property, min, max)
 	  	options = filterable_options[:range]
 	  	property = property.to_sym
-	  	scoped = options[property][:scoped].to_sym rescue false
 	  	results = self.where(nil)
-	  	if scoped_value.present? && scoped.present?
-	  		s_arguments = {}
-	  		s_arguments[scoped] = scoped_value
-	  		results = results.where(s_arguments)
-	  	end
-	  	arguments = {};
-	  	arguments[property] = min.to_i..max.to_i if min.present? && max.present?
+  		arguments = {}
+  		arguments[property] = min.to_i..max.to_i if min.present? && max.present?
 	  	arguments[property] = min.to_i..(1.0 / 0.0) if min.present? && max.blank?
 	  	arguments[property] = 0..max.to_i if min.blank? && max.present?
 	  	results.where(arguments)

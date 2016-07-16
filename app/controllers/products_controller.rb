@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_action :set_products, only: [:update_many, :destroy_many]
   before_action :related_objects, only: [:create, :update]
   before_action :filterize, only: :index
-  filterize order: :created_at_desc
+  filterize order: :created_at_desc, param: :f
   layout 'panel'
 
   # GET /products
