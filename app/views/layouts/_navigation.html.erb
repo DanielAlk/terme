@@ -20,6 +20,7 @@
         <div class="usuarios">
           <% if user_signed_in? %>
             <a href="<%= profile_path %>" class="registro"><%= current_user.name %></a>
+            <%= link_to 'Salir', destroy_user_session_path, method: :delete, class: 'ingrsar' %>
           <% elsif request.subdomain[/panel/] %>
             <% if admin_signed_in? %>
               <a href="<%= panel_path %>" class="registro"><%= current_admin.name %></a>

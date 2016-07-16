@@ -29,6 +29,6 @@
 //= require editable
 //= require file_picker
 //= require utils
-//= require user-addresses
+//= require user
 //= require categories
 //= require products

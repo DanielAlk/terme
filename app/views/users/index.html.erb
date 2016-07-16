@@ -1,0 +1,8 @@
+<% content_for :extra_js do %>
+<% end %>
+
+<% content_for :panel_subtitle, 'Usuarios' %>
+
+<div class="panel-group nested" role="tablist" id="group-root">
+  <%= render @users %>
+</div>

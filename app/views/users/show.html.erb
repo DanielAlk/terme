@@ -1,0 +1,69 @@
+<% content_for :panel_subtitle, 'Editar Usuario' %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -60px;">
+  <%= link_to users_path, title: 'Listado', class: 'btn btn-success tooltip-trigger' do %>
+    <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to edit_user_path(@user), title: 'Editar', class: 'tooltip-trigger btn btn-success' do %>
+    <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+  <% end %>
+  <%= link_to @user, title: 'Eliminar', class: 'tooltip-trigger btn btn-danger', method: 'delete', data: { confirm: '¿Seguro?' } do %>
+    <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<div id="tabs-container" style="margin-top: 20px;">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#data_tab" aria-controls="data_tab" role="tab" data-toggle="tab">Datos</a>
+    </li>
+    <li role="presentation">
+      <a href="#addresses_tab" aria-controls="addresses_tab" role="tab" data-toggle="tab">Direcciones</a>
+    </li>
+    <% if @user.reset_password_sent_at.present? && @user.reset_password_sent_at > @user.current_sign_in_at %>
+      <li role="presentation">
+        <a href="#reports_tab" aria-controls="reports_tab" role="tab" data-toggle="tab">Reportes</a>
+      </li>
+    <% end %>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="data_tab">
+      <div class="well">
+        <p>
+          <strong>Nombre:</strong>
+          <%= @user.name %><br>
+          <strong>Email:</strong>
+          <%= @user.email %><br>
+          <strong>Ultima conexión:</strong>
+          <%= @user.current_sign_in_at.strftime('%d de %h de %Y a las %r') %><br>
+          <strong>Desde IP:</strong>
+          <%= @user.current_sign_in_ip %>
+        </p>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="addresses_tab">
+      <div class="panel-group" role="tablist" id="group-root" style="margin-top:10px;">
+        <% @user.user_addresses.each do |user_address| %>
+          <%= render 'user_address', user_address: user_address %>
+        <% end %>
+      </div>
+    </div>
+    <% if @user.reset_password_sent_at.present? && @user.reset_password_sent_at > @user.current_sign_in_at %>
+      <div role="tabpanel" class="tab-pane" id="reports_tab">
+        <div class="well">
+          <p>
+            <strong>El usuario reportó olvidada su clave el:</strong><br>
+            <%= @user.reset_password_sent_at.strftime('%d de %h de %Y a las %r') %><br>
+            <br>
+            Las instrucciones para recuperar la cuenta fueron enviadas a:<br>
+            <%= link_to @user.email, 'mailto:' + @user.email %><br>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

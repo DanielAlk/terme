@@ -1,0 +1,42 @@
+<div class="panel panel-warning">
+  <div class="panel-heading" role="tab">
+    <div class="panel-heading-actions">
+      <% if user_address.first? %>
+        <%= link_to 'javascript:void(0);', class: 'link-success tooltip-trigger', title: 'Dirección principal' do %>
+          <i class="fa fa-star fa-fw" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+      <%= link_to '#body-' + user_address.id.to_s, class: 'link-gray', data: { toggle: 'collapse' } do %>
+        <i class="fa fa-caret-down fa-fw" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <h4 class="panel-title"><span><%= user_address.address %></span></h4>
+  </div>
+  <div id="body-<%= user_address.id %>" class="panel-collapse collapse" role="tabpanel">
+    <div class="panel-body">
+      <strong>Dirección:</strong>
+      <%= user_address.address %>
+      <br>
+      <strong>Email:</strong>
+      <%= user_address.email %>
+      <br>
+      <strong>Nombre:</strong>
+      <%= user_address.fname + ' ' + user_address.lname %>
+      <br>
+      <strong>Compañía:</strong>
+      <%= user_address.company %>
+      <br>
+      <strong>Código postal:</strong>
+      <%= user_address.zip_code %>
+      <br>
+      <strong>Ciudad:</strong>
+      <%= user_address.city %>
+      <br>
+      <strong>Provincia:</strong>
+      <%= user_address.zone.title %>
+      <br>
+      <strong>Teléfono celular:</strong>
+      <%= number_to_phone user_address.mobile %>
+    </div>
+  </div>
+</div>

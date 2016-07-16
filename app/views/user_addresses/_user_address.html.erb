@@ -1,8 +1,11 @@
 <div class="panel panel-success" id="<%= 'panel-template' if user_address.new_record? %>">
   <div class="panel-heading" role="tab">
     <div class="panel-heading-actions">
-      <%= link_to user_address, title: 'Marcar como principal', class: 'tooltip-trigger link-primary' + (user_address.first? ? ' hidden' : ''), data: { util: 'update', hash: { 'user_address[position]': 1 } } do %>
+      <%= link_to 'javascript:void(0);', title: 'Dirección principal', class: 'tooltip-trigger link-primary is-first' + (user_address.first? ? '' : ' hidden') do %>
         <i class="fa fa-star fa-fw" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to user_address, title: 'Marcar como principal', class: 'tooltip-trigger link-primary'  + (!user_address.first? ? '' : ' hidden'), data: { util: 'update', hash: { 'user_address[position]': 1 } } do %>
+        <i class="fa fa-star-o fa-fw" aria-hidden="true"></i>
       <% end %>
       <%= link_to edit_user_address_path(user_address), title: 'Editar', class: 'tooltip-trigger link-warning' do %>
         <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>

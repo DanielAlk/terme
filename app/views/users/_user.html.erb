@@ -1,0 +1,17 @@
+<div class="panel panel-success" id="<%= 'panel-template' if user.new_record? %>">
+  <div class="panel-heading" role="tab">
+    <div class="panel-heading-actions">
+      <%= link_to edit_user_path(user), title: 'Editar', class: 'tooltip-trigger link-success' do %>
+        <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to user, title: 'Eliminar', class: 'tooltip-trigger link-danger', method: 'delete', data: { confirm: '¿Seguro?' } do %>
+        <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <h4 class="panel-title">
+      <%= link_to user do %>
+        <%= user.name %> <small><%= user.email %></small>
+      <% end %>
+    </h4>
+  </div>
+</div>
