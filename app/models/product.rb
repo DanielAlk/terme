@@ -15,14 +15,22 @@ class Product < ActiveRecord::Base
 
   tinymce columns: [ :characteristics, :data_sheet, :information ]
 
-  filterable scopes: [ :status, :brand, :category ]
+  filterable scopes: [ :status, :brand, :category, :special ]
   filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information, :description ]
   filterable range: { price: { scoped: :currency } }
   filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
-  filterable_label scopes: {status: {draft: 'Borrador', active: 'Activa', paused: 'Pausada'}}
-  filterable_label order: {status: 'Status', title: 'Título', brand: 'Marca', category: 'Categoría', price: 'Precio', key_code: 'Código', created_at: 'Creación', updated_at: 'Modificación'}
+  filterable_labels order: {
+    status: 'Status', title: 'Título', brand: 'Marca',
+    category: 'Categoría', price: 'Precio', key_code: 'Código',
+    created_at: 'Creación', updated_at: 'Modificación'
+  }
+  filterable_labels scopes: {
+    status: {draft: 'Borrador', active: 'Activa', paused: 'Pausada'},
+    special: {is_regular: 'Sin marca', is_new: 'Nuevo', is_offer: 'Oferta'}
+  }
 
   enum status: [ :draft, :active, :paused, :trash ]
+  enum special: [ :is_regular, :is_new, :is_offer ]
   enum currency: [ '$', 'u$s' ]
 
   def price=(price)

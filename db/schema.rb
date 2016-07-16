@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160712040241) do
   create_table "products", force: :cascade do |t|
     t.string   "title",           limit: 255
     t.integer  "status",          limit: 4,                             default: 0
+    t.integer  "special",         limit: 4,                             default: 0
     t.string   "key_code",        limit: 255
     t.string   "brand",           limit: 255
     t.integer  "category_id",     limit: 4

@@ -29,7 +29,7 @@
           <div id="galeria-thumbs" class="galeria owl-carousel">
             <% @product.images.each_with_index do |img, index| %>
               <%= link_to '#', data: { image: img.item.url(:medium), zoom_image: img.item.url(:big) } do %>
-                <%= image_tag img.item.url(:small), id: 'img_' + index.to_s %>
+                <%= image_tag img.item.url(:thumb), id: 'img_' + index.to_s %>
               <% end %>
             <% end %>
           </div>

@@ -11,6 +11,14 @@
 				  <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
 				  <i class="updated fa fa-fw fa-<%= !product.active? ? 'play' : 'pause' %>" aria-hidden="true"></i>
 				<% end %>
+				<%= link_to product, title: product.is_offer? ? 'Quitar oferta' : 'Marcar como oferta', class: 'tooltip-trigger btn btn-warning product-offer-toggler', data: { util: 'update', hash: { product: { special: product.is_offer? ? 'is_regular' : 'is_offer' } } } do %>
+					<i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+				  <i class="updated fa fa-fw fa-<%= product.is_offer? ? 'star' : 'star-o' %>" aria-hidden="true"></i>
+				<% end %>
+				<%= link_to product, title: product.is_new? ? 'Quitar nuevo' : 'Marcar como nuevo', class: 'tooltip-trigger btn btn-info product-new-toggler', data: { util: 'update', hash: { product: { special: product.is_new? ? 'is_regular' : 'is_new' } } } do %>
+				  <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+				  <i class="updated fa fa-fw fa-<%= product.is_new? ? 'flag' : 'flag-o' %>" aria-hidden="true"></i>
+				<% end %>
 				<%= link_to product, title: 'Ver', class: 'btn btn-success tooltip-trigger' do %>
 					<i class="fa fa-external-link fa-fw" aria-hidden="true"></i>
 				<% end %>
@@ -29,6 +37,11 @@
 		<a class="display-thumb" href="<%= product_path(product) %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
 		<div class="display-top-right">
 			<h4 style="margin:0 -3px;">
+				<% if product.reviews.present? %>
+					<small style="margin-right:10px;">
+						<span class="badge"><%= product.reviews.count %></span> <%= 'Review'.pluralize product.reviews.count %>
+					</small>
+				<% end %>
 				<span class="label label-success">
 					<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
 				</span>

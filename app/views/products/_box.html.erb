@@ -1,6 +1,10 @@
 <li>
   <div class="caja-producto">
-    <!--div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div-->
+    <% if product.is_new? %>
+      <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
+    <% elsif product.is_offer? %>
+      <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
+    <% end %>
     <div class="img-product">
     	<%= link_to product_page_path(product), title: product.title do %>
     		<img src="<%= product.image :small %>" alt="<%= product.title %>" title="<%= product.title %>">

@@ -16,8 +16,28 @@ Products.index = function() {
   	.removeClass('label-info label-success label-danger')
   	.addClass('label-' + label_class[product.status]);
   };
+  var updateSpecialToggle = function(e, product) {
+  	var is_new = product.special == 'is_new';
+  	var is_offer = product.special == 'is_offer';
+  	var $display = $('#product_' + product.id);
+  	var $togglerNew = $display.find('.product-new-toggler');
+  	var $togglerOffer = $display.find('.product-offer-toggler');
+  	$togglerNew.data('hash', { product: { special: is_new ? 'is_regular' : 'is_new' }});
+  	$togglerNew.find('.fa').removeClass('fa-flag fa-flag-o').addClass(is_new ? 'fa-flag' : 'fa-flag-o');
+  	$togglerNew.tooltip('destroy');
+  	$togglerNew.attr('title', is_new ? 'Quitar nuevo' : 'Marcar como nuevo');
+  	$togglerNew.tooltip();
+  	$togglerOffer.data('hash', { product: { special: is_offer ? 'is_regular' : 'is_offer' }});
+  	$togglerOffer.find('.fa').removeClass('fa-star fa-star-o').addClass(is_offer ? 'fa-star' : 'fa-star-o');
+  	$togglerOffer.tooltip('destroy');
+  	$togglerOffer.attr('title', is_offer ? 'Quitar oferta' : 'Marcar como oferta');
+  	$togglerOffer.tooltip();
+  };
 	var updatedMany = function(e, response) {
-	  for (var key in response) updateToggle(e, response[key]);
+	  for (var key in response) {
+	  	updateToggle(e, response[key]);
+	  	updateSpecialToggle(e, response[key]);
+	  };
 	  Alerts.success('Se cambiaron con exito los productos seleccionados');
 	};
 	var filterable_submit = function(e) {
@@ -25,6 +45,7 @@ Products.index = function() {
 	};
 	$('[data-util=updateMany]').on('updated.util.updateMany', updatedMany);
 	$('.product-active-toggler').on('updated.util.update', updateToggle);
+	$('.product-new-toggler, .product-offer-toggler').on('updated.util.update', updateSpecialToggle);
 	$('#filterable-products select').change(filterable_submit);
 	Utils.checkboxes();
 	Utils.updateMany();

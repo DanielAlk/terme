@@ -3,6 +3,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :title
       t.integer :status, default: 0
+      t.integer :special, default: 0
       t.string :key_code
       t.string :brand
       t.references :category, index: true, foreign_key: true

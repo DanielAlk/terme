@@ -49,7 +49,7 @@ module Filterable
 	    		@filterable_options = @filterable_options.merge(options)
 	    	end
 	    end
-	    def filterable_label(options={})
+	    def filterable_labels(options={})
 	    	if @filterable_labels.blank?
 	    		@filterable_labels = options
 	    	else
