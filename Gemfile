@@ -35,6 +35,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'redis', '~>3.2'
+gem 'hiredis', '~> 0.6.0'
+
 gem 'figaro'
 gem 'devise', '3.4.1'
 gem 'ancestry'
