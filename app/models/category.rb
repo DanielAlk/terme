@@ -23,7 +23,7 @@ class Category < ActiveRecord::Base
 		end
 
 		def should_generate_new_friendly_id?
-		  title_changed?
+		  title_changed? && !fixed
 		end
 
 		def slug_candidates

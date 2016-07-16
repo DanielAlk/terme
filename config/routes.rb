@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       passwords: 'admins/passwords'
     }
 
+    resources :users
+
     resources :categories
     resources :images, :defaults => { :format => :json } do
       collection do
@@ -40,7 +42,7 @@ Rails.application.routes.draw do
       passwords: 'users/passwords'
     }
 
-    resources :user_addresses, path: 'profile/direcciones-de-envio'
+    resources :user_addresses, path: 'profile/direcciones'
     resources :reviews, path: 'profile/reviews'
   end
 

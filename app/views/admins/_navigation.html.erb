@@ -43,6 +43,11 @@
 	  		<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar Admin
 	  	<% end %>
 	  </li>
+	  <li role="presentation" class="<%= panel_nav_class(:users) %>">
+	  	<%= link_to users_path do %>
+	  		<i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuarios
+	  	<% end %>
+	  </li>
 	  <li role="presentation" class="<%= panel_nav_class(:categories) %>">
 	  	<%= link_to categories_path do %>
 	  		<i class="fa fa-list fa-fw" aria-hidden="true"></i> Categorias

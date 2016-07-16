@@ -22,4 +22,5 @@
 //= require autonumeric
 //= require acciones_aria
 //= require acciones_aria_productView
+//= require alerts
 //= require pages
