@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     unless (@product = Product.friendly.find(params[:product_id])).active?
       raise ActionController::RoutingError.new("No route matches [GET] \"#{request.path}\"")
     end
-    @related_products = @product.category.products.where.not(id: @product.id).limit(10).shuffle
+    @related_products = @product.category.products.active.where.not(id: @product.id).limit(10).shuffle
   end
   def cart
   end
