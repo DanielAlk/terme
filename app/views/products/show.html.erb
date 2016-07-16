@@ -8,6 +8,9 @@
   <%= link_to new_product_path, title: 'Nuevo', class: 'btn btn-warning tooltip-trigger' do %>
     <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
   <% end %>
+  <%= link_to product_page_path(@product), title: 'Ver', id: 'product_page_link', target: '_blank', class: 'btn btn-info tooltip-trigger' + (@product.active? ? '' : ' hidden') do %>
+    <i class="fa fa-external-link fa-fw" aria-hidden="true"></i>
+  <% end %>
   <%= link_to products_path, title: 'Listado', class: 'btn btn-success tooltip-trigger' do %>
     <i class="fa fa-list fa-fw" aria-hidden="true"></i>
   <% end %>
@@ -120,12 +123,14 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="reviews_tab">
       <p class="well">
-        <strong>Promedio: </strong><%= @product.score/2.to_f %>/5<br>
-        <br>
-        <% @product.reviews.each do |review| %>
-          <strong><%= (review.reviewer.name rescue false) || 'Anónimo' %></strong>
-          <i class="fa fa-arrow-right fa-fw"></i>
-          <%= review.score/2.to_f %>/5<br>
+        <% if @product.reviews.present? %>
+          <strong>Promedio: </strong><%= @product.score/2.to_f %>/5<br>
+          <br>
+          <% @product.reviews.each do |review| %>
+            <strong><%= (review.reviewer.name rescue false) || 'Anónimo' %></strong>
+            <i class="fa fa-arrow-right fa-fw"></i>
+            <%= review.score/2.to_f %>/5<br>
+          <% end %>
         <% end %>
       </p>
     </div>

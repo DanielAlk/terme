@@ -19,17 +19,18 @@ class Product < ActiveRecord::Base
   filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information, :description ]
   filterable range: { price: { scoped: :currency } }
   filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
-  filterable_labels order: {
-    status: 'Status', title: 'Título', brand: 'Marca',
-    category: 'Categoría', price: 'Precio', key_code: 'Código',
-    created_at: 'Creación', updated_at: 'Modificación'
-  }
-  filterable_labels scopes: {
-    status: {draft: 'Borrador', active: 'Activa', paused: 'Pausada'},
-    special: {is_regular: 'Sin marca', is_new: 'Nuevo', is_offer: 'Oferta'}
+  filterable joins: [ :reviews ]
+  filterable labels: {
+    order: {
+      status: 'status', title: 'título', brand: 'marca', category: 'categoría', price: 'precio', key_code: 'código', created_at: 'creación', updated_at: 'modificación'
+    },
+    scopes: {
+      status: {draft: 'borrador', active: 'activa', paused: 'pausada'},
+      special: {is_regular: 'sin marca', is_new: 'nuevo', is_offer: 'oferta'}
+    }
   }
 
-  enum status: [ :draft, :active, :paused, :trash ]
+  enum status: [ :draft, :active, :paused ]
   enum special: [ :is_regular, :is_new, :is_offer ]
   enum currency: [ '$', 'u$s' ]
 

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include Filterize
   before_action :filterize, only: :products
-  filterize_default object: :product, order: :price_asc, scope: :active
+  filterize object: :product, order: :price_asc, scope: :active
   layout 'soon', only: :soon
   
   def home

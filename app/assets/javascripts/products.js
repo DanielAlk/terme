@@ -66,6 +66,7 @@ Products.show = function() {
 	  $this.tooltip('destroy');
 	  $this.attr('title', is_active ? 'Pausar' : 'Activar');
 	  $this.tooltip();
+	  $('#product_page_link')[(is_active ? 'remove' : 'add') + 'Class']('hidden');
 	  $('#product_active_toggler_update')
 	  .text(is_active ? 'Activa' : 'Pausada')
 	  .removeClass('label-success label-danger label-info')

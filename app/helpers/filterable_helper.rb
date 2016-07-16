@@ -9,41 +9,63 @@ module FilterableHelper
 		response
 	end
 
-	def filterable_select(collection, option, scoped = false)
+	def filterable_html_option(content, value, *args)
+		'<option '+ (filterable(*args) == value ? 'selected' : '') +' data-content="' + content + '" value="' + value + '"></option>'
+	end
+
+	def filterable_select(collection, option, parameter = false)
 		return nil if (options = collection.filterable_options[option.to_sym]).blank?
 		response = ''
 		case option.to_sym
-		when :order
-			options.each do |o|
-				if (label = collection.filterable_labels[:order]).present? && (label = label[o]).present?
-					content = label
+		when :joins
+			options.each do |column|
+				value = column.to_s
+				if (label = collection.filterable_options[:labels][:joins]).present? && (label = label[column]).present?
+					content = label.capitalize
 				else
-					content = o.to_s.capitalize
+					content = value.capitalize
 				end
-				response += '<option '+ (filterable(:order) == o.to_s + '_asc' ? 'selected' : '') +' data-content="' + content + ' &darr;" value="' + o.to_s + '_asc"></option>'
-				response += '<option '+ (filterable(:order) == o.to_s + '_desc' ? 'selected' : '') +' data-content="' + content + ' &uarr;" value="' + o.to_s + '_desc"></option>'
+				response += filterable_html_option(content, value, :joins)
+			end
+		when :order
+			options.each do |column|
+				value = column.to_s
+				if (label = collection.filterable_options[:labels][:order]).present? && (label = label[column]).present?
+					content = label.capitalize
+				else
+					content = value.capitalize
+				end
+				response += filterable_html_option(content + ' <i class=\'fa fa-angle-down fa-fw\'></i>', value + '_asc', :order)
+				response += filterable_html_option(content + ' <i class=\'fa fa-angle-up fa-fw\'></i>', value + '_desc', :order)
 			end
 		when :scopes
-			column = collection.column_names.include?(scoped.to_s) ? scoped.to_s : false
-			column = !column && collection.column_names.include?(scoped.to_s + '_id') ? scoped.to_s + '_id' : scoped.to_s
-			if column.present?
-				collection.name.constantize.select(column).distinct.each do |d|
-					value = d[column].to_s
-					if collection.name.constantize.respond_to?(scoped.to_s.pluralize)
-						id = value
-						value = collection.name.constantize.public_send(scoped.to_s.pluralize).keys[value.to_i]
-					elsif collection.column_names.include?(scoped.to_s + '_id')
-						id = value
-						record = scoped.to_s.capitalize.constantize.find(id.to_i)
-						value = record.respond_to?(:name) ? record.name : record.title
-					else
-						id = value
-					end
-					if (labels = collection.filterable_labels[:scopes]).present? && (labels = labels[scoped.to_sym]).present?
-						value = labels[value.to_sym].to_s
-					end
-					response += '<option '+ (filterable(:scopes, scoped) == id ? 'selected' : '') +' data-content="' + value + '" value="' + id + '"></option>'
+			object = collection.name.constantize
+			column_names = collection.column_names
+			is_belongs_to = column_names.include?(parameter.to_s + '_id')
+			column_name = is_belongs_to ? parameter.to_s + '_id' : parameter.to_s
+			scope_name = parameter.to_s.pluralize
+			labels = collection.filterable_options[:labels][:scopes][parameter] rescue nil
+			select_options = []
+			if object.respond_to?(scope_name) #its enum
+				object.public_send(scope_name).each do |key, value|
+					content = (labels[key.to_sym] || key).to_s.capitalize
+					value = value.to_s
+					select_options << [content, value]
 				end
+			elsif column_name.present? #its a column
+				object.select(column_name).distinct.each do |member|
+					value = member[column_name].to_s
+					if is_belongs_to
+						record = parameter.to_s.capitalize.constantize.find(value.to_i)
+						content = (record.respond_to?(:name) ? record.name : record.title).to_s
+					else
+						content = value.to_s
+					end
+					select_options << [content, value]
+				end
+			end
+			select_options.each do |content, value|
+				response += filterable_html_option(content, value, :scopes, parameter)
 			end
 		end
 		response.html_safe

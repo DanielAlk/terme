@@ -3,7 +3,6 @@ module Filterable
   
   module ClassMethods
     attr_reader :filterable_options
-    attr_reader :filterable_labels
 
     def fsearch(search_string)
     	options = filterable_options[:search]
@@ -37,7 +36,9 @@ module Filterable
 	  		results = results.where(s_arguments)
 	  	end
 	  	arguments = {};
-	  	arguments[property] = min.to_i..max.to_i
+	  	arguments[property] = min.to_i..max.to_i if min.present? && max.present?
+	  	arguments[property] = min.to_i..(1.0 / 0.0) if min.present? && max.blank?
+	  	arguments[property] = 0..max.to_i if min.blank? && max.present?
 	  	results.where(arguments)
 	  end
 
@@ -47,13 +48,6 @@ module Filterable
 	    		@filterable_options = options
 	    	else
 	    		@filterable_options = @filterable_options.merge(options)
-	    	end
-	    end
-	    def filterable_labels(options={})
-	    	if @filterable_labels.blank?
-	    		@filterable_labels = options
-	    	else
-	    		@filterable_labels = @filterable_labels.merge(options)
 	    	end
 	    end
   end

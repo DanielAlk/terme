@@ -19,13 +19,10 @@
 				  <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
 				  <i class="updated fa fa-fw fa-<%= product.is_new? ? 'flag' : 'flag-o' %>" aria-hidden="true"></i>
 				<% end %>
-				<%= link_to product, title: 'Ver', class: 'btn btn-success tooltip-trigger' do %>
-					<i class="fa fa-external-link fa-fw" aria-hidden="true"></i>
-				<% end %>
-				<%= link_to edit_product_path(product), title: 'Editar', class: 'btn btn-warning tooltip-trigger' do %>
+				<%= link_to edit_product_path(product), title: 'Editar', class: 'btn btn-success tooltip-trigger' do %>
 				  <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
 				<% end %>
-				<%= link_to clone_product_path(product), title: 'Duplicar', method: :post, class: 'btn btn-info tooltip-trigger disable-after-click' do %>
+				<%= link_to clone_product_path(product), title: 'Duplicar', method: :post, class: 'btn btn-primary tooltip-trigger disable-after-click' do %>
 				  <i class="disabled fa fa-spinner fa-pulse fa-fw"></i>
 				  <i class="enabled fa fa-files-o fa-fw" aria-hidden="true"></i>
 				<% end %>
