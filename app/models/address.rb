@@ -1,7 +1,7 @@
-class UserAddress < ActiveRecord::Base
-  belongs_to :user
+class Address < ActiveRecord::Base
+  belongs_to :addressable, polymorphic: true
   belongs_to :zone
-  acts_as_list scope: :user
+  acts_as_list scope: :addressable
 
   validates_length_of :address, minimum: 10, message: "debe contener al menos 10 caracteres"
   validates_presence_of :email

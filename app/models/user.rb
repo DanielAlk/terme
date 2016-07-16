@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :user_addresses, -> { order(position: :asc) }, :dependent => :destroy
+  has_many :addresses, -> { order(position: :asc) }, :as => :addressable, :dependent => :destroy
   has_many :reviews, :as => :reviewer, :dependent => :destroy
 
 	def name(option = nil)
@@ -20,10 +20,6 @@ class User < ActiveRecord::Base
 		else
 			self.email[/[^@]+/]
 		end
-	end
-
-	def addresses
-		user_addresses.map &:address
 	end
 
 end

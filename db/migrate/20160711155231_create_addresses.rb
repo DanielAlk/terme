@@ -1,8 +1,8 @@
-class CreateUserAddresses < ActiveRecord::Migration
+class CreateAddresses < ActiveRecord::Migration
   def change
-    create_table :user_addresses do |t|
+    create_table :addresses do |t|
       t.string :address
-      t.references :user, index: true, foreign_key: true
+      t.references :addressable, polymorphic: true, index: true
       t.string :email
       t.string :fname
       t.string :lname

@@ -13,6 +13,26 @@
 
 ActiveRecord::Schema.define(version: 20160712040241) do
 
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address",          limit: 255
+    t.integer  "addressable_id",   limit: 4
+    t.string   "addressable_type", limit: 255
+    t.string   "email",            limit: 255
+    t.string   "fname",            limit: 255
+    t.string   "lname",            limit: 255
+    t.string   "company",          limit: 255
+    t.string   "zip_code",         limit: 255
+    t.string   "city",             limit: 255
+    t.string   "mobile",           limit: 255
+    t.integer  "zone_id",          limit: 4
+    t.integer  "position",         limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+  add_index "addresses", ["zone_id"], name: "index_addresses_on_zone_id", using: :btree
+
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",        null: false
     t.string   "profile",                limit: 255, default: "regular", null: false
@@ -130,25 +150,6 @@ ActiveRecord::Schema.define(version: 20160712040241) do
 
   add_index "tags", ["slug"], name: "index_tags_on_slug", unique: true, using: :btree
 
-  create_table "user_addresses", force: :cascade do |t|
-    t.string   "address",    limit: 255
-    t.integer  "user_id",    limit: 4
-    t.string   "email",      limit: 255
-    t.string   "fname",      limit: 255
-    t.string   "lname",      limit: 255
-    t.string   "company",    limit: 255
-    t.string   "zip_code",   limit: 255
-    t.string   "city",       limit: 255
-    t.string   "mobile",     limit: 255
-    t.integer  "zone_id",    limit: 4
-    t.integer  "position",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "user_addresses", ["user_id"], name: "index_user_addresses_on_user_id", using: :btree
-  add_index "user_addresses", ["zone_id"], name: "index_user_addresses_on_zone_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "fname",                  limit: 255
     t.string   "lname",                  limit: 255
@@ -176,8 +177,7 @@ ActiveRecord::Schema.define(version: 20160712040241) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "addresses", "zones"
   add_foreign_key "products", "categories"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "user_addresses", "users"
-  add_foreign_key "user_addresses", "zones"
 end

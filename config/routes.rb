@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       passwords: 'users/passwords'
     }
 
-    resources :user_addresses, path: 'profile/direcciones'
+    resources :addresses, path: 'profile/direcciones'
     resources :reviews, path: 'profile/reviews'
   end
 

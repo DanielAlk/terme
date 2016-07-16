@@ -1,14 +1,14 @@
 <% content_for :extra_js do %>
-  $('form#new_user_address, form#edit_user_address').validate();
+  $('form#new_address, form#edit_address').validate();
 <% end %>
 
-<%= form_for(@user_address) do |f| %>
-  <% if @user_address.errors.any? %>
+<%= form_for(@address) do |f| %>
+  <% if @address.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user_address.errors.count, "error") %> no permite crear esta dirección:</h2>
+      <h2><%= pluralize(@address.errors.count, "error") %> no permite crear esta dirección:</h2>
 
       <ul>
-      <% @user_address.errors.full_messages.each do |message| %>
+      <% @address.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -16,7 +16,8 @@
   <% end %>
 
   <div class="hidden">
-    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :addressable_id %>
+    <%= f.hidden_field :addressable_type %>
   </div>
   <div class="field">
     <%= f.label :address, 'Dirección' %><br>
@@ -55,7 +56,7 @@
   <div class="field">
     <% zones = Zone.roots.map { |z| [z.title, z.id] } %>
     <%= f.label :zone_id, 'Provincia' %><br>
-    <%= f.select :zone_id, options_from_collection_for_select(Zone.roots, :id, :title, @user_address.zone_id), {prompt: 'Seleccioná una provincia'}, required: true %>
+    <%= f.select :zone_id, options_from_collection_for_select(Zone.roots, :id, :title, @address.zone_id), {prompt: 'Seleccioná una provincia'}, required: true %>
   </div>
   <div class="field">
     <%= f.label :mobile, 'Teléfono Celular' %><br>

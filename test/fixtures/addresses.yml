@@ -2,7 +2,8 @@
 
 one:
   address: MyString
-  user_id: 
+  addressable_id: 
+  addressable_type: Addressable
   email: MyString
   fname: MyString
   lname: MyString
@@ -11,10 +12,12 @@ one:
   city: MyString
   mobile: MyString
   zone_id: 
+  position: 1
 
 two:
   address: MyString
-  user_id: 
+  addressable_id: 
+  addressable_type: Addressable
   email: MyString
   fname: MyString
   lname: MyString
@@ -23,3 +26,4 @@ two:
   city: MyString
   mobile: MyString
   zone_id: 
+  position: 1

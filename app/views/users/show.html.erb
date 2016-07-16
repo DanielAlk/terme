@@ -1,4 +1,4 @@
-<% content_for :panel_subtitle, 'Editar Usuario' %>
+<% content_for :panel_subtitle, 'Usuario' %>
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -60px;">
   <%= link_to users_path, title: 'Listado', class: 'btn btn-success tooltip-trigger' do %>
@@ -14,14 +14,18 @@
   <% end %>
 </div>
 
+<h3 style="margin-top:0;"><%= @user.name %></h3>
+
 <div id="tabs-container" style="margin-top: 20px;">
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
       <a href="#data_tab" aria-controls="data_tab" role="tab" data-toggle="tab">Datos</a>
     </li>
-    <li role="presentation">
-      <a href="#addresses_tab" aria-controls="addresses_tab" role="tab" data-toggle="tab">Direcciones</a>
-    </li>
+    <% if @user.addresses.present? %>
+      <li role="presentation">
+        <a href="#addresses_tab" aria-controls="addresses_tab" role="tab" data-toggle="tab">Direcciones</a>
+      </li>
+    <% end %>
     <% if @user.reset_password_sent_at.present? && @user.reset_password_sent_at > @user.current_sign_in_at %>
       <li role="presentation">
         <a href="#reports_tab" aria-controls="reports_tab" role="tab" data-toggle="tab">Reportes</a>
@@ -38,6 +42,10 @@
           <%= @user.name %><br>
           <strong>Email:</strong>
           <%= @user.email %><br>
+          <% if @user.addresses.present? %>
+            <strong>Dirección principal:</strong>
+            <%= @user.addresses.first.address %><br>
+          <% end %>
           <strong>Ultima conexión:</strong>
           <%= @user.current_sign_in_at.strftime('%d de %h de %Y a las %r') %><br>
           <strong>Desde IP:</strong>
@@ -45,13 +53,15 @@
         </p>
       </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="addresses_tab">
-      <div class="panel-group" role="tablist" id="group-root" style="margin-top:10px;">
-        <% @user.user_addresses.each do |user_address| %>
-          <%= render 'user_address', user_address: user_address %>
-        <% end %>
+    <% if @user.addresses.present? %>
+      <div role="tabpanel" class="tab-pane" id="addresses_tab">
+        <div class="panel-group" role="tablist" id="group-root" style="margin-top:10px;">
+          <% @user.addresses.each do |address| %>
+            <%= render 'address', address: address %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <% if @user.reset_password_sent_at.present? && @user.reset_password_sent_at > @user.current_sign_in_at %>
       <div role="tabpanel" class="tab-pane" id="reports_tab">
         <div class="well">
