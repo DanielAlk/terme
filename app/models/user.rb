@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
   has_many :addresses, -> { order(position: :asc) }, :as => :addressable, :dependent => :destroy
   has_many :reviews, :as => :reviewer, :dependent => :destroy
 
+  def cart_count
+    $redis.scan_each(match: "cart:#{id}:*").to_a.uniq.count
+  end
+
+  def cart(product_id = '*')
+  	"cart:#{id}:#{product_id}"
+  end
+
 	def name(option = nil)
 		if self.fname.present? && self.lname.present?
 			case option.to_s.to_sym

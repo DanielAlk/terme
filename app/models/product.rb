@@ -50,6 +50,13 @@ class Product < ActiveRecord::Base
     self.images.first.item.url(size) rescue "product-imgs/p-#{size}.jpg"
   end
 
+  def stock
+    quantities = []
+    carts = $redis.scan_each(match: "cart:*:#{id}").to_a.uniq
+    quantities = carts.map { |c| $redis.get(c).to_i }
+    self[:stock] - quantities.sum
+  end
+
   def score
     score = 0
     reviews.each do |review|

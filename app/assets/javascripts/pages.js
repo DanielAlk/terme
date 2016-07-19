@@ -119,9 +119,9 @@ Pages.quantityPicker = function(stock) {
 	var $el = $('.qty');
 	var change = function(amt) {
     var val = parseInt($el.val(),10) + amt;
-    val = val > 0 ? val : $el.val();
+    val = val >= 0 ? val : $el.val();
     val = val <= stock ? val : stock;
-    val = !!Number(val) ? val : 1;
+    val = !!Number(val) ? val : 0;
     $el.val(val);
   };
   var keydownHandler = function(e) {
