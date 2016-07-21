@@ -57,6 +57,11 @@ class Product < ActiveRecord::Base
     self[:stock] - quantities.sum
   end
 
+  def stock_available_to_user(user_id)
+    quantity = $redis.get "cart:#{user_id}:#{id}"
+    self.stock + quantity.to_i
+  end
+
   def score
     score = 0
     reviews.each do |review|

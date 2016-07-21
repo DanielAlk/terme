@@ -36,7 +36,6 @@ Pages.products = function() {
 
 Pages.product = function(product) {
 	AriaProductInit();
-	Pages.quantityPicker(product.stock);
 	$('#star_' + product.score).click();
 	$('.rating input').click(function(e) {
 	  e.preventDefault();
@@ -113,31 +112,4 @@ Pages.carousel = function() {
 	      0:{ items:1}
 	  }
 	});
-};
-
-Pages.quantityPicker = function(stock) {
-	var $el = $('.qty');
-	var change = function(amt) {
-    var val = parseInt($el.val(),10) + amt;
-    val = val >= 0 ? val : $el.val();
-    val = val <= stock ? val : stock;
-    val = !!Number(val) ? val : 0;
-    $el.val(val);
-  };
-  var keydownHandler = function(e) {
-    switch(e.which) {
-      case 38: change(1); break;
-      case 40: change(-1); break;
-      case 37: case 39: case 16: case 17: case 18: case 8: case 13: case 46: break;
-      default: if (!Number(String.fromCharCode(e.which)) && Number(String.fromCharCode(e.which)) != 0) e.preventDefault();
-    };
-  };
-  var focusoutHandler = function(e) {
-    if (!Number($el.val())) $el.val(1);
-    if (Number($el.val()) > stock) $el.val(stock);
-  };
-  $('#quantity .mas').click(function() { change(1); });
-  $('#quantity .menos').click(function() { change( -1 ); });
-  $('#quantity').disableSelection();
-  $el.keydown(keydownHandler).focusout(focusoutHandler);
 };

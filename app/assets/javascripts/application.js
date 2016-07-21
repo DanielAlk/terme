@@ -23,5 +23,5 @@
 //= require acciones_aria
 //= require acciones_aria_productView
 //= require alerts
-//= require cart
 //= require pages
+//= require cart

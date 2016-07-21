@@ -44,11 +44,12 @@ Rails.application.routes.draw do
 
     resources :addresses, path: 'profile/direcciones'
     resources :reviews, path: 'profile/reviews'
-  end
 
-  resource :cart, :defaults => { :format => :json }, only: [:show] do
-    put 'add', to: 'carts#add', as: :add_to
-    put 'remove', to: 'carts#remove', as: :remove_from
+    resource :cart, :defaults => { :format => :json }, only: [:show] do
+      get 'stock', to: 'carts#stock', as: :product_stock
+      put 'add', to: 'carts#add', as: :add_to
+      put 'remove', to: 'carts#remove', as: :remove_from
+    end
   end
 
   root 'pages#home'
