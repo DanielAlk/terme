@@ -24,27 +24,25 @@
       <div class="col-left">
         <form>
           <div class="tabla-product">
-            <% if @cart[:products].present? %>
-              <table class="carrito-tabla">
-                <thead>
-                  <tr>
-                    <th>&nbsp;</th>
-                    <th>Producto</th>
-                    <th class="right">Precio</th>
-                    <th class="center">Cantidad</th>
-                    <th class="right">Subtotal</th>
-                    <th>&nbsp;</th>
-                  </tr>
-                </thead>
-                <tbody>
+            <table class="carrito-tabla" id="cartTable">
+              <thead>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>Producto</th>
+                  <th class="right">Precio</th>
+                  <th class="center">Cantidad</th>
+                  <th class="right">Subtotal</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @cart[:products].present? %>
                   <% @cart[:products].each do |product| %>
                     <%= render 'products/cart', product: product %>
                   <% end %>
-                </tbody>
-              </table>
-            <% else %>
-              <div>Tu carrito de compras está vacío.</div>
-            <% end %>
+                <% end %>
+              </tbody>
+            </table>
             <% if false %>
               <div class="cupon-btn">
                 <div class="cupon-descuento">

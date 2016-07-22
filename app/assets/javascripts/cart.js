@@ -22,12 +22,12 @@ Cart.addButton = function() {
 };
 
 Cart.checkChanges = function(cart) {
-	if (!!Cart.product && !!Cart.cart) {
+	if (!!Cart.doAlertExpire) Alerts.danger('El producto: <b>' + Cart.doAlertExpire.title + '</b> ya no está tu carrito.<br>Han pasado los 10 minutos.');
+	else if (!!Cart.product && !!Cart.cart) {
 		if (!cart.items || !cart.items[Cart.product.id]) {
 			$('#quantity_input').val(0);
 			if (!!Cart.cart.items && !!Cart.cart.items[Cart.product.id]) {
-				if (!!Cart.doAlertExpire) Alerts.danger('El producto: <b>' + Cart.doAlertExpire.title + '</b> ya no está tu carrito.<br>Han pasado los 10 minutos.');
-				else Alerts.danger('Se eliminó el producto del carrito');
+				Alerts.danger('Se eliminó el producto del carrito');
 			}
 		};
 	};
@@ -47,6 +47,7 @@ Cart.update = function() {
 	.done(Cart.startTimers)
 	.done(Cart.updateHeader)
 	.done(Cart.updateProductPage)
+	.done(Cart.updateCartPage)
 	.done(Cart.log);
 };
 
@@ -94,8 +95,41 @@ Cart.updateProductPage = function(cart) {
 	$('#quantity_input').val(item.quantity);
 };
 
+Cart.updateCartPage = function(cart) {
+	var $table = $('table#cartTable');
+	if (!$table.length) return;
+	var $counters = $('[data-expires]');
+	var $rows = $table.find('tbody tr');
+	if (!Cart.cart.items) {
+		$rows.fadeOut(function() { $rows.remove(); });
+		$table.find('thead').hide();
+		$table.find('tbody').append($('<div>', { text: 'Tu carrito de compras está vacio.' }));
+	}	else $rows.each(function() {
+		var $row = $(this);
+		var id = $row.attr('id').replace('product-', '');
+		if (!Cart.cart.items[id]) $row.fadeOut(function() { $row.remove(); });
+	});
+	$counters.each(Cart.counter);
+};
+
+Cart.counter = function() {
+	if ($(this).data('cart-counter')) return;
+	var $counter = $(this);
+	var expires = $counter.data('expires');
+	var minutes, seconds;
+	var second = function() {
+		expires -= 1;
+		minutes = Math.floor(expires / 60);
+		seconds = expires - (minutes * 60);
+		if (seconds < 10) seconds = '0' + seconds;
+		$counter.text(minutes + ':' + seconds);
+	};
+	setInterval(second, 1000);
+	$counter.data('cart-counter', true);
+};
+
 Cart.getProduct = function(id) {
-	if (!Cart.product || !Cart.cart || !Cart.cart.products) return false;
+	if (!Cart.cart || !Cart.cart.products) return false;
 	var product;
 	Cart.cart.products.forEach(function(p) {
 		if (p.id == id) product = p;

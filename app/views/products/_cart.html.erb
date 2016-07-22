@@ -18,5 +18,16 @@
   	<span class="mas">&#62;</span>
   </td>
   <td class="subtotal-product"><%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %></td>
-  <td class="borrar-product"><span>X</span></td>
+  <td class="borrar-product">
+  	<span>X</span>
+  	<div class="cart-product-expiration">
+	  	<% seconds = @cart[:items][product.id.to_s][:expires_in] %>
+	  	<% minutes = @cart[:items][product.id.to_s][:expires_in] / 60 %>
+	  	<% seconds -= minutes * 60 %>
+	  	<% seconds = '0' + seconds.to_s if seconds < 10 %>
+	  	Tiempo restante en carrito:
+	  	<span data-expires="<%= @cart[:items][product.id.to_s][:expires_in] %>"><%= minutes.to_s + ':' + seconds.to_s %></span>
+	  	m.
+	  </div>
+  </td>
 </tr>

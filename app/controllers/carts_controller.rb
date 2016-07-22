@@ -33,7 +33,7 @@ class CartsController < ApplicationController
       quantity = product_params[:quantity].to_i > stock ? stock : product_params[:quantity].to_i
       if quantity > 0
         $redis.set current_user.cart(product_params[:id]), quantity
-        $redis.expire current_user.cart(product_params[:id]), 600 #expire in 10 minutes
+        $redis.expire current_user.cart(product_params[:id]), 60 #expire in 10 minutes
       end
       render json: current_user.cart_count, status: 200
     end

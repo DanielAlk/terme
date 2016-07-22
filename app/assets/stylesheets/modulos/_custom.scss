@@ -33,3 +33,12 @@
 .modal-header { text-align: center; font-size: 20px; color: #707070; text-transform: uppercase; font-family: Aria-Demi; letter-spacing: 0.04em; line-height: 42px;
 	.close { position: absolute; right: 0; top: 0; margin: 10px; }
 }
+
+td.borrar-product {
+	@media(min-width: 761px) {
+		position: relative;
+	}
+}
+.cart-product-expiration { position: absolute; white-space: nowrap; right: 0; bottom: 50px; color: #727272; font-weight: 300;
+	&>span {font-weight: 400;}
+}
