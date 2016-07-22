@@ -8,6 +8,7 @@ Modals.init = function() {
 		var $form = $(this).find('form');
 		if ($form.length) $form.get(0).reset();
 	});
+	$(document).on('click', '[data-util=modal]', Modals.customFunction);
 };
 
 Modals.contextForm = function(modalId, prefix) {
@@ -25,6 +26,25 @@ Modals.contextForm = function(modalId, prefix) {
 	};
 	$modal.on('show.bs.modal', onShow);
 	$form.validate();
+};
+
+Modals.customFunction = function(e) {
+	e.preventDefault();
+	var $trigger = $(this);
+	var $target = $($trigger.attr('href'));
+	var closeModal = function(e) {
+		e.preventDefault();
+		$(this).off('click', closeModal);
+		$('body').removeAttr('style');
+		$target.fadeOut(function() {
+			$target.removeClass('in').trigger('hidden.bs.modal');
+		});
+	};
+	$target.fadeIn(function() {
+		$target.addClass('in').trigger('shown.bs.modal');
+		$target.find('.close').click(closeModal);
+	});
+	$('body').css('overflow', 'hidden');
 };
 
 $(Modals.init);

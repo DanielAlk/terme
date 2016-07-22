@@ -1,0 +1,22 @@
+<tr id="<%= "product-#{product.id}" %>" data-stock="<%= product.stock_available_to_user(current_user.id) %>">
+	<td class="img-pruduct">
+		<%= link_to product_page_path(product) do %>
+			<%= image_tag product.image %>
+		<% end %>
+	</td>
+  <td class="nombre-product">
+  	<h3 class="product-name"><%= link_to product.title, product_page_path(product), style: 'color:inherit;' %></h3>
+  	<div class="descripcion"><%= product.characteristics[0...200] %></div>
+  	<% if false %>
+	    <div class="compartir"> <a href="#" class="facebook"> Facebook </a> <a href="#" class="twitter"> Twitter </a> </div>
+    <% end %>
+  </td>
+  <td class="precio-product"><%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %></td>
+  <td class="cantidad-product">
+  	<span class="menos">&#60;</span>
+  	<input type="text" class="qty" name="cantidad" value="<%= @cart[:items][product.id.to_s][:quantity] %>"/>
+  	<span class="mas">&#62;</span>
+  </td>
+  <td class="subtotal-product"><%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %></td>
+  <td class="borrar-product"><span>X</span></td>
+</tr>

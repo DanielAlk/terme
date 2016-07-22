@@ -110,7 +110,7 @@
                 <% if user_signed_in? %>
                   <%= link_to 'Agregar al Carrito', add_to_cart_path, id: 'cart-add' %>
                 <% else %>
-                  <%= link_to 'Agregar al Carrito', new_user_session_path %>
+                  <%= link_to 'Agregar al Carrito', '#modal-login', data: { util: 'modal' } %>
                 <% end %>
               </div>
               <div class="compartir-product" style="display:none;">

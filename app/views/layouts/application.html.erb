@@ -11,6 +11,7 @@
 	<%= render 'layouts/navigation' %>
 	<%= yield %>
 	<%= render 'layouts/footer' %>
+	<%= render 'partials/user_modals' unless user_signed_in? %>
 	<script>
 		$(function() {
 			AriaInit();

@@ -11,7 +11,7 @@
   <div class="content-info">
     <div class="breadcrumbs">
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="<%= root_path %>">Home</a></li>
         <li>Carrito</li>
       </ul>
     </div>
@@ -24,53 +24,39 @@
       <div class="col-left">
         <form>
           <div class="tabla-product">
-            <table class="carrito-tabla">
-              <thead>
-                <tr>
-                  <th>&nbsp;</th>
-                  <th>Producto</th>
-                  <th class="right">Precio</th>
-                  <th class="center">Cantidad</th>
-                  <th class="right">Subtotal</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="producto01">
-                  <td class="img-pruduct"><a href="#"> <img src="<%= asset_path 'product-imgs/product_001_thumb.jpg' %>" alt="Producto Nombre"> </a></td>
-                  <td class="nombre-product"><h3 class="product-name">CARRIER NEXGEN F/C 2300 Kcal</h3>
-                    <div class="descripcion"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </div>
-                    <div class="compartir"> <a href="#" class="facebook"> Facebook </a> <a href="#" class="twitter"> Twitter </a> </div></td>
-                  <td class="precio-product"> $. 7.749,50 </td>
-                  <td class="cantidad-product"><span class="menos">&#60;</span>
-                    <input type="text" class="qty" name="cantidad" value="1"/>
-                    <span class="mas">&#62;</span></td>
-                  <td class="subtotal-product"> $. 7.749,50 </td>
-                  <td class="borrar-product"><span>X</span></td>
-                </tr>
-                <tr class="producto02">
-                  <td class="img-pruduct"><a href="#"> <img src="<%= asset_path 'product-imgs/product_001_thumb.jpg' %>" alt="Producto Nombre"> </a></td>
-                  <td class="nombre-product"><h3 class="product-name">CARRIER NEXGEN F/C 2300 Kcal</h3>
-                    <div class="descripcion"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </div>
-                    <div class="compartir"> <a href="#" class="facebook"> Facebook </a> <a href="#" class="twitter"> Twitter </a> </div></td>
-                  <td class="precio-product"> $. 7.749,50 </td>
-                  <td class="cantidad-product"><span class="menos2">&#60;</span>
-                    <input type="text" class="qty" name="cantidad" value="1"/>
-                    <span class="mas2">&#62;</span></td>
-                  <td class="subtotal-product"> $. 7.749,50 </td>
-                  <td class="borrar-product"><span>X</span></td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="cupon-btn">
-              <div class="cupon-descuento">
-                <label>Tenés un Cupon?</label>
-                <input type="text" placeholder="Insertar Código">
+            <% if @cart[:products].present? %>
+              <table class="carrito-tabla">
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    <th>Producto</th>
+                    <th class="right">Precio</th>
+                    <th class="center">Cantidad</th>
+                    <th class="right">Subtotal</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @cart[:products].each do |product| %>
+                    <%= render 'products/cart', product: product %>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <div>Tu carrito de compras está vacío.</div>
+            <% end %>
+            <% if false %>
+              <div class="cupon-btn">
+                <div class="cupon-descuento">
+                  <label>Tenés un Cupon?</label>
+                  <input type="text" placeholder="Insertar Código">
+                </div>
+                <div class="btn-actualizar">
+                  <input type="submit" value="Actualizar Carrito">
+                  <a href="#" class="comprar">o seguir comprando</a>
+                </div>
               </div>
-              <div class="btn-actualizar">
-                <input type="submit" value="Actualizar Carrito">
-                <a href="#" class="comprar">o seguir comprando</a> </div>
-            </div>
+            <% end %>
           </div>
         </form>
       </div>
@@ -78,17 +64,21 @@
         <h2>REVISA TU ORDEN</h2>
         <div class="resumen">
           <div class="label items">tu carrito</div>
-          <div class="item right">2 Items</div>
+          <div class="item right"><%= pluralize(@cart[:count], 'item') %></div>
           <div class="label envios"> <span class="link">Costos de Envío</span>
             <ul class="lista-envios">
-              <li> <a href="#">
-                <div class="ciudad">CAPITAL - GBA</div>
-                <div class="costo">$200</div>
-                </a> </li>
-              <li> <a href="#">
-                <div class="ciudad">INTERIOR DEL PAIS</div>
-                <div class="costo">$600</div>
-                </a> </li>
+              <li class="active">
+                <a href="#">
+                  <div class="ciudad">CAPITAL - GBA</div>
+                  <div class="costo">$200</div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="ciudad">INTERIOR DEL PAIS</div>
+                  <div class="costo">$600</div>
+                </a>
+              </li>
             </ul>
           </div>
           <div class="envio right">$200</div>
@@ -96,98 +86,9 @@
           <div class="total right">$14,824.50</div>
         </div>
         <div class="action">
-          <button class="checkout"> CHECKOUT </button>
+          <a class="checkout"> CHECKOUT </a>
         </div>
       </div>
-    </section>
-    <section class="relacionados">
-      <h2>Productos Relacionados</h2>
-      <ul id="relacionados" class="carrusel owl-carousel">
-        <li>
-          <div class="caja-producto">
-            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
-            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
-            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="img-product"> <a href="#" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="img-product"> <a href="#" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="cucarda oferta"> <span class="triangulo"></span> <span class="txt">Oferta</span> </div>
-            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-1.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="cucarda"> <span class="triangulo"></span> <span class="txt">Nuevo</span> </div>
-            <div class="img-product"> <a href="#" title="Producto 1"> <img src="<%= asset_path 'productos/product-2.jpg' %>" alt="Producto 1" title="Producto 1"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="img-product"> <a href="#" title="Producto 3"> <img src="<%= asset_path 'productos/product-3.jpg' %>" alt="Producto 3" title="Producto 3"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="caja-producto">
-            <div class="img-product"> <a href="#" title="Producto 4"> <img src="<%= asset_path 'productos/product-4.jpg' %>" alt="Producto 4" title="Producto 4"> </a> </div>
-            <div class="producto-info">
-              <div class="tipo-product">Split Piso Techo</div>
-              <div class="nombre-product"> <a href="#"> CARRIER 53ERQ ELITE – R410A ERQ ELITE – R410A </a> </div>
-              <div class="precio-product">US$ 2.458,27</div>
-            </div>
-          </div>
-        </li>
-      </ul>
     </section>
     <div class="socialmedia-bottom">
       <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
