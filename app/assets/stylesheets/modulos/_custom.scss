@@ -1,0 +1,16 @@
+.alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; font-size: 14px; line-height: 1.428; }
+.alert-dismissable, .alert-dismissible { padding-right: 35px; }
+.alert-success { background-color: #dff0d8; border-color: #d6e9c6; color: #3c763d; }
+.alert-danger { background-color: #f2dede; border-color: #ebccd1; color: #a94442; }
+.alert-dismissible { position: fixed; top: 0; right: 0; z-index: 999999; margin: 10px; opacity: 0.93; max-width: calc(100% - 20px);
+	button.close{ 
+		padding: 0; position: relative; margin: 0; top: -2px;
+		right: -21px; color: inherit; font-family: 'roboto', sans-serif; text-transform: none;
+		-webkit-appearance: none; background: transparent; border: 0; cursor: pointer; float: right;
+		font-size: 21px; font-weight: bold; line-height: 1; color: #000;
+		text-shadow: 0 1px 0 #fff; opacity: 0.2; filter: alpha(opacity=20);
+	}
+}
+@media (min-width: 768px) {
+	div.alert-dismissible { white-space: nowrap; }
+}

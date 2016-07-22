@@ -11,6 +11,10 @@
   <script type="application/json" id="productJSON">
     <%= { id: @product.id, stock: @product.stock_available_to_user(current_user.id) }.to_json.html_safe %>
   </script>
+<% else %>
+  <script type="application/json" id="productJSON">
+    <%= { id: @product.id, stock: @product.stock_available }.to_json.html_safe %>
+  </script>
 <% end %>
 
 <div class="slider">
@@ -96,7 +100,7 @@
           <div class="separador"></div>
           <div class="agregar-carrito">
             <form>
-              <div class="cantidad" id="quantity" style="<%= 'opacity:0;' unless user_signed_in? %>">
+              <div class="cantidad" id="quantity">
                 <label >Catidad en carrito:</label>
                 <span class="menos">-</span>
                 <input type="text" class="qty" id="quantity_input" name="cantidad" value="0" autocomplete="off"/>

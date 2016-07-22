@@ -74,28 +74,30 @@
             <li><a href="<%= contact_page_path %>">Contacto</a></li>
           </ul>
         </nav>
-        <% if user_signed_in? %>
-          <div class="carrito" title="Carrit Aria">
-            <div class="cantidad cart_count"></div>
-          </div>
-          <!-- Carrito Header -->
-          <div class="header-cart">
-            <div class="cerrar"> <span class="line1"></span> <span class="line2"></span> </div>
+        <div class="carrito" title="Carrit Aria">
+          <div class="cantidad cart_count">0</div>
+        </div>
+        <!-- Carrito Header -->
+        <div class="header-cart">
+          <div class="cerrar"> <span class="line1"></span> <span class="line2"></span> </div>
+          <% if user_signed_in? %>
             <div class="user"><%= current_user.name %></div>
-            <div class="items">
-              <div class="iconcart"></div>
-              <div class="info-items">
-                <span class="price cart_price"></span>
-                <span class="canti"><i class="cart_count"></i> items</span>
-                </div>
-              <div class="editar"> <a href="#"> <span class="icon"></span> <span class="edit">editar</span> </a> </div>
-            </div>
-            <div class="acciones">
-              <div class="ver-carrito"> <a href="<%= cart_page_path %>"> ver carrito </a> </div>
-              <div class="completar"> <a href="<%= checkout_page_path %>"> completar compra </a> </div>
-            </div>
+          <% else %>
+            <div class="user">Invitado</div>
+          <% end %>
+          <div class="items">
+            <div class="iconcart"></div>
+            <div class="info-items">
+              <span class="price cart_price">$0,00</span>
+              <span class="canti"><i class="cart_count">0</i> items</span>
+              </div>
+            <div class="editar"> <a href="#"> <span class="icon"></span> <span class="edit">editar</span> </a> </div>
           </div>
-        <% end %>
+          <div class="acciones">
+            <div class="ver-carrito"> <a href="<%= cart_page_path %>"> ver carrito </a> </div>
+            <div class="completar"> <a href="<%= checkout_page_path %>"> completar compra </a> </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

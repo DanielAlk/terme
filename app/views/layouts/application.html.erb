@@ -14,9 +14,7 @@
 	<script>
 		$(function() {
 			AriaInit();
-			<% if user_signed_in? %>
-				Cart.init();
-			<% end %>
+			Cart.init(<%= user_signed_in? %>);
 			<% if notice.present? %>
 				Alerts.success('<%= notice %>');
 			<% end %>

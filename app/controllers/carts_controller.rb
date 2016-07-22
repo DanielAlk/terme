@@ -17,8 +17,8 @@ class CartsController < ApplicationController
     else
       prices = []
       product_ids = items.keys.map { |id| id.sub(/cart:\d+:/, '') }
-      products = Product.select(:id, :price, :stock).find(product_ids).map do |p|
-        { id: p.id, price: p.price, stock: p.stock_available_to_user(current_user.id) }
+      products = Product.select(:id, :title, :price, :stock).find(product_ids).map do |p|
+        { id: p.id, title: p.title, price: p.price, stock: p.stock_available_to_user(current_user.id) }
       end
       price = products.sum do |product|
         product[:price] * items[product[:id].to_s][:quantity].to_i
