@@ -34,17 +34,28 @@ Modals.customFunction = function(e) {
 	var $target = $($trigger.attr('href'));
 	var closeModal = function(e) {
 		e.preventDefault();
-		$(this).off('click', closeModal);
 		$('body').removeAttr('style');
 		$target.fadeOut(function() {
 			$target.removeClass('in').trigger('hidden.bs.modal');
 		});
 	};
-	$target.fadeIn(function() {
-		$target.addClass('in').trigger('shown.bs.modal');
+	var stopPropagation = function(e) {
+		e.stopPropagation();
+	};
+	var firstTime = function() {
+		$target.data('customModal', true);
+		$target.find('.modal-content').click(stopPropagation);
 		$target.find('.close').click(closeModal);
-	});
-	$('body').css('overflow', 'hidden');
+		$target.click(closeModal);
+	};
+	var show = function() {
+		if (!$target.data('customModal')) firstTime();
+		$target.fadeIn(function() {
+			$target.addClass('in').trigger('shown.bs.modal');
+		});
+		$('body').css('overflow', 'hidden');
+	};
+	show();
 };
 
 $(Modals.init);
