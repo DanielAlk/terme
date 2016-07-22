@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  #constraints subdomain: lambda { |sd| !sd[/stage/] && !sd[/panel/] } do
-  #  get '(*soon)', to: 'pages#soon'
-  #end
+  constraints subdomain: lambda { |sd| !sd[/stage/] && !sd[/panel/] } do
+    get '(*soon)', to: 'pages#soon'
+  end
 
   constraints subdomain: /panel/ do
     get '/', to: 'panel#admin', as: :panel

@@ -2,7 +2,7 @@
 
 <% content_for :extra_js do %>
   Pages.product({
-    stock: <%= @product[:stock] %>,
+    stock: <%= @product.stock %>,
     score: <%= @product.score %>
   });
 <% end %>
@@ -76,7 +76,7 @@
             <div class="code-stock">
               <div class="sku">Código de Producto: <span><%= @product.key_code %></span></div>
               <div class="stock">
-                En stock: <span id="stock_available"><%= user_signed_in? ? @product.stock_available_to_user(current_user.id) : @product.stock %></span> u.
+                En stock: <span id="stock_available"><%= user_signed_in? ? @product.stock_available_to_user(current_user.id) : @product.stock_available %></span> u.
               </div>
             </div>
           </div>
