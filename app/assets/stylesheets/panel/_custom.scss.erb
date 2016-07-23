@@ -57,13 +57,13 @@ section.page-top { text-align: center; background-image: url(<%= asset_path 'sli
 
 @media(max-width: $screen-xs-max) {
 	.nav-xs { @include transition(right, 200ms, ease-out);
-		position: fixed !important; top: 30px; right: 100%; background: rgba(0,0,0,0.2);
+		position: fixed !important; top: 30px; right: 100%;
 		width: 100%; height: calc(100% - 30px);
 		padding: 15px !important; z-index: 1;
 		&.in { right: 0; }
 		ul.nav {
 			background-color: #FFF; margin: -15px; padding: 15px;
-			margin-top: 80px; height: calc(100% - 65px);
+			height: calc(100% + 30px);
 		}
 	}
 }
