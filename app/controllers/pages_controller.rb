@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include Cart
   include Filterize
-  before_action :authenticate_user!, only: :cart
+  before_action :authenticate_user!, only: [:cart, :checkout, :confirm]
   before_action :filterize, only: :products
   filterize object: :product, order: :price_asc, scope: :active, param: :f
   layout 'soon', only: :soon

@@ -1,9 +1,5 @@
 <% content_for :body_class, 'carrito' %>
 
-<% content_for :extra_js do %>
-  Pages.cart();
-<% end %>
-
 <div class="slider">
   <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
 </div>
@@ -62,29 +58,12 @@
         <h2>REVISA TU ORDEN</h2>
         <div class="resumen">
           <div class="label items">tu carrito</div>
-          <div class="item right"><%= pluralize(@cart[:count], 'item') %></div>
-          <div class="label envios"> <span class="link">Costos de Envío</span>
-            <ul class="lista-envios">
-              <li class="active">
-                <a href="#">
-                  <div class="ciudad">CAPITAL - GBA</div>
-                  <div class="costo">$200</div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="ciudad">INTERIOR DEL PAIS</div>
-                  <div class="costo">$600</div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="envio right">$200</div>
+          <div class="item right" id="cartItems"><%= pluralize(@cart[:count], 'item') %></div>
           <div class="label totales">TOTAL</div>
-          <div class="total right">$14,824.50</div>
+          <div class="total right" id="cartTotal"><%= @cart[:total].to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %></div>
         </div>
         <div class="action">
-          <a class="checkout"> CHECKOUT </a>
+          <a href="<%= checkout_page_path %>" class="checkout" id="cartCheckout"> CHECKOUT </a>
         </div>
       </div>
     </section>

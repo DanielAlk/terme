@@ -25,16 +25,15 @@ class CartsController < ApplicationController
   end
 
   def add
-    if product_params[:quantity] == 0 || product_params[:quantity] == '0'
+    if params[:products].present?
+      params[:products].each do |key, product|
+        add_to_cart(product[:id], product[:quantity])
+      end
+      render json: current_user.cart_count, status: 200
+    elsif product_params[:quantity] == 0 || product_params[:quantity] == '0'
       remove
     else
-      product = Product.select(:id, :stock).find(product_params[:id])
-      stock = product.stock_available_to_user(current_user.id)
-      quantity = product_params[:quantity].to_i > stock ? stock : product_params[:quantity].to_i
-      if quantity > 0
-        $redis.set current_user.cart(product_params[:id]), quantity
-        $redis.expire current_user.cart(product_params[:id]), 60 #expire in 10 minutes
-      end
+      add_to_cart(product_params[:id], product_params[:quantity])
       render json: current_user.cart_count, status: 200
     end
   end
@@ -47,5 +46,15 @@ class CartsController < ApplicationController
   private
     def product_params
       params.require(:product).permit(:id, :quantity)
+    end
+
+    def add_to_cart(product_id, quantity)
+      product = Product.select(:id, :stock).find(product_id)
+      stock = product.stock_available_to_user(current_user.id)
+      quantity = quantity.to_i > stock ? stock : quantity.to_i
+      if quantity > 0
+        $redis.set current_user.cart(product_id), quantity
+        $redis.expire current_user.cart(product_id), 600 #expire in 10 minutes
+      end
     end
 end

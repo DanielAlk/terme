@@ -67,22 +67,6 @@ Pages.product = function(product) {
 	});
 };
 
-Pages.cart = function() {
-	(function() {
-		var el = $('.producto01 .qty');
-		var change = function(amt) { el.val(parseInt(el.val(),10) + amt); };
-  	$('.mas').click(function() { change(1); });
-  	$('.menos').click(function() {change(-1); });
-  })();
-
-  (function() { 
-  	var el = $('.producto02 .qty');
-  	var change = function(amt) { el.val( parseInt( el.val(), 10 ) + amt ); };
-  	$('.mas2').click(function() { change(1); });
-  	$('.menos2').click(function() { change(-1); });
-  })();
-};
-
 Pages.carousel = function() {
 	$('.slider.owl-carousel').owlCarousel({
 	  loop:true,

@@ -42,3 +42,5 @@ td.borrar-product {
 .cart-product-expiration { position: absolute; white-space: nowrap; right: 0; bottom: 50px; color: #727272; font-weight: 300;
 	&>span {font-weight: 400;}
 }
+
+td.precio-product,td.subtotal-product { white-space: nowrap; }

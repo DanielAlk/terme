@@ -52,7 +52,7 @@ Cart.update = function() {
 };
 
 Cart.updateHeader = function(cart){
-	cart.ctotal = '$ ' + Number(cart.total).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+	cart.ctotal = Cart.toCurrency(cart.total);
 	$('header .cart_count').text(cart.count);
 	$('header .cart_price').text(cart.ctotal);
 };
@@ -74,6 +74,7 @@ Cart.loadProductPage = function() {
 };
 
 Cart.checkStock = function() {
+	if (!$('#productJSON').length) return clearInterval(Cart.interval);
 	$.ajax({url: '/cart/stock', method: 'get', data: { product: Cart.product }, dataType: 'json' })
 	.done(function(product) {
 		Cart.product.stock = product.stock;
@@ -99,6 +100,8 @@ Cart.updateCartPage = function(cart) {
 	var $table = $('table#cartTable');
 	if (!$table.length) return;
 	var $counters = $('[data-expires]');
+	var $quantity_inputs = $('tbody tr .qty');
+	var $removers = $('tbody tr .removeFromCart');
 	var $rows = $table.find('tbody tr');
 	if (!Cart.cart.items) {
 		$rows.fadeOut(function() { $rows.remove(); });
@@ -110,6 +113,101 @@ Cart.updateCartPage = function(cart) {
 		if (!Cart.cart.items[id]) $row.fadeOut(function() { $row.remove(); });
 	});
 	$counters.each(Cart.counter);
+	$quantity_inputs.each(Cart.cartPageQuantity);
+	$removers.each(Cart.cartPageRemovers);
+	Cart.checkoutButton();
+	Cart.cartToPage();
+};
+
+Cart.cartToPage = function() {
+	var items = Cart.cart.items;
+	var count = Cart.cart.count;
+	var total = 0;
+	for (var id in items) {
+		var item = items[id];
+		var product = Cart.getProduct(id);
+		var subtotal = Number(product.price) * Number(item.quantity);
+		$('#product-' + id + ' .subtotal-product').text(Cart.toCurrency(subtotal));
+		$('#quantity-' + id).val(item.quantity);
+		total += subtotal;
+	};
+	$('#cartTotal').text(Cart.toCurrency(total));
+	$('#cartItems').text(count + (count > 1 ? ' items' : ' item'));
+	Cart.cart.total = total;
+};
+
+Cart.checkoutButton = function() {
+	var $checkout = $('#cartCheckout');
+	if (!$checkout.length || $checkout.data('cart-checkout')) return;
+	$checkout.click(function(e) {
+		e.preventDefault();
+		var href = $checkout.attr('href');
+		var items = Cart.cart.items;
+		var data = {};
+		data.products = [];
+		for (var id in items) {
+			var item = items[id];
+			var product = { id: id, quantity: item.quantity };
+			data.products.push(product);
+		};
+		$.ajax({url: '/cart/add', type: 'put', data: data, dataType: 'json'})
+		.done(function() {
+			window.location.href = href;
+		});
+	});
+	$checkout.data('cart-checkout', true);
+};
+
+Cart.cartPageRemovers = function() {
+	if ($(this).data('cart-remover')) return;
+	var $remover = $(this);
+	var $item = $remover.closest('tr');
+	var id = $item.attr('id').replace('product-', '');
+	$remover.click(function(e) {
+		e.preventDefault();
+		$.ajax({url: '/cart/remove', type: 'put', data: { product: { id: id } }, dataType: 'json'})
+		.done(function() {
+			$item.fadeOut(function() { $item.remove(); });
+		})
+		.done(Cart.update);
+	});
+	$remover.data('cart-remover', true);
+};
+
+Cart.cartPageQuantity = function() {
+	if ($(this).data('cart-quantity')) return;
+	var $el = $(this);
+	var $parent = $el.parent();
+	var product_stock = $el.data('stock');
+	var id = $el.attr('id').replace('quantity-', '');
+	var change = function(e) {
+		var stock = product_stock;
+		var amt = e == 1 || e == -1 ? e : ($(this).hasClass('mas') ? 1 : -1);
+    var val = parseInt($el.val(),10) + amt;
+    val = val >= 1 ? val : $el.val();
+    val = val <= stock ? val : stock;
+    val = !!Number(val) ? val : 1;
+    Cart.cart.items[id].quantity = val;
+    Cart.cartToPage();
+  };
+  var keydownHandler = function(e) {
+    switch(e.which) {
+      case 38: change(1); break;
+      case 40: change(-1); break;
+      case 37: case 39: case 16: case 17: case 18: case 8: case 13: case 46: break;
+      default: if (!Number(String.fromCharCode(e.which)) && Number(String.fromCharCode(e.which)) != 0) e.preventDefault();
+    };
+  };
+  var focusoutHandler = function(e) {
+  	var stock = product_stock;
+    if (!Number($el.val())) $el.val(0);
+    if (Number($el.val()) > stock) $el.val(stock);
+  };
+  $parent.find('.mas').click(change);
+  $parent.find('.menos').click(change);
+  $parent.disableSelection();
+  $el.keydown(keydownHandler).focusout(focusoutHandler);
+  $el.data('cart-quantity', true);
 };
 
 Cart.counter = function() {
@@ -192,6 +290,10 @@ Cart.quantityPicker = function(product_stock) {
   $('#quantity').disableSelection();
   $el.keydown(keydownHandler).focusout(focusoutHandler);
   $('#quantity').closest('form').submit(function(e) {e.preventDefault()});
+};
+
+Cart.toCurrency = function(number) {
+	return '$ ' + Number(number).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 };
 
 Cart.log = function() {
