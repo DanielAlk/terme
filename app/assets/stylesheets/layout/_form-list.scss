@@ -5,8 +5,8 @@
         margin-bottom: 30px;
         @include clear;
         
-        input + input,
-        input + select{
+        input + input, label.error + input,
+        input + select, label.error + select{
             margin-top: 15px;
         }
         
@@ -45,6 +45,10 @@
                     font-weight: 400;
                 }
             }
+        }
+
+        .field {
+            position: relative;
         }
         
         &.wide{

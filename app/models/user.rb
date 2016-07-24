@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   	"cart:#{id}:#{product_id}"
   end
 
+  def address
+  	addresses.first
+  end
+
 	def name(option = nil)
 		if self.fname.present? && self.lname.present?
 			case option.to_s.to_sym

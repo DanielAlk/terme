@@ -1,4 +1,4 @@
-<% content_for :body_class, 'checkout checkout-confirm' %>
+<% content_for :body_class, 'checkout' %>
 
 <div class="slider">
   <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
@@ -87,182 +87,22 @@
         <div class="resumen">
           <div class="label items">tu carrito</div>
           <div class="item right">2 Items</div>
-          <div class="label envios"> <span class="link">Costos de Envío</span>
-            <ul class="lista-envios">
-              <li> <a href="#">
-                <div class="ciudad">CAPITAL - GBA</div>
-                <div class="costo">$200</div>
-                </a> </li>
-              <li> <a href="#">
-                <div class="ciudad">INTERIOR DEL PAIS</div>
-                <div class="costo">$600</div>
-                </a> </li>
-            </ul>
-          </div>
-          <div class="envio right">$200</div>
           <div class="label totales">TOTAL</div>
           <div class="total right">$14,824.50</div>
         </div>
         <div class="action">
-          <button class="checkout"> checkout </button>
+          <button class="checkout"> checkout con<br>
+          mercadopago </button>
         </div>
       </div>
     </section>
     <div class="separador"></div>
-    <section class="confirmacion">
-      <form>
-        <h2 class="no-display">Mercado Pago</h2>
-        <div class="col-left">
-          <h2>TU INFORMACIÓN DE ENVÍO</h2>
-          <div class="column-left">
-            <ul class="form-list">
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">EMAIL</label>
-                  <input type="email" name="email-tarjeta" required placeholder="ej. nombre@email.com">
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Nombre Completo</label>
-                  <input type="text" name="nombre" placeholder="Nombre">
-                  <input type="text" name="Apellido" placeholder="Apellido">
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label>Compañía</label>
-                  <input type="text" name="companía" placeholder="e.g. your company (optional)">
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Dirección</label>
-                  <input type="text" name="direccion1" required placeholder="Dirección 1">
-                  <input type="text" name="direccion2" placeholder="Dirección 2">
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="column-right">
-            <ul class="form-list confirmacion">
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">codigo postal</label>
-                  <input type="text" name="cp" required placeholder="ej. 1407">
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Ciudad</label>
-                  <input type="text" name="nombre" required placeholder="ej. CABA" >
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Provincia</label>
-                  <select name="provincia" id="provincia">
-                    <option value="">Seleccione</option>
-                    <option value="">Ciudad Autónoma de Buenos Aires</option>
-                    <option value="">Cordoba</option>
-                    <option value="">Mendoza</option>
-                    <option value="">Santa Fe</option>
-                  </select>
-                </div>
-              </li>
-              <li class="wide celular">
-                <div class="field">
-                  <label class="requerido">Celular</label>
-                  <select name="cod-tel">
-                    <option>+011</option>
-                    <option>+013</option>
-                    <option>+015</option>
-                  </select>
-                  <input type="text" name="nro-tel" required placeholder="Teléfono">
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="column-left check">
-            <div class="check-option">
-              <div class="inputcheck">
-                <input type="checkbox" id="direc-tarjeta" name="direc-tarjeta" checked />
-                <label for="direc-tarjeta"><span></span></label>
-              </div>
-              <p>la dirección de la tarjeta es la misma que TU direccón real</p>
-            </div>
-          </div>
-          <div class="column-right check">
-            <div class="check-option">
-              <div class="inputcheck">
-                <input type="checkbox" id="recordar-direcc" name="recordar-direcc" />
-                <label for="recordar-direcc"><span></span></label>
-              </div>
-              <p>recordar esta dirección en el futuro </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-right">
-          <h2>TU INFORMACIÓN DE PAGO</h2>
-          <ul class="form-list tarjeta-credito">
-            <li class="wide">
-              <div class="field">
-                <label class="requerido">tarjeta de credito numero</label>
-                <input type="text" name="nro-tarjeta" required placeholder="escribe el numero de tu tarjeta de credito">
-              </div>
-            </li>
-            <li class="tarjetas">
-              <div class="field"> <span><img src="<%= asset_path 'tarjetas/visa.png' %>" alt="Visa"></span> <span><img src="<%= asset_path 'tarjetas/master.png' %>" alt="Master Card"></span> <span><img src="<%= asset_path 'tarjetas/maestro.png' %>" alt="Maestro"></span> <span><img src="<%= asset_path 'tarjetas/amex.png' %>" alt="Amex"></span> <span><img src="<%= asset_path 'tarjetas/paypal.png' %>" alt="Paypal"></span> </div>
-            </li>
-            <li class="wide fecha">
-              <div class="field">
-                <label class="requerido">fecha de vencimiento</label>
-                <select class="mes">
-                  <option>01 - Enero</option>
-                  <option>02 - Febrero</option>
-                  <option>03 - Marzo</option>
-                  <option>04 - Abril</option>
-                  <option>05 - Mayo</option>
-                  <option>06 - Junio</option>
-                </select>
-                <select class="anio">
-                  <option>2016</option>
-                  <option>2017</option>
-                  <option>2018</option>
-                  <option>2019</option>
-                  <option>2020</option>
-                </select>
-              </div>
-            </li>
-            <li class="wide ccv">
-              <div class="field">
-                <label class="requerido">código de seguridad (ccv)</label>
-                <input type="text" name="nro-tarjeta" required placeholder="000">
-                <a href="#">Qué es esto?</a> </div>
-            </li>
-            <li class="wide">
-              <div class="field">
-                <label class="requerido">Nombre en la Tarjeta</label>
-                <input type="text" name="nro-tarjeta" required placeholder="Nombre en la tarjeta">
-              </div>
-            </li>
-          </ul>
-          <span class="info">Valoramos tu privacidad</span>
-          <div class="check-option">
-            <div class="inputcheck">
-              <input type="checkbox" id="recordar-tarjeta" name="recordar-tarjeta" />
-              <label for="recordar-tarjeta"><span></span></label>
-            </div>
-            <p>recordar esta tarjeta en el futuro </p>
-          </div>
-        </div>
-        <div class="control">
-          <p>La instalación de los equipos y repuestos adquiridos no está incluida en este valor, deberá presupuestarse aparte y en el lugar de montaje de los mismos. Los valores no incluyen IVA y están expresados en Pesos Argentinos. La empresa se reserva el derecho de modificarlos sin previo aviso.</p>
-          <div class="btn-confirm-orden">
-            <button class="confirm-orden"> confirmar orden </button>
-          </div>
-        </div>
-      </form>
+    <section class="mercadopago">
+      <h2 class="no-display">Mercado Pago</h2>
+      <div class="info-mp"> <img src="<%= asset_path 'referencia.jpg' %>" alt="MP"> </div>
+      <div class="confir-compra">
+        <p>La instalación de los equipos y repuestos adquiridos no está incluida en este valor, deberá presupuestarse aparte y en el lugar de montaje de los mismos. Los valores no incluyen IVA y están expresados en Pesos Argentinos. La empresa se reserva el derecho de modificarlos sin previo aviso.</p>
+        <a href="#" class="confirmar"> confirmar compra </a> </div>
     </section>
     <div class="socialmedia-bottom">
       <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
