@@ -22,7 +22,8 @@ Cart.addButton = function() {
 };
 
 Cart.checkChanges = function(cart) {
-	if (!!Cart.doAlertExpire) Alerts.danger('El producto: <b>' + Cart.doAlertExpire.title + '</b> ya no está tu carrito.<br>Han pasado los 10 minutos.');
+	if (!!Cart.redirectIfChange && Cart.cart.products.length != cart.products.length) window.location.href = Cart.redirectIfChange;
+	else if (!!Cart.doAlertExpire) Alerts.danger('El producto: <b>' + Cart.doAlertExpire.title + '</b> ya no está tu carrito.<br>Han pasado los 10 minutos.');
 	else if (!!Cart.product && !!Cart.cart) {
 		if (!cart.items || !cart.items[Cart.product.id]) {
 			$('#quantity_input').val(0);
@@ -38,6 +39,7 @@ Cart.checkChanges = function(cart) {
 	};
 	Cart.doAlertExpire = false;
 	Cart.doAlertSuccess = false;
+	Cart.redirectIfChange = false;
 };
 
 Cart.update = function() {
@@ -48,6 +50,7 @@ Cart.update = function() {
 	.done(Cart.updateHeader)
 	.done(Cart.updateProductPage)
 	.done(Cart.updateCartPage)
+	.done(Cart.updateCheckoutPage)
 	.done(Cart.log);
 };
 
@@ -141,6 +144,7 @@ Cart.checkoutButton = function() {
 	if (!$checkout.length || $checkout.data('cart-checkout')) return;
 	$checkout.click(function(e) {
 		e.preventDefault();
+		if (!Cart.cart.items) return Alerts.danger('Tu carrito está vacio.');
 		var href = $checkout.attr('href');
 		var items = Cart.cart.items;
 		var data = {};
@@ -208,6 +212,13 @@ Cart.cartPageQuantity = function() {
   $parent.disableSelection();
   $el.keydown(keydownHandler).focusout(focusoutHandler);
   $el.data('cart-quantity', true);
+};
+
+Cart.updateCheckoutPage = function() {
+	if (!$('#cartCheckoutConfirmation').length) return;
+	var $counters = $('[data-expires]');
+	Cart.redirectIfChange = $counters.data('href');
+	$counters.each(Cart.counter);
 };
 
 Cart.counter = function() {

@@ -1,0 +1,29 @@
+<div class="display display-minimal" id="product_<%= product.id %>">
+	<div class="display-caption">
+		<a class="display-thumb" href="<%= product_page_path(product) %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
+		<div class="display-bottom-right">
+			<h4 style="margin:0; text-align: right;">
+				<span class="label label-success">
+					<% if quantity > 1 %>
+						<%= quantity %> x
+					<% end %>
+					<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+				</span>
+				<% if quantity > 1 %>
+					<br>
+					<span class="label label-warning" style="display: inline-block; margin-top: 8px;">
+						<%= number_to_currency(product.price * quantity, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+					</span>
+				<% end %>
+			</h4>
+		</div>
+		<div class="display-bottom">
+			<span class="label label-primary"><%= product.category.title %></span>
+			<span class="label label-warning">Código: <%= product.key_code %></span>
+		</div>
+		<div class="display-body">
+			<h3 class="display-title"><%= link_to product.title, product_page_path(product) %></h3>
+			<h4 class="display-subtitle"><%= product.description %></h4>
+		</div>
+	</div>
+</div>

@@ -3,6 +3,22 @@
 <% content_for :extra_js do %>
   MP.init();
   $('form#pay').validate();
+  $('#payment_zone_id').change(function(e) {
+    var $select = $(this);
+    var $option = $select.find('option:selected');
+    var data = $option.data();
+    Alerts.success('Costo de envío: ' + Cart.toCurrency(data.shipmentCost));
+    for (var key in data) {
+      var value = data[key];
+      var $elements = $('[data-value="'+key+'"]');
+      if (!$elements.length) return;
+      $elements.each(function() {
+        var $element = $(this);
+        if ($element.is('input')) $element.val(value);
+        else $element.text(Cart.toCurrency(value));
+      });
+    };
+  });
 <% end %>
 
 <div class="slider">
@@ -18,15 +34,35 @@
     </div>
     <section class="check">
       <div class="pasos-checkout">
-        <h2><span>1</span> Carrito</h2>
+        <h2><a href="<%= cart_page_path %>" style="color:inherit;"><span>1</span> Carrito</a></h2>
         <h1><span>2</span> Checkout</h1>
-        <h2><span>3</span> Confirma tu orden</h2>
+      </div>
+      <div class="col-right" style="max-width: 410px;float: none;margin: 0 auto;width: 100%;position:relative;">
+        <div class="checkout-expires">
+          Tu carrito vence en: <span data-expires="<%= @cart[:items].map{|id,i| i[:expires_in]}.min rescue 0 %>" data-href="<%= cart_page_path %>"></span> m.
+        </div>
+        <h2>REVISA TU ORDEN</h2>
+        <div class="resumen">
+          <div class="label items">tu carrito</div>
+          <div class="item right"><%= pluralize(@cart[:count], 'item') %></div>
+          <div class="label envios">Costos de Envío</div>
+          <div class="envio right" data-value="shipmentCost">
+            <% if current_user.address.present? %>
+              <%= current_user.address.zone.shipment_cost.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %>
+            <% else %>
+              --
+            <% end %>
+          </div>
+          <div class="label totales">TOTAL</div>
+          <% total = @cart[:total] + (current_user.address.zone.shipment_cost rescue 0) %>
+          <div class="total right" data-value="transactionAmount"><%= total.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %></div>
+        </div>
       </div>
     </section>
-    <section class="confirmacion">
-      <%= form_for((current_user.address || current_user.addresses.new), url: '', html: { id: 'pay' }) do |f| %>
-        <%= f.hidden_field :addressable_id %>
-        <%= f.hidden_field :addressable_type %>
+    <section class="confirmacion" id="cartCheckoutConfirmation">
+      <%= form_for(current_user.payments.new(transaction_amount: total) , html: { id: 'pay' }) do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :transaction_amount, data: { value: 'transactionAmount' } %>
         <h2 class="no-display">Mercado Pago</h2>
         <div class="col-left">
           <h2>TU INFORMACIÓN DE ENVÍO</h2>
@@ -35,27 +71,27 @@
               <li class="wide">
                 <div class="field">
                   <label class="requerido">EMAIL</label>
-                  <%= f.text_field :email, required: true, placeholder: 'ej. nombre@email.com' %>
+                  <%= text_field_tag 'address[email]', (current_user.address.email rescue nil), required: true, placeholder: 'ej. nombre@email.com' %>
                 </div>
               </li>
               <li class="wide">
                 <div class="field fields-stack">
                   <label class="requerido">Nombre Completo</label>
-                  <%= f.text_field :fname, required: true, placeholder: 'Nombre' %>
-                  <%= f.text_field :lname, required: true, placeholder: 'Apellido' %>
+                  <%= text_field_tag 'address[fname]', (current_user.address.fname rescue nil), required: true, placeholder: 'Nombre' %>
+                  <%= text_field_tag 'address[lname]', (current_user.address.lname rescue nil), required: true, placeholder: 'Apellido' %>
                 </div>
               </li>
               <li class="wide">
                 <div class="field">
                   <label>Compañía</label>
-                  <%= f.text_field :company, placeholder: 'Su compañía (opcional)' %>
+                  <%= text_field_tag 'address[company]', (current_user.address.company rescue nil), placeholder: 'Su compañía (opcional)' %>
                 </div>
               </li>
               <li class="wide">
                 <div class="field fields-stack">
                   <label class="requerido">Dirección</label>
-                  <%= f.text_field :address, required: true, minlength: 10, placeholder: 'Dirección' %>
-                  <%= f.text_field :zip_code, required: true, placeholder: 'Código postal' %>
+                  <%= text_field_tag 'address[address]', (current_user.address.address rescue nil), required: true, minlength: 10, placeholder: 'Dirección' %>
+                  <%= text_field_tag 'address[zip_code]', (current_user.address.zip_code rescue nil), required: true, placeholder: 'Código postal' %>
                 </div>
               </li>
             </ul>
@@ -65,19 +101,19 @@
               <li class="wide">
                 <div class="field">
                   <label class="requerido">Ciudad</label>
-                  <%= f.text_field :city, required: true, placeholder: 'Ciudad/Barrio/Localidad' %>
+                  <%= text_field_tag 'address[city]', (current_user.address.city rescue nil), required: true, placeholder: 'Ciudad/Barrio/Localidad' %>
                 </div>
               </li>
               <li class="wide">
                 <div class="field">
                   <label class="requerido">Provincia</label>
-                  <%= f.collection_select :zone_id, Zone.roots, :id, :title, {prompt: 'Seleccione'}, required: true %>
+                  <%= f.select :zone_id, Zone.roots.map{|z| [ z.title, z.id, { data: { shipment_cost: z.shipment_cost, transaction_amount: z.shipment_cost + @cart[:total] }} ]}, { selected: (current_user.address.zone_id rescue nil), include_blank: 'Seleccione' }, { required: true } %>
                 </div>
               </li>
               <li class="wide">
                 <div class="field">
                   <label class="requerido">Celular</label>
-                  <%= f.telephone_field :mobile, required: true, placeholder: 'Teléfono' %>
+                  <%= telephone_field_tag 'address[mobile]', (current_user.address.mobile rescue nil), required: true, placeholder: 'Teléfono' %>
                 </div>
               </li>
               <li class="wide">
@@ -90,19 +126,21 @@
             </ul>
           </div>
           <div class="column-left check">
-            <div class="check-option">
-              <div class="inputcheck">
-                <input type="checkbox" id="direc-tarjeta" name="direc-tarjeta" checked />
-                <label for="direc-tarjeta"><span></span></label>
+            <% if false %>
+              <div class="check-option">
+                <div class="inputcheck">
+                  <input type="checkbox" id="direc-tarjeta" name="direc-tarjeta" checked />
+                  <label for="direc-tarjeta"><span></span></label>
+                </div>
+                <p>la dirección de la tarjeta es la misma que TU direccón real</p>
               </div>
-              <p>la dirección de la tarjeta es la misma que TU direccón real</p>
-            </div>
+            <% end %>
           </div>
           <div class="column-right check">
             <div class="check-option">
               <div class="inputcheck">
-                <input type="checkbox" id="recordar-direcc" name="recordar-direcc" />
-                <label for="recordar-direcc"><span></span></label>
+                <%= f.check_box :save_address %>
+                <label for="payment_save_address"><span></span></label>
               </div>
               <p>recordar esta dirección en el futuro </p>
             </div>
@@ -166,8 +204,8 @@
           <span class="info">Valoramos tu privacidad</span>
           <div class="check-option">
             <div class="inputcheck">
-              <input type="checkbox" id="recordar-tarjeta" name="recordar-tarjeta" />
-              <label for="recordar-tarjeta"><span></span></label>
+              <%= f.check_box :save_card %>
+              <label for="payment_save_card"><span></span></label>
             </div>
             <p>recordar esta tarjeta en el futuro </p>
           </div>

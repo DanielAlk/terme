@@ -1,5 +1,12 @@
 <% content_for :body_class, 'carrito' %>
 
+<% content_for :extra_js do %>
+  $('#cartCheckout2').click(function(e) {
+    e.preventDefault();
+    $('#cartCheckout').click();
+  });
+<% end %>
+
 <div class="slider">
   <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
 </div>
@@ -14,8 +21,7 @@
     <section class="cart">
       <div class="pasos-checkout">
         <h1><span>1</span> Carrito</h1>
-        <h2><span>2</span> Checkout</h2>
-        <h2><span>3</span> Confirma tu orden</h2>
+        <h2><a href="<%= checkout_page_path %>" id="cartCheckout2" style="color:inherit;"><span>2</span> Checkout</a></h2>
       </div>
       <div class="col-left">
         <form>

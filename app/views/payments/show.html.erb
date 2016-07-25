@@ -1,49 +1,77 @@
-<p id="notice"><%= notice %></p>
+<% transaction_amount = @payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %>
+<% content_for :panel_subtitle, "Pago #{@payment.friendly_status.downcase} con #{@payment.payment_method_id.upcase} por #{transaction_amount}" %>
 
-<p>
-  <strong>User:</strong>
-  <%= @payment.user %>
-</p>
+<% if notice.present? %>
+  <p id="notice" style="margin: 0 0 30px;">
+    <% if @payment.status.to_sym == :rejected %>
+      <%= link_to 'Volver al checkout', checkout_page_path, class: 'btn btn-sm btn-warning', style: 'margin-right: 10px;' %>
+    <% end %>
+    <%= notice.html_safe %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Transaction amount:</strong>
-  <%= @payment.transaction_amount %>
-</p>
+<h2 class="text-sm-center m-sm-B-n33 m-xs-0 m-xs-B-20">
+  <span class="label label-<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[@payment.status.to_sym] rescue 'info' %>">
+    <%= @payment.friendly_status %>
+  </span>
+</h2>
+<div class="row" style="margin: 0 0 20px;">
+  <h2 class="pull-left" style="margin: 0;">
+    <span class="label label-primary">
+      <%= @payment.payment_method_id.upcase %>
+    </span>
+  </h2>
+  <h2 class="pull-right" style="margin: 0;">
+    <span class="label label-success">
+      <%= transaction_amount %>
+    </span>
+  </h2>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <p>
+      <strong>Estado:</strong>
+      <%= @payment.friendly_status %>
+    </p>
 
-<p>
-  <strong>Installments:</strong>
-  <%= @payment.installments %>
-</p>
+    <p>
+      <strong>Metodo de págo:</strong>
+      <%= @payment.payment_method_id.upcase %>
+    </p>
+  </div>
+  <div class="col-sm-4">
+    <p>
+      <strong>Costo de envío:</strong>
+      <%= @payment.shipment_cost.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') rescue nil %>
+    </p>
 
-<p>
-  <strong>Payment method:</strong>
-  <%= @payment.payment_method_id %>
-</p>
+    <p>
+      <strong>Importe:</strong>
+      <%= transaction_amount %>
+    </p>
 
-<p>
-  <strong>Token:</strong>
-  <%= @payment.token %>
-</p>
+    <% if false %>
+      <p>
+        <strong>Cuotas:</strong>
+        <%= @payment.installments %>
+      </p>
+    <% end %>
+  </div>
+  <div class="col-sm-4">
+    <p>
+      <strong>Fecha:</strong>
+      <%= @payment.created_at.strftime('%d/%m/%Y') %>
+    </p>
+    <p>
+      <strong>Horario:</strong>
+      <%= @payment.created_at.strftime('%H:%M') %>
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>Mercadopago payment:</strong>
-  <%= @payment.mercadopago_payment %>
-</p>
-
-<p>
-  <strong>Mercadopago payment:</strong>
-  <%= @payment.mercadopago_payment_id %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @payment.status %>
-</p>
-
-<p>
-  <strong>Status detail:</strong>
-  <%= @payment.status_detail %>
-</p>
-
-<%= link_to 'Edit', edit_payment_path(@payment) %> |
-<%= link_to 'Back', payments_path %>
+<h4>Productos</h4>
+<div>
+  <% @payment.products.each do |product| %>
+    <%= render 'products/product_minimal', product: product, quantity: (@payment.item(product.id)[:quantity].to_i rescue nil) %>
+  <% end %>
+</div>

@@ -14,4 +14,25 @@ module Cart
 		end
 		items
 	end
+
+	def set_cart
+		items = get_cart_items
+		if items.blank?
+		  @cart = { count: 0 , total: 0, items: nil, products: nil }
+		else
+		  prices = []
+		  product_ids = items.keys.map { |id| id.sub(/cart:\d+:/, '') }
+		  products = Product.find(product_ids)
+		  price = products.sum do |product|
+		    product.price * items[product.id.to_s][:quantity].to_i
+		  end
+		  @cart = { count: items.count, total: price, items: items, products: products }
+		end
+	end
+
+	def delete_cart
+		$redis.scan_each(match: current_user.cart) do |id|
+			$redis.del id
+		end
+	end
 end

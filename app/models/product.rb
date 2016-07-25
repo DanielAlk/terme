@@ -8,7 +8,8 @@ class Product < ActiveRecord::Base
   has_many :reviews, as: :reviewable, dependent: :destroy
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
-  has_many :payments, through: :payment_product
+  has_many :payment_products
+  has_many :payments, through: :payment_products
   validates_length_of :title, minimum: 5, message: "debe contener al menos 5 caracteres"
   validates :category, presence: true
   validates_presence_of :price

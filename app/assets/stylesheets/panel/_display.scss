@@ -13,3 +13,16 @@
 .display-top-right { position: absolute; top: 0; right: 0; }
 .display-checkbox { position: absolute; left: 0; top: 0; height: 100%; padding: 15px 0; }
 .display-actions { position: absolute; bottom: 0; right: 0; }
+
+.display-bottom-right { position: absolute; right: 0; bottom: 4px; }
+
+.display-minimal {
+	.display-caption { padding-left: 125px; }
+	.display-thumb { left: 0; }
+	@media(max-width: $screen-xs-max) {
+		.display-caption { padding-left: 0; padding-top: 90px; height: auto; padding-bottom: 25px; }
+		.display-thumb { width: 100%; top: 0; height: 90px; }
+		.display-body { padding: 6px 0 2px; }
+		.display-bottom-right { bottom: auto; top: 0; margin: -3px -4px; }
+	}
+}

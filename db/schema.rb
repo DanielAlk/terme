@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725071227) do
+ActiveRecord::Schema.define(version: 20160725172351) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20160725071227) do
 
   create_table "payments", force: :cascade do |t|
     t.integer  "user_id",                limit: 4
+    t.integer  "zone_id",                limit: 4
     t.decimal  "transaction_amount",                   precision: 8, scale: 2
     t.integer  "installments",           limit: 4,                             default: 1
     t.string   "payment_method_id",      limit: 255
@@ -111,11 +112,15 @@ ActiveRecord::Schema.define(version: 20160725071227) do
     t.integer  "mercadopago_payment_id", limit: 4
     t.string   "status",                 limit: 255
     t.string   "status_detail",          limit: 255
-    t.datetime "created_at",                                                               null: false
-    t.datetime "updated_at",                                                               null: false
+    t.boolean  "save_address",                                                 default: false
+    t.boolean  "save_card",                                                    default: false
+    t.datetime "created_at",                                                                   null: false
+    t.datetime "updated_at",                                                                   null: false
+    t.text     "additional_info",        limit: 65535
   end
 
   add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
+  add_index "payments", ["zone_id"], name: "index_payments_on_zone_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "title",           limit: 255
@@ -198,16 +203,18 @@ ActiveRecord::Schema.define(version: 20160725071227) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "zones", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "ancestry",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "title",         limit: 255
+    t.string   "ancestry",      limit: 255
+    t.decimal  "shipment_cost",             precision: 8, scale: 2, default: 0.0
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
   end
 
   add_foreign_key "addresses", "zones"
   add_foreign_key "payment_products", "payments"
   add_foreign_key "payment_products", "products"
   add_foreign_key "payments", "users"
+  add_foreign_key "payments", "zones"
   add_foreign_key "products", "categories"
   add_foreign_key "taggings", "tags"
 end

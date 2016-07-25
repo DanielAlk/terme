@@ -57,10 +57,10 @@
 		$(function() {
 			$('.tooltip-trigger').tooltip();
 			<% if notice.present? %>
-				Alerts.success('<%= notice %>');
+				Alerts.success('<%= notice.html_safe %>');
 			<% end %>
 			<% if alert.present? %>
-				Alerts.danger('<%= alert %>');
+				Alerts.danger('<%= alert.html_safe %>');
 			<% end %>
 			<%= content_for :extra_js %>
 		});

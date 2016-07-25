@@ -1,43 +1,53 @@
+<% content_for :extra_js do %>
+  $('tbody tr').click(function(e) {
+    e.preventDefault();
+    window.location.href = $('#link_payment_' + $(this).data('id')).attr('href');
+  });
+  $('tbody a').click(function(e) {
+    e.stopPropagation();
+  });
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Payments</h1>
+<% content_for :panel_subtitle, 'Tus Págos' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Transaction amount</th>
-      <th>Installments</th>
-      <th>Payment method</th>
-      <th>Token</th>
-      <th>Mercadopago payment</th>
-      <th>Mercadopago payment</th>
-      <th>Status</th>
-      <th>Status detail</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if @payments.blank? %>
+  Aún no has generado págos
+<% else %>
+  <div class="table-responsive">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Estado</th>
+          <% if false %>
+            <th>Cuotas</th>
+          <% end %>
+          <th>Medio de pago</th>
+          <th>Importe</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @payments.each do |payment| %>
-      <tr>
-        <td><%= payment.user %></td>
-        <td><%= payment.transaction_amount %></td>
-        <td><%= payment.installments %></td>
-        <td><%= payment.payment_method_id %></td>
-        <td><%= payment.token %></td>
-        <td><%= payment.mercadopago_payment %></td>
-        <td><%= payment.mercadopago_payment_id %></td>
-        <td><%= payment.status %></td>
-        <td><%= payment.status_detail %></td>
-        <td><%= link_to 'Show', payment %></td>
-        <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-        <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Payment', new_payment_path %>
+      <tbody>
+        <% @payments.each do |payment| %>
+          <tr style="cursor:pointer;" data-id="<%= payment.id %>" class="<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[payment.status.to_sym] rescue nil %>">
+            <td>
+              <%= link_to payment, id: 'link_payment_' + payment.id.to_s do %>
+                <%= image_tag payment.products.first.image, style: 'height: 24px; width: auto; margin: -4px 0 -2px;' %>
+              <% end %>
+            </td>
+            <td><%= payment.friendly_status %></td>
+            <% if false %>
+              <td><%= payment.installments %></td>
+            <% end %>
+            <td><%= payment.payment_method_id.upcase rescue nil %></td>
+            <td><b><%= payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ",", delimiter: ".") %></b></td>
+            <td><%= payment.created_at.strftime('%d/%m/%Y') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

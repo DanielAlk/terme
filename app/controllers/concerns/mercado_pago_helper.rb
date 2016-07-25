@@ -1,10 +1,17 @@
 module MercadoPagoHelper
 	extend ActiveSupport::Concern
 
+	def MercadoPagoMessage(payment)
+		message = MercadoPagoMessages()[payment.status.to_sym][payment.status_detail.to_sym]
+		message.gsub(/\{\{\w+\}\}/) do |match|
+			payment.mercadopago_payment[match.gsub(/[{}]/, '')].to_s
+		end
+	end
+
 	def MercadoPagoMessages
 		{
 		  approved: { 
-		    accredited: '¡Listo, se acreditó tu pago!<br>En tu resumen verás el cargo de {{amount}} como {{statement_descriptor}}.'
+		    accredited: '¡Listo, se acreditó tu pago!<br>En tu resumen verás el cargo de {{transaction_amount}} como {{statement_descriptor}}.'
 		  },
 		  in_process: {
 		    pending_contingency: 'Estamos procesando el pago.<br>En menos de una hora te enviaremos por e-mail el resultado.',
@@ -16,7 +23,7 @@ module MercadoPagoHelper
 		    cc_rejected_bad_filled_other: 'Revisa los datos.',
 		    cc_rejected_bad_filled_security_code: 'Revisa el código de seguridad.',
 		    cc_rejected_blacklist: 'No pudimos procesar tu pago.',
-		    cc_rejected_call_for_authorize: 'Debes autorizar ante {{payment_method_id}} el pago de {{amount}} a MercadoPago',
+		    cc_rejected_call_for_authorize: 'Debes autorizar ante {{payment_method_id}} el pago de {{transaction_amount}} a MercadoPago',
 		    cc_rejected_card_disabled: 'Llama a {{payment_method_id}} para que active tu tarjeta.<br>El teléfono está al dorso de tu tarjeta.',
 		    cc_rejected_card_error: 'No pudimos procesar tu pago.',
 		    cc_rejected_duplicated_payment: 'Ya hiciste un pago por ese valor.<br>Si necesitas volver a pagar usa otra tarjeta u otro medio de pago.',
@@ -31,43 +38,43 @@ module MercadoPagoHelper
 
 	def MercadoPagoErrors
 		{
-		  106: {
+		  106 => {
 		    description: 'Cannot operate between users from different countries',
 		    message: 'No puedes realizar pagos a usuarios de otros países.'
 		  },
-		  109: {
+		  109 => {
 		    description: 'Invalid number of shares for this payment_method_id',
 		    message: '{{payment_method_id}} no procesa pagos en {{installments}} cuotas. Elige otra tarjeta u otro medio de pago.'
 		  },
-		  126: {
+		  126 => {
 		    description: 'The action requested is not valid for the current payment state',
 		    message: 'No pudimos procesar tu pago.'
 		  },
-		  129: {
+		  129 => {
 		    description: 'Cannot pay this amount with this paymentMethod',
 		    message: '{{payment_method_id}} no procesa pagos del monto seleccionado. Elige otra tarjeta u otro medio de pago.'
 		  },
-		  145: {
+		  145 => {
 		    description: 'Invalid users involved',
 		    message: 'No pudimos procesar tu pago.'
 		  },
-		  150: {
+		  150 => {
 		    description: 'The payer_id cannot do payments currently',
 		    message: 'No puedes realizar pagos.'
 		  },
-		  151: {
+		  151 => {
 		    description: 'The payer_id cannot do payments with this payment_method_id',
 		    message: 'No puedes realizar pagos.'
 		  },
-		  160: {
+		  160 => {
 		    description: 'Collector not allowed to operate',
 		    message: 'No pudimos procesar tu pago.'
 		  },
-		  204: {
+		  204 => {
 		    description: 'Unavailable paymentmethod',
 		    message: '{{payment_method_id}} no está disponible en este momento. Elige otra tarjeta u otro medio de pago.'
 		  },
-		  801: {
+		  801 => {
 		    description: 'Already posted the same request in the last minute',
 		    message: 'Realizaste un pago similar hace instantes. Intenta nuevamente en unos minutos.'
 		  }

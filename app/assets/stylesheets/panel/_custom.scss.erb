@@ -75,13 +75,15 @@ body.control-panel { font-family: 'roboto', sans-serif;
 			.sass-col-left { @extend .col-sm-4 }
 			.sass-col-right { @extend .col-sm-8 }
 		}
-		&.products section.row {
-			.sass-col-left { @extend .col-sm-1 }
-			.sass-col-right { @extend .col-sm-11 }
-			@media(min-width: $screen-sm-min) {
-				.nav-stacked {
-					a { white-space: nowrap; overflow: hidden; margin: 0 -5px;
-						&>i.fa { margin-right: 10px; }
+		&.products, &.payments {
+			section.row {
+				.sass-col-left { @extend .col-sm-1 }
+				.sass-col-right { @extend .col-sm-11 }
+				@media(min-width: $screen-sm-min) {
+					.nav-stacked {
+						a { white-space: nowrap; overflow: hidden; margin: 0 -5px;
+							&>i.fa { margin-right: 10px; }
+						}
 					}
 				}
 			}
@@ -134,4 +136,14 @@ body.control-panel { font-family: 'roboto', sans-serif;
 	&.d2 { @extend .panel-success; }
 	&.d3 { @extend .panel-danger; }
 	&.d4, &.d4 .panel.panel-depth { @extend .panel-default; }
+}
+
+@media(min-width: $screen-sm-min) {
+	.text-sm-center { text-align: center; }
+}
+
+.m-xs-0 { margin: 0; }
+.m-xs-B-20 { margin-bottom: 20px; }
+@media(min-width: $screen-sm-min) {
+	.m-sm-B-n33 { margin-bottom: -33px; }
 }

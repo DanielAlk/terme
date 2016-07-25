@@ -23,13 +23,13 @@ MP.captureSubmit = function() {
 			response.cause.forEach(function(cause) {
 				var error = MP.cardTokenErrors[cause.code];
 				var $element = $(error.selector)
-				if ($element.length) $element.after($('<label>', { class: 'mp-error', text: error.message }));
+				if ($element.length) $element.after($('<label>', { class: 'mp-error', text: error.message })).focus();
 				else alert('Revisá los datos.');
 			});
 		}else{
 			var form = document.querySelector('#pay');
 			var card = document.createElement('input');
-			card.setAttribute('name',"token");
+			card.setAttribute('name',"payment[token]");
 			card.setAttribute('type',"hidden");
 			card.setAttribute('value',response.id);
 			form.appendChild(card);
@@ -71,15 +71,16 @@ MP.getPaymentMethod = function() {
 			// do somethings ex: show logo of the payment method
 			var form = document.querySelector('#pay');
 
-			if (document.querySelector("input[name=paymentMethodId]") == null) {
+			if (document.querySelector("input#paymentMethodId") == null) {
 				var paymentMethod = document.createElement('input');
-				paymentMethod.setAttribute('name', "paymentMethodId");
+				paymentMethod.setAttribute('name', "payment[payment_method_id]");
+				paymentMethod.setAttribute('id', "paymentMethodId");
 				paymentMethod.setAttribute('type', "hidden");
 				paymentMethod.setAttribute('value', response[0].id);
 
 				form.appendChild(paymentMethod);
 			} else {
-				document.querySelector("input[name=paymentMethodId]").value = response[0].id;
+				document.querySelector("input#paymentMethodId").value = response[0].id;
 			}
 		}
 	};

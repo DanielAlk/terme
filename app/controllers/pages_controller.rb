@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   include Cart
   include Filterize
   before_action :authenticate_user!, only: [:cart, :checkout, :confirm]
+  before_action :set_cart, only: [:cart, :checkout]
   before_action :filterize, only: :products
   filterize object: :product, order: :price_asc, scope: :active, param: :f
   layout 'soon', only: :soon
@@ -24,21 +25,10 @@ class PagesController < ApplicationController
   end
 
   def cart
-    items = get_cart_items
-    if items.blank?
-      @cart = { count: 0 , total: 0, items: nil, products: nil }
-    else
-      prices = []
-      product_ids = items.keys.map { |id| id.sub(/cart:\d+:/, '') }
-      products = Product.find(product_ids)
-      price = products.sum do |product|
-        product.price * items[product.id.to_s][:quantity].to_i
-      end
-      @cart = { count: items.count, total: price, items: items, products: products }
-    end
   end
 
   def checkout
+    redirect_to cart_page_url if @cart[:items].blank?
   end
 
   def confirm
