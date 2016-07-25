@@ -6,7 +6,7 @@
         @include clear;
         
         input + input, label.error + input,
-        input + select, label.error + select{
+        input + select, select + input, label.error + select{
             margin-top: 15px;
         }
         

@@ -1,7 +1,8 @@
 <% content_for :body_class, 'checkout checkout-confirm' %>
 
 <% content_for :extra_js do %>
-  $('form#new_address, form#edit_address').validate();
+  MP.init();
+  $('form#pay').validate();
 <% end %>
 
 <div class="slider">
@@ -23,7 +24,7 @@
       </div>
     </section>
     <section class="confirmacion">
-      <%= form_for((current_user.address || current_user.addresses.new)) do |f| %>
+      <%= form_for((current_user.address || current_user.addresses.new), url: '', html: { id: 'pay' }) do |f| %>
         <%= f.hidden_field :addressable_id %>
         <%= f.hidden_field :addressable_type %>
         <h2 class="no-display">Mercado Pago</h2>
@@ -79,6 +80,13 @@
                   <%= f.telephone_field :mobile, required: true, placeholder: 'Teléfono' %>
                 </div>
               </li>
+              <li class="wide">
+                <div class="field">
+                  <label class="requerido" for="docType">Tipo y Nro de documento:</label>
+                  <select id="docType" data-checkout="docType" required></select>
+                  <input type="text" id="docNumber" data-checkout="docNumber" placeholder="Número de documento" required>
+                </div>
+              </li>
             </ul>
           </div>
           <div class="column-left check">
@@ -106,7 +114,7 @@
             <li class="wide">
               <div class="field">
                 <label class="requerido">tarjeta de credito numero</label>
-                <input type="text" name="nro-tarjeta" required placeholder="escribe el numero de tu tarjeta de credito">
+                <input type="text" data-checkout="cardNumber" required placeholder="escribe el numero de tu tarjeta de credito">
               </div>
             </li>
             <li class="tarjetas">
@@ -115,33 +123,43 @@
             <li class="wide fecha">
               <div class="field">
                 <label class="requerido">fecha de vencimiento</label>
-                <select class="mes">
-                  <option>01 - Enero</option>
-                  <option>02 - Febrero</option>
-                  <option>03 - Marzo</option>
-                  <option>04 - Abril</option>
-                  <option>05 - Mayo</option>
-                  <option>06 - Junio</option>
+                <select data-checkout="cardExpirationMonth" class="mes">
+                  <% month = Date.today.month %>
+                  <option <%= 'selected' if month == 1 %> value="1">01 - Enero</option>
+                  <option <%= 'selected' if month == 2 %> value="2">02 - Febrero</option>
+                  <option <%= 'selected' if month == 3 %> value="3">03 - Marzo</option>
+                  <option <%= 'selected' if month == 4 %> value="4">04 - Abril</option>
+                  <option <%= 'selected' if month == 5 %> value="5">05 - Mayo</option>
+                  <option <%= 'selected' if month == 6 %> value="6">06 - Junio</option>
+                  <option <%= 'selected' if month == 7 %> value="7">07 - Julio</option>
+                  <option <%= 'selected' if month == 8 %> value="8">08 - Agosto</option>
+                  <option <%= 'selected' if month == 9 %> value="9">09 - Septiembre</option>
+                  <option <%= 'selected' if month == 10 %> value="10">10 - Octubre</option>
+                  <option <%= 'selected' if month == 11 %> value="11">11 - Noviembre</option>
+                  <option <%= 'selected' if month == 12 %> value="12">12 - Diciembre</option>
                 </select>
-                <select class="anio">
-                  <option>2016</option>
-                  <option>2017</option>
-                  <option>2018</option>
-                  <option>2019</option>
-                  <option>2020</option>
+                <select data-checkout="cardExpirationYear" class="anio">
+                  <% year = Date.today.year %>
+                  <option value="<%= year %>"><%= year %></option>
+                  <option value="<%= year + 1 %>"><%= year + 1 %></option>
+                  <option value="<%= year + 2 %>"><%= year + 2 %></option>
+                  <option value="<%= year + 3 %>"><%= year + 3 %></option>
+                  <option value="<%= year + 4 %>"><%= year + 4 %></option>
+                  <option value="<%= year + 5 %>"><%= year + 5 %></option>
+                  <option value="<%= year + 6 %>"><%= year + 6 %></option>
                 </select>
               </div>
             </li>
             <li class="wide ccv">
               <div class="field">
                 <label class="requerido">código de seguridad (ccv)</label>
-                <input type="text" name="nro-tarjeta" required placeholder="000">
+                <input type="text" data-checkout="securityCode" required placeholder="000">
                 <a href="#">Qué es esto?</a> </div>
             </li>
             <li class="wide">
               <div class="field">
                 <label class="requerido">Nombre en la Tarjeta</label>
-                <input type="text" name="nro-tarjeta" required placeholder="Nombre en la tarjeta">
+                <input type="text" data-checkout="cardholderName" required placeholder="Nombre en la tarjeta">
               </div>
             </li>
           </ul>

@@ -22,6 +22,7 @@
 //= require autonumeric
 //= require acciones_aria
 //= require acciones_aria_productView
+//= require mercadopago
 //= require modals
 //= require alerts
 //= require pages

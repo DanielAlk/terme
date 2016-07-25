@@ -15,8 +15,8 @@
 	div.alert-dismissible { white-space: nowrap; }
 }
 
-form label.error { font-weight: 400 !important; color: #fff !important; position: absolute; margin-bottom: -5px; background-color: #d9534f; width: calc(100% - 2px); text-align: center; font-size: 9px !important; text-transform: none !important; left: 1px; top: 100%; border-radius: 6px; border-top-left-radius: 0; border-top-right-radius: 0; }
-form .fields-stack>label.error:nth-child(3) { top: 64px; }
+form label.error, form label.mp-error { font-weight: 400 !important; color: #fff !important; position: absolute; margin-bottom: -5px; background-color: #d9534f; width: calc(100% - 2px); text-align: center; font-size: 9px !important; text-transform: none !important; left: 1px; top: 100%; border-radius: 6px; border-top-left-radius: 0; border-top-right-radius: 0; }
+form .fields-stack>label.error:nth-child(3), form .fields-stack>label.mp-error:nth-child(3) { top: 64px; }
 
 .modal { position: fixed; z-index: 99999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7);
 	&:not(.in) { display: none; }
