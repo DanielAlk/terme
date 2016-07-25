@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @payment.user %>
+</p>
+
+<p>
+  <strong>Transaction amount:</strong>
+  <%= @payment.transaction_amount %>
+</p>
+
+<p>
+  <strong>Installments:</strong>
+  <%= @payment.installments %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @payment.payment_method_id %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @payment.token %>
+</p>
+
+<p>
+  <strong>Mercadopago payment:</strong>
+  <%= @payment.mercadopago_payment %>
+</p>
+
+<p>
+  <strong>Mercadopago payment:</strong>
+  <%= @payment.mercadopago_payment_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @payment.status %>
+</p>
+
+<p>
+  <strong>Status detail:</strong>
+  <%= @payment.status_detail %>
+</p>
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>

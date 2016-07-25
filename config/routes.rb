@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :payments
+
   root 'pages#home'
 
   get 'home', to: 'pages#home', as: :home

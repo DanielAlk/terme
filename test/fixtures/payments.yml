@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  transaction_amount: 9.99
+  installments: 1
+  payment_method_id: MyString
+  token: MyString
+  mercadopago_payment: MyText
+  mercadopago_payment_id: 1
+  status: MyString
+  status_detail: MyString
+
+two:
+  user_id: 
+  transaction_amount: 9.99
+  installments: 1
+  payment_method_id: MyString
+  token: MyString
+  mercadopago_payment: MyText
+  mercadopago_payment_id: 1
+  status: MyString
+  status_detail: MyString

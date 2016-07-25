@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :addresses, -> { order(position: :asc) }, :as => :addressable, :dependent => :destroy
   has_many :reviews, :as => :reviewer, :dependent => :destroy
+  has_many :payments
 
   def cart_count
     $redis.scan_each(match: "cart:#{id}:*").to_a.uniq.count

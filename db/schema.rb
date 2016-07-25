@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712040241) do
+ActiveRecord::Schema.define(version: 20160725071227) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -91,6 +91,32 @@ ActiveRecord::Schema.define(version: 20160712040241) do
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "payment_products", force: :cascade do |t|
+    t.integer  "payment_id", limit: 4
+    t.integer  "product_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "payment_products", ["payment_id"], name: "index_payment_products_on_payment_id", using: :btree
+  add_index "payment_products", ["product_id"], name: "index_payment_products_on_product_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "user_id",                limit: 4
+    t.decimal  "transaction_amount",                   precision: 8, scale: 2
+    t.integer  "installments",           limit: 4,                             default: 1
+    t.string   "payment_method_id",      limit: 255
+    t.string   "token",                  limit: 255
+    t.text     "mercadopago_payment",    limit: 65535
+    t.integer  "mercadopago_payment_id", limit: 4
+    t.string   "status",                 limit: 255
+    t.string   "status_detail",          limit: 255
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
+  end
+
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.string   "title",           limit: 255
     t.integer  "status",          limit: 4,                             default: 0
@@ -165,6 +191,7 @@ ActiveRecord::Schema.define(version: 20160712040241) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "customer_id",            limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -178,6 +205,9 @@ ActiveRecord::Schema.define(version: 20160712040241) do
   end
 
   add_foreign_key "addresses", "zones"
+  add_foreign_key "payment_products", "payments"
+  add_foreign_key "payment_products", "products"
+  add_foreign_key "payments", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "taggings", "tags"
 end
