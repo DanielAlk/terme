@@ -1,0 +1,33 @@
+<% content_for :extra_js do %>
+  $('.editable').editable(function(form, zone) {
+    var $span = $(form).closest('.editable').children('span');
+    $span.text(Utils.toCurrency(zone.shipment_cost));
+  });
+<% end %>
+
+<% content_for :panel_subtitle, 'Zonas' %>
+
+<div class="table-responsive">
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Costo de envío</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @zones.each do |zone| %>
+        <tr>
+          <td><%= zone.title %></td>
+          <td class="editable">
+            <span><%= zone.shipment_cost.to_s(:currency, unit: '$ ', delimiter: '.') %></span>
+            <%= form_for(zone) do |f| %>
+              <%= f.text_field :shipment_cost, id: 'zone_' + zone.id.to_s + '_shipment_cost', placeholder: 'Costo de envío', required: true, autocomplete: 'off', class: 'autonumeric', style: 'width:50px;' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
