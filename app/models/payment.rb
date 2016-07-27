@@ -19,7 +19,7 @@ class Payment < ActiveRecord::Base
 
   def parse_cart(cart)
     self.shipment_cost = self.zone.shipment_cost
-    self.transaction_amount = cart[:total] + self.zone.shipment_cost
+    self.transaction_amount = cart[:total] + self.shipment_cost
     cart[:products].each do |product|
       self.payment_products.new(product_id: product.id, quantity: cart[:items][product.id.to_s][:quantity].to_i, unit_price: product.price)
     end
