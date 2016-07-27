@@ -1,27 +1,29 @@
 <% content_for :panel_subtitle, current_user.email %>
 
-<p>
-	<b>Nombre:</b>
-	<% if current_user.fname.present? && current_user.fname.present? %>
-		<%= current_user.name %>
-	<% else %>
-		<%= link_to 'Agregar mi nombre', edit_user_registration_path, class: 'link-primary' %>
-	<% end %>
-</p>
-
-<p>
-	<b>Email:</b>
-	<%= current_user.email %>
-</p>
-
-<p>
-	<b>Direccion principal:</b>
-	<% if current_user.addresses.present? %>
-		<%= current_user.addresses.first.address %>
-		<% if current_user.addresses.count-1 > 0 %>
-			&nbsp; <%= link_to '+ ' + (current_user.addresses.count - 1).to_s + ' más', addresses_path, class: 'btn btn-xs btn-success' %>
+<div class="well">
+	<p>
+		<b>Nombre:</b>
+		<% if current_user.fname.present? && current_user.fname.present? %>
+			<%= current_user.name %>
+		<% else %>
+			<%= link_to 'Agregar mi nombre', edit_user_registration_path, class: 'link-primary' %>
 		<% end %>
-	<% else %>
-		<%= link_to 'Agregar direcciones de envío', new_address_path, class: 'link-primary' %>
-	<% end %>
-</p>
+	</p>
+
+	<p>
+		<b>Email:</b>
+		<%= current_user.email %>
+	</p>
+
+	<p>
+		<b>Direccion principal:</b>
+		<% if current_user.addresses.present? %>
+			<%= current_user.addresses.first.address %>
+			<% if current_user.addresses.count-1 > 0 %>
+				&nbsp; <%= link_to '+ ' + (current_user.addresses.count - 1).to_s + ' más', addresses_path, class: 'btn btn-xs btn-success' %>
+			<% end %>
+		<% else %>
+			<%= link_to 'Agregar direcciones de envío', new_address_path, class: 'link-primary' %>
+		<% end %>
+	</p>
+</div>
