@@ -6,6 +6,18 @@ Cart.init = function(user_signed_in) {
 	Cart.update();
 };
 
+Cart.update = function() {
+	$.ajax({url: '/cart', method: 'get'})
+	.done(Cart.checkChanges)
+	.done(Cart.save)
+	.done(Cart.startTimers)
+	.done(Cart.updateHeader)
+	.done(Cart.updateProductPage)
+	.done(Cart.updateCartPage)
+	.done(Cart.updateCheckoutPage)
+	.done(Cart.log);
+};
+
 Cart.addButton = function() {
 	$('#cart-add').click(function(e) {
 		e.preventDefault();
@@ -40,18 +52,6 @@ Cart.checkChanges = function(cart) {
 	Cart.doAlertExpire = false;
 	Cart.doAlertSuccess = false;
 	Cart.redirectIfChange = false;
-};
-
-Cart.update = function() {
-	$.ajax({url: '/cart', method: 'get'})
-	.done(Cart.checkChanges)
-	.done(Cart.save)
-	.done(Cart.startTimers)
-	.done(Cart.updateHeader)
-	.done(Cart.updateProductPage)
-	.done(Cart.updateCartPage)
-	.done(Cart.updateCheckoutPage)
-	.done(Cart.log);
 };
 
 Cart.updateHeader = function(cart){
@@ -224,16 +224,20 @@ Cart.updateCheckoutPage = function() {
 Cart.counter = function() {
 	if ($(this).data('cart-counter')) return;
 	var $counter = $(this);
-	var expires = $counter.data('expires');
+	var start = new Date().getTime();
+	var elapsed = '0';
+	var expiration = $counter.data('expires');
 	var minutes, seconds;
-	var second = function() {
-		expires -= 1;
+	var frame = function() {
+		var time = new Date().getTime() - start;
+		elapsed = Math.round(Math.floor(time / 100) / 10);
+		expires = expiration - elapsed;
 		minutes = Math.floor(expires / 60);
 		seconds = expires - (minutes * 60);
 		if (seconds < 10) seconds = '0' + seconds;
 		$counter.text(minutes + ':' + seconds);
 	};
-	setInterval(second, 1000);
+	window.setInterval(frame, 500);
 	$counter.data('cart-counter', true);
 };
 
