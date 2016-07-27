@@ -17,6 +17,7 @@
 //= require jquery.validate.localization/messages_es_AR
 //= require jquery-ui/sortable
 //= require jquery.elevatezoom
+//= require jquery.livequery-1.3.6.min
 //= require turbolinks
 //= require owl.carousel
 //= require autonumeric

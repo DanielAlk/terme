@@ -1,8 +1,9 @@
 class PaymentsController < ApplicationController
   include Cart
   include MercadoPagoHelper
-  before_action :authenticate_user!
+  before_action :authenticate_user!, unless: Proc.new { admin_signed_in? && action_name == 'show' }
   before_action :set_cart, only: :create
+  before_action :authenticate_cart!, only: :create
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
   layout 'panel'
 
@@ -15,7 +16,7 @@ class PaymentsController < ApplicationController
   # GET /payments/1
   # GET /payments/1.json
   def show
-    raise ActionController::RoutingError.new("No route matches [GET] \"#{request.path}\"") if @payment.user != current_user
+    raise ActionController::RoutingError.new("No route matches [GET] \"#{request.path}\"") if !admin_signed_in? && @payment.user != current_user
   end
 
   # GET /payments/new
@@ -37,7 +38,7 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       if @payment.save
         delete_cart if [:approved, :in_process].include?(@payment.status.to_sym)
-        format.html { redirect_to @payment, notice: MercadoPagoMessage(@payment) }
+        format.html { redirect_to @payment, notice: mercado_pago_message(@payment) }
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new }
@@ -82,7 +83,7 @@ class PaymentsController < ApplicationController
     end
 
     def address_params
-      address = params.require(:address).permit(:email, :fname, :lname, :company, :address, :zip_code, :city, :zone_id, :mobile)
+      address = params.require(:address).permit(:email, :fname, :doc_type, :doc_number, :lname, :company, :address, :zip_code, :city, :zone_id, :mobile)
       address[:zone_id] = payment_params[:zone_id]
       address
     end

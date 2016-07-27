@@ -1,5 +1,5 @@
 <% transaction_amount = @payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %>
-<% content_for :panel_subtitle, "Pago #{@payment.friendly_status.downcase} con #{@payment.payment_method_id.upcase} por #{transaction_amount}" %>
+<% content_for :panel_subtitle, "Pago #{@payment.friendly_status.downcase} con #{@payment.payment_method_id.try(:upcase)} por #{transaction_amount}" %>
 
 <% if notice.present? %>
   <p id="notice" style="margin: 0 0 30px;">
@@ -11,15 +11,17 @@
 <% end %>
 
 <h2 class="text-sm-center m-sm-B-n33 m-xs-0 m-xs-B-20">
-  <span class="label label-<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[@payment.status.to_sym] rescue 'info' %>">
+  <span class="label label-<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[@payment.status.try(:to_sym)] || 'danger' %>">
     <%= @payment.friendly_status %>
   </span>
 </h2>
 <div class="row" style="margin: 0 0 20px;">
   <h2 class="pull-left" style="margin: 0;">
-    <span class="label label-primary">
-      <%= @payment.payment_method_id.upcase %>
-    </span>
+    <% if @payment.payment_method_id.present? %>
+      <span class="label label-primary">
+        <%= @payment.payment_method_id.try(:upcase) %>
+      </span>
+    <% end %>
   </h2>
   <h2 class="pull-right" style="margin: 0;">
     <span class="label label-success">
@@ -36,7 +38,7 @@
 
     <p>
       <strong>Metodo de págo:</strong>
-      <%= @payment.payment_method_id.upcase %>
+      <%= @payment.payment_method_id.try(:upcase) %>
     </p>
   </div>
   <div class="col-sm-4">
@@ -69,9 +71,49 @@
   </div>
 </div>
 
-<h4>Productos</h4>
-<div>
-  <% @payment.payment_products.each do |payment_product| %>
-    <%= render 'products/product_minimal', product: payment_product.product, quantity: payment_product.quantity, unit_price: payment_product.unit_price %>
-  <% end %>
+
+<div id="tabs-container" style="margin-top: 20px;">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#products_tab" aria-controls="products_tab" role="tab" data-toggle="tab">Productos</a>
+    </li>
+    <li role="presentation" class="">
+      <a href="#address_tab" aria-controls="address_tab" role="tab" data-toggle="tab">Direccion de envío</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="products_tab">
+      <div>
+        <% @payment.payment_products.each do |payment_product| %>
+          <%= render 'products/product_minimal', product: payment_product.product, quantity: payment_product.quantity, unit_price: payment_product.unit_price %>
+        <% end %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="address_tab">
+      <div class="well">
+        <p>
+          <strong>Dirección:</strong>
+          <%= @payment.address.address %><br>
+          <strong>Nombre:</strong>
+          <%= @payment.address.fname %>
+          <%= @payment.address.lname %><br>
+          <strong>Email:</strong>
+          <%= @payment.address.email %><br>
+          <strong>Document:</strong>
+          <%= @payment.address.doc_type %>
+          <%= @payment.address.doc_number %><br>
+          <strong>Código postal:</strong>
+          <%= @payment.address.zip_code %><br>
+          <strong>Ciudad:</strong>
+          <%= @payment.address.city %><br>
+          <strong>Provincia:</strong>
+          <%= @payment.address.zone.title %><br>
+          <strong>Compañía:</strong>
+          <%= @payment.address.company %><br>
+          <strong>Teléfono Celular:</strong>
+          <%= @payment.address.mobile %><br>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

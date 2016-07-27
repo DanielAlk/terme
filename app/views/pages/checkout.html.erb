@@ -119,8 +119,8 @@
               <li class="wide">
                 <div class="field">
                   <label class="requerido" for="docType">Tipo y Nro de documento:</label>
-                  <select id="docType" data-checkout="docType" required></select>
-                  <input type="text" id="docNumber" data-checkout="docNumber" placeholder="Número de documento" required>
+                  <select id="docType" name="address[doc_type]" data-checkout="docType" data-selected="<%= (current_user.address.doc_type rescue '') %>" required></select>
+                  <input type="text" name="address[doc_number]" value="<%= (current_user.address.doc_number rescue '') %>" id="docNumber" data-checkout="docNumber" placeholder="Número de documento" required>
                 </div>
               </li>
             </ul>
@@ -192,7 +192,8 @@
               <div class="field">
                 <label class="requerido">código de seguridad (ccv)</label>
                 <input type="text" data-checkout="securityCode" required placeholder="000">
-                <a href="#">Qué es esto?</a> </div>
+                <!--a href="#">Qué es esto?</a-->
+              </div>
             </li>
             <li class="wide">
               <div class="field">

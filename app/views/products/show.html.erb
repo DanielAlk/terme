@@ -63,12 +63,19 @@
       <a href="#data_sheet_tab" aria-controls="data_sheet_tab" role="tab" data-toggle="tab">Ficha técnica</a>
     </li>
     <li role="presentation">
-      <a href="#information_tab" aria-controls="information_tab" role="tab" data-toggle="tab">Información adicional</a>
+      <a href="#information_tab" aria-controls="information_tab" role="tab" data-toggle="tab">Info adicional</a>
     </li>
+    <% if @product.payments.present? %>
+      <li role="presentation">
+        <a href="#payments_tab" aria-controls="payments_tab" role="tab" data-toggle="tab">
+          Ventas <span class="badge"><%= @product.payments.count %></span>
+        </a>
+      </li>
+    <% end %>
     <% if @product.reviews.present? %>
       <li role="presentation">
         <a href="#reviews_tab" aria-controls="reviews_tab" role="tab" data-toggle="tab">
-          Reviews <span class="badge"><%= @product.reviews.count %>
+          Reviews <span class="badge"><%= @product.reviews.count %></span>
         </a>
       </li>
     <% end %>
@@ -121,9 +128,57 @@
         <%= @product.information.html_safe %>
       </p>
     </div>
-    <div role="tabpanel" class="tab-pane" id="reviews_tab">
-      <p class="well">
-        <% if @product.reviews.present? %>
+    <% if @product.payments.present? %>
+      <% content_for :extra_js do %>
+        $('#payments_tab tbody tr').click(function(e) {
+          e.preventDefault();
+          window.location.href = $('#link_payment_' + $(this).data('id')).attr('href');
+        });
+        $('#payments_tab tbody a').click(function(e) {
+          e.stopPropagation();
+        });
+      <% end %>
+      <div role="tabpanel" class="tab-pane" id="payments_tab">
+        <div class="table-responsive">
+          <table class="table table-condensed table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Estado</th>
+                <% if false %>
+                  <th>Cuotas</th>
+                <% end %>
+                <th>Medio de pago</th>
+                <th>Importe</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @product.payments.order(updated_at: :desc).each do |payment| %>
+                <tr style="cursor:pointer;" data-id="<%= payment.id %>" class="<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[payment.status.try(:to_sym)] || 'danger' %>">
+                  <td>
+                    <%= link_to payment, id: 'link_payment_' + payment.id.to_s do %>
+                      <%= image_tag payment.products.first.image, style: 'height: 24px; width: auto; margin: -4px 0 -2px;' %>
+                    <% end %>
+                  </td>
+                  <td><%= payment.friendly_status %></td>
+                  <% if false %>
+                    <td><%= payment.installments %></td>
+                  <% end %>
+                  <td><%= payment.payment_method_id.upcase rescue nil %></td>
+                  <td><b><%= payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ",", delimiter: ".") %></b></td>
+                  <td><%= payment.created_at.strftime('%d/%m/%Y') %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+    <% if @product.reviews.present? %>
+      <div role="tabpanel" class="tab-pane" id="reviews_tab">
+        <p class="well">
           <strong>Promedio: </strong><%= @product.score/2.to_f %>/5<br>
           <br>
           <% @product.reviews.each do |review| %>
@@ -131,8 +186,8 @@
             <i class="fa fa-arrow-right fa-fw"></i>
             <%= review.score/2.to_f %>/5<br>
           <% end %>
-        <% end %>
-      </p>
-    </div>
+        </p>
+      </div>
+    <% end %>
   </div>
 </div>

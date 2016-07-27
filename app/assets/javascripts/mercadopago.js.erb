@@ -5,6 +5,11 @@ MP.init = function() {
 	Mercadopago.getIdentificationTypes();
 	MP.getPaymentMethod();
 	MP.captureSubmit();
+	$('#docType option').livequery(function(e){
+		var $option = $(this);
+		var $select = $option.parent();
+		if ($option.val() == $select.data('selected')) $select.val($option.val());
+	});
 };
 
 MP.captureSubmit = function() {

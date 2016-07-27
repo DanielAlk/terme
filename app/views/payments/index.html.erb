@@ -8,8 +8,6 @@
   });
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
 <% content_for :panel_subtitle, 'Tus Págos' %>
 
 <% if @payments.blank? %>
@@ -32,7 +30,7 @@
 
       <tbody>
         <% @payments.each do |payment| %>
-          <tr style="cursor:pointer;" data-id="<%= payment.id %>" class="<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[payment.status.to_sym] rescue nil %>">
+          <tr style="cursor:pointer;" data-id="<%= payment.id %>" class="<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[payment.status.try(:to_sym)] || 'danger' %>">
             <td>
               <%= link_to payment, id: 'link_payment_' + payment.id.to_s do %>
                 <%= image_tag payment.products.first.image, style: 'height: 24px; width: auto; margin: -4px 0 -2px;' %>

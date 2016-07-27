@@ -11,6 +11,7 @@ class Payment < ActiveRecord::Base
   validates :transaction_amount, presence: true
 
   after_create :create_mercadopago_user
+  after_create :save_user_address, if: :save_address?
   after_create :create_mercadopago_payment
 
   serialize :mercadopago_payment
@@ -23,18 +24,11 @@ class Payment < ActiveRecord::Base
   end
 
   def create_mercadopago_user
-    unless user.customer_id.present?
-      customer = $mp.post("/v1/customers", { email: user.email })
-      user.customer_id = customer['response']['id']
-      if user.customer_id.blank?
-        customer = $mp.get("/v1/customers/search", { email: user.email })
-        user.customer_id = customer['response']['results'][0]['id']
-      end
-      user.save
-    end
-    if self.save_address
-      user.addresses.create(self.address.attributes.select { |key,val| !['id', 'addressable_type', 'addressable_id'].include? key })
-    end
+    user.create_mercadopago_user
+  end
+
+  def save_user_address
+    user.addresses.create(self.address.attributes.select { |key,val| !['id', 'addressable_type', 'addressable_id'].include? key })
   end
   
   def create_mercadopago_payment
@@ -62,7 +56,7 @@ class Payment < ActiveRecord::Base
   			id: user.customer_id
 			},
 			external_reference: id,
-			statement_descriptor: "Aria Web",
+			statement_descriptor: "Compra en Aria Web",
 			notification_url: "https://ariaweb.com.ar/payments/notifications",
 			additional_info: additional_info
   	}
@@ -72,17 +66,26 @@ class Payment < ActiveRecord::Base
     self.status = self.mercadopago_payment['status']
     self.status_detail = self.mercadopago_payment['status_detail']
     if [:approved, :in_process].include?(self.status.to_sym)
+      if self.save_card
+        user.card = token
+      end
       payment_products.each do |payment_product|
         product = payment_product.product
         product.stock -= payment_product.quantity
         product.save
       end
+    elsif self.status == '400' && self.mercadopago_payment['cause'][0]['code'] == 2002 #customer_not_found
+      user.update_attribute(:customer_id, nil)
     end
     save
   end
 
   def friendly_status
-    { approved: 'Aprobado', in_process: 'En proceso', rejected: 'Rechazado' }[status.to_sym] if status.present?
+    friendly = { approved: 'Aprobado', in_process: 'En proceso', rejected: 'Rechazado' }[status.try(:to_sym)]
+    if friendly.blank?
+      friendly = 'No procesado'
+    end
+    friendly
   end
 
   private

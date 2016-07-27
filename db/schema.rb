@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20160725071227) do
     t.string   "email",            limit: 255
     t.string   "fname",            limit: 255
     t.string   "lname",            limit: 255
+    t.string   "doc_type",         limit: 255
+    t.string   "doc_number",       limit: 255
     t.string   "company",          limit: 255
     t.string   "zip_code",         limit: 255
     t.string   "city",             limit: 255

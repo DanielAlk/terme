@@ -6,6 +6,8 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :email
       t.string :fname
       t.string :lname
+      t.string :doc_type
+      t.string :doc_number
       t.string :company
       t.string :zip_code
       t.string :city

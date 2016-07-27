@@ -16,6 +16,29 @@ class User < ActiveRecord::Base
   	"cart:#{id}:#{product_id}"
   end
 
+  def card=(token)
+    $mp.post("/v1/customers/#{customer_id}/cards", { token: token })
+  end
+
+  def cards
+    request = $mp.get("/v1/customers/#{customer_id}/cards")
+    if request["status"] == "200"
+      request["response"]
+    end
+  end
+
+  def create_mercadopago_user
+    unless self.customer_id.present?
+      customer = $mp.post("/v1/customers", { email: email })
+      self.customer_id = customer['response']['id']
+      if self.customer_id.blank?
+        customer = $mp.get("/v1/customers/search", { email: email })
+        self.customer_id = customer['response']['results'][0]['id']
+      end
+      self.save
+    end
+  end
+
   def address
   	addresses.first
   end

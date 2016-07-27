@@ -1,14 +1,20 @@
 module MercadoPagoHelper
 	extend ActiveSupport::Concern
 
-	def MercadoPagoMessage(payment)
-		message = MercadoPagoMessages()[payment.status.to_sym][payment.status_detail.to_sym]
+	def mercado_pago_message(payment)
+		if mercado_pago_errors.keys.include? payment.status.to_i
+			message = mercado_pago_errors[payment.status.to_i]
+		elsif payment.status.present? && payment.status_detail.present?
+			message = mercado_pago_messages[payment.status.to_sym][payment.status_detail.to_sym]
+		else
+			message = 'Ocurrió un error al procesar tu pago, por favor intenta nuevamente en unos minutos.'
+		end
 		message.gsub(/\{\{\w+\}\}/) do |match|
 			payment.mercadopago_payment[match.gsub(/[{}]/, '')].to_s
 		end
 	end
 
-	def MercadoPagoMessages
+	def mercado_pago_messages
 		{
 		  approved: { 
 		    accredited: '¡Listo, se acreditó tu pago!<br>En tu resumen verás el cargo de {{transaction_amount}} como {{statement_descriptor}}.'
@@ -36,7 +42,7 @@ module MercadoPagoHelper
 		}
 	end
 
-	def MercadoPagoErrors
+	def mercado_pago_errors
 		{
 		  106 => {
 		    description: 'Cannot operate between users from different countries',

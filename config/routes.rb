@@ -52,7 +52,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :payments, only: [ :index, :show, :create ], path: 'profile/payments'
+  resources :payments, only: [ :index, :show, :create ]
 
   root 'pages#home'
 
