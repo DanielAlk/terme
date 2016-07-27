@@ -1,6 +1,8 @@
+<% path_to_product = admin_signed_in? ? product_path(product) : product_page_path(product) %>
+
 <div class="display display-minimal" id="product_<%= product.id %>">
 	<div class="display-caption">
-		<a class="display-thumb" href="<%= product_page_path(product) %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
+		<a class="display-thumb" href="<%= path_to_product %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
 		<div class="display-bottom-right">
 			<h4 style="margin:0; text-align: right;">
 				<span class="label label-success">
@@ -18,7 +20,7 @@
 			<span class="label label-warning">Código: <%= product.key_code %></span>
 		</div>
 		<div class="display-body">
-			<h3 class="display-title"><%= link_to product.title, product_page_path(product) %></h3>
+			<h3 class="display-title"><%= link_to product.title, path_to_product %></h3>
 			<h4 class="display-subtitle"><%= product.description %></h4>
 		</div>
 	</div>

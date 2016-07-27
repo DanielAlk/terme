@@ -18,6 +18,9 @@
       <thead>
         <tr>
           <th></th>
+          <% if admin_signed_in? %>
+            <th>User</th>
+          <% end %>
           <th>Estado</th>
           <% if false %>
             <th>Cuotas</th>
@@ -36,6 +39,9 @@
                 <%= image_tag payment.products.first.image, style: 'height: 24px; width: auto; margin: -4px 0 -2px;' %>
               <% end %>
             </td>
+            <% if admin_signed_in? %>
+              <td><%= payment.user.name %></td>
+            <% end %>
             <td><%= payment.friendly_status %></td>
             <% if false %>
               <td><%= payment.installments %></td>

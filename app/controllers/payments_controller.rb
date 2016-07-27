@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   include Cart
   include MercadoPagoHelper
-  before_action :authenticate_user!, unless: Proc.new { admin_signed_in? && action_name == 'show' }
+  before_action :authenticate_user!, unless: Proc.new { admin_signed_in? && [:index, :show].include?(action_name.to_sym) }
   before_action :set_cart, only: :create
   before_action :authenticate_cart!, only: :create
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
@@ -10,7 +10,11 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = current_user.payments.order(updated_at: :desc)
+    if admin_signed_in?
+      @payments = Payment.order(updated_at: :desc)
+    else
+      @payments = current_user.payments.order(updated_at: :desc)
+    end
   end
 
   # GET /payments/1

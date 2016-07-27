@@ -48,6 +48,11 @@
 	  		<i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuarios
 	  	<% end %>
 	  </li>
+	  <li role="presentation" class="<%= panel_nav_class(:payments) %>">
+	  	<%= link_to payments_path do %>
+	  		<i class="fa fa-money fa-fw" aria-hidden="true"></i> Pagos
+	  	<% end %>
+	  </li>
 	  <li role="presentation" class="<%= panel_nav_class(:categories) %>">
 	  	<%= link_to categories_path do %>
 	  		<i class="fa fa-list fa-fw" aria-hidden="true"></i> Categorias
