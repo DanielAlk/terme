@@ -53,14 +53,12 @@
       <div class="col-right">
         <h2>Dirección</h2>
         <div class="direccion"> <span class="icon"></span>
-          <p>Jorge 408, Adrogué,<br>
-            Buenos Aires</p>
+          <p><%= @website.address %></p>
         </div>
-        <p class="info">Lorem Ipsum is simply dummy<br>
-          text of the printing and over</p>
-        <div class="telefonos"> <span class="icon"></span> <span class="numeros">(+ 54 11) 3969.8286 <br>
-          (+54 11) 15.3126.3521</span> </div>
-        <div class="email"> <span class="icon"></span> <a href="mailto:info@ariaweb.com.ar">info@ariaweb.com.ar</a> </div>
+        <div class="telefonos"> <span class="icon"></span> <span class="numeros"><%= @website.phone %> <br>
+          <%= @website.mobile %></span>
+        </div>
+        <div class="email"> <span class="icon"></span> <a href="mailto:<%= @website.email %>"><%= @website.email %></a> </div>
         <div class="info"> Si tenes preguntas sobre tu orden o necesitas informacion general nuestro servicio al cliente te respondera a la brevedad. </div>
       </div>
     </section>
@@ -69,10 +67,6 @@
       <div class="partner"><img src="<%= asset_path 'partner/toshiba.jpg' %>" alt=""></div>
       <div class="partner"><img src="<%= asset_path 'partner/midea.jpg' %>" alt=""></div>
     </div>
-    <div class="socialmedia-bottom">
-      <div class="facebook"> <a href="http://www.facebook.com" target="_blank">Facebook</a> </div>
-      <div class="twitter"> <a href="http://www.twitter.com" target="_blank">Twitterk</a> </div>
-      <div class="youtube"> <a href="http://www.youtube.com" target="_blank">Youtube</a> </div>
-    </div>
+    <%= render 'partials/social_media' %>
   </div>
 </div>

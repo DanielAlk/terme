@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725071227) do
+ActiveRecord::Schema.define(version: 20160727185629) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -214,6 +214,20 @@ ActiveRecord::Schema.define(version: 20160725071227) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "websites", force: :cascade do |t|
+    t.string   "address",    limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "mobile",     limit: 255
+    t.string   "email",      limit: 255
+    t.string   "facebook",   limit: 255
+    t.string   "twitter",    limit: 255
+    t.string   "google",     limit: 255
+    t.string   "linkedin",   limit: 255
+    t.string   "youtube",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "zones", force: :cascade do |t|
     t.string   "title",         limit: 255

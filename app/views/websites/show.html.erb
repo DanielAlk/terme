@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @website.address %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @website.phone %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @website.mobile %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @website.email %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @website.facebook %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @website.twitter %>
+</p>
+
+<p>
+  <strong>Google:</strong>
+  <%= @website.google %>
+</p>
+
+<p>
+  <strong>Linkedin:</strong>
+  <%= @website.linkedin %>
+</p>
+
+<p>
+  <strong>Youtube:</strong>
+  <%= @website.youtube %>
+</p>
+
+<%= link_to 'Edit', edit_website_path(@website) %> |
+<%= link_to 'Back', websites_path %>

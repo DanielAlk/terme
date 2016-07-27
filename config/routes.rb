@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       passwords: 'admins/passwords'
     }
 
+    resources :websites, :defaults => { :format => :json }, only: [:show, :update]
+    
     resources :users
 
     resources :categories

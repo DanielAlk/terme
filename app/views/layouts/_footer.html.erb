@@ -32,10 +32,10 @@
     </div>
     <div class="contacto">
       <h2>Contacto</h2>
-      <p>Jorge 408, Adrogué - Buenos Aires</p>
-      <div class="telefonos"> <span class="icono"></span> <span class="numeros">(+54 11) 3969.8286 <br>
-        (+54 11) 15.3126.3521</span> </div>
-      <div class="email"> <span class="icono"></span> <a href="mailto:info@ariaweb.com.ar">info@ariaweb.com.ar</a> </div>
+      <p><%= @website.address %></p>
+      <div class="telefonos"> <span class="icono"></span> <span class="numeros"><%= @website.phone %><br>
+        <%= @website.mobile %></span> </div>
+      <div class="email"> <span class="icono"></span> <a href="mailto:<%= @website.email %>"><%= @website.email %></a> </div>
     </div>
   </div>
 </footer>
@@ -45,11 +45,11 @@
     <div class="powered"> <span>Powered by </span> <a href="#" title="Vertigo Design"> <img src="<%= asset_path 'Vertigo_Design.png' %>" alt="Vertigo Design" title="Vertigo Design"> </a> </div>
     <div class="socialmedia">
       <ul>
-        <li class="facebook"><a href="#" title="Facebook">Facebook</a></li>
-        <li class="twitter"><a href="#" title="Twitter">Twitter</a></li>
-        <li class="google"><a href="#" title="Google">Google</a></li>
-        <li class="linkedin"><a href="#" title="Linkedin">Linkedin</a></li>
-        <li class="youtube"><a href="#" title="Youtube">Youtube</a></li>
+        <li class="facebook"><a href="<%= @website.facebook %>" title="Facebook">Facebook</a></li>
+        <li class="twitter"><a href="<%= @website.twitter %>" title="Twitter">Twitter</a></li>
+        <li class="google"><a href="<%= @website.google %>" title="Google">Google</a></li>
+        <li class="linkedin"><a href="<%= @website.linkedin %>" title="Linkedin">Linkedin</a></li>
+        <li class="youtube"><a href="<%= @website.youtube %>" title="Youtube">Youtube</a></li>
       </ul>
     </div>
   </div>

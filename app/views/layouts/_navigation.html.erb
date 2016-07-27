@@ -3,17 +3,17 @@
     <div class="info-top">
       <div class="socialmedia">
         <ul>
-          <li class="facebook"><a href="#" title="Facebook">Facebook</a></li>
-          <li class="twitter"><a href="#" title="Twitter">Twitter</a></li>
-          <li class="google"><a href="#" title="Google">Google</a></li>
-          <li class="linkedin"><a href="#" title="Linkedin">Linkedin</a></li>
-          <li class="youtube"><a href="#" title="Youtube">Youtube</a></li>
+          <li class="facebook"><a href="<%= @website.facebook %>" title="Facebook">Facebook</a></li>
+          <li class="twitter"><a href="<%= @website.twitter %>" title="Twitter">Twitter</a></li>
+          <li class="google"><a href="<%= @website.google %>" title="Google">Google</a></li>
+          <li class="linkedin"><a href="<%= @website.linkedin %>" title="Linkedin">Linkedin</a></li>
+          <li class="youtube"><a href="<%= @website.youtube %>" title="Youtube">Youtube</a></li>
         </ul>
       </div>
       <div class="links-top">
         <ul>
-          <li class="email"> <a href="mailto:info@ariaweb.com.ar" title="Email"> <span></span> info@ariaweb.com.ar </a> </li>
-          <li class="whatsapp" title="Whatsapp"> <a href="tel:+541139698286"> <span></span> (+54 11) 3969.8286 </a> </li>
+          <li class="email"> <a href="mailto:<%= '@website.email' %>" title="Email"> <span></span><%= @website.email %></a> </li>
+          <li class="whatsapp" title="Whatsapp"> <a href="tel:<%= @website.phone.gsub(/[^\d\+]/, '') %>"> <span></span><%= @website.phone %></a> </li>
         </ul>
       </div>
       <div class="top-right">
