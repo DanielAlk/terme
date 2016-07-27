@@ -1,4 +1,6 @@
-<%= form_tag products_page_path(@category), method: :get, class: 'products-page-filters' do %>
+<% form_url = @tag.present? ? tag_page_path(@tag) : products_page_path(@category) %>
+
+<%= form_tag form_url, method: :get, class: 'products-page-filters' do %>
 	<div style="display:none;">
 		<%= submit_tag %>
 	</div>

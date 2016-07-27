@@ -59,6 +59,7 @@ Rails.application.routes.draw do
 
   get 'home', to: 'pages#home', as: :home
   get 'catalogo/(:category_id)', to: 'pages#products', as: :products_page
+  get 'tag/:tag_id', to: 'pages#tag', as: :tag_page
   get 'producto/:product_id', to: 'pages#product', as: :product_page
   get 'carrito', to: 'pages#cart', as: :cart_page
   get 'checkout', to: 'pages#checkout', as: :checkout_page

@@ -3,28 +3,20 @@
     <div class="secciones">
       <h2>Secciones</h2>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">La Empresa</a></li>
-        <li><a href="#">Productos y Servicios</a></li>
-        <li><a href="#">Clubs de Partners Aria </a></li>
-        <li><a href="#">Noticias</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li><a href="<%= about_page_path %>">La Empresa</a></li>
+        <li><a href="<%= products_page_path %>">Productos y Servicios</a></li>
+        <li><a href="<%= partners_page_path %>">Clubs de Partners Aria </a></li>
+        <li><a href="<%= news_page_path %>">Noticias</a></li>
+        <li><a href="<%= contact_page_path %>">Contacto</a></li>
       </ul>
     </div>
     <div class="tags">
       <h2>Tags</h2>
       <ul>
-        <li><a href="#">Aire acondicionado</a></li>
-        <li><a href="#">Anafes</a></li>
-        <li><a href="#">Carrier</a></li>
-        <li><a href="#">Domec</a></li>
-        <li><a href="#">Midea</a></li>
-        <li><a href="#">Pisos</a></li>
-        <li><a href="#">Calefón</a></li>
-        <li><a href="#">Hornos</a></li>
-        <li><a href="#">Campanas</a></li>
-        <li><a href="#">Cintas</a></li>
-        <li><a href="#">Aislantes</a></li>
+        <% Tag.limit(10).order('RAND()').each do |tag| %>
+          <li><a href="<%= tag_page_path(tag) %>"><%= tag.name %></a></li>
+        <% end %>
       </ul>
     </div>
     <div class="newsletter">

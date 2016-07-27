@@ -40,11 +40,11 @@
         </div>
         <div class="buscador">
           <div class="buscar_mobile"></div>
-          <form class="busca_form">
-            <input id="buscar" type="search" placeholder="Buscar" required>
-            <input type="submit" name="Buscar" title="buscar" value="buscar">
+          <%= form_tag products_page_path, method: :get, class: 'busca_form' do %>
+            <%= search_field_tag 'f[search]', filterable(:search), placeholder: 'Buscar', id: 'buscar', required: true %>
+            <%= submit_tag 'Buscar', title: 'Buscar' %>
             <span class="borrar"></span>
-          </form>
+          <% end %>
         </div>
       </div>
     </div>

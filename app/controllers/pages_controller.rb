@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   include Filterize
   before_action :authenticate_user!, only: [:cart, :checkout, :confirm]
   before_action :set_cart, only: [:cart, :checkout]
-  before_action :filterize, only: :products
+  before_action :filterize, only: [:products, :tag]
   filterize object: :product, order: :price_asc, scope: :active, param: :f
   layout 'soon', only: :soon
   
@@ -15,6 +15,13 @@ class PagesController < ApplicationController
     @category = Category.friendly.find(params[:category_id]) rescue nil
     @products = @products.where(category: @category) if @category.present?
     @products = @products.paginate(:page => params[:page], :per_page => params[:per_page] || 12)
+  end
+
+  def tag
+    @tag = Tag.friendly.find(params[:tag_id])
+    @products = @products.where(id: Tagging.where(taggable_type: 'Product', tag_id: @tag.id ).map(&:taggable_id))
+    @products = @products.paginate(:page => params[:page], :per_page => params[:per_page] || 12)
+    render :products
   end
 
   def product
