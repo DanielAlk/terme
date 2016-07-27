@@ -27,6 +27,12 @@ es:
         restrict_dependent_destroy:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
+      models:
+        category:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                many: No se puede eliminar la categoría porque existen %{record} dependientes
   will_paginate:
     next_label: "→"
     page_entries_info:

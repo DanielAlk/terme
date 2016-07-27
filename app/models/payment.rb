@@ -21,7 +21,10 @@ class Payment < ActiveRecord::Base
     self.shipment_cost = self.zone.shipment_cost
     self.transaction_amount = cart[:total] + self.shipment_cost
     cart[:products].each do |product|
-      self.payment_products.new(product_id: product.id, quantity: cart[:items][product.id.to_s][:quantity].to_i, unit_price: product.price)
+      payment_product = self.payment_products.new(product.attributes.select { |key,val| [:price, :title, :key_code, :brand, :category_id, :currency, :description, :external_link].include? key.to_sym })
+      payment_product.product = product
+      payment_product.quantity = cart[:items][product.id.to_s][:quantity].to_i
+      payment_product.image = Image.new(item: product.images.first.item)
     end
   end
 
@@ -94,12 +97,12 @@ class Payment < ActiveRecord::Base
   		payment_products.map do |payment_product|
   			{
   				id: payment_product.product.id,
-  				title: payment_product.product.title,
-  				picture_url: payment_product.product.image(:medium),
-  				description: payment_product.product.description,
+  				title: payment_product.title,
+  				picture_url: payment_product.image(:medium),
+  				description: payment_product.description,
   				category_id: 'home',
   				quantity: payment_product.quantity,
-  				unit_price: payment_product.unit_price
+  				unit_price: payment_product.price
   			}
   		end
   	end

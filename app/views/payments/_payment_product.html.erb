@@ -1,17 +1,17 @@
-<% path_to_product = admin_signed_in? ? product_path(product) : product_page_path(product) %>
+<% path_to_product = admin_signed_in? ? product_path(product.product) : 'javascript:void(0);' %>
 
-<div class="display display-minimal" id="product_<%= product.id %>">
+<div class="display display-minimal <%= 'display-no-links' unless admin_signed_in? %>" id="product_<%= product.id %>">
 	<div class="display-caption">
-		<a class="display-thumb" href="<%= path_to_product %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
+		<a class="display-thumb" href="<%= path_to_product %>" style="background-image:url(<%= asset_path product.cover :thumb %>)"></a>
 		<div class="display-bottom-right">
 			<h4 style="margin:0; text-align: right;">
 				<span class="label label-success">
-					<%= quantity %> x
-					<%= unit_price.to_s(:currency, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+					<%= product.quantity %> x
+					<%= product.price.to_s(:currency, unit: product.currency + " ", separator: ",", delimiter: ".") %>
 				</span>
 				<br>
 				<span class="label label-warning" style="display: inline-block; margin-top: 8px;">
-					<%= (unit_price * quantity).to_s(:currency, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+					<%= (product.price * product.quantity).to_s(:currency, unit: product.currency + " ", separator: ",", delimiter: ".") %>
 				</span>
 			</h4>
 		</div>

@@ -27,12 +27,12 @@ class Product < ActiveRecord::Base
       status: 'status', title: 'título', brand: 'marca', category: 'categoría', price: 'precio', key_code: 'código', created_at: 'creación', updated_at: 'modificación'
     },
     scopes: {
-      status: {draft: 'borrador', active: 'activa', paused: 'pausada'},
+      status: {draft: 'borrador', active: 'activo', paused: 'pausado', deleted: 'eliminado'},
       special: {is_regular: 'sin marca', is_new: 'nuevo', is_offer: 'oferta'}
     }
   }
 
-  enum status: [ :draft, :active, :paused ]
+  enum status: [ :draft, :active, :paused, :deleted ]
   enum special: [ :is_regular, :is_new, :is_offer ]
   enum currency: [ '$' ]
 
@@ -45,7 +45,7 @@ class Product < ActiveRecord::Base
   end
 
   def status_translated
-    {draft: 'Borrador', active: 'Activa', paused: 'Pausada'}[self.status.to_sym]
+    {draft: 'Borrador', active: 'Activo', paused: 'Pausado', deleted: 'Eliminado'}[self.status.to_sym]
   end
 
   def image(size = :thumb)
@@ -70,6 +70,14 @@ class Product < ActiveRecord::Base
       score += review.score
     end
     (score / reviews.count.to_f).round rescue false
+  end
+
+  def destroy
+    if self.payments.present?
+      self.deleted!
+    else
+      super
+    end
   end
   
   private

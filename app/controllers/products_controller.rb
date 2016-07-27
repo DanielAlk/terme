@@ -83,14 +83,10 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    @product.destroy
     respond_to do |format|
-      if (@product.destroy rescue false)
-        format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to product_url(@product), alert: 'El producto no se puede borrar, probablemente tiene ventas asociadas. Puedes pausarlo para que no aparezca en los listados.' }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

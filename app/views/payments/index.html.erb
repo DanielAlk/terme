@@ -36,7 +36,7 @@
           <tr style="cursor:pointer;" data-id="<%= payment.id %>" class="<%= { approved: 'success', in_process: 'info', rejected: 'danger' }[payment.status.try(:to_sym)] || 'danger' %>">
             <td>
               <%= link_to payment, id: 'link_payment_' + payment.id.to_s do %>
-                <%= image_tag payment.products.first.image, style: 'height: 24px; width: auto; margin: -4px 0 -2px;' %>
+                <%= image_tag payment.payment_products.first.cover, style: 'height: 24px; width: auto; margin: -4px 0 -2px;' %>
               <% end %>
             </td>
             <% if admin_signed_in? %>

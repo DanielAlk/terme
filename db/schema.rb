@@ -94,14 +94,22 @@ ActiveRecord::Schema.define(version: 20160725071227) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "payment_products", force: :cascade do |t|
-    t.integer  "payment_id", limit: 4
-    t.integer  "product_id", limit: 4
-    t.integer  "quantity",   limit: 4
-    t.decimal  "unit_price",           precision: 8, scale: 2
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.integer  "payment_id",    limit: 4
+    t.integer  "product_id",    limit: 4
+    t.integer  "quantity",      limit: 4
+    t.decimal  "price",                     precision: 8, scale: 2
+    t.string   "title",         limit: 255
+    t.string   "key_code",      limit: 255
+    t.string   "brand",         limit: 255
+    t.integer  "category_id",   limit: 4
+    t.integer  "currency",      limit: 4,                           default: 0
+    t.string   "description",   limit: 255
+    t.string   "external_link", limit: 255
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
   end
 
+  add_index "payment_products", ["category_id"], name: "index_payment_products_on_category_id", using: :btree
   add_index "payment_products", ["payment_id"], name: "index_payment_products_on_payment_id", using: :btree
   add_index "payment_products", ["product_id"], name: "index_payment_products_on_product_id", using: :btree
 
@@ -216,6 +224,7 @@ ActiveRecord::Schema.define(version: 20160725071227) do
   end
 
   add_foreign_key "addresses", "zones"
+  add_foreign_key "payment_products", "categories"
   add_foreign_key "payment_products", "payments"
   add_foreign_key "payment_products", "products"
   add_foreign_key "payments", "users"

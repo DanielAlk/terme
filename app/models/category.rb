@@ -2,7 +2,8 @@ class Category < ActiveRecord::Base
 	extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 	has_ancestry
-  has_many :products
+  has_many :products, :dependent => :restrict_with_error
+  has_many :payment_products, :dependent => :restrict_with_error
   before_destroy :abort_if_fixed
 
 	validates_presence_of :title

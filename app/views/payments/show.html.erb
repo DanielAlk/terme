@@ -96,7 +96,7 @@
     <div role="tabpanel" class="tab-pane active" id="products_tab">
       <div>
         <% @payment.payment_products.each do |payment_product| %>
-          <%= render 'products/product_minimal', product: payment_product.product, quantity: payment_product.quantity, unit_price: payment_product.unit_price %>
+          <%= render 'payment_product', product: payment_product %>
         <% end %>
       </div>
     </div>
