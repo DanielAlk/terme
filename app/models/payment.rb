@@ -18,6 +18,8 @@ class Payment < ActiveRecord::Base
   serialize :additional_info
 
   def parse_cart(cart)
+    self.shipment_cost = self.zone.shipment_cost
+    self.transaction_amount = cart[:total] + self.zone.shipment_cost
     cart[:products].each do |product|
       self.payment_products.new(product_id: product.id, quantity: cart[:items][product.id.to_s][:quantity].to_i, unit_price: product.price)
     end
@@ -60,7 +62,6 @@ class Payment < ActiveRecord::Base
 			notification_url: "https://ariaweb.com.ar/payments/notifications",
 			additional_info: additional_info
   	}
-    self.shipment_cost = self.zone.shipment_cost
   	self.mercadopago_payment = $mp.post("/v1/payments", paymentData)['response'];
     self.mercadopago_payment_id = self.mercadopago_payment['id']
     self.status = self.mercadopago_payment['status']
