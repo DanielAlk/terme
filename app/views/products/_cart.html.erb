@@ -1,3 +1,5 @@
+<% characteristics = product.characteristics[0...180] %>
+<% characteristics += '…' if product.characteristics.length > characteristics.length %>
 <% quantity = @cart[:items][product.id.to_s][:quantity].to_i %>
 <% seconds = @cart[:items][product.id.to_s][:expires_in] %>
 <% minutes = @cart[:items][product.id.to_s][:expires_in] / 60 %>
@@ -12,7 +14,7 @@
 	</td>
   <td class="nombre-product">
   	<h3 class="product-name"><%= link_to product.title, product_page_path(product), style: 'color:inherit;' %></h3>
-  	<div class="descripcion"><%= product.characteristics[0...200] %></div>
+  	<div class="descripcion"><%= characteristics %></div>
   	<% if false %>
 	    <div class="compartir"> <a href="#" class="facebook"> Facebook </a> <a href="#" class="twitter"> Twitter </a> </div>
     <% end %>

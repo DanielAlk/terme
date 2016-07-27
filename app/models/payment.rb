@@ -10,6 +10,7 @@ class Payment < ActiveRecord::Base
   validates :payment_products, presence: true
   validates :transaction_amount, presence: true
 
+  after_create :create_mercadopago_user
   after_create :create_mercadopago_payment
 
   serialize :mercadopago_payment
@@ -21,8 +22,8 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  def create_mercadopago_payment
-  	unless user.customer_id.present?
+  def create_mercadopago_user
+    unless user.customer_id.present?
       customer = $mp.post("/v1/customers", { email: user.email })
       user.customer_id = customer['response']['id']
       if user.customer_id.blank?
@@ -30,7 +31,13 @@ class Payment < ActiveRecord::Base
         user.customer_id = customer['response']['results'][0]['id']
       end
       user.save
-  	end
+    end
+    if self.save_address
+      user.addresses.create(self.address.attributes.select { |key,val| !['id', 'addressable_type', 'addressable_id'].include? key })
+    end
+  end
+  
+  def create_mercadopago_payment
     self.additional_info = {
       items: additional_info_items,
       payer: {
