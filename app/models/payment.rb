@@ -98,7 +98,7 @@ class Payment < ActiveRecord::Base
   			{
   				id: payment_product.product.id,
   				title: payment_product.title,
-  				picture_url: payment_product.image(:medium),
+  				picture_url: payment_product.cover(:medium),
   				description: payment_product.description,
   				category_id: 'home',
   				quantity: payment_product.quantity,
