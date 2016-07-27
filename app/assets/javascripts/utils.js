@@ -309,6 +309,10 @@ Utils.submitTriggers = function() {
 	});
 };
 
+Utils.toCurrency = function(number) {
+	return '$ ' + Number(number).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+};
+
 Utils.handleAjaxErrors = function() {
 	$(document).ajaxError(function(event, xhr, settings, thrownError) {
 		var string = '';

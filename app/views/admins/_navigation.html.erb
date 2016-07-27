@@ -48,9 +48,9 @@
 	  		<i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuarios
 	  	<% end %>
 	  </li>
-	  <li role="presentation" class="<%= panel_nav_class(:payments) %>">
-	  	<%= link_to payments_path do %>
-	  		<i class="fa fa-money fa-fw" aria-hidden="true"></i> Pagos
+	  <li role="presentation" class="<%= panel_nav_class(:zones) %>">
+	  	<%= link_to zones_path do %>
+	  		<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i> Zonas
 	  	<% end %>
 	  </li>
 	  <li role="presentation" class="<%= panel_nav_class(:categories) %>">
@@ -61,6 +61,11 @@
 	  <li role="presentation" class="<%= panel_nav_class(:products) %>">
 	  	<%= link_to products_path do %>
 	  		<i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Productos
+	  	<% end %>
+	  </li>
+	  <li role="presentation" class="<%= panel_nav_class(:payments) %>">
+	  	<%= link_to payments_path do %>
+	  		<i class="fa fa-money fa-fw" aria-hidden="true"></i> Pagos
 	  	<% end %>
 	  </li>
 	  <li role="presentation">

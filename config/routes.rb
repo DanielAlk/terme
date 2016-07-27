@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
     end
     resources :tags
+    resources :zones, only: [:index, :update]
     resources :products do
       collection do
         put '/', action: :update_many
