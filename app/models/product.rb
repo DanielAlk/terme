@@ -21,7 +21,7 @@ class Product < ActiveRecord::Base
   filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information, :description ]
   filterable range: [ :price ]
   filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
-  filterable joins: [ :reviews ]
+  filterable joins: [ :reviews, :payments ]
   filterable labels: {
     order: {
       status: 'status', title: 'título', brand: 'marca', category: 'categoría', price: 'precio', key_code: 'código', created_at: 'creación', updated_at: 'modificación'
@@ -29,6 +29,9 @@ class Product < ActiveRecord::Base
     scopes: {
       status: {draft: 'borrador', active: 'activo', paused: 'pausado', deleted: 'eliminado'},
       special: {is_regular: 'sin marca', is_new: 'nuevo', is_offer: 'oferta'}
+    },
+    joins: {
+      reviews: 'reviews', payments: 'compras'
     }
   }
 

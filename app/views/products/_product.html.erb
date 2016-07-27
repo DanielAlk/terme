@@ -1,5 +1,10 @@
 <div class="display" id="product_<%= product.id %>">
 	<div class="display-caption">
+		<% if product.payments.present? %>
+			<div class="display-notifications">
+				<span><%= product.payments.count %></span>
+			</div>
+		<% end %>
 		<div class="display-checkbox">
 			<label class="checkbox-inline">
 				<input class="checkbox-target" type="checkbox" name="product[ids][]" id="product_id_<%= product.id %>" value="<%= product.id %>">
