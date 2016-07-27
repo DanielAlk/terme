@@ -10,20 +10,29 @@ class Payment < ActiveRecord::Base
   validates :payment_products, presence: true
   validates :transaction_amount, presence: true
 
+  after_create :create_mercadopago_payment
+
   serialize :mercadopago_payment
   serialize :additional_info
 
-  def create_mercadopago_payment(cart)
+  def parse_cart(cart)
     cart[:products].each do |product|
-      self.payment_products.new(product_id: product.id)
+      self.payment_products.new(product_id: product.id, quantity: cart[:items][product.id.to_s][:quantity].to_i, unit_price: product.price)
     end
+  end
+
+  def create_mercadopago_payment
   	unless user.customer_id.present?
       customer = $mp.post("/v1/customers", { email: user.email })
       user.customer_id = customer['response']['id']
-  		user.save
+      if user.customer_id.blank?
+        customer = $mp.get("/v1/customers/search", { email: user.email })
+        user.customer_id = customer['response']['results'][0]['id']
+      end
+      user.save
   	end
     self.additional_info = {
-      items: items_for_payment_data(cart),
+      items: additional_info_items,
       payer: {
         first_name: address.fname,
         last_name: address.lname,
@@ -47,9 +56,10 @@ class Payment < ActiveRecord::Base
 			},
 			external_reference: id,
 			statement_descriptor: "Aria Web",
-			notification_url: "https://www.ariaweb.com.ar/payments/notifications",
+			notification_url: "https://ariaweb.com.ar/payments/notifications",
 			additional_info: additional_info
   	}
+    self.shipment_cost = self.zone.shipment_cost
   	self.mercadopago_payment = $mp.post("/v1/payments", paymentData)['response'];
     self.mercadopago_payment_id = self.mercadopago_payment['id']
     self.status = self.mercadopago_payment['status']
@@ -57,38 +67,19 @@ class Payment < ActiveRecord::Base
     if [:approved, :in_process].include?(self.status.to_sym)
       payment_products.each do |payment_product|
         product = payment_product.product
-        product.stock -= cart[:items][product.id.to_s][:quantity].to_i
+        product.stock -= payment_product.quantity
         product.save
       end
     end
+    save
   end
 
   def friendly_status
     { approved: 'Aprobado', in_process: 'En proceso', rejected: 'Rechazado' }[status.to_sym] if status.present?
   end
 
-  def shipment_cost
-    if self.additional_info.present?
-      prods = Product.select(:id, :price).find(product_ids)
-      price = prods.sum do |product|
-        product.price * self.item(product.id)[:quantity].to_i
-      end
-      self.transaction_amount - price
-    end
-  end
-
-  def item(id)
-    response = nil
-    if self.additional_info.present?
-      self.additional_info[:items].each do |item|
-        response = item if item[:id] == id
-      end
-    end
-    response
-  end
-
   private
-  	def items_for_payment_data(cart)
+  	def additional_info_items
   		payment_products.map do |payment_product|
   			{
   				id: payment_product.product.id,
@@ -96,8 +87,8 @@ class Payment < ActiveRecord::Base
   				picture_url: payment_product.product.image(:medium),
   				description: payment_product.product.description,
   				category_id: 'home',
-  				quantity: cart[:items][payment_product.product.id.to_s][:quantity],
-  				unit_price: payment_product.product.price
+  				quantity: payment_product.quantity,
+  				unit_price: payment_product.unit_price
   			}
   		end
   	end

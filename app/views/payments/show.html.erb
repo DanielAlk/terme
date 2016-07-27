@@ -42,7 +42,7 @@
   <div class="col-sm-4">
     <p>
       <strong>Costo de envío:</strong>
-      <%= @payment.shipment_cost.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') rescue nil %>
+      <%= @payment.shipment_cost.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %>
     </p>
 
     <p>
@@ -71,7 +71,7 @@
 
 <h4>Productos</h4>
 <div>
-  <% @payment.products.each do |product| %>
-    <%= render 'products/product_minimal', product: product, quantity: (@payment.item(product.id)[:quantity].to_i rescue nil) %>
+  <% @payment.payment_products.each do |payment_product| %>
+    <%= render 'products/product_minimal', product: payment_product.product, quantity: payment_product.quantity, unit_price: payment_product.unit_price %>
   <% end %>
 </div>

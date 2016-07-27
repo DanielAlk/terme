@@ -71,14 +71,14 @@
               <li class="wide">
                 <div class="field">
                   <label class="requerido">EMAIL</label>
-                  <%= text_field_tag 'address[email]', (current_user.address.email rescue nil), required: true, placeholder: 'ej. nombre@email.com' %>
+                  <%= text_field_tag 'address[email]', (current_user.address.email rescue nil || current_user.email), required: true, placeholder: 'ej. nombre@email.com' %>
                 </div>
               </li>
               <li class="wide">
                 <div class="field fields-stack">
                   <label class="requerido">Nombre Completo</label>
-                  <%= text_field_tag 'address[fname]', (current_user.address.fname rescue nil), required: true, placeholder: 'Nombre' %>
-                  <%= text_field_tag 'address[lname]', (current_user.address.lname rescue nil), required: true, placeholder: 'Apellido' %>
+                  <%= text_field_tag 'address[fname]', (current_user.address.fname rescue nil || current_user.fname), required: true, placeholder: 'Nombre' %>
+                  <%= text_field_tag 'address[lname]', (current_user.address.lname rescue nil || current_user.lname), required: true, placeholder: 'Apellido' %>
                 </div>
               </li>
               <li class="wide">

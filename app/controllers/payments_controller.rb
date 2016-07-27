@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
     @payment.address = Address.new(address_params)
-    @payment.create_mercadopago_payment(@cart)
+    @payment.parse_cart(@cart)
 
     respond_to do |format|
       if @payment.save
