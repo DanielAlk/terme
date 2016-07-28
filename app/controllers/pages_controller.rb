@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   
   def home
     @product_categories = Category.friendly.find('products').children
+    @news = Article.limit(Article.shape_highlited(:news)).news.order(position: :asc)
   end
 
   def products
@@ -53,6 +54,15 @@ class PagesController < ApplicationController
   end
 
   def news
+    @articles = Article.news.order(position: :asc).paginate(:page => params[:page], :per_page => 2)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def article
+    @article = Article.friendly.find(params[:article_id])
   end
 
   def contact

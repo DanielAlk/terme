@@ -7,19 +7,15 @@
   <%= link_to @article, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'btn btn-danger tooltip-trigger' do %>
     <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
   <% end %>
+  <%= link_to new_article_path(@shape), title: 'Nuevo', class: 'btn btn-success tooltip-trigger' do %>
+    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+  <% end %>
   <%= link_to articles_path(@article.shape.to_sym), title: 'Volver al listado', class: 'btn btn-warning tooltip-trigger' do %>
     <i class="fa fa-list fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>
 
 <%= render 'tabs' %>
-
-<% if @article.shape_has_image? %>
-  <p>
-    <strong>Image:</strong>
-    <%= @article.image %>
-  </p>
-<% end %>
 
 <% if @article.shape_has_title? %>
   <p>
@@ -29,8 +25,7 @@
 
 <% if @article.shape_has_subtitle? %>
   <p>
-    <strong>Subtitle:</strong>
-    <%= @article.subtitle %>
+    <h4 class="text-center"><%= @article.subtitle %></h4>
   </p>
 <% end %>
 
@@ -39,6 +34,10 @@
     <strong>Description:</strong>
     <%= @article.description %>
   </p>
+<% end %>
+
+<% if @article.shape_has_image? %>
+  <%= image_tag @article.image(:thumb), class: 'pull-left', style: 'margin: 20px 20px 10px;' %>
 <% end %>
 
 <% if @article.shape_has_text? %>

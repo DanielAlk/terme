@@ -147,3 +147,23 @@ body.control-panel { font-family: 'roboto', sans-serif;
 @media(min-width: $screen-sm-min) {
 	.m-sm-B-n33 { margin-bottom: -33px; }
 }
+
+
+.highlited->*:not(.warning) {
+	& { @extend .info; }
+}
+
+.highlited-1>*:not(.warning) {
+	& { @extend .info; }
+	&:nth-child(-n+1) { @extend .success; }
+}
+
+.highlited-3>*:not(.warning) {
+	& { @extend .info; }
+	&:nth-child(-n+3) { @extend .success; }
+}
+
+.highlited-5>*:not(.warning) {
+	& { @extend .info; }
+	&:nth-child(-n+5) { @extend .success; }
+}

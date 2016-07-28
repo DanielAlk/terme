@@ -1,5 +1,8 @@
 <div style="margin-bottom:20px;">
   <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= 'active' if @shape == :news %>">
+      <a href="<%= articles_path(:news) %>">Noticias</a>
+    </li>
     <li role="presentation" class="<%= 'active' if @shape == :about %>">
       <a href="<%= articles_path(:about) %>">La empresa</a>
     </li>

@@ -1,24 +1,18 @@
 <% content_for :body_class, 'noticias' %>
 
-<script type="text/javascript">
 <% content_for :extra_js do %>
   Pages.articles();
-  $('#more-news').click(function(e) {
-    e.preventDefault();
-    $.getScript($(this).attr('href'));
-  });
 <% end %>
-</script>
 
 <%= render 'partials/carousel' %>
 <div class="content">
   <div class="content-info">
-    <section class="news" id="news-container">
+    <section class="news">
       <h1>Noticias</h1>
-      <%= render @articles %>
+      <%= render @article %>
     </section>
     <div style="text-align:center; margin: -10px 0 30px;">
-      <%= link_to 'Ver más noticias', news_page_path(page: @articles.next_page), class: 'btn-general', id: 'more-news' %>
+      <%= link_to 'Ver más noticias', news_page_path, class: 'btn-general' %>
     </div>
     <%= render 'partials/social_media' %>
   </div>

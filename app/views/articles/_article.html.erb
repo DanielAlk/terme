@@ -1,0 +1,15 @@
+<article data-article="expand">
+  <div class="col-left">
+    <%= link_to article_page_path(article) do %>
+      <img src="<%= asset_path article.image(:small) %>" alt="<%= article.title %>">
+    <% end %>
+  </div>
+  <div class="col-right">
+    <h2 style="padding-bottom:0;"><%= article.title %></h2>
+    <h3><%= article.subtitle %></h3>
+    <div class="bajada expansible">
+      <%= article.text.html_safe %>
+    </div>
+    <div class="button-ver expansible-trigger ver-mas" style="margin-top: 20px;"> Ver Más </div>
+  </div>
+</article>

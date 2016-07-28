@@ -1,0 +1,6 @@
+$('#news-container').append('<%= j render @articles %>');
+<% if @articles.next_page %>
+	$('#more-news').attr('href', '<%= news_page_path(page: @articles.next_page) %>');
+<% else %>
+	$('#more-news').remove();
+<% end %>

@@ -2,10 +2,17 @@ class Article < ActiveRecord::Base
 	extend FriendlyId
 	include Tinymce
 	friendly_id :slug_candidates, use: :slugged
-	has_attached_file :image, styles: { big: "2000x1455#", medium: "1100x800#", small: "500x460#", thumb: "150x110#" }, default_url: "product-imgs/p-:style.jpg"
+	has_attached_file :image,
+		styles: Proc.new { |attachment| {
+			big: attachment.instance.shape_image_style(:big),
+			medium: attachment.instance.shape_image_style(:medium),
+			small: attachment.instance.shape_image_style(:small),
+			thumb: attachment.instance.shape_image_style(:thumb)
+		} },
+		default_url: "product-imgs/p-:style.jpg"
 	validates_attachment :image, presence: true, content_type: { content_type: /\Aimage\/.*\Z/ }, if: :shape_has_image?
 
-	acts_as_list scope: [:shape]
+	acts_as_list scope: [:shape], add_new_at: :top
 
 	tinymce columns: [ :text ]
 	
@@ -23,12 +30,31 @@ class Article < ActiveRecord::Base
 		Article.new(shape: shape).send('shape_has_' + column.to_s + '?')
 	end
 
+	def self.shape_is_sortable?(shape)
+		[ :showcase, :about, :services, :news ].include? shape.to_sym
+	end
+
+	def self.shape_highlited(shape)
+		{ about: 1, news: 3 }[shape.to_sym]
+	end
+
+	def shape_image_style(style)
+		{
+			news: {
+				big: '1467x474#',
+				medium: '760x760#',
+				small: '755x323#',
+				thumb: '150x110#'
+			}
+		}[self.shape.to_sym][style]
+	end
+
 	def shape_has_title?
 		[ :showcase, :news, :about, :services, :partners ].include? self.shape.to_sym
 	end
 
 	def shape_has_subtitle?
-		[ :showcase ].include? self.shape.to_sym
+		[ :showcase, :news ].include? self.shape.to_sym
 	end
 
 	def shape_has_description?

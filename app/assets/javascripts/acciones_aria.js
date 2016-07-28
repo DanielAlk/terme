@@ -250,8 +250,6 @@ var AriaInit = function() {
         } else {
             $this.text('Cerrar');
         }
-        
-        $('.mas-info').slideToggle(500);
     });
     
     

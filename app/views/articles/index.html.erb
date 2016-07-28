@@ -1,23 +1,23 @@
 <% content_for :panel_subtitle, 'Artículos' %>
 
-<script type="text/javascript">
 <% content_for :extra_js do %>
-  var $sortable = $('tbody');
-  $sortable.sortable({ update: function() {
-    var sortable = $sortable.sortable('toArray');
-    var data = { article: {} };
-    data.article.ids = [];
-    data.article.positions = [];
-    sortable.forEach(function(s, i) {
-      data.article.ids.push(Number(s.replace('article-', '')));
-      data.article.positions.push(i+1);
-    });
-    $.ajax({ url: '/articles/', dataType: 'json', type: 'PUT', data: data })
-    .done(function() { Alerts.success('Se cambio la posición del artículo con éxito'); })
-    .fail(function() { Alerts.danger('Ocurrió un error al cambiar la posición del artículo'); });
-  }, placeholder: 'warning' });
+  <% if Article.shape_is_sortable? @shape %>
+    var $sortable = $('tbody');
+    $sortable.sortable({ update: function() {
+      var sortable = $sortable.sortable('toArray');
+      var data = { article: {} };
+      data.article.ids = [];
+      data.article.positions = [];
+      sortable.forEach(function(s, i) {
+        data.article.ids.push(Number(s.replace('article-', '')));
+        data.article.positions.push(i+1);
+      });
+      $.ajax({ url: '/articles/', dataType: 'json', type: 'PUT', data: data })
+      .done(function() { Alerts.success('Se cambio la posición del artículo con éxito'); })
+      .fail(function() { Alerts.danger('Ocurrió un error al cambiar la posición del artículo'); });
+    }, placeholder: 'warning' });
+  <% end %>
 <% end %>
-</script>
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
   <%= link_to new_article_path(@shape), title: 'Nuevo', class: 'btn btn-warning tooltip-trigger' do %>
@@ -30,11 +30,17 @@
 <% unless @articles.present? %>
   No hay ningún articulo para <%= Article.shape_sp(@shape) %>
 <% else %>
+  <% if @shape == :news && @articles.count > 5 %>
+    <div style="margin: -15px 0 10px;"><small>Los items marcados en verde aparecen en el carousel de noticias de la home</small></div>
+  <% end %>
+  <% if @shape == :about && @articles.count > 1 %>
+    <div style="margin: -15px 0 10px;"><small>El item marcado en verde es el único que será visible en la sección "La empresa"</small></div>
+  <% end %>
   <div class="table-responsive">
     <table class="table table-condensed table-hover">
-      <tbody>
+      <tbody class="highlited-<%= Article.shape_highlited(@shape) %>">
         <% @articles.each_with_index do |article, i| %>
-          <tr class="<%= i == 0 && [:about].include?(article.shape.to_sym) ? 'success' : 'info' %>" id="article-<%= article.id %>">
+          <tr id="article-<%= article.id %>">
             <% if Article.shape_has?(:image, @shape) %>
               <td>
                 <%= link_to article do %>

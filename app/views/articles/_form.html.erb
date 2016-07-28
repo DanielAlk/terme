@@ -47,7 +47,10 @@
   <% end %>
   <% if @article.shape_has_image? %>
     <div class="field">
-      <%= f.file_field :image, accept: 'image/*', required: true %>
+      <%= f.file_field :image, accept: 'image/*', required: !@article.image.present? %>
+      <% if @article.image.present? %>
+        <small>Ya tienes una imágen en esta publicación</small>
+      <% end %>
     </div>
   <% end %>
   <div class="actions">

@@ -22,20 +22,18 @@
     <% end %>
     <div class="slider-bottom">
       <div class="slider-bott owl-carousel">
-        <div class="item"> <img src="<%= asset_path 'slider/slider_bottom_1.jpg' %>" alt="Slider Bottom 1" class="desktop"> <img src="<%= asset_path 'slider/slider_bottom_1_mobile.jpg' %>" alt="Slider Bottom 1 Mobile" class="mobile">
-          <div class="info-slider-bott">
-            <h2>FILTROS<br>
-              <span>de Aire</span></h2>
-            <p>Cuando es tiempo de realizar una limpieza.</p>
-            <a href="#" class="button">ver Noticia</a> <a href="#" class="button mas">+</a> </div>
-        </div>
-        <div class="item"> <img src="<%= asset_path 'slider/slider_bottom_2.jpg' %>" alt="Slider Bottom 2" class="desktop"> <img src="<%= asset_path 'slider/slider_bottom_2_mobile.jpg' %>" alt="Slider Bottom 2 Mobile" class="mobile">
-          <div class="info-slider-bott">
-            <h2>FILTROS<br>
-              <span>de Aire</span></h2>
-            <p>Cuando es tiempo de realizar una limpieza.</p>
-            <a href="#" class="button">ver Noticia</a> <a href="#" class="button mas">+</a> </div>
-        </div>
+        <% @news.each do |article| %>
+          <div class="item">
+            <img src="<%= asset_path article.image(:big) %>" alt="Slider Bottom 1" class="desktop">
+            <img src="<%= asset_path article.image(:medium) %>" alt="Slider Bottom 1 Mobile" class="mobile">
+            <div class="info-slider-bott">
+              <% title_words = article.title.split(' ') %>
+              <h2><%= title_words.shift %><br>
+                <span><%= title_words.join(' ') %></span></h2>
+              <p><%= article.subtitle %></p>
+              <a href="<%= article_page_path(article) %>" class="button">ver Noticia</a> <a href="<%= article_path(article) %>" class="button mas">+</a> </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="partner-bottom">

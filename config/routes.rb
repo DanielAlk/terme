@@ -77,6 +77,7 @@ Rails.application.routes.draw do
   get 'servicios/:article_id', to: 'pages#services', as: :service_page
   get 'la-empresa', to: 'pages#about', as: :about_page
   get 'noticias', to: 'pages#news', as: :news_page
+  get 'articulo/:article_id', to: 'pages#article', as: :article_page
   get 'contacto', to: 'pages#contact', as: :contact_page
 
 end
