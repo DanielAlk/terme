@@ -1,0 +1,20 @@
+<% content_for :panel_subtitle, @article.shape_sp.titlecase %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+	<%= link_to articles_path(@shape), title: 'Ir al listado', class: 'btn btn-warning tooltip-trigger' do %>
+		<i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<div style="margin-bottom:20px;">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= 'active' if @shape == :about %>">
+      <a href="<%= articles_path(:about) %>">La empresa</a>
+    </li>
+    <li role="presentation" class="<%= 'active' if @shape == :services %>">
+      <a href="<%= articles_path(:services) %>">Servicios</a>
+    </li>
+  </ul>
+</div>
+
+<%= render 'form' %>

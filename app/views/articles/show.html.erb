@@ -1,0 +1,62 @@
+<% content_for :panel_subtitle, 'Artículo ' + @article.shape_sp %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to edit_article_path(@article), title: 'Editar', class: 'btn btn-info tooltip-trigger' do %>
+    <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+  <% end %>
+  <%= link_to articles_path(@article.shape.to_sym), title: 'Editar', class: 'btn btn-warning tooltip-trigger' do %>
+    <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<div style="margin-bottom:20px;">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= 'active' if @article.shape.to_sym == :about %>">
+      <a href="<%= articles_path(:about) %>">La empresa</a>
+    </li>
+    <li role="presentation" class="<%= 'active' if @article.shape.to_sym == :services %>">
+      <a href="<%= articles_path(:services) %>">Servicios</a>
+    </li>
+  </ul>
+</div>
+
+<% if @article.shape_has_image? %>
+  <p>
+    <strong>Image:</strong>
+    <%= @article.image %>
+  </p>
+<% end %>
+
+<% if @article.shape_has_title? %>
+  <p>
+    <strong>Title:</strong>
+    <%= @article.title %>
+  </p>
+<% end %>
+
+<% if @article.shape_has_subtitle? %>
+  <p>
+    <strong>Subtitle:</strong>
+    <%= @article.subtitle %>
+  </p>
+<% end %>
+
+<% if @article.shape_has_description? %>
+  <p>
+    <strong>Description:</strong>
+    <%= @article.description %>
+  </p>
+<% end %>
+
+<% if @article.shape_has_text? %>
+  <p>
+    <strong>Text:</strong>
+    <%= @article.text %>
+  </p>
+<% end %>
+
+<% if @article.shape_has_link? || @article.shape_has_link_to_page? %>
+  <p>
+    <%= link_to 'Enlace', @article.link, class: 'btn btn-sm btn-primary' %>
+  </p>
+<% end %>

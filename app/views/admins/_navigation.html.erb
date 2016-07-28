@@ -48,6 +48,11 @@
 	  		<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar Admin
 	  	<% end %>
 	  </li>
+	  <li role="presentation" class="<%= panel_nav_class(:articles) %>">
+	  	<%= link_to articles_path(:about) do %>
+	  		<i class="fa fa-sticky-note fa-fw" aria-hidden="true"></i> Artículos
+	  	<% end %>
+	  </li>
 	  <li role="presentation" class="<%= panel_nav_class(:users) %>">
 	  	<%= link_to users_path do %>
 	  		<i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuarios

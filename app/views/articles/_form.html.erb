@@ -1,0 +1,59 @@
+<%= tinymce_init(200) %>
+
+<% content_for :extra_js do %>
+  $('#article_form').validate();
+<% end %>
+
+<%= form_for(@article, html: {id: 'article_form'}) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :shape %>
+  <% if @article.shape_has_title? %>
+    <div class="field">
+      <%= f.text_field :title, required: true, placeholder: 'Título' %>
+    </div>
+  <% end %>
+  <% if @article.shape_has_subtitle? %>
+    <div class="field">
+      <%= f.text_field :subtitle, required: true, placeholder: 'Subtítulo' %>
+    </div>
+  <% end %>
+  <% if @article.shape_has_description? %>
+    <div class="field">
+      <%= f.text_field :description, required: true, placeholder: 'Descripción' %>
+    </div>
+  <% end %>
+  <% if @article.shape_has_text? %>
+    <div class="field">
+      <%= f.text_area :text, placeholder: 'Texto', rows: 4, minlength: 15, class: 'tinymce' %>
+    </div>
+  <% end %>
+  <% if @article.shape_has_link? %>
+    <div class="field">
+      <%= f.text_field :link, required: true, placeholder: 'Link' %>
+    </div>
+  <% end %>
+  <% if @article.shape_has_link_to_page? %>
+    <div class="field">
+      <%= f.select :link, options_for_select([['Home'],['Productos', products_page_path],['Partners', partners_page_path],['La Empresa', about_page_path],['Noticias', news_page_path],['Contacto', contact_page_path]]), { prompt: 'Link a:' }, class: 'selectpicker' %>
+    </div>
+  <% end %>
+  <% if @article.shape_has_image? %>
+    <div class="field">
+      <%= f.file_field :image, accept: 'image/*', required: true %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
