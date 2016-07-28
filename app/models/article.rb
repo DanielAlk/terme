@@ -5,8 +5,9 @@ class Article < ActiveRecord::Base
 	has_attached_file :image, styles: { big: "2000x1455#", medium: "1100x800#", small: "500x460#", thumb: "150x110#" }, default_url: "product-imgs/p-:style.jpg"
 	validates_attachment :image, presence: true, content_type: { content_type: /\Aimage\/.*\Z/ }, if: :shape_has_image?
 
+	acts_as_list scope: [:shape]
+
 	tinymce columns: [ :text ]
-	#acts_as_list scope: :shape
 	
 	enum shape: [ :showcase, :news, :about, :services, :partners ]
 
