@@ -6,15 +6,6 @@
   <% end %>
 </div>
 
-<div style="margin-bottom:20px;">
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="<%= 'active' if @shape == :about %>">
-      <a href="<%= articles_path(:about) %>">La empresa</a>
-    </li>
-    <li role="presentation" class="<%= 'active' if @shape == :services %>">
-      <a href="<%= articles_path(:services) %>">Servicios</a>
-    </li>
-  </ul>
-</div>
+<%= render 'tabs' %>
 
 <%= render 'form' %>

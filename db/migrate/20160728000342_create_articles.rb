@@ -8,6 +8,8 @@ class CreateArticles < ActiveRecord::Migration
       t.string :description
       t.text :text
       t.string :link
+      t.string :link_title
+      t.boolean :link_external, default: 0
       t.attachment :image
       t.integer :position
       t.string :slug

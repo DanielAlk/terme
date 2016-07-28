@@ -14,6 +14,14 @@ class Article < ActiveRecord::Base
 		{ showcase: 'showcase', news: 'noticia', about: 'la empresa', services: 'servicio', partners: 'partners' }[self.shape.to_sym]
 	end
 
+	def self.shape_sp(shape)
+		{ showcase: 'showcase', news: 'noticia', about: 'la empresa', services: 'servicio', partners: 'partners' }[shape]
+	end
+
+	def self.shape_has?(column, shape)
+		Article.new(shape: shape).send('shape_has_' + column.to_s + '?')
+	end
+
 	def shape_has_title?
 		[ :showcase, :news, :about, :services, :partners ].include? self.shape.to_sym
 	end
@@ -31,10 +39,6 @@ class Article < ActiveRecord::Base
 	end
 
 	def shape_has_link?
-		[].include? self.shape.to_sym
-	end
-
-	def shape_has_link_to_page?
 		[ :showcase, :about, :services, :partners ].include? self.shape.to_sym
 	end
 

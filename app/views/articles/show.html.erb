@@ -4,21 +4,15 @@
   <%= link_to edit_article_path(@article), title: 'Editar', class: 'btn btn-info tooltip-trigger' do %>
     <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
   <% end %>
-  <%= link_to articles_path(@article.shape.to_sym), title: 'Editar', class: 'btn btn-warning tooltip-trigger' do %>
+  <%= link_to @article, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'btn btn-danger tooltip-trigger' do %>
+    <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+  <% end %>
+  <%= link_to articles_path(@article.shape.to_sym), title: 'Volver al listado', class: 'btn btn-warning tooltip-trigger' do %>
     <i class="fa fa-list fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>
 
-<div style="margin-bottom:20px;">
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="<%= 'active' if @article.shape.to_sym == :about %>">
-      <a href="<%= articles_path(:about) %>">La empresa</a>
-    </li>
-    <li role="presentation" class="<%= 'active' if @article.shape.to_sym == :services %>">
-      <a href="<%= articles_path(:services) %>">Servicios</a>
-    </li>
-  </ul>
-</div>
+<%= render 'tabs' %>
 
 <% if @article.shape_has_image? %>
   <p>
@@ -29,8 +23,7 @@
 
 <% if @article.shape_has_title? %>
   <p>
-    <strong>Title:</strong>
-    <%= @article.title %>
+    <h3 class="text-center"><%= @article.title %></h3>
   </p>
 <% end %>
 
@@ -49,14 +42,13 @@
 <% end %>
 
 <% if @article.shape_has_text? %>
-  <p>
-    <strong>Text:</strong>
-    <%= @article.text %>
+  <p class="well">
+    <%= @article.text.html_safe %>
   </p>
 <% end %>
 
-<% if @article.shape_has_link? || @article.shape_has_link_to_page? %>
+<% if @article.shape_has_link? %>
   <p>
-    <%= link_to 'Enlace', @article.link, class: 'btn btn-sm btn-primary' %>
+    <%= link_to @article.link_title, @article.link, class: 'btn btn-sm btn-primary' %>
   </p>
 <% end %>

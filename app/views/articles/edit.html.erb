@@ -1,6 +1,14 @@
-<h1>Editing Article</h1>
+<% content_for :panel_subtitle, @article.shape_sp.titlecase %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+	<%= link_to @article, title: 'Ver', class: 'btn btn-success tooltip-trigger' do %>
+		<i class="fa fa-external-link fa-fw" aria-hidden="true"></i>
+	<% end %>
+	<%= link_to articles_path(@shape), title: 'Ir al listado', class: 'btn btn-warning tooltip-trigger' do %>
+		<i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<%= render 'tabs' %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>

@@ -62,14 +62,16 @@ ActiveRecord::Schema.define(version: 20160728000342) do
     t.string   "description",        limit: 255
     t.text     "text",               limit: 65535
     t.string   "link",               limit: 255
+    t.string   "link_title",         limit: 255
+    t.boolean  "link_external",                    default: false
     t.string   "image_file_name",    limit: 255
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
     t.integer  "position",           limit: 4
     t.string   "slug",               limit: 255
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree

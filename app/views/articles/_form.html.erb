@@ -2,6 +2,7 @@
 
 <% content_for :extra_js do %>
   $('#article_form').validate();
+  Utils.selectpicker();
 <% end %>
 
 <%= form_for(@article, html: {id: 'article_form'}) do |f| %>
@@ -40,12 +41,8 @@
   <% end %>
   <% if @article.shape_has_link? %>
     <div class="field">
-      <%= f.text_field :link, required: true, placeholder: 'Link' %>
-    </div>
-  <% end %>
-  <% if @article.shape_has_link_to_page? %>
-    <div class="field">
-      <%= f.select :link, options_for_select([['Home'],['Productos', products_page_path],['Partners', partners_page_path],['La Empresa', about_page_path],['Noticias', news_page_path],['Contacto', contact_page_path]]), { prompt: 'Link a:' }, class: 'selectpicker' %>
+      <%= f.text_field :link_title, required: true, placeholder: 'Título del link' %>
+      <%= f.select :link, options_for_select([['Home'],['Productos', products_page_path],['Partners', partners_page_path],['La Empresa', about_page_path],['Noticias', news_page_path],['Contacto', contact_page_path]], @article.link), { prompt: 'Linkear a…' }, class: 'selectpicker' %>
     </div>
   <% end %>
   <% if @article.shape_has_image? %>

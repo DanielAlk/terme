@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     resources :users
 
     resources :articles, path: '(:shape)/articles', only: [:index, :new]
-    resources :articles, except: [:index, :new]
+    resources :articles, except: [:index, :new] do
+      collection do
+        put '/', action: :update_many, :defaults => { :format => :json }
+      end
+    end
 
     resources :categories
     resources :images, :defaults => { :format => :json } do

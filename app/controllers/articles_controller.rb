@@ -1,13 +1,13 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_shape, only: [:index, :new]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_shape, only: [:index, :show, :new, :edit, :destroy]
   layout 'panel'
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.where(shape: Article.shapes[@shape])
+    @articles = Article.where(shape: Article.shapes[@shape]).order(position: :asc)
   end
 
   # GET /articles/1
@@ -59,14 +59,34 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to articles_url(@shape), notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /articles.json
+  def update_many
+    article_errors = []
+    article_ids = params.require(:article)[:ids]
+    article_positions = params.require(:article)[:positions]
+    article_ids.each_with_index do |id, index|
+      article = Article.find(id)
+      unless article.update(position: article_positions[index])
+        article_errors << article.errors
+      end
+    end
+    respond_to do |format|
+      unless article_errors.count > 0
+        format.json { render :index, status: :ok, location: articles_path }
+      else
+        format.json { render json: article_errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
     def set_shape
-      @shape = params[:shape].try(:to_sym)
+      @shape = @article.present? ? @article.shape.try(:to_sym) : params[:shape].try(:to_sym)
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -76,6 +96,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:shape, :status, :title, :subtitle, :description, :text, :link, :image)
+      params.require(:article).permit(:shape, :status, :title, :subtitle, :description, :text, :link, :link_title, :link_external, :image, :position)
     end
 end
