@@ -44,7 +44,7 @@ class PagesController < ApplicationController
   def partners
   end
 
-  def service
+  def services
     @article = Article.friendly.find(params[:article_id])
   end
 

@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   get 'checkout', to: 'pages#checkout', as: :checkout_page
   get 'confirmar', to: 'pages#confirm', as: :confirm_page
   get 'partners', to: 'pages#partners', as: :partners_page
-  get 'servicios/:article_id', to: 'pages#service', as: :service_page
+  get 'servicios/:article_id', to: 'pages#services', as: :service_page
   get 'la-empresa', to: 'pages#about', as: :about_page
   get 'noticias', to: 'pages#news', as: :news_page
   get 'contacto', to: 'pages#contact', as: :contact_page
