@@ -42,15 +42,12 @@
                 <% end %>
               </td>
             <% end %>
-            <td>
+            <td style="padding-left: 10px;">
               <%= link_to article, style: 'color:inherit;' do %>
-                <b style="margin: 0 10px;"><%= article.title %></b>
+                <b><%= article.title %></b>
               <% end %>
             </td>
-            <!--td><%= article.subtitle %></td-->
-            <td><%= article.link %></td>
-            <!--td><%= article.position %></td-->
-            <td class="text-right">
+            <td class="text-right" style="padding-right: 10px;">
               <%= link_to edit_article_path(article), title: 'Editar', class: 'tooltip-trigger link-success' do %>
                 <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
               <% end %>
