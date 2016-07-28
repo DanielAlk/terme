@@ -50,5 +50,6 @@
 <% if @article.shape_has_link? %>
   <p>
     <%= link_to @article.link_title, @article.link, class: 'btn btn-sm btn-primary' %>
+    <small><b>URL:</b> <%= @article.link %></small>
   </p>
 <% end %>
