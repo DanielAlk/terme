@@ -1,10 +1,11 @@
 <% content_for :body_class, 'aria' %>
 
-<%= render 'partials/carousel' %>
+<div class="slider">
+  <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
+</div>
 <div class="content">
   <div class="content-info">
     <section class="aria">
-      <div class="img-top"> <img src="<%= asset_path 'aria/la-empresa.jpg' %>" alt="Aria La Empresa"> </div>
       <h1><%= @article.title %></h1>
       <p><%= @article.text.html_safe %></p>
       <a href="<%= @article.link %>"><%= @article.link_title %></a> </section>

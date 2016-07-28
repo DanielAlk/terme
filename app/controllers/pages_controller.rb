@@ -44,13 +44,12 @@ class PagesController < ApplicationController
   def partners
   end
 
-  def engineering
-  end
-
-  def instalation
+  def service
+    @article = Article.friendly.find(params[:article_id])
   end
 
   def about
+    @article = Article.about.order(position: :asc).first
   end
 
   def news

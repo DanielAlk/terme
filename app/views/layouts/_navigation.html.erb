@@ -65,8 +65,9 @@
                     <% end %>
                   </ul>
                 </li>
-                <li> <a href="<%= engineering_page_path %>">Ingeniería en climatización</a></li>
-                <li><a href="<%= instalation_page_path %>">Instalación y mantenimiento</a></li>
+                <% Article.services.order(position: :asc).each do |article| %>
+                  <li> <a href="<%= service_page_path(article) %>"><%= article.title %></a></li>
+                <% end %>
               </ul>
             </li>
             <li><a href="<%= partners_page_path %>">Clubs de Partners Aria</a></li>
