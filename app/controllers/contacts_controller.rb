@@ -1,9 +1,11 @@
 class ContactsController < ApplicationController
   include Filterize
-  before_action :authenticate_admin!, except: :create, unless: Proc.new { action_name.to_sym == :new && user_signed_in? }
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, except: :create, unless: Proc.new {
+    user_signed_in? && (action_name.to_sym == :new || action_name.to_sym == :destroy && @contact.newsletter?)
+  }
   before_action :set_contacts, only: [:update_many, :destroy_many]
-  before_action :set_kind, only: [:index, :show]
+  before_action :set_kind, only: [:index, :show, :destroy]
   before_action :filterize, only: :index
   filterize order: :created_at_desc, param: :f
   layout 'panel'
@@ -67,7 +69,7 @@ class ContactsController < ApplicationController
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.html { redirect_to after_destroy_url, notice: 'Se eliminó con exito.' }
       format.json { head :no_content }
     end
   end
@@ -103,6 +105,8 @@ class ContactsController < ApplicationController
     def after_destroy_url
       if params[:after_destroy_url].present?
         params[:after_destroy_url]
+      elsif user_signed_in? && @kind == :newsletter
+        profile_url
       else
         contacts_url
       end

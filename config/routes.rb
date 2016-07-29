@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     resources :addresses, path: 'profile/direcciones'
     resources :reviews, path: 'profile/reviews'
     resources :contacts, path: 'profile/soporte', only: :new
+    resources :contacts, only: :destroy
 
     resource :cart, :defaults => { :format => :json }, only: [:show] do
       get 'stock', to: 'carts#stock', as: :product_stock

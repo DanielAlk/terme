@@ -6,7 +6,7 @@
 		<% if current_user.fname.present? && current_user.fname.present? %>
 			<%= current_user.name %>
 		<% else %>
-			<%= link_to 'Agregar mi nombre', edit_user_registration_path, class: 'link-primary' %>
+			<%= link_to 'Agregar mi nombre', edit_user_registration_path, class: 'btn btn-xs btn-primary' %>
 		<% end %>
 	</p>
 
@@ -23,7 +23,24 @@
 				&nbsp; <%= link_to '+ ' + (current_user.addresses.count - 1).to_s + ' más', addresses_path, class: 'btn btn-xs btn-success' %>
 			<% end %>
 		<% else %>
-			<%= link_to 'Agregar direcciones de envío', new_address_path, class: 'link-primary' %>
+			<%= link_to 'Agregar direcciones de envío', new_address_path, class: 'btn btn-xs btn-primary' %>
+		<% end %>
+	</p>
+
+	<p>
+		<b>Newsletter:</b>
+		<% if (contact = Contact.newsletter.find_by(email: current_user.email)).present? %>
+			<%= link_to 'Eliminar suscripción', contact, method: :delete, data: { confirm: '¿Seguro?' }, class: 'btn btn-danger btn-xs' %>
+		<% else %>
+			<%= link_to 'Suscribirme', contact, data: { submit: '#newsletter-create' }, class: 'btn btn-primary btn-xs' %>
+			<div class="hidden">
+				<%= form_for Contact.new(kind: :newsletter,email: current_user.email), html: { id: 'newsletter-create' } do |f| %>
+					<%= hidden_field_tag 'after_create_url', profile_url %>
+					<%= hidden_field_tag 'after_create_notice', 'Gracias por suscribirte al newsletter Aria.' %>
+					<%= f.hidden_field :kind %>
+					<%= f.hidden_field :email %>
+				<% end %>
+			</div>
 		<% end %>
 	</p>
 </div>
