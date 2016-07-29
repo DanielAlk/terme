@@ -1,4 +1,4 @@
-<% content_for :panel_subtitle, 'Contacto ' + @contact.name %>
+<% content_for :panel_subtitle, 'Contacto ' + @contact.email %>
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
   <%= link_to @contact, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'btn btn-danger tooltip-trigger' do %>
@@ -8,6 +8,8 @@
     <i class="fa fa-list fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>
+
+<%= render 'tabs' %>
 
 <p class="well">
   <strong>Nombre:</strong> <%= @contact.name %><br>

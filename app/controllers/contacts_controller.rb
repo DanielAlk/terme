@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   include Filterize
   before_action :authenticate_admin!, unless: Proc.new { user_signed_in? && action_name.to_sym == :create }
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  before_action :set_kind, only: :index
+  before_action :set_kind, only: [:index, :show]
   before_action :filterize, only: :index
   filterize order: :created_at_desc, param: :f
   layout 'panel'
@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = @contacts.send(@kind).paginate(:page => params[:page], :per_page => 6)
+    @contacts = @contacts.send(@kind).paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /contacts/1

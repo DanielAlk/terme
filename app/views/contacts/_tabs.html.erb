@@ -1,0 +1,10 @@
+<div style="margin-bottom:20px;">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= 'active' if @kind == :regular %>">
+      <a href="<%= contacts_path %>">Contactos</a>
+    </li>
+    <li role="presentation" class="<%= 'active' if @kind == :partners %>">
+      <a href="<%= contacts_path(:partners) %>">Partners</a>
+    </li>
+  </ul>
+</div>

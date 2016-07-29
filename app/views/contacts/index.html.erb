@@ -1,22 +1,26 @@
 <% content_for :panel_subtitle, 'Contactos' %>
 
 <% content_for :extra_js do %>
+  Utils.checkboxes();
   Utils.selectpicker();
   $('#filterable-contacts select').change(function() {
     $(this).closest('form').submit();
   });
 <% end %>
 
-<div style="margin-bottom:20px;">
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="<%= 'active' if @kind == :regular %>">
-      <a href="<%= contacts_path(:regular) %>">Contactos</a>
-    </li>
-    <li role="presentation" class="<%= 'active' if @kind == :partners %>">
-      <a href="<%= contacts_path(:partners) %>">Partners</a>
-    </li>
-  </ul>
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to 'javascript:void(0);', class: 'btn btn-default resource-checkbox tooltip-trigger', title: 'Seleccionar todos' do %>
+    <label class="checkbox-inline">
+      <input type="checkbox" name="select_all" data-target=".checkbox-target">
+    </label>
+  <% end %>
+  <%= link_to contacts_path, title: 'Borrar seleccionados', class: 'btn btn-danger tooltip-trigger', disabled: true, data: { util: 'deleteManyForm', target: '#destroy_all', ids: '.checkbox-target' } do %>
+    <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+    <i class="updated fa fa-trash fa-fw" aria-hidden="true"></i>
+  <% end %>
 </div>
+
+<%= render 'tabs' %>
 
 <div class="filterable" id="filterable-contacts" style="padding-right:30px;">
   <%= form_tag contacts_path(@kind), method: :get do %>
@@ -43,6 +47,7 @@
     <table class="table table-condensed table-hover">
       <thead>
         <tr>
+          <th></th>
           <th>Name</th>
           <th>Email</th>
           <th>Fecha</th>
@@ -53,6 +58,11 @@
       <tbody>
         <% @contacts.each do |contact| %>
           <tr class="<%= contact.read ? 'info' : 'success' %>">
+            <td>
+              <label class="checkbox-inline" style="height:auto;">
+                <input class="checkbox-target" type="checkbox" name="contact[ids][]" id="contact_id_<%= contact.id %>" value="<%= contact.id %>">
+              </label>
+            </td>
             <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
             <td><%= link_to contact.email, contact, style: 'color:inherit;' %></td>
             <td><%= contact.created_at.strftime('%d-%m-%Y %H:%M') %></td>
