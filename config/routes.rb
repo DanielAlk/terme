@@ -25,7 +25,13 @@ Rails.application.routes.draw do
     end
 
     resources :contacts, path: '(:kind)/contacts', only: :index
-    resources :contacts, only: [:show, :destroy]
+    resources :contacts, only: [:show, :destroy, :update] do
+      collection do
+        put '/', action: :update_many
+        delete '/', action: :destroy_many
+      end
+    end
+
     resources :categories
 
     resources :images, :defaults => { :format => :json } do

@@ -1,7 +1,8 @@
 class ContactsController < ApplicationController
   include Filterize
-  before_action :authenticate_admin!, unless: Proc.new { user_signed_in? && action_name.to_sym == :create }
+  before_action :authenticate_admin!, except: :create
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contacts, only: [:update_many, :destroy_many]
   before_action :set_kind, only: [:index, :show]
   before_action :filterize, only: :index
   filterize order: :created_at_desc, param: :f
@@ -68,6 +69,33 @@ class ContactsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /contacts
+  # PATCH/PUT /contacts.json
+  def update_many
+    respond_to do |format|
+      if @contacts.update_all(contact_params)
+        format.html { redirect_to contacts_url, notice: 'Contacts were successfully updated.' }
+        format.json { render :index, status: :ok, location: contacts_url }
+      else
+        format.html { render :index }
+        format.json { render json: @contacts.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /contacts.json
+  def destroy_many
+    respond_to do |format|
+      if (@contacts.destroy_all rescue false)
+        format.html { redirect_to contacts_url, notice: 'Contacts were successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to contacts_url, alert: 'Algunos contactos no se puedieron borrar.' }
+        format.json { render json: @contacts.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     def after_create_url
       if params[:after_create_url].present?
@@ -81,6 +109,10 @@ class ContactsController < ApplicationController
       @kind = @contact.present? ? @contact.kind.try(:to_sym) : params[:kind].try(:to_sym)
       @kind = :regular unless @kind.present?
     end
+    
+    def set_contacts
+      @contacts = Contact.where(id: params[:ids])
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
@@ -89,6 +121,6 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:kind, :name, :email, :company, :subject, :message)
+      params.require(:contact).permit(:kind, :read, :name, :email, :company, :subject, :message)
     end
 end

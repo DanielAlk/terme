@@ -32,3 +32,4 @@
 //= require user
 //= require categories
 //= require products
+//= require contacts
