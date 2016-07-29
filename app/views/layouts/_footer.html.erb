@@ -21,13 +21,20 @@
     </div>
     <div class="newsletter">
       <h2>Newsletter</h2>
-      <p>Mantente en contacto para recibir promociones exclusivas.</p>
-      <div class="newsletter-input">
-        <form action="news">
-          <input type="email" placeholder="INSERTAR EMAIL" required>
-          <input type="submit" name="Suscribir" title="Suscribir" value="SUSCRIBIR">
-        </form>
-      </div>
+      <% unless user_signed_in? && Contact.newsletter.find_by(email: current_user.email).present? %>
+        <p>Mantente en contacto para recibir promociones exclusivas.</p>
+        <div class="newsletter-input">
+          <%= form_for Contact.new(email: user_signed_in? ? current_user.email : '') do |f| %>
+            <%= hidden_field_tag :after_create_url, request.path %>
+            <%= hidden_field_tag :after_create_notice, 'Gracias por suscribirte al newsletter de Aria' %>
+            <%= f.hidden_field :kind, value: :newsletter %>
+            <%= f.email_field :email, placeholder: 'INSERTAR EMAIL', required: true %>
+            <%= f.submit 'SUSCRIBIR' %>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Ya estás suscripto al newsletter</p>
+      <% end %>
       <div class="tarjetas"> <span><img src="<%= asset_path 'tarjetas/visa.png' %>" alt="Visa"></span> <span><img src="<%= asset_path 'tarjetas/master.png' %>" alt="Master Card"></span> <span><img src="<%= asset_path 'tarjetas/maestro.png' %>" alt="Maestro"></span> <span><img src="<%= asset_path 'tarjetas/amex.png' %>" alt="Amex"></span> </div>
     </div>
     <div class="contacto">

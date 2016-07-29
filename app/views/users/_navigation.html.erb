@@ -62,6 +62,11 @@
 	  		<i class="fa fa-money fa-fw" aria-hidden="true"></i> Pagos
 	  	<% end %>
 	  </li>
+	  <li role="presentation" class="<%= panel_nav_class(:contacts) %>">
+	  	<%= link_to new_contact_path do %>
+	  		<i class="fa fa-question-circle fa-fw" aria-hidden="true"></i> Soporte
+	  	<% end %>
+	  </li>
 	  <li role="presentation">
 	  	<%= link_to destroy_user_session_path, class: 'link-danger', method: :delete do %>
 	  		<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Cerrar sesión

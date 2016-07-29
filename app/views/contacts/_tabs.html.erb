@@ -3,8 +3,11 @@
     <li role="presentation" class="<%= 'active' if @kind == :regular %>">
       <a href="<%= contacts_path %>">Contactos</a>
     </li>
-    <li role="presentation" class="<%= 'active' if @kind == :partners %>">
-      <a href="<%= contacts_path(:partners) %>">Club Partners</a>
+    <li role="presentation" class="<%= 'active' if @kind == :support %>">
+      <a href="<%= contacts_path(:support) %>">Soporte</a>
+    </li>
+    <li role="presentation" class="<%= 'active' if @kind == :newsletter %>">
+      <a href="<%= contacts_path(:newsletter) %>">Newsletter</a>
     </li>
   </ul>
 </div>

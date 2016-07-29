@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   include Filterize
-  before_action :authenticate_admin!, except: :create
+  before_action :authenticate_admin!, except: :create, unless: Proc.new { action_name.to_sym == :new && user_signed_in? }
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :set_contacts, only: [:update_many, :destroy_many]
   before_action :set_kind, only: [:index, :show]
@@ -36,8 +36,11 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to after_create_url, notice: 'Gracias por contactarte con ariaweb.com.ar' }
+        format.html { redirect_to after_create_url, notice: after_create_notice }
         format.json { render :show, status: :created, location: @contact }
+      elsif @contact.newsletter?
+        format.html { redirect_to after_create_url, alert: @contact.errors[:email][0] }
+        format.json { render json: @contact.errors, status: :unprocessable_entity }
       else
         format.html { render :new }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -87,7 +90,7 @@ class ContactsController < ApplicationController
   def destroy_many
     respond_to do |format|
       if (@contacts.destroy_all rescue false)
-        format.html { redirect_to contacts_url, notice: 'Contacts were successfully destroyed.' }
+        format.html { redirect_to after_destroy_url, notice: 'Contacts were successfully destroyed.' }
         format.json { head :no_content }
       else
         format.html { redirect_to contacts_url, alert: 'Algunos contactos no se puedieron borrar.' }
@@ -97,11 +100,27 @@ class ContactsController < ApplicationController
   end
 
   private
+    def after_destroy_url
+      if params[:after_destroy_url].present?
+        params[:after_destroy_url]
+      else
+        contacts_url
+      end
+    end
+
     def after_create_url
       if params[:after_create_url].present?
         params[:after_create_url]
       else
         @contact
+      end
+    end
+
+    def after_create_notice
+      if params[:after_create_notice].present?
+        params[:after_create_notice]
+      else
+        'Gracias por contactarte con ariaweb.com.ar'
       end
     end
 

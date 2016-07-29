@@ -28,6 +28,7 @@ module FilterableHelper
 				response += filterable_html_option(content, value, :joins)
 			end
 		when :order
+			options = options - parameter if parameter.present?
 			options.each do |column|
 				value = column.to_s
 				if (label = collection.filterable_options[:labels][:order]).present? && (label = label[column]).present?

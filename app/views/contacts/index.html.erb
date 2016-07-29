@@ -10,13 +10,15 @@
       <input type="checkbox" name="select_all" data-target=".checkbox-target">
     </label>
   <% end %>
-  <%= link_to contacts_path, title: 'Marcar como leídos', class: 'btn btn-primary tooltip-trigger', disabled: true, data: { util: 'updateMany', ids: '.checkbox-target', hash: { contact: { read: 1 } } } do %>
-    <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
-    <i class="updated fa fa-bookmark fa-fw" aria-hidden="true"></i>
-  <% end %>
-  <%= link_to contacts_path, title: 'Marcar como no leídos', class: 'btn btn-primary tooltip-trigger', disabled: true, data: { util: 'updateMany', ids: '.checkbox-target', hash: { contact: { read: 0 } } } do %>
-    <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
-    <i class="updated fa fa-bookmark-o fa-fw" aria-hidden="true"></i>
+  <% unless @kind == :newsletter %>
+    <%= link_to contacts_path, title: 'Marcar como leídos', class: 'btn btn-primary tooltip-trigger', disabled: true, data: { util: 'updateMany', ids: '.checkbox-target', hash: { contact: { read: 1 } } } do %>
+      <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+      <i class="updated fa fa-bookmark fa-fw" aria-hidden="true"></i>
+    <% end %>
+    <%= link_to contacts_path, title: 'Marcar como no leídos', class: 'btn btn-primary tooltip-trigger', disabled: true, data: { util: 'updateMany', ids: '.checkbox-target', hash: { contact: { read: 0 } } } do %>
+      <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+      <i class="updated fa fa-bookmark-o fa-fw" aria-hidden="true"></i>
+    <% end %>
   <% end %>
   <%= link_to contacts_path, title: 'Borrar seleccionados', class: 'btn btn-danger tooltip-trigger', disabled: true, data: { util: 'deleteManyForm', target: '#destroy_all', ids: '.checkbox-target' } do %>
     <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
@@ -25,7 +27,9 @@
 </div>
 
 <div class="hidden">
-  <%= form_for contacts_path, html: { id: 'destroy_all' }, method: :delete, data: { confirm: '¿Seguro?' } {} %>
+  <%= form_for contacts_path, html: { id: 'destroy_all' }, method: :delete, data: { confirm: '¿Seguro?' } do %>
+    <%= hidden_field_tag :after_destroy_url, request.path %>
+  <% end %>
 </div>
 
 <%= render 'tabs' %>
@@ -41,7 +45,8 @@
       </div>
       <div class="col-xs-5">
         <div class="field">
-          <%= select_tag 'f[order]', filterable_select(@contacts, :order), prompt: 'Ordenar', class: 'selectpicker' %>
+          <% reject = @kind == :newsletter ? [:name, :read] : nil %>
+          <%= select_tag 'f[order]', filterable_select(@contacts, :order, reject), prompt: 'Ordenar', class: 'selectpicker' %>
         </div>
       </div>
     </div>
@@ -61,13 +66,19 @@
                 <input class="checkbox-target" type="checkbox" name="contact[ids][]" id="contact_id_<%= contact.id %>" value="<%= contact.id %>">
               </label>
             </td>
-            <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
-            <td><%= link_to contact.email, contact, style: 'color:inherit;' %></td>
+            <% unless contact.newsletter? %>
+              <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
+              <td><%= link_to contact.email, contact, style: 'color:inherit;' %></td>
+            <% else %>
+              <td><%= contact.email %></td>
+            <% end %>
             <td><%= contact.created_at.strftime('%d-%m-%Y %H:%M') %></td>
             <td>
-              <%= link_to contact, title: contact.read? ? 'Marcar como no leído' : 'Marcar como leído', class: 'tooltip-trigger link-primary contact-read-toggler', data: { util: 'update', hash: { contact: { read: contact.read? ? 0 : 1 } } } do %>
-                <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
-                <i class="updated fa fa-fw fa-bookmark<%= contact.read? ? '' : '-o' %>" aria-hidden="true"></i>
+              <% unless contact.newsletter? %>
+                <%= link_to contact, title: contact.read? ? 'Marcar como no leído' : 'Marcar como leído', class: 'tooltip-trigger link-primary contact-read-toggler', data: { util: 'update', hash: { contact: { read: contact.read? ? 0 : 1 } } } do %>
+                  <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
+                  <i class="updated fa fa-fw fa-bookmark<%= contact.read? ? '' : '-o' %>" aria-hidden="true"></i>
+                <% end %>
               <% end %>
               <%= link_to contact, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'link-danger tooltip-trigger' do %>
                 <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
