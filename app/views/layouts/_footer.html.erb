@@ -22,9 +22,12 @@
     <div class="newsletter">
       <h2>Newsletter</h2>
       <% unless user_signed_in? && Contact.newsletter.find_by(email: current_user.email).present? %>
+        <% content_for :extra_js do %>
+          $('#newsletter-form').validate();
+        <% end %>
         <p>Mantente en contacto para recibir promociones exclusivas.</p>
-        <div class="newsletter-input">
-          <%= form_for Contact.new(email: user_signed_in? ? current_user.email : '') do |f| %>
+        <div class="newsletter-input" style="position:relative;">
+          <%= form_for Contact.new(email: user_signed_in? ? current_user.email : ''), html: {id: 'newsletter-form'} do |f| %>
             <%= hidden_field_tag :after_create_url, request.path %>
             <%= hidden_field_tag :after_create_notice, 'Gracias por suscribirte al newsletter de Aria' %>
             <%= f.hidden_field :kind, value: :newsletter %>

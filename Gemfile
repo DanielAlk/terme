@@ -55,6 +55,7 @@ gem 'font-awesome-sass'
 gem 'tinymce-rails'
 gem 'bootstrap-select-rails'
 gem 'autonumeric-rails'
+gem 'clipboard-rails'
 
 gem 'mercadopago-sdk'
 

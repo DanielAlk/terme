@@ -21,8 +21,32 @@ Contacts.index = function() {
 	$('[data-util=updateMany]').on('updated.util.updateMany', updatedMany);
 	$('.contact-read-toggler').on('updated.util.update', updateToggle);
 	$('#filterable-contacts select').change(submitFilterable);
+	Contacts.clipboard();
 	Utils.checkboxes();
 	Utils.selectpicker();
 	Utils.deleteManyForm();
 	Utils.updateMany();
-}
+};
+
+Contacts.clipboard = function() {
+	var clipboard = new Clipboard('.clipboard-trigger');
+	var $trigger = $('.clipboard-trigger');
+	var $checkboxes = $('.checkbox-target');
+	$checkboxes.change(function(e) {
+		$trigger.attr('disabled', !$checkboxes.filter(':checked').length);
+	});
+	clipboard.on('success', function(e) {
+		Alerts.success('Se copiaron los emails al portapapeles.');
+	});
+	clipboard.on('error', function(e) {
+		Alerts.danger('No se pudo copiar... tu navegador no es compatible.');
+	});
+	$trigger.click(function(e) {
+		e.preventDefault();
+		var text = '';
+		$('.clipboard-field').each(function() {
+			text += $(this).text() + ', ';
+		});
+		$trigger.attr('data-clipboard-text', text.substr(0, text.length - 2));
+	});
+};

@@ -19,6 +19,10 @@
       <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
       <i class="updated fa fa-bookmark-o fa-fw" aria-hidden="true"></i>
     <% end %>
+  <% else %>
+    <%= link_to '#', title: 'Copiar emails', class: 'btn btn-warning clipboard-trigger tooltip-trigger', disabled: true, data: { clipboard_text: '' } do %>
+      <i class="fa fa-clipboard fa-fw" aria-hidden="true"></i>
+    <% end %>
   <% end %>
   <%= link_to contacts_path, title: 'Borrar seleccionados', class: 'btn btn-danger tooltip-trigger', disabled: true, data: { util: 'deleteManyForm', target: '#destroy_all', ids: '.checkbox-target' } do %>
     <i class="updating fa fa-spinner fa-pulse fa-fw"></i>
@@ -70,7 +74,7 @@
               <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
               <td><%= link_to contact.email, contact, style: 'color:inherit;' %></td>
             <% else %>
-              <td><%= contact.email %></td>
+              <td class="clipboard-field"><%= contact.email %></td>
             <% end %>
             <td><%= contact.created_at.strftime('%d-%m-%Y %H:%M') %></td>
             <td>

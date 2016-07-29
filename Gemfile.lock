@@ -55,6 +55,7 @@ GEM
     chunky_png (1.3.6)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    clipboard-rails (1.5.10)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.1)
@@ -229,6 +230,7 @@ DEPENDENCIES
   bootstrap-select-rails
   browser
   byebug
+  clipboard-rails
   coffee-rails (~> 4.1.0)
   compass-rails
   devise (= 3.4.1)

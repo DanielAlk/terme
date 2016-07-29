@@ -23,6 +23,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-select
 //= require autonumeric
+//= require clipboard
 //= require turbolinks
 //= require alerts
 //= require modals
