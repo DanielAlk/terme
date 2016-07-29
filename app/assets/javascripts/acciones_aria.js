@@ -240,18 +240,4 @@ var AriaInit = function() {
     
     
     
-    // -> Noticias
-    
-    $('.button-ver').click(function(){
-        var $this = $(this);
-        $this.toggleClass('ver-mas');
-        if($this.hasClass('ver-mas')){
-            $this.text('Ver Más');         
-        } else {
-            $this.text('Cerrar');
-        }
-    });
-    
-    
-    
 };

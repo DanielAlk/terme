@@ -2,14 +2,7 @@ class Article < ActiveRecord::Base
 	extend FriendlyId
 	include Tinymce
 	friendly_id :slug_candidates, use: :slugged
-	has_attached_file :image,
-		styles: Proc.new { |attachment| {
-			big: attachment.instance.shape_image_style(:big),
-			medium: attachment.instance.shape_image_style(:medium),
-			small: attachment.instance.shape_image_style(:small),
-			thumb: attachment.instance.shape_image_style(:thumb)
-		} },
-		default_url: "product-imgs/p-:style.jpg"
+	has_attached_file :image, styles: Proc.new { |attachment| attachment.instance.shape_image_style }, default_url: "product-imgs/p-:style.jpg"
 	validates_attachment :image, presence: true, content_type: { content_type: /\Aimage\/.*\Z/ }, if: :shape_has_image?
 
 	acts_as_list scope: [:shape], add_new_at: :top
@@ -38,7 +31,7 @@ class Article < ActiveRecord::Base
 		{ about: 1, news: 3 }[shape.to_sym]
 	end
 
-	def shape_image_style(style)
+	def shape_image_style
 		{
 			news: {
 				big: '1467x474#',
@@ -46,7 +39,7 @@ class Article < ActiveRecord::Base
 				small: '755x323#',
 				thumb: '150x110#'
 			}
-		}[self.shape.to_sym][style]
+		}[self.shape.to_sym]
 	end
 
 	def shape_has_title?

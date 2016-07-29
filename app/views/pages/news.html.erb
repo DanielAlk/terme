@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 <% content_for :extra_js do %>
-  Pages.articles();
+  $('.article-expansible').articleExpansible();
   $('#more-news').click(function(e) {
     e.preventDefault();
     $.getScript($(this).attr('href'));

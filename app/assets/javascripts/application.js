@@ -26,5 +26,6 @@
 //= require mercadopago
 //= require modals
 //= require alerts
+//= require article_expansible
 //= require pages
 //= require cart

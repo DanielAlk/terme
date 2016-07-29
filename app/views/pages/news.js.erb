@@ -1,4 +1,5 @@
-$('#news-container').append('<%= j render @articles %>');
+$articles = $('<%= j render @articles %>');
+$('#news-container').append($articles).find('.article-expansible').articleExpansible();
 <% if @articles.next_page %>
 	$('#more-news').attr('href', '<%= news_page_path(page: @articles.next_page) %>');
 <% else %>

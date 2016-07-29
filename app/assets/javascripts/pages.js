@@ -67,29 +67,6 @@ Pages.product = function(product) {
 	});
 };
 
-Pages.articles = function() {	
-	var expansible_article = function() {
-	  var article = this;
-	  var $article = $(this);
-	  var $trigger = $article.find('.expansible-trigger');
-	  var $expansible = $article.find('.expansible');
-	  var $window = $(window);
-	  var expansible_height;
-	  var getHeight = function() {
-	    expansible_height = $expansible.height();
-	    $expansible.css('height', expansible_height).addClass('contracted');
-	  };
-	  var triggerClick = function(e) {
-	    // text of the button changes by another function defined previously by Leandro
-	    e.preventDefault();
-	    $expansible.toggleClass('contracted');
-	  };
-	  $trigger.click(triggerClick);
-	  setTimeout(getHeight, 200);
-	};
-	$('[data-article="expand"]').each(expansible_article);
-};
-
 Pages.carousel = function() {
 	$('.slider.owl-carousel').owlCarousel({
 	  loop:true,
