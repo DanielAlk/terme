@@ -39,5 +39,4 @@ module Cart
 	def authenticate_cart!
 	  redirect_to root_url unless @cart.present? && @cart[:products].present? && @cart[:items].present?
 	end
-
 end
