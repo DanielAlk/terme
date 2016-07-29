@@ -24,12 +24,16 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :contacts, path: '(:kind)/contacts', only: :index
+    resources :contacts, only: [:show, :destroy]
     resources :categories
+
     resources :images, :defaults => { :format => :json } do
       collection do
         put '/', action: :update_many
       end
     end
+    
     resources :tags
     resources :zones, only: [:index, :update]
     resources :products do
@@ -63,6 +67,7 @@ Rails.application.routes.draw do
   end
 
   resources :payments, only: [ :index, :show, :create ]
+  resources :contacts, only: :create
 
   root 'pages#home'
 

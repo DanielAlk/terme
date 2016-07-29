@@ -20,7 +20,7 @@
 <% end %>
 
 <div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
-  <%= link_to new_article_path(@shape), title: 'Nuevo', class: 'btn btn-warning tooltip-trigger' do %>
+  <%= link_to new_article_path(@shape), title: 'Nuevo ' + Article.shape_sp(@shape), class: 'btn btn-warning tooltip-trigger' do %>
     <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
   <% end %>
 </div>
@@ -87,7 +87,7 @@
   </div>
   <% if @shape == :news %>
     <div class="will-paginate">
-      <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+      <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
     </div>
   <% end %>
 <% end %>

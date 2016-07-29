@@ -7,7 +7,7 @@
   <%= link_to @article, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'btn btn-danger tooltip-trigger' do %>
     <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
   <% end %>
-  <%= link_to new_article_path(@shape), title: 'Nuevo', class: 'btn btn-success tooltip-trigger' do %>
+  <%= link_to new_article_path(@shape), title: 'Nuevo ' + @article.shape_sp, class: 'btn btn-success tooltip-trigger' do %>
     <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
   <% end %>
   <%= link_to articles_path(@article.shape.to_sym), title: 'Volver al listado', class: 'btn btn-warning tooltip-trigger' do %>

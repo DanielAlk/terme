@@ -1,5 +1,9 @@
 <% content_for :body_class, 'contacto' %>
 
+<% content_for :extra_js do %>
+  $('form#new_contact').validate();
+<% end %>
+
 <%= render 'partials/carousel' %>
 <div class="content">
   <div class="content-info">
@@ -12,43 +16,44 @@
     <section class="contact">
       <h2 class="no-display">Contacto</h2>
       <div class="col-left">
-        <form name="contacto">
+        <%= form_for @contact do |f| %>
+          <%= hidden_field_tag :after_create_url, root_url %>
           <ul class="form-list">
             <li class="wide">
               <div class="field">
                 <label class="requerido">Nombre Completo</label>
-                <input type="text" placeholder="ej.  roberto martinez" required>
+                <%= f.text_field :name, placeholder: 'ej. Roberto Martinez', required: true %>
               </div>
             </li>
             <li class="wide">
               <div class="field">
                 <label class="requerido">Email</label>
-                <input type="email" placeholder="ej.  nombre@mail.com" required>
+                <%= f.email_field :email, placeholder: 'ej. nombre@mail.com', required: true %>
               </div>
             </li>
             <li class="wide">
               <div class="field">
                 <label>Compañía</label>
-                <input type="text" placeholder="ej. tu compania (opcional)">
+                <%= f.text_field :company, placeholder: 'ej. tu compania (opcional)'%>
               </div>
             </li>
             <li class="wide">
               <div class="field">
                 <label class="requerido">Asunto</label>
-                <input type="text" placeholder="Solicitar Presupuesto" required>
+                <%= f.text_field :subject, placeholder: 'ej. Solicitar Presupuesto', required: true %>
               </div>
             </li>
             <li class="wide">
               <div class="field">
                 <label class="requerido">Mensaje</label>
-                <textarea name="msj"></textarea>
+                <%= f.text_area :message, required: true %>
               </div>
             </li>
           </ul>
           <div class="btn">
-            <input type="submit" value="Enviar" name="enviar">
+            <%= f.submit 'Enviar' %>
           </div>
-        </form>
+        <% end %>
       </div>
       <div class="col-right">
         <h2>Dirección</h2>

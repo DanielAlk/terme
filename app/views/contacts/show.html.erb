@@ -1,0 +1,18 @@
+<% content_for :panel_subtitle, 'Contacto ' + @contact.name %>
+
+<div class="btn-group pull-right btn-group-xs" style="margin-top: -30px;">
+  <%= link_to @contact, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'btn btn-danger tooltip-trigger' do %>
+    <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+  <% end %>
+  <%= link_to contacts_path, title: 'Volver al listado', class: 'btn btn-warning tooltip-trigger' do %>
+    <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+  <% end %>
+</div>
+
+<p class="well">
+  <strong>Nombre:</strong> <%= @contact.name %><br>
+  <strong>Email:</strong> <%= @contact.email %><br>
+  <strong>Compañía:</strong> <%= @contact.company %><br>
+  <strong>Asunto:</strong> <%= @contact.subject %><br>
+  <strong>Mensaje:</strong> <%= @contact.message %><br>
+</p>

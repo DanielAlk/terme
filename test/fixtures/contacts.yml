@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kind: 1
+  read: 1
+  name: MyString
+  email: MyString
+  company: MyString
+  subject: MyString
+  message: MyText
+
+two:
+  kind: 1
+  read: 1
+  name: MyString
+  email: MyString
+  company: MyString
+  subject: MyString
+  message: MyText

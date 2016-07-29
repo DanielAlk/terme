@@ -1,0 +1,72 @@
+<% content_for :panel_subtitle, 'Contactos' %>
+
+<% content_for :extra_js do %>
+  Utils.selectpicker();
+  $('#filterable-contacts select').change(function() {
+    $(this).closest('form').submit();
+  });
+<% end %>
+
+<div style="margin-bottom:20px;">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= 'active' if @kind == :regular %>">
+      <a href="<%= contacts_path(:regular) %>">Contactos</a>
+    </li>
+    <li role="presentation" class="<%= 'active' if @kind == :partners %>">
+      <a href="<%= contacts_path(:partners) %>">Partners</a>
+    </li>
+  </ul>
+</div>
+
+<div class="filterable" id="filterable-contacts" style="padding-right:30px;">
+  <%= form_tag contacts_path(@kind), method: :get do %>
+    <div class="row">
+      <%= button_tag 'Buscar', type: :submit, class: 'btn btn-xs btn-success' %>
+      <div class="col-xs-5">
+        <div class="field">
+          <%= search_field_tag 'f[search]', filterable(:search), placeholder: 'Buscar' %>
+        </div>
+      </div>
+      <div class="col-xs-5">
+        <div class="field">
+          <%= select_tag 'f[order]', filterable_select(@contacts, :order), prompt: 'Ordenar', class: 'selectpicker' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% unless @contacts.present? %>
+  No se econtraron contactos
+<% else %>
+  <div class="table-responsive">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Fecha</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @contacts.each do |contact| %>
+          <tr class="<%= contact.read ? 'info' : 'success' %>">
+            <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
+            <td><%= link_to contact.email, contact, style: 'color:inherit;' %></td>
+            <td><%= contact.created_at.strftime('%d-%m-%Y %H:%M') %></td>
+            <td>
+              <%= link_to contact, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'link-danger tooltip-trigger' do %>
+                <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="will-paginate">
+    <%= will_paginate @contacts, renderer: BootstrapPagination::Rails %>
+  </div>
+<% end %>
