@@ -33,6 +33,11 @@ class Article < ActiveRecord::Base
 
 	def shape_image_style
 		{
+			showcase: {
+				big: '1920x895#',
+				medium: '760x760#',
+				thumb: '150x110#'
+			},
 			news: {
 				big: '1467x474#',
 				medium: '760x760#',

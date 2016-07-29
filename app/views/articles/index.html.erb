@@ -38,7 +38,10 @@
   <% end %>
   <div class="table-responsive">
     <table class="table table-condensed table-hover">
-      <tbody class="highlited-<%= Article.shape_highlited(@shape) %>">
+      <% if @shape != :news || @articles.current_page == 1 %>
+        <% @highlited = Article.shape_highlited(@shape) %>
+      <% end %>
+      <tbody class="highlited-<%= @highlited %>">
         <% @articles.each_with_index do |article, i| %>
           <tr id="article-<%= article.id %>">
             <% if Article.shape_has?(:image, @shape) %>
@@ -48,14 +51,30 @@
                 <% end %>
               </td>
             <% end %>
-            <td style="padding-left: 10px;">
+            <td style="padding-left: 10px;color:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;">
               <%= link_to article, style: 'color:inherit;' do %>
                 <b><%= article.title %></b>
+              <% end %>
+            </td>
+            <td style="color:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;">
+              <%= link_to article, style: 'color:inherit;' do %>
+                <small><%= article.subtitle %></small>
               <% end %>
             </td>
             <td class="text-right" style="padding-right: 10px;">
               <%= link_to edit_article_path(article), title: 'Editar', class: 'tooltip-trigger link-success' do %>
                 <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+              <% end %>
+              <% if article.news? && @articles.current_page > 1 %>
+                <div class="hidden">
+                  <%= form_for article do |f| %>
+                    <%= hidden_field_tag :after_update_url, articles_url(@shape) %>
+                    <%= f.hidden_field :position, value: 1 %>
+                  <% end %>
+                </div>
+                <%= link_to '#', title: 'Poner primero', class: 'tooltip-trigger link-info', data: { submit: '#edit_article_' + article.id.to_s } do %>
+                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                <% end %>
               <% end %>
               <%= link_to article, method: :delete, data: { confirm: '¿Seguro?' }, title: 'Eliminar', class: 'link-danger tooltip-trigger' do %>
                 <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
@@ -66,4 +85,9 @@
       </tbody>
     </table>
   </div>
+  <% if @shape == :news %>
+    <div class="will-paginate">
+      <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+    </div>
+  <% end %>
 <% end %>

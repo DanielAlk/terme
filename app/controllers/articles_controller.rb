@@ -7,7 +7,8 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.where(shape: Article.shapes[@shape]).order(position: :asc)
+    @articles = Article.send(@shape).order(position: :asc)
+    @articles = @articles.paginate(:page => params[:page], :per_page => 6) if @shape == :news
   end
 
   # GET /articles/1
@@ -45,7 +46,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to after_update_url, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -85,6 +86,14 @@ class ArticlesController < ApplicationController
   end
 
   private
+    def after_update_url
+      if params[:after_update_url].present?
+        params[:after_update_url]
+      else
+        @article
+      end
+    end
+
     def set_shape
       @shape = @article.present? ? @article.shape.try(:to_sym) : params[:shape].try(:to_sym)
     end

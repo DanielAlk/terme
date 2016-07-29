@@ -1,4 +1,6 @@
-<%= tinymce_init(200) %>
+<% if @article.shape_has_text? %>
+  <%= tinymce_init(200) %>
+<% end %>
 
 <% content_for :extra_js do %>
   $('#article_form').validate();

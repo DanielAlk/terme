@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_website
 
-  def set_website
-  	@website = Website.find(1)
-  end
+	private
+	  def set_website
+	  	@website = Website.find(1)
+	  end
 end

@@ -29,25 +29,25 @@
   </p>
 <% end %>
 
-<% if @article.shape_has_description? %>
-  <p>
-    <strong>Description:</strong>
-    <%= @article.description %>
-  </p>
-<% end %>
-
 <% if @article.shape_has_image? %>
   <%= image_tag @article.image(:thumb), class: 'pull-left', style: 'margin: 20px 20px 10px;' %>
 <% end %>
 
+<% if @article.shape_has_description? %>
+  <p class="well" style="min-height: 150px;">
+    <%= @article.description %>
+  </p>
+<% end %>
+
 <% if @article.shape_has_text? %>
-  <p class="well">
+  <p class="well" style="min-height: 150px;">
     <%= @article.text.html_safe %>
   </p>
 <% end %>
 
 <% if @article.shape_has_link? %>
-  <p>
+  <div class="clearfix"></div>
+  <p class="well">
     <%= link_to @article.link_title, @article.link, class: 'btn btn-sm btn-primary' %>
     <small><b>URL:</b> <%= @article.link %></small>
   </p>
