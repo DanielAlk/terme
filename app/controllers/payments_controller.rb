@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   include Cart
   include MercadoPagoHelper
-  before_action :authenticate_user!, unless: Proc.new { admin_signed_in? && [:index, :show].include?(action_name.to_sym) }
+  before_action :authenticate_user!, except: :notifications, unless: Proc.new { admin_signed_in? && [:index, :show].include?(action_name.to_sym) }
   before_action :set_cart, only: :create
   before_action :authenticate_cart!, only: :create
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
@@ -72,6 +72,20 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /payments/notifications/
+  def notifications
+    if params[:type] == 'payment'
+      @payment = Payment.find_mp(params['data.id'])
+    end
+    respond_to do |format|
+      if @payment.present?
+        format.json { render json: @payment.to_json, status: :ok }
+      else
+        format.json { head :no_content }
+      end
     end
   end
 

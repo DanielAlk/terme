@@ -17,6 +17,21 @@ class Payment < ActiveRecord::Base
   serialize :mercadopago_payment
   serialize :additional_info
 
+  def self.find_mp(mercadopago_payment_id)
+    mp_payment = $mp.get("/v1/payments/"+mercadopago_payment_id)
+    if mp_payment['status'].to_i == 200
+      payment = self.find(mp_payment['response']['external_reference'])
+      payment.mercadopago_payment = mp_payment['response']
+      payment.mercadopago_payment_id = payment.mercadopago_payment['id']
+      payment.status = payment.mercadopago_payment['status']
+      payment.status_detail = payment.mercadopago_payment['status_detail']
+      payment.save
+      return payment
+    else
+      return false
+    end
+  end
+
   def parse_cart(cart)
     self.shipment_cost = self.zone.shipment_cost
     self.transaction_amount = cart[:total] + self.shipment_cost
@@ -62,7 +77,7 @@ class Payment < ActiveRecord::Base
 			},
 			external_reference: id,
 			statement_descriptor: "Compra en Aria Web",
-			notification_url: "https://ariaweb.com.ar/payments/notifications",
+			notification_url: Rails.application.routes.url_helpers.notifications_payments_url(host: 'ariaweb.com.ar'),
 			additional_info: additional_info
   	}
   	self.mercadopago_payment = $mp.post("/v1/payments", paymentData)['response'];

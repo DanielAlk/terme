@@ -74,7 +74,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :payments, only: [ :index, :show, :create ]
+  resources :payments, only: [ :index, :show, :create ] do
+    collection do
+      post 'notifications', action: :notifications
+    end
+  end
   resources :contacts, only: :create
 
   root 'pages#home'
