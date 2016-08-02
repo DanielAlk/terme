@@ -1,7 +1,7 @@
 var MP = {};
 
 MP.init = function() {
-	Mercadopago.setPublishableKey('TEST-10c1a1a2-86ee-4a43-96c4-1159538dab36');
+	Mercadopago.setPublishableKey('<%= ENV['mercadopago_public_key'] %>');
 	Mercadopago.getIdentificationTypes();
 	MP.getPaymentMethod();
 	MP.captureSubmit();
