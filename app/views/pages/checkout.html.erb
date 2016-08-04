@@ -1,7 +1,7 @@
 <% content_for :body_class, 'checkout checkout-confirm' %>
 
 <% content_for :extra_js do %>
-  MP.init();
+  MP.init('<%= ENV['mercadopago_public_key'] %>');
   $('form#pay').validate();
   $('#payment_zone_id').change(function(e) {
     var $select = $(this);

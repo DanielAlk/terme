@@ -1,4 +1,5 @@
 class Payment < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
   belongs_to :user
   belongs_to :zone
   has_one :address, :as => :addressable, :dependent => :destroy
@@ -19,7 +20,7 @@ class Payment < ActiveRecord::Base
 
   def self.find_mp(mercadopago_payment_id)
     mp_payment = $mp.get("/v1/payments/"+mercadopago_payment_id)
-    if mp_payment['status'].to_i == 200
+    if mp_payment['status'].try(:to_i) == 200
       payment = self.find(mp_payment['response']['external_reference'])
       payment.mercadopago_payment = mp_payment['response']
       payment.mercadopago_payment_id = payment.mercadopago_payment['id']
@@ -77,7 +78,7 @@ class Payment < ActiveRecord::Base
 			},
 			external_reference: id,
 			statement_descriptor: "Compra en Aria Web",
-			notification_url: Rails.application.routes.url_helpers.notifications_payments_url(host: 'ariaweb.com.ar'),
+			notification_url: notifications_payments_url(protocol: 'https', host: 'ariaweb.com.ar'),
 			additional_info: additional_info
   	}
   	self.mercadopago_payment = $mp.post("/v1/payments", paymentData)['response'];
