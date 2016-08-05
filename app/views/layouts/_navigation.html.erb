@@ -58,7 +58,7 @@
             <li><a href="<%= about_page_path %>">La Empresa</a></li>
             <li> <a href="<%= products_page_path %>">Productos y Servicios</a>
               <ul class="level1">
-                <li> <a href="<%= products_page_path %>">Equipos</a>
+                <li> <a href="<%= products_page_path %>">Productos</a>
                   <ul class="level2">
                     <% Category.friendly.find('products').children.each do |category| %>
                       <li><a href="<%= products_page_path category %>"><%= category.title %></a></li>
