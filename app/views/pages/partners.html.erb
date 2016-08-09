@@ -12,7 +12,12 @@
         <p>Se consideran Partners a todos aquellos profesionales que se encuentren dirigiendo proyectos de diseño, construcción y remodelación de hogares, comercios y empresas, tales como Arquitectos, Ingenieros Civiles, Diseñadores de Interiores, MMdeO, o directamente, propietarios.</p>
         <h2>¿En qué consiste el CPA?</h2>
         <p>Ser Partner significa poder acceder a los beneficios exclusivos de contar con Aria como socio  estratégico para todos aquellos proyectos de climatización de obras civiles y comerciales, sin importar la magnitud de la misma. Funciona de manera muy simple: Un Partner, que cuente con una necesidad de climatización de un proyecto y lo presente en el CPA para que ARIA se convierta en el proveedor que realice dicho proyecto y lo realice efectivamente, obtiene los Beneficios Exclusivos del CPA.</p>
-        <a href="#">Participar</a> </div>
+        <% unless user_signed_in? && Contact.partners.find_by(email: current_user.email).present? %>
+          <a href="#modal-partners" data-util="modal">Participar</a>
+        <% else %>
+          <a href="javascript:void(0);">Ya estás participando</a>
+        <% end %>
+      </div>
       <div class="col-right"> <img src="<%= asset_path 'club-partners/clubpartners.jpg' %>" alt="Club Partners Aria"> </div>
     </section>
     <section class="beneficios">
@@ -42,7 +47,13 @@
         </tbody>
       </table>
     </section>
-    <div class="button-set"> <a href="#">HAZ CLICK AQUí para empezar a participar del club de partners aria</a> </div>
+    <div class="button-set">
+      <% unless user_signed_in? && Contact.partners.find_by(email: current_user.email).present? %>
+        <a href="#modal-partners" data-util="modal">HAZ CLICK AQUí para empezar a participar del club de partners aria</a>
+      <% else %>
+        <a href="javascript:void(0);">Ya estas participando del club de partners aria</a>
+      <% end %>
+    </div>
     <div class="partner-bottom">
       <div class="partner"><img src="<%= asset_path 'partner/carrier.jpg' %>" alt=""></div>
       <div class="partner"><img src="<%= asset_path 'partner/toshiba.jpg' %>" alt=""></div>
@@ -51,3 +62,32 @@
     <%= render 'partials/social_media' %>
   </div>
 </div>
+
+<% unless user_signed_in? && Contact.partners.find_by(email: current_user.email).present? %>
+  <% content_for :extra_js do %>
+    $('#partners-form').validate();
+  <% end %>
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal-partners">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Club de Partners Aria</h4>
+        </div>
+        <%= form_for Contact.new(email: user_signed_in? ? current_user.email : ''), html: {id: 'partners-form'} do |f| %>
+          <%= hidden_field_tag :after_create_url, request.path %>
+          <%= hidden_field_tag :after_create_notice, 'Gracias por suscribirte al Club de Partners Aria' %>
+          <%= f.hidden_field :kind, value: :partners %>
+          <div class="modal-body">
+            <div class="field">
+              <%= f.email_field :email, placeholder: 'Email', required: true, autofocus: true %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit 'Participar' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

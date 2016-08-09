@@ -1,13 +1,28 @@
 <div style="margin-bottom:20px;">
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="<%= 'active' if @kind == :regular %>">
-      <a href="<%= contacts_path %>">Contactos</a>
+      <a href="<%= contacts_path %>">Contactos
+        <% if (regular_count = Contact.regular.where(read: false).count) > 0 %>
+          <span class="badge">
+            <%= regular_count %>
+          </span>
+        <% end %>
+      </a>
     </li>
     <li role="presentation" class="<%= 'active' if @kind == :support %>">
-      <a href="<%= contacts_path(:support) %>">Soporte</a>
+      <a href="<%= contacts_path(:support) %>">Soporte
+        <% if (support_count = Contact.support.where(read: false).count) > 0 %>
+          <span class="badge">
+            <%= support_count %>
+          </span>
+        <% end %>
+      </a>
     </li>
     <li role="presentation" class="<%= 'active' if @kind == :newsletter %>">
       <a href="<%= contacts_path(:newsletter) %>">Newsletter</a>
+    </li>
+    <li role="presentation" class="<%= 'active' if @kind == :partners %>">
+      <a href="<%= contacts_path(:partners) %>">Club de Partners</a>
     </li>
   </ul>
 </div>

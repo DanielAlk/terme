@@ -43,4 +43,21 @@
 			</div>
 		<% end %>
 	</p>
+
+	<p>
+		<b>Club de partners:</b>
+		<% if (contact = Contact.partners.find_by(email: current_user.email)).present? %>
+			<%= link_to 'Dejar de participar', contact, method: :delete, data: { confirm: '¿Seguro?' }, class: 'btn btn-danger btn-xs' %>
+		<% else %>
+			<%= link_to 'Participar', contact, data: { submit: '#partners-create' }, class: 'btn btn-primary btn-xs' %>
+			<div class="hidden">
+				<%= form_for Contact.new(kind: :partners,email: current_user.email), html: { id: 'partners-create' } do |f| %>
+					<%= hidden_field_tag 'after_create_url', profile_url %>
+					<%= hidden_field_tag 'after_create_notice', 'Gracias por suscribirte al Club de Partners Aria.' %>
+					<%= f.hidden_field :kind %>
+					<%= f.hidden_field :email %>
+				<% end %>
+			</div>
+		<% end %>
+	</p>
 </div>

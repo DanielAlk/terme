@@ -61,6 +61,11 @@
 	  <li role="presentation" class="<%= panel_nav_class(:contacts) %>">
 	  	<%= link_to contacts_path do %>
 	  		<i class="fa fa-quote-left fa-fw" aria-hidden="true"></i> Contactos
+  			<% if (unread_count = Contact.where(read: false).count) > 0 %>
+		  		<span class="badge">
+		  			<%= unread_count %>
+		  		</span>
+	  		<% end %>
 	  	<% end %>
 	  </li>
 	  <li role="presentation" class="<%= panel_nav_class(:zones) %>">

@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   include Filterize
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, except: :create, unless: Proc.new {
-    user_signed_in? && (action_name.to_sym == :new || action_name.to_sym == :destroy && @contact.newsletter?)
+    user_signed_in? && (action_name.to_sym == :new || action_name.to_sym == :destroy && @contact.newsletter_or_partners?)
   }
   before_action :set_contacts, only: [:update_many, :destroy_many]
   before_action :set_kind, only: [:index, :show, :destroy]
@@ -40,7 +40,7 @@ class ContactsController < ApplicationController
       if @contact.save
         format.html { redirect_to after_create_url, notice: after_create_notice }
         format.json { render :show, status: :created, location: @contact }
-      elsif @contact.newsletter?
+      elsif @contact.newsletter? || @contact.partners?
         format.html { redirect_to after_create_url, alert: @contact.errors[:email][0] }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       else
@@ -105,7 +105,7 @@ class ContactsController < ApplicationController
     def after_destroy_url
       if params[:after_destroy_url].present?
         params[:after_destroy_url]
-      elsif user_signed_in? && @kind == :newsletter
+      elsif user_signed_in? && [:newsletter, :partners].include?(@kind)
         profile_url
       else
         contacts_url
