@@ -56,7 +56,11 @@ class Product < ActiveRecord::Base
   end
 
   def dimensions
-    width_mm.to_s(:delimited, locale: :es) + ' x ' + height_mm.to_s(:delimited, locale: :es) + ' x ' + depth_mm.to_s(:delimited, locale: :es) + ' mm.'
+    if width_mm.present? && height_mm.present? && depth_mm.present?
+      width_mm.to_s(:delimited, locale: :es) + ' x ' + height_mm.to_s(:delimited, locale: :es) + ' x ' + depth_mm.to_s(:delimited, locale: :es) + ' mm.'
+    else
+      'N/A'
+    end
   end
 
   def status_translated
