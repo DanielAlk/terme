@@ -75,31 +75,33 @@ Products.show = function() {
 };
 
 Products.form = function() {
-	$('form#new_product, form#edit_prodcut').validate({
+	var validationObject = {
 	  rules: {
-	    "product[width_cm]": {
+	    "product[width_mm]": {
 	      required: {
 	        depends: function(element) {
-	          return !!$('#product_height_cm').val().length || !!$('#product_depth_cm').val().length;
+	          return !!$('#product_height_mm').val().length || !!$('#product_depth_mm').val().length;
 	        }
 	      }
 	    },
-	    "product[height_cm]": {
+	    "product[height_mm]": {
 	      required: {
 	        depends: function(element) {
-	          return !!$('#product_width_cm').val().length || !!$('#product_depth_cm').val().length;
+	          return !!$('#product_width_mm').val().length || !!$('#product_depth_mm').val().length;
 	        }
 	      }
 	    },
-	    "product[depth_cm]": {
+	    "product[depth_mm]": {
 	      required: {
 	        depends: function(element) {
-	          return !!$('#product_width_cm').val().length || !!$('#product_height_cm').val().length;
+	          return !!$('#product_width_mm').val().length || !!$('#product_height_mm').val().length;
 	        }
 	      }
 	    }
 	  }
-	});
+	};
+	$('form#new_product').validate(validationObject);
+	$('form[id^="edit_product"]').validate(validationObject);
 	Utils.selectpicker();
 	Utils.autonumeric();
 	Utils.addOptionToSelect();

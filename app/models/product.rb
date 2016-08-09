@@ -43,8 +43,20 @@ class Product < ActiveRecord::Base
     write_attribute(:price, price.gsub('.', '').gsub(',', '.'))
   end
 
+  def width_mm=(width_mm)
+    write_attribute(:width_mm, width_mm.gsub('.', '').gsub(',', '.'))
+  end
+
+  def height_mm=(height_mm)
+    write_attribute(:height_mm, height_mm.gsub('.', '').gsub(',', '.'))
+  end
+
+  def depth_mm=(depth_mm)
+    write_attribute(:depth_mm, depth_mm.gsub('.', '').gsub(',', '.'))
+  end
+
   def dimensions
-    width_cm.to_s + 'x' + height_cm.to_s + 'x' + depth_cm.to_s + ' cm.'
+    width_mm.to_s(:delimited, locale: :es) + ' x ' + height_mm.to_s(:delimited, locale: :es) + ' x ' + depth_mm.to_s(:delimited, locale: :es) + ' mm.'
   end
 
   def status_translated

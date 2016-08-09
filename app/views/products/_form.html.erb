@@ -47,20 +47,19 @@
     </div>
     <div class="col-sm-6">
       <div class="field">
-        <%= f.label :height_cm, 'Dimensiones <small>(Alto x Ancho x Largo)</small>'.html_safe %><br>
-        <div class="cols-6">
+        <%= f.label :height_mm, 'Dimensiones <small>en mm. <small>(Alto x Ancho x Prof.)</small></small>'.html_safe %><br>
+        <div class="cols-5 cols-lg-odds-25">
           <div>
-            <%= f.text_field :height_cm, class: 'autonumeric' %>
+            <%= f.text_field :height_mm, class: 'autonumeric' %>
           </div>
           <small style="text-align:center;line-height:34px;">x</small>
           <div>
-            <%= f.text_field :width_cm, class: 'autonumeric' %>
+            <%= f.text_field :width_mm, class: 'autonumeric' %>
           </div>
           <small style="text-align:center;line-height:34px;">x</small>
           <div>
-            <%= f.text_field :depth_cm, class: 'autonumeric' %>
+            <%= f.text_field :depth_mm, class: 'autonumeric' %>
           </div>
-          <small style="text-align:center;line-height:34px;">cm.</small>
         </div>
       </div>
     </div>
