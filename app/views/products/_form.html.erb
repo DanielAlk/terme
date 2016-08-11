@@ -100,6 +100,13 @@
     <%= f.label :external_link, 'Ficha oficial carrier (link)' %><br>
     <%= f.text_field :external_link %>
   </div>
+  <div class="field">
+    <%= f.label :data_sheet_file, 'Ficha PDF' %><br>
+    <%= f.file_field :data_sheet_file, accept: 'application/pdf' %>
+    <% if @product.data_sheet_file.present? %>
+      <small>Ya tienes una ficha pdf en este producto</small>
+    <% end %>
+  </div>
   <div id="tinymce_tabs">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active">

@@ -10,6 +10,8 @@ class Product < ActiveRecord::Base
   has_many :tags, through: :taggings
   has_many :payment_products
   has_many :payments, through: :payment_products
+  has_attached_file :data_sheet_file
+  validates_attachment_content_type :data_sheet_file, content_type: "application/pdf"
   validates_length_of :title, minimum: 5, message: "debe contener al menos 5 caracteres"
   validates :category, presence: true
   validates_presence_of :price

@@ -111,6 +111,8 @@
           <strong>Link externo:</strong>
           <%= link_to @product.external_link, @product.external_link, target: '_blank' if @product.external_link.present? %>
         </span>
+        <strong>Ficha PDF:</strong>
+        <%= link_to 'Ver ficha.', @product.data_sheet_file.url, target: '_blank' if @product.data_sheet_file.present? %>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="characteristics_tab">

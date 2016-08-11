@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809091944) do
+ActiveRecord::Schema.define(version: 20160811062835) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -170,26 +170,30 @@ ActiveRecord::Schema.define(version: 20160809091944) do
   add_index "payments", ["zone_id"], name: "index_payments_on_zone_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.string   "title",           limit: 255
-    t.integer  "status",          limit: 4,                             default: 0
-    t.integer  "special",         limit: 4,                             default: 0
-    t.string   "key_code",        limit: 255
-    t.string   "brand",           limit: 255
-    t.integer  "category_id",     limit: 4
-    t.integer  "stock",           limit: 4
-    t.decimal  "price",                         precision: 8, scale: 2
-    t.integer  "currency",        limit: 4,                             default: 0
-    t.integer  "width_mm",        limit: 4
-    t.integer  "height_mm",       limit: 4
-    t.integer  "depth_mm",        limit: 4
-    t.string   "description",     limit: 255
-    t.text     "characteristics", limit: 65535
-    t.text     "data_sheet",      limit: 65535
-    t.text     "information",     limit: 65535
-    t.string   "external_link",   limit: 255
-    t.string   "slug",            limit: 255
-    t.datetime "created_at",                                                        null: false
-    t.datetime "updated_at",                                                        null: false
+    t.string   "title",                        limit: 255
+    t.integer  "status",                       limit: 4,                             default: 0
+    t.integer  "special",                      limit: 4,                             default: 0
+    t.string   "key_code",                     limit: 255
+    t.string   "brand",                        limit: 255
+    t.integer  "category_id",                  limit: 4
+    t.integer  "stock",                        limit: 4
+    t.decimal  "price",                                      precision: 8, scale: 2
+    t.integer  "currency",                     limit: 4,                             default: 0
+    t.integer  "width_mm",                     limit: 4
+    t.integer  "height_mm",                    limit: 4
+    t.integer  "depth_mm",                     limit: 4
+    t.string   "description",                  limit: 255
+    t.text     "characteristics",              limit: 65535
+    t.text     "data_sheet",                   limit: 65535
+    t.text     "information",                  limit: 65535
+    t.string   "external_link",                limit: 255
+    t.string   "slug",                         limit: 255
+    t.datetime "created_at",                                                                     null: false
+    t.datetime "updated_at",                                                                     null: false
+    t.string   "data_sheet_file_file_name",    limit: 255
+    t.string   "data_sheet_file_content_type", limit: 255
+    t.integer  "data_sheet_file_file_size",    limit: 4
+    t.datetime "data_sheet_file_updated_at"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

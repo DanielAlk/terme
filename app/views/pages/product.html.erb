@@ -129,6 +129,7 @@
     <div class="product-descripcion">
       <label class="tab1 active">Ficha Técnica</label>
       <div class="content-tab1" style="display:block;">
+        <%= link_to 'Ver ficha en pdf.', @product.data_sheet_file.url, class: 'gral-btn', target: '_blank' if @product.data_sheet_file.present? %>
         <p><%= @product.data_sheet.html_safe %></p>
       </div>
       <label class="tab2">información adicional</label>
