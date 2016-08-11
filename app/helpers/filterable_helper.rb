@@ -13,7 +13,7 @@ module FilterableHelper
 		'<option '+ (filterable(*args) == value ? 'selected' : '') +' data-content="' + content + '" value="' + value + '"></option>'
 	end
 
-	def filterable_select(collection, option, parameter = false)
+	def filterable_select(collection, option, parameter = false, exclude: nil)
 		return nil if (options = collection.filterable_options[option.to_sym]).blank?
 		response = ''
 		case option.to_sym
@@ -49,9 +49,11 @@ module FilterableHelper
 			select_options = []
 			if object.respond_to?(scope_name) #its enum
 				object.public_send(scope_name).each do |key, value|
-					content = (labels[key.to_sym] || key).to_s.capitalize
-					value = value.to_s
-					select_options << [content, value]
+					unless exclude.present? && key.to_sym == exclude
+						content = (labels[key.to_sym] || key).to_s.capitalize
+						value = value.to_s
+						select_options << [content, value]
+					end
 				end
 			elsif column_name.present? #its a column
 				object.select(column_name).distinct.each do |member|

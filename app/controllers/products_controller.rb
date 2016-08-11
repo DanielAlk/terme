@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_action :set_products, only: [:update_many, :destroy_many]
   before_action :related_objects, only: [:create, :update]
   before_action :filterize, only: :index
-  filterize order: :created_at_desc, param: :f, exclude: 'status = 3', exclude_if: Proc.new { |f| f['scopes']['status'] != Product.statuses[:deleted].to_s rescue true }
+  filterize order: :created_at_desc, param: :f, exclude: 'status = 3 or status = 4', exclude_if: Proc.new { |f| ![3, 4].include?(f['scopes']['status'].to_i) rescue true }
   layout 'panel'
 
   # GET /products

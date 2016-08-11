@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
     }
   }
 
-  enum status: [ :draft, :active, :paused, :deleted ]
+  enum status: [ :draft, :active, :paused, :deleted, :hidden ]
   enum special: [ :is_regular, :is_new, :is_offer ]
   enum currency: [ '$' ]
 
@@ -66,7 +66,7 @@ class Product < ActiveRecord::Base
   end
 
   def status_translated
-    {draft: 'Borrador', active: 'Activo', paused: 'Pausado', deleted: 'Eliminado'}[self.status.to_sym]
+    {draft: 'Borrador', active: 'Activo', paused: 'Pausado', deleted: 'Eliminado', hidden: 'Eliminado'}[self.status.to_sym]
   end
 
   def image(size = :thumb)
@@ -94,10 +94,14 @@ class Product < ActiveRecord::Base
   end
 
   def destroy
-    if self.payments.present?
-      self.deleted!
+    if self.deleted?
+      if self.payments.present?
+        self.hidden!
+      else
+        super
+      end
     else
-      super
+      self.deleted!
     end
   end
   

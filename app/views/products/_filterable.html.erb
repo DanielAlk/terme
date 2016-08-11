@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col-xs-3">
 				<div class="field">
-					<%= select_tag 'f[scopes][status]', filterable_select(products, :scopes, :status), prompt: 'Status', class: 'selectpicker' %>
+					<%= select_tag 'f[scopes][status]', filterable_select(products, :scopes, :status, exclude: :hidden), prompt: 'Status', class: 'selectpicker' %>
 				</div>
 			</div>
 			<div class="col-xs-3">
