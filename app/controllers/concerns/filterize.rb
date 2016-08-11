@@ -51,6 +51,9 @@ module Filterize
 			if (scope = defaults[:scope]).present?
 				collection = collection.send(scope.to_s)
 			end
+			if (exclude = defaults[:exclude]).present? && (defaults[:exclude_if].blank? || defaults[:exclude_if].call(@filterable))
+				collection = collection.where.not(exclude)
+			end
 		end
 		instance_variable_set('@' + object.name.pluralize.downcase, collection)
 	end
