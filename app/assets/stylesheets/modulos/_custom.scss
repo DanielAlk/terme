@@ -1,3 +1,6 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; font-size: 14px; line-height: 1.428; }
 .alert-dismissable, .alert-dismissible { padding-right: 35px; }
 .alert-success { background-color: #dff0d8; border-color: #d6e9c6; color: #3c763d; }
@@ -58,3 +61,6 @@ td.precio-product,td.subtotal-product { white-space: nowrap; }
 .btn-general { display: inline-block; padding: 15px; text-align: center; text-transform: uppercase; color: #ffffff; font-family: Aria-Medium; font-size: 14px; letter-spacing: 0.04em; background: #0b9444; cursor: pointer;
 	&:hover { background: #333333; }
 }
+
+section.contact .col-right .telefonos .fa { font-size: 33px; float: left; margin: -5px 0 0 5px; }
+footer .content-footer .contacto .telefonos .fa { color: #fff; font-size: 24px; float: left; margin: -1px 22px 0 1px; }

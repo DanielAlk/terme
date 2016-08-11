@@ -60,8 +60,13 @@
         <div class="direccion"> <span class="icon"></span>
           <p><%= @website.address %></p>
         </div>
-        <div class="telefonos"> <span class="icon"></span> <span class="numeros"><%= @website.phone %> <br>
-          <%= @website.mobile %></span>
+        <div class="telefonos">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <span class="numeros"><%= @website.phone %></span>
+        </div>
+        <div class="telefonos">
+          <i class="fa fa-whatsapp" aria-hidden="true"></i>
+          <span class="numeros"><%= @website.mobile %></span>
         </div>
         <div class="email"> <span class="icon"></span> <a href="mailto:<%= @website.email %>"><%= @website.email %></a> </div>
         <div class="info"> Si tenes preguntas sobre tu orden o necesitas informacion general nuestro servicio al cliente te respondera a la brevedad. </div>
