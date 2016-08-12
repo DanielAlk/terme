@@ -42,6 +42,8 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       if @payment.save
         delete_cart if [:approved, :in_process].include?(@payment.status.to_sym)
+        Notifier.notify_admin(@payment).deliver_now
+        Notifier.notify_user(@payment).deliver_now
         format.html { redirect_to @payment, notice: mercado_pago_message(@payment) }
         format.json { render :show, status: :created, location: @payment }
       else
@@ -82,6 +84,8 @@ class PaymentsController < ApplicationController
     end
     respond_to do |format|
       if @payment.present?
+        Notifier.notify_admin(@payment, special: :mercadopago_notification).deliver_now
+        Notifier.notify_user(@payment, special: :mercadopago_notification).deliver_now
         format.json { render json: @payment.to_json, status: :ok }
       else
         format.json { head :no_content }

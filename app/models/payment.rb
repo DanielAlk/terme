@@ -22,15 +22,29 @@ class Payment < ActiveRecord::Base
     mp_payment = $mp.get("/v1/payments/"+mercadopago_payment_id)
     if mp_payment['status'].try(:to_i) == 200
       payment = self.find(mp_payment['response']['external_reference'])
-      payment.mercadopago_payment = mp_payment['response']
-      payment.mercadopago_payment_id = payment.mercadopago_payment['id']
-      payment.status = payment.mercadopago_payment['status']
-      payment.status_detail = payment.mercadopago_payment['status_detail']
-      payment.save
-      return payment
-    else
-      return false
+      if payment.present?
+        payment.mercadopago_payment = mp_payment['response']
+        payment.mercadopago_payment_id = payment.mercadopago_payment['id']
+        payment.status = payment.mercadopago_payment['status']
+        payment.status_detail = payment.mercadopago_payment['status_detail']
+        if payment.status_changed? && [:pending, :authorized, :in_process].include?(payment.status_was.try(:to_sym))
+          if payment.status.try(:to_sym) == :approved
+            if payment.save_card
+              payment.user.card = token
+            end
+          elsif [:rejected, :cancelled].include?(payment.status.try(:to_sym))
+            payment.payment_products.each do |payment_product|
+              product = payment_product.product
+              product.stock += payment_product.quantity
+              product.save
+            end
+          end
+        end
+        payment.save
+        return payment
+      end
     end
+    return false
   end
 
   def parse_cart(cart)
@@ -85,10 +99,12 @@ class Payment < ActiveRecord::Base
     self.mercadopago_payment_id = self.mercadopago_payment['id']
     self.status = self.mercadopago_payment['status']
     self.status_detail = self.mercadopago_payment['status_detail']
-    if [:approved, :in_process].include?(self.status.to_sym)
+    if self.status.try(:to_sym) == :approved
       if self.save_card
         user.card = token
       end
+    end
+    if [:approved, :pending, :authorized, :in_process].include?(self.status.try(:to_sym))
       payment_products.each do |payment_product|
         product = payment_product.product
         product.stock -= payment_product.quantity
@@ -101,7 +117,7 @@ class Payment < ActiveRecord::Base
   end
 
   def friendly_status
-    friendly = { approved: 'Aprobado', in_process: 'En proceso', rejected: 'Rechazado' }[status.try(:to_sym)]
+    friendly = { pending: 'Pendiente', approved: 'Aprobado', authorized: 'Autorizado', in_process: 'En proceso', in_mediation: 'En mediación', rejected: 'Rechazado', cancelled: 'Cancelado', refunded: 'Devuelto', charged_back: 'Contracargado' }[status.try(:to_sym)]
     if friendly.blank?
       friendly = 'No procesado'
     end

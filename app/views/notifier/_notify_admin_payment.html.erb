@@ -1,0 +1,59 @@
+<% transaction_amount = @payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %>
+<% if @mercadopago_notification %>
+	<h1>Información de compra actualizada</h1>
+<% else %>
+	<h1>Nueva compra</h1>
+<% end %>
+<h2><%= "Pago #{@payment.friendly_status.downcase} con #{@payment.payment_method_id.try(:upcase)} por #{transaction_amount}" %></h2>
+
+<h4><a href="<%= payment_url(@payment, subdomain: 'panel') %>">Ver en la web</a></h4>
+<strong>Estado:</strong> <%= @payment.friendly_status %><br>
+<% if @payment.payment_method_id.present? %>
+	<strong>Medio de págo</strong> <%= @payment.payment_method_id.try(:upcase) %><br>
+<% end %>
+<strong>Importe:</strong> <%= transaction_amount %><br>
+<strong>Costo de envío:</strong> <%= @payment.shipment_cost.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %><br>
+<strong>Usuario: </strong> <a href="<%= user_url(@payment.user, subdomain: 'panel') %>"><%= @payment.user.name %></a> - <%= @payment.user.email %><br>
+<% if false %>
+	<strong>Cuotas:</strong> <%= @payment.installments %><br>
+<% end %>
+<strong>Fecha:</strong> <%= @payment.created_at.strftime('%d/%m/%Y') %><br>
+<strong>Horario:</strong> <%= @payment.created_at.strftime('%H:%M') %><br>
+
+<h3>Productos</h3>
+<% @payment.payment_products.each do |product| %>
+	<strong><big><%= product.title %></big></strong><br>
+	<strong>Categoría:</strong> <%= product.category.title %><br>
+	<strong>Código: </strong> <%= product.key_code %><br>
+	<%= product.description %><br>
+	<%= product.quantity %> x
+	<%= product.price.to_s(:currency, unit: product.currency + " ", separator: ",", delimiter: ".") %> =
+	<strong><%= (product.price * product.quantity).to_s(:currency, unit: product.currency + " ", separator: ",", delimiter: ".") %></strong><br>
+	<hr>
+	<% if @payment.payment_products.last == product %>
+		<strong>Envío:</strong> <%= @payment.shipment_cost.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %><br>
+		<strong>Total: </strong> <%= transaction_amount %>
+	<% end %>
+<% end %>
+
+<h3>Dirección de envío</h3>
+<strong>Dirección:</strong>
+<%= @payment.address.address %><br>
+<strong>Nombre:</strong>
+<%= @payment.address.fname %>
+<%= @payment.address.lname %><br>
+<strong>Email:</strong>
+<%= @payment.address.email %><br>
+<strong>Documento:</strong>
+<%= @payment.address.doc_type %>
+<%= @payment.address.doc_number %><br>
+<strong>Código postal:</strong>
+<%= @payment.address.zip_code %><br>
+<strong>Ciudad:</strong>
+<%= @payment.address.city %><br>
+<strong>Provincia:</strong>
+<%= @payment.address.zone.title %><br>
+<strong>Compañía:</strong>
+<%= @payment.address.company %><br>
+<strong>Teléfono Celular:</strong>
+<%= @payment.address.mobile %><br>
