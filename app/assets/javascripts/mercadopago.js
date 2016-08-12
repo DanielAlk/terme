@@ -39,6 +39,7 @@ MP.captureSubmit = function() {
 			card.setAttribute('value',response.id);
 			form.appendChild(card);
 			doSubmit=true;
+			Pages.loader("Procesando el págo...");
 			form.submit();
 		}
 	};

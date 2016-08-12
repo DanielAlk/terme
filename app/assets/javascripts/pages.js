@@ -1,5 +1,15 @@
 var Pages = {};
 
+Pages.loader = function(text) {
+	var $loader = $('<div>', { class: 'gral-loader', id: 'gral_loader' });
+	$loader
+	.hide()
+	.append($('<span>', { text: text }))
+	.append('<i class="fa fa-spinner fa-spin fa-5x fa-fw"></i>')
+	.appendTo('body')
+	.fadeIn();
+};
+
 Pages.home = function() {
 	$('section .owl-carousel').owlCarousel({
 		loop:false,
