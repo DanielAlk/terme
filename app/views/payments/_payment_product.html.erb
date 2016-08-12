@@ -1,4 +1,8 @@
-<% path_to_product = admin_signed_in? ? product_path(product.product) : 'javascript:void(0);' %>
+<% if admin_signed_in? %>
+	<% path_to_product = !product.product.hidden? ? product_path(product.product) : 'javascript:Alerts.danger("El producto ha sido eliminado con anterioridad")' %>
+<% else %>
+	<% path_to_product = 'javascript:void(0);' %>
+<% end %>
 
 <div class="display display-minimal <%= 'display-no-links' unless admin_signed_in? %>" id="product_<%= product.id %>">
 	<div class="display-caption">

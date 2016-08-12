@@ -53,5 +53,8 @@
         <% end %>
       </tbody>
     </table>
+  </div>  
+  <div class="will-paginate">
+    <%= will_paginate @payments, renderer: BootstrapPagination::Rails %>
   </div>
 <% end %>

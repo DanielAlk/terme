@@ -59,12 +59,12 @@ module FilterableHelper
 				object.select(column_name).distinct.each do |member|
 					value = member[column_name].to_s
 					if is_belongs_to
-						record = parameter.to_s.capitalize.constantize.find(value.to_i)
-						content = (record.respond_to?(:name) ? record.name : record.title).to_s
+						record = parameter.to_s.capitalize.constantize.find(value.to_i) rescue false
+						content = record.present? ? ((record.respond_to?(:name) ? record.name : record.title).to_s) : false
 					else
 						content = value.to_s
 					end
-					select_options << [content, value]
+					select_options << [content, value] if content.present?
 				end
 			end
 			select_options.each do |content, value|

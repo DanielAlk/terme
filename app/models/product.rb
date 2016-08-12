@@ -12,8 +12,8 @@ class Product < ActiveRecord::Base
   has_many :payments, through: :payment_products
   has_attached_file :data_sheet_file
   validates_attachment_content_type :data_sheet_file, content_type: "application/pdf"
-  validates_length_of :title, minimum: 5, message: "debe contener al menos 5 caracteres"
-  validates :category, presence: true
+  validates_length_of :title, minimum: 5, message: "debe contener al menos 5 caracteres", unless: :hidden?
+  validates :category, presence: true, unless: :hidden?
   validates_presence_of :price
   validates_presence_of :currency
 
@@ -66,7 +66,7 @@ class Product < ActiveRecord::Base
   end
 
   def status_translated
-    {draft: 'Borrador', active: 'Activo', paused: 'Pausado', deleted: 'Eliminado', hidden: 'Eliminado'}[self.status.to_sym]
+    {draft: 'Borrador', active: 'Activo', paused: 'Pausado', deleted: 'Eliminado', hidden: 'Destroyed'}[self.status.to_sym]
   end
 
   def image(size = :thumb)
@@ -96,6 +96,10 @@ class Product < ActiveRecord::Base
   def destroy
     if self.deleted?
       if self.payments.present?
+        self.images.destroy_all
+        self.title = nil
+        self.category = nil
+        self.data_sheet_file = nil
         self.hidden!
       else
         super
