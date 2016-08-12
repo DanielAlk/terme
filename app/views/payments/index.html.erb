@@ -48,7 +48,7 @@
             <% end %>
             <td><%= payment.payment_method_id.upcase rescue nil %></td>
             <td><b><%= payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ",", delimiter: ".") %></b></td>
-            <td><%= payment.created_at.strftime('%d/%m/%Y') %></td>
+            <td><%= payment.created_at.strftime('%d/%m/%Y %H:%Mhs.') %></td>
           </tr>
         <% end %>
       </tbody>

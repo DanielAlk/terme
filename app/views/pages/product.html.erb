@@ -107,7 +107,9 @@
                 <span class="mas">+</span>
               </div>
               <div class="agregar-boton">
-                <% if user_signed_in? %>
+                <% if request.subdomain[/panel/] %>
+                  <%= link_to 'Agregar al Carrito', 'javascript:Alerts.danger("Para usar el carrito tenés que salir del Panel Aria")' %>
+                <% elsif user_signed_in? %>
                   <%= link_to 'Agregar al Carrito', add_to_cart_path, id: 'cart-add' %>
                 <% else %>
                   <%= link_to 'Agregar al Carrito', '#modal-login', data: { util: 'modal' } %>
