@@ -1,0 +1,17 @@
+<h2><%= { regular: 'Contacto', newsletter: 'Newsletter', support: 'Pedido de soporte', partners: 'Suscripción Club de Partners' }[@contact.kind.try(:to_sym)] %></h2>
+
+<% if @contact.name.present? %>
+	<strong>Nombre:</strong> <%= @contact.name %><br>
+<% end %>
+<% if @contact.email.present? %>
+	<strong>Email:</strong> <%= @contact.email %><br>
+<% end %>
+<% if @contact.company.present? %>
+	<strong>Compañía:</strong> <%= @contact.company %><br>
+<% end %>
+<% if @contact.subject.present? %>
+	<strong>Asunto:</strong> <%= @contact.subject %><br>
+<% end %>
+<% if @contact.message.present? %>
+	<strong>Mesnsaje:</strong> <%= @contact.message %><br>
+<% end %>
