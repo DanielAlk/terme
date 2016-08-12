@@ -1,17 +1,20 @@
 class PaymentsController < ApplicationController
+  include Filterize
   include Cart
   include MercadoPagoHelper
   before_action :authenticate_user!, except: :notifications, unless: Proc.new { admin_signed_in? && [:index, :show].include?(action_name.to_sym) }
   before_action :set_cart, only: :create
   before_action :authenticate_cart!, only: :create
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :filterize, only: :index, if: :admin_signed_in?
+  filterize order: :updated_at_desc, param: :f
   layout 'panel'
 
   # GET /payments
   # GET /payments.json
   def index
     if admin_signed_in?
-      @payments = Payment.order(updated_at: :desc).paginate(:page => params[:page], :per_page => 12)
+      @payments = @payments.paginate(:page => params[:page], :per_page => 12)
     else
       @payments = current_user.payments.order(updated_at: :desc).paginate(:page => params[:page], :per_page => 12)
     end

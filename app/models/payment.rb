@@ -1,5 +1,6 @@
 class Payment < ActiveRecord::Base
   include Rails.application.routes.url_helpers
+  include Filterable
   belongs_to :user
   belongs_to :zone
   has_one :address, :as => :addressable, :dependent => :destroy
@@ -17,6 +18,9 @@ class Payment < ActiveRecord::Base
 
   serialize :mercadopago_payment
   serialize :additional_info
+
+  filterable order: [ :user_id, :status, :payment_method_id, :transaction_amount, :created_at ]
+  filterable labels: { order: { user_id: 'Usuario', status: 'Estado', payment_method_id: 'Medio de págo', transaction_amount: 'Importe', created_at: 'Fecha' } }
 
   def self.find_mp(mercadopago_payment_id)
     mp_payment = $mp.get("/v1/payments/"+mercadopago_payment_id)
