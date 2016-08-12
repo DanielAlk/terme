@@ -1,12 +1,15 @@
 class UsersController < ApplicationController
+  include Filterize
   before_filter :authenticate_admin!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :filterize, only: :index
+  filterize order: :email_asc, param: :f
   layout 'panel'
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = @users.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /users/1

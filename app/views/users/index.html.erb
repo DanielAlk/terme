@@ -1,8 +1,16 @@
 <% content_for :extra_js do %>
+	$('#filterable-users select').change(function(e) {
+	  $(this).closest('form').submit();
+	});
 <% end %>
 
 <% content_for :panel_subtitle, 'Usuarios' %>
 
+<%= render 'filterable', users: @users %>
+
 <div class="panel-group nested" role="tablist" id="group-root">
   <%= render @users %>
+</div>
+<div class="will-paginate">
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
 </div>

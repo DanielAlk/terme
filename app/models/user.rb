@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Filterable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :addresses, -> { order(position: :asc) }, :as => :addressable, :dependent => :destroy
   has_many :reviews, :as => :reviewer, :dependent => :destroy
   has_many :payments
+
+  filterable search: [ :fname, :lname, :email ]
+  filterable order: [ :fname, :lname, :email ]
+  filterable labels: { order: { fname: 'Nombre', lname: 'Apellido' } }
 
   def cart_count
     $redis.scan_each(match: "cart:#{id}:*").to_a.uniq.count
