@@ -28,7 +28,7 @@
     <div class="col-sm-6">
       <div class="field">
         <%= f.label :category_id, 'Categoría' %><br>
-        <%= f.select :category_id, options_from_collection_for_select(Category.friendly.find('products').children, :id, :title, @product.category_id), {}, class: 'selectpicker' %>
+        <%= f.select :category_id, (ancestry_options(Category.friendly.find('products').descendants.arrange) {|i| "#{'-' * (i.depth - 1)} #{i.title}" }), {selected: @product.category_id}, class: 'selectpicker' %>
       </div>
     </div>
     <div class="col-sm-6">

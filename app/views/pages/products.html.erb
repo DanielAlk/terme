@@ -2,6 +2,10 @@
 
 <% content_for :extra_js do %>
   Pages.products();
+  $('#category-select').change(function() {
+    var val = $(this).val();
+    if (!!val) window.location.href = val;
+  });
 <% end %>
 
 <div class="slider">
@@ -9,14 +13,34 @@
 </div>
 <div class="content">
   <div class="content-info">
-    <div class="breadcrumbs">
+    <div class="breadcrumbs <%= 'breadcrumbs-mobile' if browser.device.mobile? %>">
       <ul>
-        <li><a href="<%= root_path %>">Home</a></li>
-        <% if @category.present? %>
-          <li><a href="<%= products_page_path %>">Productos</a></li>
-          <li><%= @category.title %></li>
+        <% if browser.device.mobile? %>
+          <li class="category-select">
+            <%= select_tag 'category-select', options_for_select(ancestry_product_categories(Category.friendly.find('products').descendants.arrange), products_page_path(@category)), prompt: 'Categoría' %>
+          </li>
         <% else %>
-          <li>Productos</li>
+          <li><a href="<%= root_path %>">Home</a></li>
+          <% if @category.present? %>
+            <li><a href="<%= products_page_path %>">Productos</a></li>
+            <% @category.ancestors.each do |category| %>
+              <% unless category.slug == 'products' %>
+                <li><a href="<%= products_page_path category %>"><%= category.title %></a></li>
+              <% end %>
+            <% end %>
+            <li class="active"><%= @category.title %></li>
+          <% else %>
+            <li class="active">Productos</li>
+          <% end %>
+          <% if @category.present? && @category.has_children? %>
+            <li class="category-select">
+              <%= select_tag 'category-select', options_for_select(@category.children.map{|c| [c.title, products_page_path(c)]}), prompt: 'Sub categoría' %>
+            </li>
+          <% elsif @category.blank? %>
+            <li class="category-select">
+              <%= select_tag 'category-select', options_for_select(Category.friendly.find('products').children.map{|c| [c.title, products_page_path(c)]}), prompt: 'Sub categoría' %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>

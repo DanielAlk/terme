@@ -71,3 +71,19 @@ footer .content-footer .contacto .telefonos .fa { color: #fff; font-size: 24px; 
 	&>span { display: block; text-align: center; position: relative; top: 50%; color: #FFF; font-family: Aria-Bold; }
 	&>.fa { display: block; position: relative; left: 50%; top: 50%; margin: -112px -58px; }
 }
+
+.category-select { color: #000;
+	label { display: inline-block; vertical-align: middle; font-size: 11px; text-transform: uppercase; line-height: 1; }
+	select { border: 1px solid #ccc; border-radius: 0; height: 26px; padding: 5px; outline: none; margin: 0; }
+	&:before { display: inline-block; vertical-align: middle; content: ' » '; padding: 0 10px; color: #747474; font-size: 16px; }
+}
+
+@media only screen and (max-width: 760px) {
+	.category-select {
+		select { display: block; width: 100%; }
+		&:before { display: none; }
+	}
+	.breadcrumbs.breadcrumbs-mobile { display: block; padding: 5px 5px 0;
+		ul li { display: block; }
+	}
+}

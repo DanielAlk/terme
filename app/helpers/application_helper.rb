@@ -6,4 +6,22 @@ module ApplicationHelper
 			super
 		end
 	end
+
+	def ancestry_options(items, &block)
+	  result = []
+	  items.map do |item, sub_items|
+	    result << [yield(item), item.id]
+	    result += ancestry_options(sub_items, &block)
+	  end
+	  result
+	end
+
+	def ancestry_product_categories(items)
+	  result = []
+	  items.map do |item, sub_items|
+	    result << ["#{'-' * (item.depth - 1)} #{item.title}", products_page_path(item)]
+	    result += ancestry_product_categories(sub_items)
+	  end
+	  result
+	end
 end

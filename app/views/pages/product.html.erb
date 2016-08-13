@@ -26,8 +26,13 @@
       <ul>
         <li><a href="<%= root_path %>">Home</a></li>
         <li><a href="<%= products_page_path %>">Productos</a></li>
+        <% @product.category.ancestors.each do |category| %>
+          <% unless category.slug == 'products' %>
+            <li><a href="<%= products_page_path category %>"><%= category.title %></a></li>
+          <% end %>
+        <% end %>
         <li><a href="<%= products_page_path @product.category %>"><%= @product.category.title %></a></li>
-        <li><%= @product.title %></li>
+        <li class="active"><%= @product.title %></li>
       </ul>
     </div>
     <section>

@@ -18,6 +18,12 @@ class Category < ActiveRecord::Base
 
 	private
 		def abort_if_fixed
+			self.descendants.each do |c|
+				if c.products.present? || c.payment_products.present?
+					errors.add 'Categoría', 'No se puede eliminar ya que alguna subcategoría tiene productos asociados.'
+					return false
+				end
+			end
 			return true if !fixed
 			errors.add 'Categoría Fija', 'No se puede eliminar esta categoría'
 			false

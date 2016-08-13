@@ -26,7 +26,7 @@
                 color: $c-verde-link;
             }
         }
-        &:after{
+        &:not(.active):not(:last-child):after {
             display: inline-block;
             vertical-align: middle;
             content: ' » ';
@@ -36,14 +36,10 @@
             font-size: $f-size-xl;
         }
         
-        &:last-child{
+        &.active{
             background: $c-gris-menu;
             color: $c-blanco;
             padding: 8px;
-            
-            &:after{
-                display: none;
-            }
         }
         
         
