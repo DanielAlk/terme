@@ -35,7 +35,7 @@ Cart.addButton = function() {
 };
 
 Cart.checkChanges = function(cart) {
-	if (!!Cart.redirectIfChange && Cart.cart.products.length != cart.products.length) window.location.href = Cart.redirectIfChange;
+	if (!!Cart.redirectIfChange && (!cart.products || Cart.cart.products.length != cart.products.length)) window.location.href = Cart.redirectIfChange;
 	else if (!!Cart.doAlertExpire) Alerts.danger('El producto: <b>' + Cart.doAlertExpire.title + '</b> ya no está tu carrito.<br>Han pasado los 10 minutos.');
 	else if (!!Cart.product && !!Cart.cart) {
 		if (!cart.items || !cart.items[Cart.product.id]) {
