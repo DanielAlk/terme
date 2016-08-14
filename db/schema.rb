@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814005512) do
+ActiveRecord::Schema.define(version: 20160814093341) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 20160814005512) do
     t.boolean  "save_card",                                                    default: false
     t.datetime "created_at",                                                                   null: false
     t.datetime "updated_at",                                                                   null: false
+    t.decimal  "dolar",                                precision: 8, scale: 2
   end
 
   add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
@@ -263,9 +264,9 @@ ActiveRecord::Schema.define(version: 20160814005512) do
     t.string   "google",     limit: 255
     t.string   "linkedin",   limit: 255
     t.string   "youtube",    limit: 255
+    t.decimal  "dolar",                  precision: 8, scale: 2
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.decimal  "dolar",                  precision: 8, scale: 2
   end
 
   create_table "zones", force: :cascade do |t|

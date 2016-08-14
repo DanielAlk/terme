@@ -39,7 +39,7 @@ class Product < ActiveRecord::Base
 
   enum status: [ :draft, :active, :paused, :deleted, :hidden ]
   enum special: [ :is_regular, :is_new, :is_offer ]
-  enum currency: [ '$' ]
+  enum currency: [ '$', 'u$s' ]
 
   def price=(price)
     write_attribute(:price, price.gsub('.', '').gsub(',', '.'))

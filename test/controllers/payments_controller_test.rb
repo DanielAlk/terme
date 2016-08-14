@@ -18,7 +18,7 @@ class PaymentsControllerTest < ActionController::TestCase
 
   test "should create payment" do
     assert_difference('Payment.count') do
-      post :create, payment: { installments: @payment.installments, mercadopago_payment: @payment.mercadopago_payment, mercadopago_payment_id: @payment.mercadopago_payment_id, payment_method_id: @payment.payment_method_id, status: @payment.status, status_detail: @payment.status_detail, token: @payment.token, transaction_amount: @payment.transaction_amount, user_id: @payment.user_id }
+      post :create, payment: { installments: @payment.installments, mercadopago_payment: @payment.mercadopago_payment, mercadopago_payment_id: @payment.mercadopago_payment_id, payment_method_id: @payment.payment_method_id, status: @payment.status, status_detail: @payment.status_detail, token: @payment.token, transaction_amount: @payment.transaction_amount, user_id: @payment.user_id, dolar: @payment.dolar }
     end
 
     assert_redirected_to payment_path(assigns(:payment))
@@ -35,7 +35,7 @@ class PaymentsControllerTest < ActionController::TestCase
   end
 
   test "should update payment" do
-    patch :update, id: @payment, payment: { installments: @payment.installments, mercadopago_payment: @payment.mercadopago_payment, mercadopago_payment_id: @payment.mercadopago_payment_id, payment_method_id: @payment.payment_method_id, status: @payment.status, status_detail: @payment.status_detail, token: @payment.token, transaction_amount: @payment.transaction_amount, user_id: @payment.user_id }
+    patch :update, id: @payment, payment: { installments: @payment.installments, mercadopago_payment: @payment.mercadopago_payment, mercadopago_payment_id: @payment.mercadopago_payment_id, payment_method_id: @payment.payment_method_id, status: @payment.status, status_detail: @payment.status_detail, token: @payment.token, transaction_amount: @payment.transaction_amount, user_id: @payment.user_id, dolar: @payment.dolar }
     assert_redirected_to payment_path(assigns(:payment))
   end
 

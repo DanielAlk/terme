@@ -10,6 +10,7 @@ one:
   mercadopago_payment_id: 1
   status: MyString
   status_detail: MyString
+  dolar: 9.99
 
 two:
   user_id: 
@@ -21,3 +22,4 @@ two:
   mercadopago_payment_id: 1
   status: MyString
   status_detail: MyString
+  dolar: 9.99

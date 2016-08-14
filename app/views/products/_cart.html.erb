@@ -3,6 +3,7 @@
 <% quantity = @cart[:items][product.id.to_s][:quantity].to_i %>
 <% seconds = @cart[:items][product.id.to_s][:expires_in] %>
 <% minutes = @cart[:items][product.id.to_s][:expires_in] / 60 %>
+<% price = product.currency == 'u$s' ? product.price * @website.dolar : product.price %>
 <% seconds -= minutes * 60 %>
 <% seconds = '0' + seconds.to_s if seconds < 10 %>
 
@@ -19,13 +20,13 @@
 	    <div class="compartir"> <a href="#" class="facebook"> Facebook </a> <a href="#" class="twitter"> Twitter </a> </div>
     <% end %>
   </td>
-  <td class="precio-product"><%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %></td>
+  <td class="precio-product"><%= number_to_currency(price, unit: "$ ", separator: ",", delimiter: ".") %></td>
   <td class="cantidad-product">
   	<span class="menos">&#60;</span>
   	<input type="text" class="qty" id="quantity-<%= product.id %>" name="cantidad" value="<%= quantity %>" data-stock="<%= product.stock_available_to_user(current_user.id) %>" autocomplete="off">
   	<span class="mas">&#62;</span>
   </td>
-  <td class="subtotal-product"><%= number_to_currency(product.price * quantity, unit: product.currency + " ", separator: ",", delimiter: ".") %></td>
+  <td class="subtotal-product"><%= number_to_currency(price * quantity, unit: "$ ", separator: ",", delimiter: ".") %></td>
   <td class="borrar-product">
   	<span class="removeFromCart">X</span>
   	<div class="cart-product-expiration">

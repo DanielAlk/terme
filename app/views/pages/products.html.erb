@@ -17,7 +17,7 @@
       <ul>
         <% if browser.device.mobile? %>
           <li class="category-select">
-            <%= select_tag 'category-select', options_for_select(ancestry_product_categories(Category.friendly.find('products').descendants.arrange), products_page_path(@category)), prompt: 'Categoría' %>
+            <%= select_tag 'category-select', options_for_select(ancestry_product_categories(Category.friendly.find('products').subtree.arrange), products_page_path(@category)) %>
           </li>
         <% else %>
           <li><a href="<%= root_path %>">Home</a></li>

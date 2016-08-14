@@ -55,7 +55,8 @@ class Payment < ActiveRecord::Base
     self.shipment_cost = self.zone.shipment_cost
     self.transaction_amount = cart[:total] + self.shipment_cost
     cart[:products].each do |product|
-      payment_product = self.payment_products.new(product.attributes.select { |key,val| [:price, :title, :key_code, :brand, :category_id, :currency, :description, :external_link].include? key.to_sym })
+      payment_product = self.payment_products.new(product.attributes.select { |key,val| [:title, :key_code, :brand, :category_id, :description, :external_link].include? key.to_sym })
+      payment_product.price = product.currency == 'u$s' ? product.price * self.dolar : product.price
       payment_product.product = product
       payment_product.quantity = cart[:items][product.id.to_s][:quantity].to_i
       payment_product.image = Image.new(item: product.images.first.item)

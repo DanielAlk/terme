@@ -87,3 +87,11 @@ footer .content-footer .contacto .telefonos .fa { color: #fff; font-size: 24px; 
 		ul li { display: block; }
 	}
 }
+
+div.user span.dolar { float: right; text-transform: none; font-size: 12px; margin: 1px 0 0;
+	@media(max-width: 990px) { margin-right: 12px; }
+}
+
+@media(max-width:760px) {
+	.hide-xs {display:none;}
+}

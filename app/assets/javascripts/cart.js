@@ -1,7 +1,8 @@
 var Cart = {};
 
-Cart.init = function(user_signed_in) {
+Cart.init = function(user_signed_in, dolar) {
 	if (!user_signed_in) return Cart.notLoggedIn();
+	Cart.dolar = dolar;
 	Cart.loadProductPage();
 	Cart.update();
 };
@@ -129,7 +130,8 @@ Cart.cartToPage = function() {
 	for (var id in items) {
 		var item = items[id];
 		var product = Cart.getProduct(id);
-		var subtotal = Number(product.price) * Number(item.quantity);
+		var price = product.currency == 'u$s' ? product.price * Cart.dolar : product.price;
+		var subtotal = Number(price) * Number(item.quantity);
 		$('#product-' + id + ' .subtotal-product').text(Cart.toCurrency(subtotal));
 		$('#quantity-' + id).val(item.quantity);
 		total += subtotal;

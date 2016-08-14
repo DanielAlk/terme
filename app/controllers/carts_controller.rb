@@ -9,11 +9,12 @@ class CartsController < ApplicationController
     else
       prices = []
       product_ids = items.keys.map { |id| id.sub(/cart:\d+:/, '') }
-      products = Product.select(:id, :title, :price, :stock).find(product_ids).map do |p|
-        { id: p.id, title: p.title, price: p.price, stock: p.stock_available_to_user(current_user.id) }
+      products = Product.select(:id, :title, :price, :currency, :stock).find(product_ids).map do |p|
+        { id: p.id, title: p.title, price: p.price, currency: p.currency, stock: p.stock_available_to_user(current_user.id) }
       end
       price = products.sum do |product|
-        product[:price] * items[product[:id].to_s][:quantity].to_i
+        pr = product[:currency] == 'u$s' ? product[:price] * @website.dolar : product[:price]
+        pr * items[product[:id].to_s][:quantity].to_i
       end
       @cart = { count: items.count, total: price, items: items, products: products }
     end

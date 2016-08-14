@@ -104,7 +104,9 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:user_id, :transaction_amount, :installments, :payment_method_id, :token, :mercadopago_payment, :mercadopago_payment_id, :status, :status_detail, :zone_id, :save_address, :save_card)
+      payment = params.require(:payment).permit(:user_id, :transaction_amount, :installments, :payment_method_id, :token, :mercadopago_payment, :mercadopago_payment_id, :status, :status_detail, :zone_id, :dolar, :save_address, :save_card)
+      payment[:dolar] = @website.dolar
+      payment
     end
 
     def address_params

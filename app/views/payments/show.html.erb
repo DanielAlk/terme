@@ -51,6 +51,13 @@
         <strong>Metodo de págo:</strong>
         <%= @payment.payment_method_id.try(:upcase) %>
       </p>
+
+      <% if admin_signed_in? %>
+        <p style="white-space:nowrap;">
+          <strong>Cotización del dólar al momento de la compra:</strong>
+          <%= @payment.dolar.to_s(:currency, unit: '$ ', delimiter: '.') rescue '$ 0.00' %>
+        </p>
+      <% end %>
     </div>
     <div class="col-sm-4">
       <p>

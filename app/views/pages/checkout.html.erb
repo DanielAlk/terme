@@ -41,6 +41,9 @@
         <div class="checkout-expires">
           Tu carrito vence en: <span data-expires="<%= @cart[:items].map{|id,i| i[:expires_in]}.min rescue 0 %>" data-href="<%= cart_page_path %>"></span> m.
         </div>
+        <div style="position:absolute;left:0;top:0;margin:10px;font-size:14px;font-weight:300;">
+          <span class="hide-xs">Cotización </span>u$s: <%= @website.dolar.to_s(:currency, unit: '$', delimiter: '.') %>
+        </div>
         <h2>REVISA TU ORDEN</h2>
         <div class="resumen">
           <div class="label items">tu carrito</div>

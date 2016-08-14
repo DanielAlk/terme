@@ -60,7 +60,10 @@
           </div>
         </form>
       </div>
-      <div class="col-right">
+      <div class="col-right" style="position:relative;">
+        <div style="position:absolute;left:0;top:0;margin:10px;font-size:14px;font-weight:300;">
+          Cotización u$s: <%= @website.dolar.to_s(:currency, unit: '$', delimiter: '.') %>
+        </div>
         <h2>REVISA TU ORDEN</h2>
         <div class="resumen">
           <div class="label items">tu carrito</div>

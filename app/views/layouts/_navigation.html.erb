@@ -83,7 +83,10 @@
           <div class="header-cart">
             <div class="cerrar"> <span class="line1"></span> <span class="line2"></span> </div>
             <% if user_signed_in? %>
-              <div class="user"><%= current_user.name %></div>
+              <div class="user">
+                <%= current_user.name %>
+                <span class="dolar">u$s: <%= @website.dolar.to_s(:currency, unit: '$', delimiter: '.') %></span>
+              </div>
             <% else %>
               <div class="user">Invitado</div>
             <% end %>

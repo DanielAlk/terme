@@ -24,7 +24,8 @@ module Cart
 		  product_ids = items.keys.map { |id| id.sub(/cart:\d+:/, '') }
 		  products = Product.find(product_ids)
 		  price = products.sum do |product|
-		    product.price * items[product.id.to_s][:quantity].to_i
+		  	pr = product.currency == 'u$s' ? product.price * @website.dolar : product.price
+		  	pr * items[product.id.to_s][:quantity].to_i
 		  end
 		  @cart = { count: items.count, total: price, items: items, products: products }
 		end

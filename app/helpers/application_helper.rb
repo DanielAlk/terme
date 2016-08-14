@@ -19,7 +19,7 @@ module ApplicationHelper
 	def ancestry_product_categories(items)
 	  result = []
 	  items.map do |item, sub_items|
-	    result << ["#{'-' * (item.depth - 1)} #{item.title}", products_page_path(item)]
+	    result << ["#{'-' * item.depth} #{item.title}", products_page_path(item)]
 	    result += ancestry_product_categories(sub_items)
 	  end
 	  result
