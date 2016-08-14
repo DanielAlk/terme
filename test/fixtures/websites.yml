@@ -10,6 +10,7 @@ one:
   google: MyString
   linkedin: MyString
   youtube: MyString
+  dolar: 9.99
 
 two:
   address: MyString
@@ -21,3 +22,4 @@ two:
   google: MyString
   linkedin: MyString
   youtube: MyString
+  dolar: 9.99

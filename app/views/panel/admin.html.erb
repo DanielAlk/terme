@@ -1,7 +1,12 @@
 <% content_for :extra_js do %>
+	Utils.autonumeric();
 	$('.editable').editable(function(form, response) {
 		var $input = $(form).find('input:not([type=hidden])');
-		Alerts.success('Se actualizó el '+ $input.attr('placeholder').toLowerCase() +' de los datos de la web');
+		if ($input.hasClass('autonumeric-price')) {
+			var param = $input.attr('name').replace(/\w+\[(\w+)\]/, '$1');
+			$(form).closest('.editable').children('span').text(Utils.toCurrency(response[param]));
+		};
+		Alerts.success('Se actualizó '+ $input.attr('placeholder').toLowerCase() +' de los datos de la web');
 	});
 <% end %>
 
@@ -20,60 +25,67 @@
 			<div style="margin-bottom:5px;"><b>Google:</b></div>
 			<div style="margin-bottom:5px;"><b>Linkedin:</b></div>
 			<div style="margin-bottom:5px;"><b>Youtube:</b></div>
+			<div style="margin-bottom:5px;"><b>Cotización dolar:</b></div>
 		</div>
 		<div class="col-xs-8">
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.address %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.text_field :address, id: 'website_1_address', placeholder: 'Dirección', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.email %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.email_field :email, id: 'website_1_email', placeholder: 'Email', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.phone %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.phone_field :phone, id: 'website_1_phone', placeholder: 'Teléfono', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.mobile %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.phone_field :mobile, id: 'website_1_mobile', placeholder: 'Celular', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.facebook %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.text_field :facebook, id: 'website_1_facebook', placeholder: 'Facebook', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.twitter %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.text_field :twitter, id: 'website_1_twitter', placeholder: 'Twitter', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.google %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.text_field :google, id: 'website_1_google', placeholder: 'Google', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.linkedin %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.text_field :linkedin, id: 'website_1_linkedin', placeholder: 'Linkedin', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 			<div class="editable" style="margin-bottom:5px;">
 				<span><%= @website.youtube %></span>
-				<%= form_for @website do |f| %>
+				<%= form_for @website, html: { id: nil } do |f| %>
 					<%= f.text_field :youtube, id: 'website_1_youtube', placeholder: 'Youtube', required: true, autocomplete: 'off' %>
+				<% end %>
+			</div>
+			<div class="editable" style="margin-bottom:5px;">
+				<span><%= @website.dolar.to_s(:currency, unit: '$ ', separator: ',', delimiter: '.') %></span>
+				<%= form_for @website, html: { id: nil } do |f| %>
+					<%= f.text_field :dolar, id: 'website_1_dolar', class: 'autonumeric-price', placeholder: 'Cotización dolar', required: true, autocomplete: 'off' %>
 				<% end %>
 			</div>
 		</div>
