@@ -95,3 +95,6 @@ div.user span.dolar { float: right; text-transform: none; font-size: 12px; margi
 @media(max-width:760px) {
 	.hide-xs {display:none;}
 }
+
+.gral-select { border: 1px solid #e8e8e8; height: 40px; padding: 0 10px; font-size: 14px; color: #333333; font-family: Roboto; width: 100%; background-color: #ffffff; outline: none; }
+.gral-label { text-transform: uppercase; color: #333333; font-family: Aria-Medium; font-weight: 700; margin-bottom: 5px; display: inline-block; }

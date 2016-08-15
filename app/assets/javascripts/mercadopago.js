@@ -28,10 +28,15 @@ MP.captureSubmit = function() {
 			response.cause.forEach(function(cause) {
 				var error = MP.cardTokenErrors[cause.code];
 				var $element = $(error.selector)
-				if ($element.length) $element.after($('<label>', { class: 'mp-error', text: error.message })).focus();
-				else alert('Revisá los datos.');
+				if ($element.length) {
+					if ($element.closest('.address-creator').css('display') == 'none') {
+						$('.address-selector').fadeOut();
+						$('.address-creator').fadeIn();
+					};
+					$element.after($('<label>', { class: 'mp-error', text: error.message })).focus();
+				} else alert('Revisá los datos.');
 			});
-		}else{
+		}else if ($('form#pay').valid()) {
 			var form = document.querySelector('#pay');
 			var card = document.createElement('input');
 			card.setAttribute('name',"payment[token]");
@@ -49,7 +54,8 @@ MP.captureSubmit = function() {
 MP.getPaymentMethod = function() {
 	function getBin() {
 		var ccNumber = document.querySelector('input[data-checkout="cardNumber"]');
-		return ccNumber.value.replace(/[ .-]/g, '').slice(0, 6);
+		if (!!ccNumber) return ccNumber.value.replace(/[ .-]/g, '').slice(0, 6);
+		else return $('#cardId').find('option:selected').attr('first_six_digits');
 	};
 
 	function guessingPaymentMethod(event) {
@@ -62,7 +68,7 @@ MP.getPaymentMethod = function() {
 			}
 		} else {
 			setTimeout(function() {
-				if (bin.length >= 6) {
+				if (!!bin && bin.length >= 6) {
 					Mercadopago.getPaymentMethod({
 						"bin": bin
 					}, setPaymentMethodInfo);
@@ -91,8 +97,14 @@ MP.getPaymentMethod = function() {
 		}
 	};
 
-	$('input[data-checkout="cardNumber"]').on('keyup', guessingPaymentMethod);
-	$('input[data-checkout="cardNumber"]').on('change', guessingPaymentMethod);
+	if ($('#cardId').length) {
+		$('#cardId').on('change', guessingPaymentMethod);
+		guessingPaymentMethod({});
+	} else {
+		$('input[data-checkout="cardNumber"]').on('keyup', guessingPaymentMethod);
+		$('input[data-checkout="cardNumber"]').on('change', guessingPaymentMethod);
+		$('input[data-checkout="cardNumber"]').on('focusout', guessingPaymentMethod);
+	};
 };
 
 

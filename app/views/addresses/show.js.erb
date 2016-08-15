@@ -1,0 +1,7 @@
+var object = JSON.parse("<%= j @address.to_json.html_safe %>");
+for(var key in object) {
+	var value = object[key];
+	var $element = $('[name="address\['+key+'\]"]');
+	if (!$element.length) $element = $('[name="payment\['+key+'\]"]');
+	$element.val(value);
+}

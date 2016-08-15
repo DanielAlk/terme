@@ -69,150 +69,154 @@
         <h2 class="no-display">Mercado Pago</h2>
         <div class="col-left">
           <h2>TU INFORMACIÓN DE ENVÍO</h2>
-          <div class="column-left">
-            <ul class="form-list">
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">EMAIL</label>
-                  <%= text_field_tag 'address[email]', (current_user.address.email rescue nil || current_user.email), required: true, placeholder: 'ej. nombre@email.com' %>
+          <% if current_user.address.present? %>
+            <script type="text/javascript">
+              <% content_for :extra_js do %>
+                $('.address-selector select').change(function(e) {
+                  var $select = $(this);
+                  var id = $select.val();
+                  var path = '<%= addresses_path %>/';
+                  if (!!id) $.getScript(path + id);
+                  else $('.address-selector').fadeOut().next('.address-creator').fadeIn().find('input').val(null);
+                });
+              <% end %>
+            </script>
+            <div class="address-selector">
+              <label class="gral-label">Tus direcciones</label>
+              <%= collection_select nil, :address_id, current_user.addresses + [Address.new(address: 'Envíar a otra dirección…')], :id, :address, {}, { selected: current_user.address, class: 'gral-select' } %>
+            </div>
+          <% end %>
+          <div class="address-creator" style="<%= 'display:none;' if current_user.address.present? %>">
+            <div class="column-left">
+              <ul class="form-list">
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido">EMAIL</label>
+                    <%= text_field_tag 'address[email]', (current_user.address.email rescue nil || current_user.email), required: true, placeholder: 'ej. nombre@email.com' %>
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field fields-stack">
+                    <label class="requerido">Nombre Completo</label>
+                    <%= text_field_tag 'address[fname]', (current_user.address.fname rescue nil || current_user.fname), required: true, placeholder: 'Nombre' %>
+                    <%= text_field_tag 'address[lname]', (current_user.address.lname rescue nil || current_user.lname), required: true, placeholder: 'Apellido' %>
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field">
+                    <label>Compañía</label>
+                    <%= text_field_tag 'address[company]', (current_user.address.company rescue nil), placeholder: 'Su compañía (opcional)' %>
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field fields-stack">
+                    <label class="requerido">Dirección</label>
+                    <%= text_field_tag 'address[address]', (current_user.address.address rescue nil), required: true, minlength: 10, placeholder: 'Dirección' %>
+                    <%= text_field_tag 'address[zip_code]', (current_user.address.zip_code rescue nil), required: true, placeholder: 'Código postal' %>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="column-right">
+              <ul class="form-list confirmacion">
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido">Ciudad</label>
+                    <%= text_field_tag 'address[city]', (current_user.address.city rescue nil), required: true, placeholder: 'Ciudad/Barrio/Localidad' %>
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido">Provincia</label>
+                    <%= f.select :zone_id, Zone.roots.map{|z| [ z.title, z.id, { data: { shipment_cost: z.shipment_cost, transaction_amount: z.shipment_cost + @cart[:total] }} ]}, { selected: (current_user.address.zone_id rescue nil), include_blank: 'Seleccione' }, { required: true } %>
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido">Celular</label>
+                    <%= telephone_field_tag 'address[mobile]', (current_user.address.mobile rescue nil), required: true, placeholder: 'Teléfono' %>
+                  </div>
+                </li>
+                <li class="wide">
+                  <div class="field">
+                    <label class="requerido" for="docType">Tipo y Nro de documento:</label>
+                    <select id="docType" name="address[doc_type]" data-checkout="docType" data-selected="<%= (current_user.address.doc_type rescue '') %>" required></select>
+                    <input type="text" name="address[doc_number]" value="<%= (current_user.address.doc_number rescue '') %>" id="docNumber" data-checkout="docNumber" placeholder="Número de documento" required>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="column-left check">
+              <% if false %>
+                <div class="check-option">
+                  <div class="inputcheck">
+                    <input type="checkbox" id="direc-tarjeta" name="direc-tarjeta" checked />
+                    <label for="direc-tarjeta"><span></span></label>
+                  </div>
+                  <p>la dirección de la tarjeta es la misma que TU direccón real</p>
                 </div>
-              </li>
-              <li class="wide">
-                <div class="field fields-stack">
-                  <label class="requerido">Nombre Completo</label>
-                  <%= text_field_tag 'address[fname]', (current_user.address.fname rescue nil || current_user.fname), required: true, placeholder: 'Nombre' %>
-                  <%= text_field_tag 'address[lname]', (current_user.address.lname rescue nil || current_user.lname), required: true, placeholder: 'Apellido' %>
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label>Compañía</label>
-                  <%= text_field_tag 'address[company]', (current_user.address.company rescue nil), placeholder: 'Su compañía (opcional)' %>
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field fields-stack">
-                  <label class="requerido">Dirección</label>
-                  <%= text_field_tag 'address[address]', (current_user.address.address rescue nil), required: true, minlength: 10, placeholder: 'Dirección' %>
-                  <%= text_field_tag 'address[zip_code]', (current_user.address.zip_code rescue nil), required: true, placeholder: 'Código postal' %>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="column-right">
-            <ul class="form-list confirmacion">
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Ciudad</label>
-                  <%= text_field_tag 'address[city]', (current_user.address.city rescue nil), required: true, placeholder: 'Ciudad/Barrio/Localidad' %>
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Provincia</label>
-                  <%= f.select :zone_id, Zone.roots.map{|z| [ z.title, z.id, { data: { shipment_cost: z.shipment_cost, transaction_amount: z.shipment_cost + @cart[:total] }} ]}, { selected: (current_user.address.zone_id rescue nil), include_blank: 'Seleccione' }, { required: true } %>
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido">Celular</label>
-                  <%= telephone_field_tag 'address[mobile]', (current_user.address.mobile rescue nil), required: true, placeholder: 'Teléfono' %>
-                </div>
-              </li>
-              <li class="wide">
-                <div class="field">
-                  <label class="requerido" for="docType">Tipo y Nro de documento:</label>
-                  <select id="docType" name="address[doc_type]" data-checkout="docType" data-selected="<%= (current_user.address.doc_type rescue '') %>" required></select>
-                  <input type="text" name="address[doc_number]" value="<%= (current_user.address.doc_number rescue '') %>" id="docNumber" data-checkout="docNumber" placeholder="Número de documento" required>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="column-left check">
-            <% if false %>
+              <% end %>
+            </div>
+            <div class="column-right check">
               <div class="check-option">
                 <div class="inputcheck">
-                  <input type="checkbox" id="direc-tarjeta" name="direc-tarjeta" checked />
-                  <label for="direc-tarjeta"><span></span></label>
+                  <%= f.check_box :save_address %>
+                  <label for="payment_save_address"><span></span></label>
                 </div>
-                <p>la dirección de la tarjeta es la misma que TU direccón real</p>
+                <p>recordar esta dirección en el futuro </p>
               </div>
-            <% end %>
-          </div>
-          <div class="column-right check">
-            <div class="check-option">
-              <div class="inputcheck">
-                <%= f.check_box :save_address %>
-                <label for="payment_save_address"><span></span></label>
-              </div>
-              <p>recordar esta dirección en el futuro </p>
             </div>
           </div>
         </div>
         <div class="col-right">
           <h2>TU INFORMACIÓN DE PAGO</h2>
-          <ul class="form-list tarjeta-credito">
-            <li class="wide">
-              <div class="field">
-                <label class="requerido">tarjeta de credito numero</label>
-                <input type="text" data-checkout="cardNumber" required placeholder="escribe el numero de tu tarjeta de credito">
-              </div>
-            </li>
-            <li class="tarjetas">
-              <div class="field"> <span><img src="<%= asset_path 'tarjetas/visa.png' %>" alt="Visa"></span> <span><img src="<%= asset_path 'tarjetas/master.png' %>" alt="Master Card"></span> <span><img src="<%= asset_path 'tarjetas/maestro.png' %>" alt="Maestro"></span> <span><img src="<%= asset_path 'tarjetas/amex.png' %>" alt="Amex"></span> </div>
-            </li>
-            <li class="wide fecha">
-              <div class="field">
-                <label class="requerido">fecha de vencimiento</label>
-                <select data-checkout="cardExpirationMonth" class="mes">
-                  <% month = Date.today.month %>
-                  <option <%= 'selected' if month == 1 %> value="1">01 - Enero</option>
-                  <option <%= 'selected' if month == 2 %> value="2">02 - Febrero</option>
-                  <option <%= 'selected' if month == 3 %> value="3">03 - Marzo</option>
-                  <option <%= 'selected' if month == 4 %> value="4">04 - Abril</option>
-                  <option <%= 'selected' if month == 5 %> value="5">05 - Mayo</option>
-                  <option <%= 'selected' if month == 6 %> value="6">06 - Junio</option>
-                  <option <%= 'selected' if month == 7 %> value="7">07 - Julio</option>
-                  <option <%= 'selected' if month == 8 %> value="8">08 - Agosto</option>
-                  <option <%= 'selected' if month == 9 %> value="9">09 - Septiembre</option>
-                  <option <%= 'selected' if month == 10 %> value="10">10 - Octubre</option>
-                  <option <%= 'selected' if month == 11 %> value="11">11 - Noviembre</option>
-                  <option <%= 'selected' if month == 12 %> value="12">12 - Diciembre</option>
-                </select>
-                <select data-checkout="cardExpirationYear" class="anio">
-                  <% year = Date.today.year %>
-                  <option value="<%= year %>"><%= year %></option>
-                  <option value="<%= year + 1 %>"><%= year + 1 %></option>
-                  <option value="<%= year + 2 %>"><%= year + 2 %></option>
-                  <option value="<%= year + 3 %>"><%= year + 3 %></option>
-                  <option value="<%= year + 4 %>"><%= year + 4 %></option>
-                  <option value="<%= year + 5 %>"><%= year + 5 %></option>
-                  <option value="<%= year + 6 %>"><%= year + 6 %></option>
-                </select>
-              </div>
-            </li>
-            <li class="wide ccv">
-              <div class="field">
-                <label class="requerido">código de seguridad (ccv)</label>
-                <input type="text" data-checkout="securityCode" required placeholder="000">
-                <!--a href="#">Qué es esto?</a-->
-              </div>
-            </li>
-            <li class="wide">
-              <div class="field">
-                <label class="requerido">Nombre en la Tarjeta</label>
-                <input type="text" data-checkout="cardholderName" required placeholder="Nombre en la tarjeta">
-              </div>
-            </li>
-          </ul>
-          <span class="info">Valoramos tu privacidad</span>
-          <div class="check-option">
-            <div class="inputcheck">
-              <%= f.check_box :save_card %>
-              <label for="payment_save_card"><span></span></label>
-            </div>
-            <p>recordar esta tarjeta en el futuro </p>
-          </div>
+          <% if current_user.cards.present? %>
+            <script type="text/javascript">
+              <% content_for :extra_js do %>
+                var validateSecurityCodeLength = function() {
+                  $('[data-checkout="securityCode"]')
+                  .attr('minlength', $('#card-selector select option:selected').attr('security_code_length'));
+                };
+                $('#card-selector select').change(function(e) {
+                  var $select = $(this);
+                  var value = $select.val();
+                  var card_inputs_html = "<%= j render('card_inputs', f: f) %>";
+                  if (!value) {
+                    var $parent = $('#card-selector').parent();
+                    $('#card-selector').remove();
+                    $parent.append(card_inputs_html);
+                    setTimeout(MP.getPaymentMethod, 100);
+                  }
+                  else validateSecurityCodeLength();
+                });
+                validateSecurityCodeLength();
+              <% end %>
+            </script>
+            <ul class="form-list tarjeta-credito" id="card-selector">
+              <li class="wide">
+                <div class="field">
+                  <label>Tus tarjetas</label>
+                  <select id="cardId" name="cardId" data-checkout="cardId">
+                    <% current_user.cards.each do |card| %>
+                      <option value="<%= card['id'] %>"
+                        first_six_digits="<%= card['first_six_digits'] %>" security_code_length="<%= card['security_code']['length'] %>">
+                        <%= card['payment_method']['name'].upcase %> terminada en <%= card['last_four_digits'] %>
+                      </option>
+                    <% end %>
+                    <option value="">Usar otra tarjeta…</option>
+                  </select>
+                </div>
+              </li>
+              <li class="wide ccv">
+                <div class="field">
+                  <label class="requerido">código de seguridad (ccv)</label>
+                  <input type="text" data-checkout="securityCode" required placeholder="000" minlength="3">
+                </div>
+              </li>
+            </ul>
+          <% else %>
+            <%= render 'card_inputs', f: f %>
+          <% end %>
         </div>
         <div class="control">
           <p>La instalación de los equipos y repuestos adquiridos no está incluida en este valor, deberá presupuestarse aparte y en el lugar de montaje de los mismos. Los valores no incluyen IVA y están expresados en Pesos Argentinos. La empresa se reserva el derecho de modificarlos sin previo aviso.</p>
