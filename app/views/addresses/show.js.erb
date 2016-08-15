@@ -5,3 +5,4 @@ for(var key in object) {
 	if (!$element.length) $element = $('[name="payment\['+key+'\]"]');
 	$element.val(value);
 }
+$('#payment_zone_id').trigger('change');
