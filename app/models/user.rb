@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     $mp.post("/v1/customers/#{customer_id}/cards", { token: token })
   end
 
+  def delete_card(card_id)
+    $mp.delete("/v1/customers/#{customer_id}/cards/#{card_id}")
+  end
+
   def cards
     request = $mp.get("/v1/customers/#{customer_id}/cards")
     if request["status"] == "200"

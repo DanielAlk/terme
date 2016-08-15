@@ -1,0 +1,29 @@
+<% content_for :panel_subtitle, 'Tarjetas guardadas' %>
+
+<% if @cards.present? %>
+	<div class="panel-group nested" role="tablist" id="group-root">
+		<% @cards.each do |card| %>
+		  <div class="panel panel-success">
+		  	<div class="panel-heading" role="tab">
+		      <div class="panel-heading-actions">
+		      	<%= link_to destroy_user_card_path(card['id']), title: 'Eliminar', class: 'tooltip-trigger link-danger', method: 'delete', data: { confirm: '¿Seguro?' } do %>
+		          <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+		        <% end %>
+		      </div>
+		      <h4 class="panel-title">
+		      	<%= image_tag card['payment_method']['secure_thumbnail'], style: 'height: 17px;margin-right: 2px;' %>
+		        <%= card['payment_method']['name'].upcase %> terminada en <%= card['last_four_digits'] %>
+		      </h4>
+		    </div>
+		  </div>
+	  <% end %>
+	</div>
+	<p>
+		<small>
+			<sup>*</sup> La información de tus tarjetas es proporcionada por <strong>&copy; MercadoPago</strong><br>
+			<sup>*</sup> <strong>AriaWeb.com.ar</strong> no almacena ningún dato de tus tarjetas en sus servidores
+		</small>
+	</p>
+<% else %>
+	No tenés tarjetas guardadas.
+<% end %>

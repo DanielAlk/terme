@@ -55,6 +55,8 @@ Rails.application.routes.draw do
 
   constraints subdomain: lambda { |sd| !sd[/panel/] } do
     get 'profile', to: 'panel#profile', as: :profile
+    get 'profile/cards', to: 'panel#user_cards', as: :user_cards
+    delete 'profile/cards/:card_id', to: 'panel#destroy_user_card', as: :destroy_user_card
 
     devise_for :users, path: 'profile', controllers: {
       registrations: 'users/registrations',
