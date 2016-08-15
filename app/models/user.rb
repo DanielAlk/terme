@@ -9,9 +9,15 @@ class User < ActiveRecord::Base
   has_many :reviews, :as => :reviewer, :dependent => :destroy
   has_many :payments
 
+  before_destroy :free_user_from_payments, if: :payments?
+
   filterable search: [ :fname, :lname, :email ]
   filterable order: [ :fname, :lname, :email ]
   filterable labels: { order: { fname: 'Nombre', lname: 'Apellido' } }
+
+  def payments?
+    self.payments.present?
+  end
 
   def cart_count
     $redis.scan_each(match: "cart:#{id}:*").to_a.uniq.count
@@ -66,5 +72,13 @@ class User < ActiveRecord::Base
 			self.email[/[^@]+/]
 		end
 	end
+
+  private
+    def free_user_from_payments
+      self.payments.each do |payment|
+        payment.user = nil
+        payment.save
+      end
+    end
 
 end

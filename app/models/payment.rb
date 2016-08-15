@@ -6,7 +6,7 @@ class Payment < ActiveRecord::Base
   has_one :address, :as => :addressable, :dependent => :destroy
   has_many :payment_products, :dependent => :destroy
   has_many :products, through: :payment_products
-  validates :user, presence: true
+  validates :user, presence: true, if: :new_record?
   validates :zone, presence: true
   validates :address, presence: true
   validates :payment_products, presence: true
@@ -33,7 +33,7 @@ class Payment < ActiveRecord::Base
         payment.status_detail = payment.mercadopago_payment['status_detail']
         if payment.status_changed? && [:pending, :authorized, :in_process].include?(payment.status_was.try(:to_sym))
           if payment.status.try(:to_sym) == :approved
-            if payment.save_card
+            if payment.save_card && payment.user.present?
               payment.user.card = token
             end
           elsif [:rejected, :cancelled].include?(payment.status.try(:to_sym))

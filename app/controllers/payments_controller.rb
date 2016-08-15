@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
   before_action :authenticate_cart!, only: :create
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
   before_action :filterize, only: :index, if: :admin_signed_in?
-  filterize order: :updated_at_desc, param: :f
+  filterize order: :created_at_desc, param: :f
   layout 'panel'
 
   # GET /payments

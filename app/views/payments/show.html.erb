@@ -31,12 +31,22 @@
 </div>
 
 <% if admin_signed_in? %>
-  <p style="margin: 30px 0 20px;">
-    <%= link_to @payment.user, class: 'btn btn-sm btn-primary tooltip-trigger', title: @payment.user.email do %>
-      <span class="fa fa-user fa-fw"></span>
-      <%= @payment.user.name %>
-    <% end %>
-  </p>
+  <% if @payment.user.present? %>
+    <p style="margin: 30px 0 20px;">
+      <%= link_to @payment.user, class: 'btn btn-sm btn-primary tooltip-trigger', title: @payment.user.email do %>
+        <span class="fa fa-user fa-fw"></span>
+        <%= @payment.user.name %>
+      <% end %>
+    </p>
+  <% else %>
+    <p style="margin: 30px 0 20px;">
+      <%= link_to 'mailto:' + @payment.address.email, class: 'btn btn-sm btn-primary tooltip-trigger', title: @payment.address.email do %>
+        <span class="fa fa-user fa-fw"></span>
+        <%= @payment.address.name %>
+      <% end %>
+      <small>&nbsp; El usuario ya no tiene cuenta en AriaWeb</small>
+    </p>
+  <% end %>
 <% end %>
 
 <div class="well">
