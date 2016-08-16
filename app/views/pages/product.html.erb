@@ -5,7 +5,6 @@
     stock: <%= @product.stock %>,
     score: <%= @product.score %>
   });
-  $('form#new_contact').validate();
 <% end %>
 
 <% if user_signed_in? %>
@@ -169,44 +168,54 @@
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="modal-ask-product">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <% contact = Contact.new(subject: 'Consulta por ' + @product.title, contactable: @product) %>
-      <% contact.name = current_user.name if user_signed_in? %>
-      <% contact.email = current_user.email if user_signed_in? %>
-      <%= form_for contact do |f| %>
-        <%= hidden_field_tag :after_create_url, request.path %>
-        <%= f.hidden_field :contactable_id %>
-        <%= f.hidden_field :contactable_type %>
-        <% if user_signed_in? %>
-          <%= f.hidden_field :name %>
-          <%= f.hidden_field :email %>
-        <% end %>
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><%= @product.brand %></h4>
-        </div>
-        <div class="modal-body">
-          <% unless user_signed_in? %>
-            <div class="field">
-              <%= f.text_field :name, placeholder: 'Nombre completo', required: true %>
-            </div>
-            <div class="field">
-              <%= f.email_field :email, autofocus: true, required: true, placeholder: 'Email' %>
-            </div>
+<% if @product.ask? %>
+  <% content_for :extra_js do %>
+    $('form#new_contact').validate({
+      submitHandler: function(form) {
+        Pages.loader('Enviando consulta…');
+        form.submit();
+      }
+    });
+  <% end %>
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal-ask-product">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <% contact = Contact.new(subject: 'Consulta por ' + @product.title, contactable: @product) %>
+        <% contact.name = current_user.name if user_signed_in? %>
+        <% contact.email = current_user.email if user_signed_in? %>
+        <%= form_for contact do |f| %>
+          <%= hidden_field_tag :after_create_url, request.path %>
+          <%= f.hidden_field :contactable_id %>
+          <%= f.hidden_field :contactable_type %>
+          <% if user_signed_in? %>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :email %>
           <% end %>
-          <div class="field">
-            <%= f.text_field :subject, placeholder: 'Asunto', required: true %>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><%= @product.brand %></h4>
           </div>
-          <div class="field">
-            <%= f.text_area :message, required: true, style: 'height:100px;min-height:initial;max-height:initial;' %>
+          <div class="modal-body">
+            <% unless user_signed_in? %>
+              <div class="field">
+                <%= f.text_field :name, placeholder: 'Nombre completo', required: true %>
+              </div>
+              <div class="field">
+                <%= f.email_field :email, autofocus: true, required: true, placeholder: 'Email' %>
+              </div>
+            <% end %>
+            <div class="field">
+              <%= f.text_field :subject, placeholder: 'Asunto', required: true %>
+            </div>
+            <div class="field">
+              <%= f.text_area :message, required: true, style: 'height:100px;min-height:initial;max-height:initial;' %>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <%= f.submit "Consultar" %>
-        </div>
-      <% end %>
+          <div class="modal-footer">
+            <%= f.submit "Consultar" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
