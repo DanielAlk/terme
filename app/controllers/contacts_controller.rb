@@ -38,7 +38,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        Notifier.notify_admin(@contact).deliver_now
+        Notifier.notify_admin(@contact).deliver_later
         format.html { redirect_to after_create_url, notice: after_create_notice }
         format.json { render :show, status: :created, location: @contact }
       elsif @contact.newsletter? || @contact.partners?

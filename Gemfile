@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'redis', '~>3.2'
 gem 'hiredis', '~> 0.6.0'
 
+gem 'sucker_punch'
 gem 'figaro'
 gem 'devise', '3.4.1'
 gem 'ancestry'
