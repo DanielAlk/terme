@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   include Filterize
   include Cart
   include MercadoPagoHelper
+  skip_before_action :verify_authenticity_token, only: :notifications
   before_action :authenticate_user!, except: :notifications, unless: Proc.new { admin_signed_in? && [:index, :show].include?(action_name.to_sym) }
   before_action :set_cart, only: :create
   before_action :authenticate_cart!, only: :create
