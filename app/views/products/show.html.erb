@@ -76,6 +76,16 @@
         </a>
       </li>
     <% end %>
+    <% if @product.contacts.present? %>
+      <li role="presentation">
+        <a href="#contacts_tab" aria-controls="contacts_tab" role="tab" data-toggle="tab">
+          Consultas
+          <% if (contacts_count = @product.contacts.where(read: false).count) > 0 %>
+            <span class="badge"><%= contacts_count %></span>
+          <% end %>
+        </a>
+      </li>
+    <% end %>
     <% if @product.reviews.present? %>
       <li role="presentation">
         <a href="#reviews_tab" aria-controls="reviews_tab" role="tab" data-toggle="tab">
@@ -175,6 +185,24 @@
                   <td><%= payment.payment_method_id.upcase rescue nil %></td>
                   <td><b><%= payment.transaction_amount.to_s(:currency, unit: '$ ', separator: ",", delimiter: ".") %></b></td>
                   <td><%= payment.created_at.strftime('%d/%m/%Y') %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+    <% if @product.contacts.present? %>
+      <div role="tabpanel" class="tab-pane" id="contacts_tab">
+        <div class="table-responsive">
+          <table class="table table-condensed table-hover">
+            <tbody>
+              <% @product.contacts.order(created_at: :desc).each do |contact| %>
+                <tr class="<%= contact.read ? 'info' : 'success' %>" id="contact_<%= contact.id.to_s %>">
+                  <td></td>
+                  <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
+                  <td><%= link_to contact.email, contact, style: 'color:inherit;' %></td>
+                  <td><%= contact.created_at.strftime('%d-%m-%Y %H:%M') %></td>
                 </tr>
               <% end %>
             </tbody>

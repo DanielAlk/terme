@@ -13,8 +13,12 @@
 
 <p class="well">
   <strong>Nombre:</strong> <%= @contact.name %><br>
-  <strong>Email:</strong> <%= @contact.email %><br>
+  <strong>Email:</strong> <%= link_to @contact.email, 'mailto:' + @contact.email, style: 'color:inherit;' %><br>
   <strong>Compañía:</strong> <%= @contact.company %><br>
   <strong>Asunto:</strong> <%= @contact.subject %><br>
   <strong>Mensaje:</strong> <%= @contact.message %><br>
 </p>
+
+<% if @contact.contactable.present? %>
+  <%= render 'contact_product', product: @contact.contactable %>
+<% end %>

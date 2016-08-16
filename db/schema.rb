@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814093341) do
+ActiveRecord::Schema.define(version: 20160816050227) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -88,16 +88,20 @@ ActiveRecord::Schema.define(version: 20160814093341) do
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "contacts", force: :cascade do |t|
-    t.integer  "kind",       limit: 4,     default: 0
-    t.boolean  "read",                     default: false
-    t.string   "name",       limit: 255
-    t.string   "email",      limit: 255
-    t.string   "company",    limit: 255
-    t.string   "subject",    limit: 255
-    t.text     "message",    limit: 65535
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "kind",             limit: 4,     default: 0
+    t.boolean  "read",                           default: false
+    t.string   "name",             limit: 255
+    t.string   "email",            limit: 255
+    t.string   "company",          limit: 255
+    t.string   "subject",          limit: 255
+    t.text     "message",          limit: 65535
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "contactable_id",   limit: 4
+    t.string   "contactable_type", limit: 255
   end
+
+  add_index "contacts", ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false

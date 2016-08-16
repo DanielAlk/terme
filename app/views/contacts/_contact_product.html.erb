@@ -1,0 +1,13 @@
+<div class="display display-minimal">
+	<div class="display-caption">
+		<a class="display-thumb" href="<%= product_path(product) %>" style="background-image:url(<%= asset_path product.image :thumb %>)"></a>
+		<div class="display-bottom">
+			<span class="label label-primary"><%= product.category.title %></span>
+			<span class="label label-warning">Código: <%= product.key_code %></span>
+		</div>
+		<div class="display-body">
+			<h3 class="display-title"><%= link_to product.title, product %></h3>
+			<h4 class="display-subtitle"><%= product.description %></h4>
+		</div>
+	</div>
+</div>

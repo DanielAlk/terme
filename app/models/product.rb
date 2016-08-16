@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
   include Tinymce
 	friendly_id :slug_candidates, use: :slugged
 	belongs_to :category
+  has_many :contacts, :as => :contactable, :dependent => :destroy
   has_many :images, -> { order(position: :asc) }, as: :imageable, dependent: :destroy
   has_many :reviews, as: :reviewable, dependent: :destroy
   has_many :taggings, as: :taggable, dependent: :destroy
@@ -13,6 +14,7 @@ class Product < ActiveRecord::Base
   has_attached_file :data_sheet_file
 
   before_save :check_currency
+
   validates_attachment_content_type :data_sheet_file, content_type: "application/pdf"
   validates_length_of :title, minimum: 5, message: "debe contener al menos 5 caracteres", unless: :hidden?
   validates :category, presence: true, unless: :hidden?
@@ -25,7 +27,7 @@ class Product < ActiveRecord::Base
   filterable search: [ :title, :key_code, :characteristics, :data_sheet, :information, :description ]
   filterable range: [ :price ]
   filterable order: [ :status, :title, :brand, :category, :price, :key_code, :created_at, :updated_at ]
-  filterable joins: [ :reviews, :payments ]
+  filterable joins: [ :reviews, :payments, :contacts ]
   filterable labels: {
     order: {
       status: 'status', title: 'título', brand: 'marca', category: 'categoría', price: 'precio', key_code: 'código', created_at: 'creación', updated_at: 'modificación'
@@ -35,7 +37,7 @@ class Product < ActiveRecord::Base
       special: {is_regular: 'sin marca', is_new: 'nuevo', is_offer: 'oferta'}
     },
     joins: {
-      reviews: 'reviews', payments: 'compras'
+      reviews: 'reviews', payments: 'compras', contacts: 'consultas'
     }
   }
 
@@ -98,6 +100,7 @@ class Product < ActiveRecord::Base
   def destroy
     if self.deleted?
       if self.payments.present?
+        self.contacts.destroy_all
         self.images.destroy_all
         self.title = nil
         self.category = nil

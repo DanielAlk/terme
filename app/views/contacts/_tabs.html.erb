@@ -18,11 +18,20 @@
         <% end %>
       </a>
     </li>
+    <li role="presentation" class="<%= 'active' if @kind == :ask %>">
+      <a href="<%= contacts_path(:ask) %>">Consultas
+        <% if (ask_count = Contact.ask.where(read: false).count) > 0 %>
+          <span class="badge">
+            <%= ask_count %>
+          </span>
+        <% end %>
+      </a>
+    </li>
     <li role="presentation" class="<%= 'active' if @kind == :newsletter %>">
       <a href="<%= contacts_path(:newsletter) %>">Newsletter</a>
     </li>
     <li role="presentation" class="<%= 'active' if @kind == :partners %>">
-      <a href="<%= contacts_path(:partners) %>">Club de Partners</a>
+      <a href="<%= contacts_path(:partners) %>">Partners</a>
     </li>
   </ul>
 </div>

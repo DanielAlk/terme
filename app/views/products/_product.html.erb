@@ -5,6 +5,11 @@
 				<span><%= product.payments.count %></span>
 			</div>
 		<% end %>
+		<% if product.contacts.present? && (contacts_count = product.contacts.where(read: false).count) > 0 %>
+			<div class="display-notifications contacts">
+				<span><%= contacts_count %></span>
+			</div>
+		<% end %>
 		<div class="display-checkbox">
 			<label class="checkbox-inline">
 				<input class="checkbox-target" type="checkbox" name="product[ids][]" id="product_id_<%= product.id %>" value="<%= product.id %>">

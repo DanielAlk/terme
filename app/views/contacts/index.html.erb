@@ -42,12 +42,12 @@
   <%= form_tag contacts_path(@kind), method: :get do %>
     <div class="row">
       <%= button_tag 'Buscar', type: :submit, class: 'btn btn-xs btn-success' %>
-      <div class="col-xs-5">
+      <div class="col-xs-7">
         <div class="field">
           <%= search_field_tag 'f[search]', filterable(:search), placeholder: 'Buscar' %>
         </div>
       </div>
-      <div class="col-xs-5">
+      <div class="col-xs-3">
         <div class="field">
           <% reject = [:newsletter, :partners].include?(@kind) ? [:name, :read] : nil %>
           <%= select_tag 'f[order]', filterable_select(@contacts, :order, reject), prompt: 'Ordenar', class: 'selectpicker' %>
@@ -70,9 +70,16 @@
                 <input class="checkbox-target" type="checkbox" name="contact[ids][]" id="contact_id_<%= contact.id %>" value="<%= contact.id %>">
               </label>
             </td>
+            <% if contact.ask? %>
+              <td>
+                <%= link_to contact do %>
+                  <%= image_tag contact.contactable.image, style: 'height:20px;width:auto;margin:-5px;' %>
+                <% end %>
+              </td>
+            <% end %>
             <% unless contact.newsletter_or_partners? %>
               <td><%= link_to contact.name, contact, style: 'color:inherit;' %></td>
-              <td><%= link_to contact.email[0..12] + '…', contact, style: 'color:inherit;' %></td>
+              <td><%= link_to contact.email[0...18] + (contact.email.length > 18 ? '…' : ''), contact, style: 'color:inherit;' %></td>
             <% else %>
               <td class="clipboard-field"><%= contact.email %></td>
             <% end %>

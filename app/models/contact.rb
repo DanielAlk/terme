@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
 	include Filterable
+	belongs_to :contactable, polymorphic: true
 	filterable search: [ :name, :email, :company, :subject, :message ]
 	filterable order: [ :name, :email, :read, :created_at ]
 	filterable labels: {
@@ -15,8 +16,9 @@ class Contact < ActiveRecord::Base
 	validates :email, presence: true
 
 	before_save :mark_as_read, if: :newsletter_or_partners?
+	before_save :check_kind, if: Proc.new { |c| c.contactable.present? }
 
-	enum kind: [ :regular, :newsletter, :support, :partners ]
+	enum kind: [ :regular, :newsletter, :support, :partners, :ask ]
 
 	def newsletter_or_partners?
 		newsletter? || partners?
@@ -25,6 +27,10 @@ class Contact < ActiveRecord::Base
 	private
 		def mark_as_read
 			self.read = true
+		end
+
+		def check_kind
+			self.kind = :ask
 		end
 
 end

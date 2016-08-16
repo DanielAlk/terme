@@ -1,4 +1,16 @@
-<h2><%= { regular: 'Contacto', newsletter: 'Newsletter', support: 'Pedido de soporte', partners: 'Suscripción Club de Partners' }[@contact.kind.try(:to_sym)] %></h2>
+<h2>
+	<%= {
+		regular: 'Contacto',
+		newsletter: 'Newsletter',
+		support: 'Pedido de soporte',
+		partners: 'Suscripción Club de Partners',
+		ask: 'Consulta por ' + (@contact.contactable.title rescue '')
+	}[@contact.kind.try(:to_sym)] %>
+</h2>
+
+<% if @contact.contactable.present? %>
+	<strong>Producto:</strong> <%= link_to @contact.contactable.title, product_url(@contact.contactable, subdomain: 'panel') %><br><br>
+<% end %>
 
 <% if @contact.name.present? %>
 	<strong>Nombre:</strong> <%= @contact.name %><br>
