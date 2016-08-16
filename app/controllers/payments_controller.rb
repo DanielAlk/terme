@@ -85,14 +85,12 @@ class PaymentsController < ApplicationController
     if params[:type] == 'payment'
       @payment = Payment.find_mp(params['data.id'])
     end
-    respond_to do |format|
-      if @payment.present?
-        Notifier.notify_admin(@payment, special: :mercadopago_notification).deliver_later
-        Notifier.notify_user(@payment, special: :mercadopago_notification).deliver_later
-        format.json { render json: @payment.to_json, status: :ok }
-      else
-        format.json { head :no_content }
-      end
+    if @payment.present?
+      Notifier.notify_admin(@payment, 'mercadopago_notification').deliver_later
+      Notifier.notify_user(@payment, 'mercadopago_notification').deliver_later
+      render json: @payment.to_json, status: :ok
+    else
+      head :no_content
     end
   end
 
