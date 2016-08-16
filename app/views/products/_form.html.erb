@@ -68,7 +68,7 @@
     <div class="col-sm-2">
       <div class="field">
         <%= f.label :price, 'Precio <em>*</em>'.html_safe %><br>
-        <%= f.select :currency, options_for_select(Product.currencies.keys, @product.currency), {}, class: 'selectpicker' %>
+        <%= f.select :currency, options_for_select(Product.currencies.keys.map{|k| [k == 'ask' ? 'Consultar' : k, k] }, @product.currency), {}, class: 'selectpicker' %>
       </div>
     </div>
     <div class="col-sm-4">

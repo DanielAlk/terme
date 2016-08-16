@@ -37,7 +37,11 @@
     <span id="product_active_toggler_update" class="label label-<%= @product.active? ? 'success' : @product.draft? ? 'info' : 'danger' %>"><%= @product.status_translated %></span>
   </h4>
   <h3 class="pull-right" style="margin:0;">
-    <span class="label label-success"><%= number_to_currency(@product.price, unit: @product.currency + " ", separator: ",", delimiter: ".") %></span>
+    <% if @product.price.present? %>
+      <span class="label label-success"><%= number_to_currency(@product.price, unit: @product.currency + " ", separator: ",", delimiter: ".") %></span>
+    <% else %>
+      <span class="label label-primary">Consultar</span>
+    <% end %>
     <small class="label label-default">Stock: <%= @product.stock %></small>
   </h3>
   <div class="clearfix"></div>

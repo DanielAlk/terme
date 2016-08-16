@@ -11,10 +11,12 @@ class Product < ActiveRecord::Base
   has_many :payment_products
   has_many :payments, through: :payment_products
   has_attached_file :data_sheet_file
+
+  before_save :check_currency
   validates_attachment_content_type :data_sheet_file, content_type: "application/pdf"
   validates_length_of :title, minimum: 5, message: "debe contener al menos 5 caracteres", unless: :hidden?
   validates :category, presence: true, unless: :hidden?
-  validates_presence_of :price
+  validates_presence_of :price, unless: :ask?
   validates_presence_of :currency
 
   tinymce columns: [ :characteristics, :data_sheet, :information ]
@@ -39,7 +41,7 @@ class Product < ActiveRecord::Base
 
   enum status: [ :draft, :active, :paused, :deleted, :hidden ]
   enum special: [ :is_regular, :is_new, :is_offer ]
-  enum currency: [ '$', 'u$s' ]
+  enum currency: [ '$', 'u$s', :ask ]
 
   def price=(price)
     write_attribute(:price, price.gsub('.', '').gsub(',', '.'))
@@ -110,6 +112,10 @@ class Product < ActiveRecord::Base
   end
   
   private
+    def check_currency
+      write_attribute(:price, nil) if self.ask?
+    end
+
   	def should_generate_new_friendly_id?
   		title_changed?
   	end

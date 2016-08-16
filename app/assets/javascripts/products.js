@@ -109,4 +109,11 @@ Products.form = function() {
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
+	$('#product_currency').change(function(e) {
+		var $this = $(this);
+		var value = $this.val();
+		var $price = $('#product_price');
+		if (value == 'ask') $price.attr('disabled', 'disabled').val(null);
+		else $price.removeAttr('disabled');
+	}).triggerHandler('change');
 };

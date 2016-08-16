@@ -44,9 +44,15 @@
 						<span class="badge"><%= product.reviews.count %></span> <%= 'Review'.pluralize product.reviews.count %>
 					</small>
 				<% end %>
-				<span class="label label-success">
-					<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
-				</span>
+				<% if product.price.present? %>
+					<span class="label label-success">
+						<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+					</span>
+				<% else %>
+					<span class="label label-primary">
+						Consultar
+					</span>
+				<% end %>
 			</h4>
 		</div>
 		<div class="display-bottom">

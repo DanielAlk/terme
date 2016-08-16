@@ -16,7 +16,11 @@
       	<%= link_to product.title.upcase, product_page_path(product), title: product.title %>
       </div>
       <div class="precio-product">
-      	<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+        <% if product.price.present? %>
+        	<%= number_to_currency(product.price, unit: product.currency + " ", separator: ",", delimiter: ".") %>
+        <% else %>
+          Consultar
+        <% end %>
       </div>
     </div>
   </div>
