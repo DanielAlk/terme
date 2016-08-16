@@ -1,6 +1,13 @@
 <% content_for :extra_js do %>
   $('form#new_user').validate();
   $('form#new_registration').validate();
+  $('.swap-modals').click(function(e) {
+  	e.preventDefault();
+  	var $this = $(this);
+  	var href = $this.attr('href');
+  	$this.closest('.modal').find('.modal-header .close').click();
+  	$('[data-util="modal"][href="' + href + '"]').click();
+	});
 <% end %>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modal-login">
@@ -26,6 +33,9 @@
 	    	</div>
 	      <div class="modal-footer">
     	    <%= f.submit "Log in" %>
+    	    <div style="margin-top: 5px;border-top: 1px solid #ccc;padding-top: 5px;font-size: 12px;">
+    	    	¿No tenés cuenta en Aria? <a href="#modal-signup" class="swap-modals">Registrarse</a>
+    	    </div>
     	  </div>
       <% end %>
     </div>
@@ -54,6 +64,9 @@
 				</div>
 	      <div class="modal-footer">
     	    <%= f.submit "Sign up" %>
+    	    <div style="margin-top: 5px;border-top: 1px solid #ccc;padding-top: 5px;font-size: 12px;">
+    	    	¿Ya tenés cuenta en Aria? <a href="#modal-login" class="swap-modals">Ingresar</a>
+    	    </div>
     	  </div>
 			<% end %>
 		</div>
