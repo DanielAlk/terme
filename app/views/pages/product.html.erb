@@ -152,7 +152,7 @@
       <label class="tab3">tags</label>
       <div class="content-tab3">
         <% @product.tags.each do |tag| %>
-          <p><a href="#"><%= tag.name %></a></p>
+          <p><a href="<%= tag_page_path(tag) %>"><%= tag.name %></a></p>
         <% end %>
       </div>
     </div>
