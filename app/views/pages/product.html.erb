@@ -156,14 +156,16 @@
         <% end %>
       </div>
     </div>
-    <section class="relacionados">
-      <h2>Productos Relacionados</h2>
-      <ul id="relacionados" class="carrusel owl-carousel">
-        <% @related_products.each do |product| %>
-          <%= render 'products/box', product: product  %>
-        <% end %>
-      </ul>
-    </section>
+    <% if @related_products.present? %>
+      <section class="relacionados">
+        <h2>Productos Relacionados</h2>
+        <ul id="relacionados" class="carrusel owl-carousel">
+          <% @related_products.each do |product| %>
+            <%= render 'products/box', product: product  %>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
     <%= render 'partials/social_media' %>
   </div>
 </div>
