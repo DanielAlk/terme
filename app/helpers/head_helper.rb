@@ -49,7 +49,7 @@ module HeadHelper
 		when :pages
 			case action_name.to_sym
 			when :product
-				return @product.image :small
+				return asset_url(@product.image :small)
 			end
 		end
 		asset_url 'aria-logo.png'
