@@ -1,31 +1,90 @@
 module HeadHelper
 	def head_allow_robots?
-		true
+		controller_name.to_sym == :pages
 	end
 
 	def head_title
-		case action_name.to_sym
-		when :welcome
-			'Bienvenidos | Aria'
-		else
-			'Aria'
+		title = ''
+		case controller_name.to_sym
+		when :pages
+			case action_name.to_sym
+			when :home
+				title = 'Home | '
+			when :products, :tag
+				title = (@category.title rescue 'Productos') + ' | '
+			when :product
+				title = @product.title + ' | '
+			when :cart
+				title = 'Carrito | '
+			when :checkout
+				title = 'Checkout | '
+			when :partners
+				title = 'Club de Partners | '
+			when :services, :article
+				title = @article.title + ' | '
+			when :about
+				title = 'La Empresa | '
+			when :news
+				title = 'Noticias | '
+			when :contact
+				title = 'Contacto | '
+			end
 		end
+		title + 'Aria'
 	end
 
 	def head_description
-		''
+		case controller_name.to_sym
+		when :pages
+			case action_name.to_sym
+			when :product
+				return @product.characteristics
+			end
+		end
+		'Somos una compañía especializada en climatización, con un gran expertise en asesoramiento técnico, comercialización, instalación y mantenimiento de equipos de aire acondicionado.'
 	end
 
 	def head_og_image
-		#asset_url 'logo.jpg'
-		''
+		case controller_name.to_sym
+		when :pages
+			case action_name.to_sym
+			when :product
+				return @product.image :small
+			end
+		end
+		asset_url 'aria-logo.png'
+	end
+
+	def head_og_image_type
+		case controller_name.to_sym
+		when :pages
+			case action_name.to_sym
+			when :product
+				return @product.images.first.item.content_type
+			end
+		end
+		'image/png'
 	end
 
 	def head_og_image_width
-		'102'
+		case controller_name.to_sym
+		when :pages
+			case action_name.to_sym
+			when :product
+				return '500'
+			end
+		end
+		'192'
 	end
 
 	def head_og_image_height
-		'130'
+		case controller_name.to_sym
+		when :pages
+			case action_name.to_sym
+			when :product
+				return '460'
+			end
+		end
+		'192'
 	end
 end
