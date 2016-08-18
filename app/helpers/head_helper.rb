@@ -34,12 +34,11 @@ module HeadHelper
 	end
 
 	def head_description
-		sanitizer = Rails::Html::WhiteListSanitizer.new
 		case controller_name.to_sym
 		when :pages
 			case action_name.to_sym
 			when :product
-				return sanitizer.sanitize @product.characteristics
+				return sanitize @product.characteristics, tags: []
 			end
 		end
 		'Somos una compañía especializada en climatización, con un gran expertise en asesoramiento técnico, comercialización, instalación y mantenimiento de equipos de aire acondicionado.'
