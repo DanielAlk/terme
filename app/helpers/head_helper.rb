@@ -38,7 +38,7 @@ module HeadHelper
 		when :pages
 			case action_name.to_sym
 			when :product
-				return @product.characteristics
+				return sanitize @product.characteristics
 			end
 		end
 		'Somos una compañía especializada en climatización, con un gran expertise en asesoramiento técnico, comercialización, instalación y mantenimiento de equipos de aire acondicionado.'
