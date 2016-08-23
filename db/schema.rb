@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816050227) do
+ActiveRecord::Schema.define(version: 20160823215157) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20160816050227) do
     t.string   "token",                  limit: 255
     t.text     "additional_info",        limit: 65535
     t.text     "mercadopago_payment",    limit: 65535
-    t.integer  "mercadopago_payment_id", limit: 4
+    t.integer  "mercadopago_payment_id", limit: 8
     t.string   "status",                 limit: 255
     t.string   "status_detail",          limit: 255
     t.integer  "zone_id",                limit: 4
