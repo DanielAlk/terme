@@ -83,13 +83,15 @@ class PaymentsController < ApplicationController
 
   # POST /payments/notifications/
   def notifications
-    if params[:type] == 'payment'
-      @payment = Payment.find_mp(params['data.id'])
+    topic = params[:type] || params[:topic]
+    if topic.try(:to_sym) == :payment
+      id = params['data.id'] || params[:id]
+      @payment = Payment.find_mp(id)
     end
     if @payment.present?
       Notifier.notify_admin(@payment, 'mercadopago_notification').deliver_later
       Notifier.notify_user(@payment, 'mercadopago_notification').deliver_later
-      render json: @payment.to_json, status: :ok
+      render json: @payment, status: :ok
     else
       head :no_content
     end
