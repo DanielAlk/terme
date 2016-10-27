@@ -84,8 +84,8 @@ Pages.carousel = function() {
 	  margin:0,
 	  nav:true,
 	  dots:true,
-	  autoPlay: 7000,
-	  stopOnHover: true,
+	  autoplay:true,
+	  autoplayTimeout:5000,
 	  responsive:{
 	      0:{ items:1}
 	  }
