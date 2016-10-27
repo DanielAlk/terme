@@ -71,6 +71,14 @@ class Article < ActiveRecord::Base
 		[ :showcase, :news ].include? self.shape.to_sym
 	end
 
+	def link=(url)
+		if Rails.env.development?
+			write_attribute :link, url.gsub(/http:\/\/(?:panel\.local\.)?localhost:3000/, '')
+		else
+			write_attribute :link, url.gsub(/https?:\/\/(?:panel\.|www\.)?ariaweb.com.ar/, '')
+		end
+	end
+
 	private
   	def should_generate_new_friendly_id?
   		title_changed?
