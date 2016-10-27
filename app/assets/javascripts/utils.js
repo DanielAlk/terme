@@ -70,8 +70,9 @@ Utils.addOptionToSelect = function() {
 		if (!$(this).find('.add_option_to_select').length) return;
 		var form = this;
 		var $form = $(form);
-		$form.submit(function(e) {
-			var $input = $(this).find('.add_option_to_select:focus');
+		$form.keypress(function(e) {
+			if (e.which != 13) return;
+			var $input = $form.find('.add_option_to_select:focus');
 			if (!$input.length) return;
 			var $select = $($input.data('select'));
 			var value = $input.val();

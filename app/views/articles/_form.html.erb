@@ -5,6 +5,7 @@
 <% content_for :extra_js do %>
   $('#article_form').validate();
   Utils.selectpicker();
+  Utils.addOptionToSelect();
 <% end %>
 
 <%= form_for(@article, html: {id: 'article_form'}) do |f| %>
@@ -43,8 +44,12 @@
   <% end %>
   <% if @article.shape_has_link? %>
     <div class="field">
+      <%= f.label :link_title, 'Texto del botón:' %>
       <%= f.text_field :link_title, required: true, placeholder: 'Título del link' %>
-      <%= f.select :link, options_for_select([['Home'],['Productos', products_page_path],['Partners', partners_page_path],['La Empresa', about_page_path],['Noticias', news_page_path],['Contacto', contact_page_path]], @article.link), { prompt: 'Linkear a…' }, class: 'selectpicker' %>
+      <%= f.label :link, 'Link:', style: 'margin-top:5px;' %>
+      <%= f.select :link, options_for_select(article_link_options(@article.link), @article.link), { prompt: 'Linkear a…' }, class: 'selectpicker' %>
+      <%= text_field_tag 'new_link', nil, class: 'add_option_to_select', data: { select: '#article_link' }, placeholder: 'Otro...' %>
+      <small>Si el link no aparece en la lista, ingresalo en el campo de texto y tocá enter para agregarlo.</small>
     </div>
   <% end %>
   <% if @article.shape_has_image? %>
