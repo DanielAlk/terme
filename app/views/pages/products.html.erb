@@ -44,21 +44,39 @@
         <% end %>
       </ul>
     </div>
-    <section>
-      <div class="filtros">
-        <%= render 'products/page_filters' %>
-      </div>
-      <div class="product-grid-col4">
-        <ul>
-          <% @products.each do |product| %>
-            <%= render 'products/box', product: product  %>
+    <% if @product_categories.present? %>
+      <div class="content-info-like-home">
+        <% @product_categories.each do |category| %>
+          <% products = Product.active.where(category: category.subtree.map{|c| c}).order(special: :desc).take(7) %>
+          <% if products.present? %>
+            <section class="<%= 'first' if @first_category_rendered.blank? && (@first_category_rendered = true) %>">
+              <h2><%= link_to category.title, products_page_path(category), style: 'color:inherit' %></h2>
+              <ul id="<%= category.slug %>" class="carrusel owl-carousel">
+                <% products.each do |product| %>
+                  <%= render 'products/box', product: product  %>
+                <% end %>
+              </ul>
+            </section>
           <% end %>
-        </ul>
+        <% end %>
       </div>
-      <div class="filtros bottom">
-        <%= render 'products/page_filters' %>
-      </div>
-    </section>
+    <% else %>
+      <section>
+        <div class="filtros">
+          <%= render 'products/page_filters' %>
+        </div>
+        <div class="product-grid-col4">
+          <ul>
+            <% @products.each do |product| %>
+              <%= render 'products/box', product: product  %>
+            <% end %>
+          </ul>
+        </div>
+        <div class="filtros bottom">
+          <%= render 'products/page_filters' %>
+        </div>
+      </section>
+    <% end %>
     <%= render 'partials/social_media' %>
   </div>
 </div>

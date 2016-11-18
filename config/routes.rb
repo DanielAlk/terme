@@ -89,10 +89,12 @@ Rails.application.routes.draw do
   get 'catalogo/(:category_id)', to: 'pages#products', as: :products_page
   get 'tag/:tag_id', to: 'pages#tag', as: :tag_page
   get 'producto/:product_id', to: 'pages#product', as: :product_page
+  get 'productos-y-servicios', to: 'pages#products_and_services', as: :products_and_services_page
   get 'carrito', to: 'pages#cart', as: :cart_page
   get 'checkout', to: 'pages#checkout', as: :checkout_page
   get 'confirmar', to: 'pages#confirm', as: :confirm_page
   get 'partners', to: 'pages#partners', as: :partners_page
+  get 'servicios', to: 'pages#services_index', as: :services_page
   get 'servicios/:article_id', to: 'pages#services', as: :service_page
   get 'la-empresa', to: 'pages#about', as: :about_page
   get 'noticias', to: 'pages#news', as: :news_page

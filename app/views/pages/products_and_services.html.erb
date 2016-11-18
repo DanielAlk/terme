@@ -1,0 +1,39 @@
+<% content_for :body_class, 'aria' %>
+
+<div class="slider">
+	<div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
+</div>
+<div class="content">
+	<div class="content-info">
+		<section class="aria">
+			<div class="drow dcols-2-sm">
+				<div class="dcol">
+					<a href="<%= products_page_path %>" class="select-box">
+						<h3 class="select-box-title">Productos</h3>
+					</a>
+					<% @categories.each do |category| %>
+						<a href="<%= products_page_path category %>" class="select-box">
+							<h3 class="select-box-title"><%= category.title %></h3>
+						</a>
+					<% end %>
+				</div>
+				<div class="dcol mt-xs-40">
+					<a href="<%= services_page_path %>" class="select-box">
+						<h3 class="select-box-title">Servicios</h3>
+					</a>
+					<% @articles.each do |article| %>
+						<a href="<%= service_page_path(article) %>" class="select-box">
+							<h3 class="select-box-title"><%= article.title %></h3>
+						</a>
+					<% end %>
+				</div>
+			</div>
+		</section>
+		<div class="partner-bottom">
+			<div class="partner"><img src="<%= asset_path 'partner/carrier.jpg' %>" alt=""></div>
+			<div class="partner"><img src="<%= asset_path 'partner/toshiba.jpg' %>" alt=""></div>
+			<div class="partner"><img src="<%= asset_path 'partner/midea.jpg' %>" alt=""></div>
+		</div>
+		<%= render 'partials/social_media' %>
+	</div>
+</div>

@@ -42,6 +42,21 @@ Pages.products = function() {
 	$('.products-page-filters select').change(function(e) {
 	  $(this).closest('form').submit();
 	});
+	$('section .owl-carousel').owlCarousel({
+		loop:false,
+		items:1,
+		slideBy:1,
+		margin:0,
+		nav: true,
+		dots: false,
+		responsive:{
+			0:{items:1},
+			650:{items:2},
+			800:{items:3},
+			1025:{items:4},
+			1251:{items:5}
+		}
+	});
 };
 
 Pages.product = function(product) {

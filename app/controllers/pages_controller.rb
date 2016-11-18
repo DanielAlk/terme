@@ -12,9 +12,19 @@ class PagesController < ApplicationController
     @news = Article.limit(Article.shape_highlited(:news)).news.order(position: :asc)
   end
 
+  def products_and_services
+    @categories = Category.friendly.find('products').children
+    @articles = Article.services.order(position: :asc)
+  end
+
+  def services_index
+    @articles = Article.services.order(position: :asc)
+  end
+
   def products
     @category = Category.friendly.find(params[:category_id]) rescue nil
     @products = @products.where(category: @category.subtree.map{|c| c}) if @category.present?
+    @product_categories = Category.friendly.find('products').children unless @category.present?
     @products = @products.paginate(:page => params[:page], :per_page => params[:per_page] || 12)
   end
 
