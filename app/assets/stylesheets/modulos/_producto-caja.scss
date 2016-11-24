@@ -59,12 +59,14 @@
         }
     }
     .producto-info{
-        font-family: Aria-Book;
+        font-family: $f-aria-book;
+        font-weight: 300;
         .tipo-product{
             color: $c-verde-link;
             line-height: 1.2;
             font-size: $f-size;
-            font-family: Aria-Book;
+            font-family: $f-aria-book;
+            font-weight: 300;
             margin-bottom: 2px;
         }
         .nombre-product{
@@ -87,7 +89,8 @@
         .precio-product{
             padding: 10px 0;
             font-size: 19px;
-            font-family: Aria-Bold;
+            font-family: $f-aria-bold;
+            font-weight: 700;
             color: $c-gris-oscuro2;
         }
     }

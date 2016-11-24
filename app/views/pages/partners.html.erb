@@ -4,21 +4,21 @@
 <div class="content">
   <div class="content-info">
     <section class="clubpartners">
-      <h1>club de partners aria:</h1>
+      <h1>club de partners Terme:</h1>
       <div class="col-left">
-        <h2>¿Qué es el Club de Partners Aria (CPA)?</h2>
+        <h2>¿Qué es el Club de Partners Terme (CPT)?</h2>
         <p>Es un programa de membresía sin cargo para los Partners (miembros participantes), con grandes beneficios exclusivos,para profesionales vinculados con la construcción y remodelación de hogares y empresas.</p>
         <h2>¿Quiénes pueden ser parte del Club?</h2>
         <p>Se consideran Partners a todos aquellos profesionales que se encuentren dirigiendo proyectos de diseño, construcción y remodelación de hogares, comercios y empresas, tales como Arquitectos, Ingenieros Civiles, Diseñadores de Interiores, MMdeO, o directamente, propietarios.</p>
         <h2>¿En qué consiste el CPA?</h2>
-        <p>Ser Partner significa poder acceder a los beneficios exclusivos de contar con Aria como socio  estratégico para todos aquellos proyectos de climatización de obras civiles y comerciales, sin importar la magnitud de la misma. Funciona de manera muy simple: Un Partner, que cuente con una necesidad de climatización de un proyecto y lo presente en el CPA para que ARIA se convierta en el proveedor que realice dicho proyecto y lo realice efectivamente, obtiene los Beneficios Exclusivos del CPA.</p>
+        <p>Ser Partner significa poder acceder a los beneficios exclusivos de contar con Terme como socio  estratégico para todos aquellos proyectos de climatización de obras civiles y comerciales, sin importar la magnitud de la misma. Funciona de manera muy simple: Un Partner, que cuente con una necesidad de climatización de un proyecto y lo presente en el CPA para que TERME se convierta en el proveedor que realice dicho proyecto y lo realice efectivamente, obtiene los Beneficios Exclusivos del CPA.</p>
         <% unless user_signed_in? && Contact.partners.find_by(email: current_user.email).present? %>
           <a href="#modal-partners" data-util="modal">Participar</a>
         <% else %>
           <a href="javascript:void(0);">Ya estás participando</a>
         <% end %>
       </div>
-      <div class="col-right"> <img src="<%= asset_path 'club-partners/clubpartners.jpg' %>" alt="Club Partners Aria"> </div>
+      <div class="col-right"> <img src="<%= asset_path 'club-partners/clubpartners.jpg' %>" alt="Club Partners Terme"> </div>
     </section>
     <section class="beneficios">
       <h2>¿Cuáles son los Beneficios Exclusivos del CPA?</h2>
@@ -26,22 +26,22 @@
         <tbody>
           <tr>
             <td class="left"><h2>INSTANT <span>REBATE:</span></h2>
-              <p>Todo proyecto de climatización que un Partner presente en el CPA y que cuente con la aprobación de la contratación de Aria para realizarlo, por parte del propietario o contratista en la obra, generará un “INSTANT REBATE” (reembolso inmediato) para el Partner, constituido por un porcentaje del valor total del proyecto de climatización (en base a una escala), que se hará efectivo al momento de finalizar y cobrar el proyecto total.</p></td>
+              <p>Todo proyecto de climatización que un Partner presente en el CPA y que cuente con la aprobación de la contratación de Terme para realizarlo, por parte del propietario o contratista en la obra, generará un “INSTANT REBATE” (reembolso inmediato) para el Partner, constituido por un porcentaje del valor total del proyecto de climatización (en base a una escala), que se hará efectivo al momento de finalizar y cobrar el proyecto total.</p></td>
             <td class="right"><h2><span>BONUS:</span></h2>
               <p>Los Partners que mayor volumen de obras aportan, reciben además un premio adicional, según la escala vigente.</p></td>
           </tr>
           <tr>
             <td class="left"><h2>DESCUENTOS Y <span>BONIFICACIONES:</span></h2>
-              <p>También los clientes de los Partners se benefician, ya que obtienen descuentos y bonificaciones en toda la línea de productos y servicios de ARIA, para las obras que contraten a través del CPA.</p></td>
+              <p>También los clientes de los Partners se benefician, ya que obtienen descuentos y bonificaciones en toda la línea de productos y servicios de TERME, para las obras que contraten a través del CPA.</p></td>
             <td class="right"><h2>ASESORAMIENTO <span>SIN CARGO: </span></h2>
-              <p>La planificación de la climatización de un proyecto de construcción o remodelación, no es para nada sencillo. Por eso, los Partners de CPA pueden solicitar asesoramiento sin cargo por parte de ARIA para su obra.</p></td>
+              <p>La planificación de la climatización de un proyecto de construcción o remodelación, no es para nada sencillo. Por eso, los Partners de CPA pueden solicitar asesoramiento sin cargo por parte de Terme para su obra.</p></td>
           </tr>
           <tr>
             <td class="left"><h2><span>DISPONIBILIDAD:</span></h2>
-              <p>En el sector de climatización, conseguir un proveedor que comience rápidamente a trabajar en un proyecto, es una tarea difícil, por la demanda que se genera en determinados momentos del año. Pero los Partners de CPA cuentan con  disponibilidad inmediata para sumarse al proyecto por parte de ARIA y su personal.</p></td>
+              <p>En el sector de climatización, conseguir un proveedor que comience rápidamente a trabajar en un proyecto, es una tarea difícil, por la demanda que se genera en determinados momentos del año. Pero los Partners de CPA cuentan con  disponibilidad inmediata para sumarse al proyecto por parte de TERME y su personal.</p></td>
             <td class="right"><h2>¿Cómo participar <span>del CPA?</span></h2>
               <p>a) Completar el formulario de Admisión. <br>
-                b) Y confirmar la recepción del email de aceptación y bienvenida como Partners enviado por ARIA. </p>
+                b) Y confirmar la recepción del email de aceptación y bienvenida como Partners enviado por TERME. </p>
               <p>A partir de ese momento, el Partner puede comenzar a presentar proyecto ¡y a disfrutar de los Beneficios Exclusivos!</p></td>
           </tr>
         </tbody>
@@ -49,9 +49,9 @@
     </section>
     <div class="button-set">
       <% unless user_signed_in? && Contact.partners.find_by(email: current_user.email).present? %>
-        <a href="#modal-partners" data-util="modal">HAZ CLICK AQUí para empezar a participar del club de partners aria</a>
+        <a href="#modal-partners" data-util="modal">HAZ CLICK AQUí para empezar a participar del club de partners terme</a>
       <% else %>
-        <a href="javascript:void(0);">Ya estas participando del club de partners aria</a>
+        <a href="javascript:void(0);">Ya estas participando del club de partners terme</a>
       <% end %>
     </div>
     <div class="partner-bottom">
@@ -72,11 +72,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Club de Partners Aria</h4>
+          <h4 class="modal-title">Club de Partners Terme</h4>
         </div>
         <%= form_for Contact.new(email: user_signed_in? ? current_user.email : ''), html: {id: 'partners-form'} do |f| %>
           <%= hidden_field_tag :after_create_url, request.path %>
-          <%= hidden_field_tag :after_create_notice, 'Gracias por suscribirte al Club de Partners Aria' %>
+          <%= hidden_field_tag :after_create_notice, 'Gracias por suscribirte al Club de Partners Terme' %>
           <%= f.hidden_field :kind, value: :partners %>
           <div class="modal-body">
             <div class="field">

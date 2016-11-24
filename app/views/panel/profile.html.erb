@@ -36,7 +36,7 @@
 			<div class="hidden">
 				<%= form_for Contact.new(kind: :newsletter,email: current_user.email), html: { id: 'newsletter-create' } do |f| %>
 					<%= hidden_field_tag 'after_create_url', profile_url %>
-					<%= hidden_field_tag 'after_create_notice', 'Gracias por suscribirte al newsletter Aria.' %>
+					<%= hidden_field_tag 'after_create_notice', 'Gracias por suscribirte al newsletter Terme.' %>
 					<%= f.hidden_field :kind %>
 					<%= f.hidden_field :email %>
 				<% end %>
@@ -53,7 +53,7 @@
 			<div class="hidden">
 				<%= form_for Contact.new(kind: :partners,email: current_user.email), html: { id: 'partners-create' } do |f| %>
 					<%= hidden_field_tag 'after_create_url', profile_url %>
-					<%= hidden_field_tag 'after_create_notice', 'Gracias por suscribirte al Club de Partners Aria.' %>
+					<%= hidden_field_tag 'after_create_notice', 'Gracias por suscribirte al Club de Partners Terme.' %>
 					<%= f.hidden_field :kind %>
 					<%= f.hidden_field :email %>
 				<% end %>

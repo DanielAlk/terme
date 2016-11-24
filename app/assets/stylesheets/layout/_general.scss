@@ -61,7 +61,8 @@ input[type=search]::-webkit-search-results-decoration {
 }
 
 button{
-    font-family: Aria-Medium;
+    font-family: $f-aria-medium;
+    font-weight: 500;
     text-transform: uppercase;
     background: $c-verde-link;
     padding: 8px 12px 6px;

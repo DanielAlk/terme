@@ -25,7 +25,7 @@
             <% if admin_signed_in? %>
               <a href="<%= panel_path %>" class="registro"><%= current_admin.name %></a>
             <% else %>
-              <a href="<%= panel_path %>" class="registro">Panel Aria</a>
+              <a href="<%= panel_path %>" class="registro">Panel Terme</a>
             <% end %>
           <% else %>
             <a href="#modal-login" data-util="modal" class="ingrsar">Ingresar</a>
@@ -43,28 +43,27 @@
       </div>
     </div>
     <div class="info-head">
-      <div class="logo"> <a href="<%= root_path %>" class="logo"> <img src="<%= asset_path 'Aria_Logo.png' %>" alt="Aria" title="Aria"> </a> </div>
+      <div class="logo"> <a href="<%= root_path %>" class="logo"> <img src="<%= asset_path 'Terme_logo.png' %>" alt="Terme" title="Terme"> </a> </div>
       <div class="navegacion">
         <div class="menu-mobile"></div>
         <nav>
           <ul class="level0">
             <li><a href="<%= root_path %>">home</a></li>
             <li><a href="<%= about_page_path %>">La Empresa</a></li>
-            <li> <a href="<%= products_and_services_page_path %>">Productos y Servicios</a>
+            <li> <a href="<%= products_page_path %>">Productos</a>
               <ul class="level1">
-                <li> <a href="<%= products_page_path %>">Productos</a>
-                  <ul class="level2">
-                    <% Category.friendly.find('products').children.each do |category| %>
-                      <li><a href="<%= products_page_path category %>"><%= category.title %></a></li>
-                    <% end %>
-                  </ul>
-                </li>
+                <% Category.friendly.find('products').children.each do |category| %>
+                  <li><a href="<%= products_page_path category %>"><%= category.title %></a></li>
+                <% end %>
+              </ul>
+            </li>
+            <li> <a href="<%= services_page_path %>">Servicios</a>
+              <ul class="level1">
                 <% Article.services.order(position: :asc).each do |article| %>
                   <li> <a href="<%= service_page_path(article) %>"><%= article.title %></a></li>
                 <% end %>
               </ul>
             </li>
-            <li><a href="<%= partners_page_path %>">Clubs de Partners Aria</a></li>
             <li><a href="<%= news_page_path %>">Noticias</a></li>
             <li><a href="<%= contact_page_path %>">Contacto</a></li>
           </ul>

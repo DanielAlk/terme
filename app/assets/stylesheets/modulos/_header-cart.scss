@@ -87,10 +87,12 @@
                 font-size: 21px;
                 margin-bottom: 0;
                 font-family: $f-aria-book;
+                font-weight: 300;
             }
             .canti{
                 font-size: $f-size-l;
                 font-family: $f-aria-light;
+                font-weight: 100;
                 letter-spacing: 0.07em;
             }
         }
@@ -105,6 +107,7 @@
                 text-transform: uppercase;
                 font-size: $f-size-s;
                 font-family: $f-aria-light;
+                font-weight: 100;
                 letter-spacing: 0.07em;
                 color: $c-blanco;
                 
@@ -144,6 +147,7 @@
                 color: $c-blanco;
                 text-transform: uppercase;
                 font-family: $f-aria-book;
+                font-weight: 300;
                 font-size: $f-size;
                 padding: 11px 2px 8px;
                 

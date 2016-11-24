@@ -178,7 +178,8 @@
             color: $c-blanco;
             font-size: $f-size-xl;
             padding: 15px 10px 13px;
-            font-family: Aria-Medium;
+            font-family: $f-aria-medium;
+            font-weight: 500;
             line-height: 1;
             letter-spacing: 0.05em;
             display: inline-block;
@@ -279,7 +280,8 @@
                 margin-top: 40px;
                 margin-bottom: 80px;
                 h2{
-                    font-family: Aria-Medium;
+                    font-family: $f-aria-medium;
+                    font-weight: 500;
                     font-size: 28px;
                     letter-spacing: 0.02em;
                     margin-bottom: 20px;
@@ -350,7 +352,7 @@
                 height: 30px;
                 line-height: 33px;
                 cursor: pointer;
-                font-family: Aria-Demi;
+                font-family: $f-aria-demi;
                 font-size: $f-size-l;
                 text-transform: uppercase;
                 

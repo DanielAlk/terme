@@ -55,7 +55,8 @@ section.news{
                 text-align: center;
                 text-transform: uppercase;
                 color: $c-blanco;
-                font-family: Aria-Medium;
+                font-family: $f-aria-medium;
+                font-weight: 500;
                 font-size: $f-size;
                 letter-spacing: 0.04em;
                 background: $c-verde-link;

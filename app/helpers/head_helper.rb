@@ -30,7 +30,7 @@ module HeadHelper
 				title = 'Contacto | '
 			end
 		end
-		title + 'Aria'
+		title + 'Terme'
 	end
 
 	def head_description
@@ -52,7 +52,7 @@ module HeadHelper
 				return asset_url(@product.image :small)
 			end
 		end
-		asset_url 'aria-logo.png'
+		asset_url 'Terme_logo.png'
 	end
 
 	def head_og_image_type

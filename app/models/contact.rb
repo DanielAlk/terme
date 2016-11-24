@@ -12,7 +12,7 @@ class Contact < ActiveRecord::Base
 	validates :subject, presence: true, unless: :newsletter_or_partners?
 	validates :message, presence: true, unless: :newsletter_or_partners?
 	validates :email, uniqueness: { scope: :kind, message: 'Ya estás suscripto al newsletter' }, if: :newsletter?
-	validates :email, uniqueness: { scope: :kind, message: 'Ya sos miembro del Club Partners de Aria' }, if: :partners?
+	validates :email, uniqueness: { scope: :kind, message: 'Ya sos miembro del Club Partners de Terme' }, if: :partners?
 	validates :email, presence: true
 
 	before_save :mark_as_read, if: :newsletter_or_partners?

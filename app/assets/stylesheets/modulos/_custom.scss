@@ -25,7 +25,7 @@ form .fields-stack>label.error:nth-child(3), form .fields-stack>label.mp-error:n
 	&:not(.in) { display: none; }
 	form {
 		input[type=checkbox] { display: inline-block; width: auto; height: auto; }
-		input[type="submit"] { text-transform: uppercase; font-family: Aria-Demi; letter-spacing: 0.04em; line-height: 42px; cursor: pointer; }
+		input[type="submit"] { text-transform: uppercase; font-family: $f-aria-demi; letter-spacing: 0.04em; line-height: 42px; cursor: pointer; }
 		.field { position:relative; min-height: 40px; margin: 10px 0;
 			&.checkbox { padding: 3px 0; min-height: auto; }
 		}
@@ -35,7 +35,7 @@ form .fields-stack>label.error:nth-child(3), form .fields-stack>label.mp-error:n
 	@media(max-width: 420px) { width: 100%; }
 }
 .modal-content {background-color: #f8f8f8;padding: 10px;position: relative;font-size: 14px;}
-.modal-header { text-align: center; font-size: 20px; color: #707070; text-transform: uppercase; font-family: Aria-Demi; letter-spacing: 0.04em; line-height: 42px;
+.modal-header { text-align: center; font-size: 20px; color: #707070; text-transform: uppercase; font-family: $f-aria-demi; letter-spacing: 0.04em; line-height: 42px;
 	.close { position: absolute; right: 0; top: 0; margin: 10px; }
 }
 
@@ -58,17 +58,17 @@ td.precio-product,td.subtotal-product { white-space: nowrap; }
 	}
 }
 
-.btn-general { display: inline-block; padding: 15px; text-align: center; text-transform: uppercase; color: #ffffff; font-family: Aria-Medium; font-size: 14px; letter-spacing: 0.04em; background: #0b9444; cursor: pointer;
+.btn-general { display: inline-block; padding: 15px; text-align: center; text-transform: uppercase; color: #ffffff; font-family: $f-aria-medium; font-weight: 500; font-size: 14px; letter-spacing: 0.04em; background: #0b9444; cursor: pointer;
 	&:hover { background: #333333; }
 }
 
 section.contact .col-right .telefonos .fa { font-size: 33px; float: left; margin: -5px 0 0 5px; }
 footer .content-footer .contacto .telefonos .fa { color: #fff; font-size: 24px; float: left; margin: -1px 22px 0 1px; }
 
-.gral-btn { display: inline-block; background: #8dc63f; color: #fff; font-size: 14px; font-family: Aria-Medium; padding: 5px 12px 1px; line-height: 2; margin-bottom: 12px; }
+.gral-btn { display: inline-block; background: #8dc63f; color: #fff; font-size: 14px; font-family: $f-aria-medium; font-weight: 500; padding: 5px 12px 1px; line-height: 2; margin-bottom: 12px; }
 
 .gral-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9999999; color: #8dc63f;
-	&>span { display: block; text-align: center; position: relative; top: 50%; color: #FFF; font-family: Aria-Bold; }
+	&>span { display: block; text-align: center; position: relative; top: 50%; color: #FFF; font-family: $f-aria-bold; font-weight: 700; }
 	&>.fa { display: block; position: relative; left: 50%; top: 50%; margin: -112px -58px; }
 }
 
@@ -99,7 +99,7 @@ div.user span.dolar { float: right; text-transform: none; font-size: 12px; margi
 }
 
 .gral-select { border: 1px solid #e8e8e8; height: 40px; padding: 0 10px; font-size: 14px; color: #333333; font-family: Roboto; width: 100%; background-color: #ffffff; outline: none; }
-.gral-label { text-transform: uppercase; color: #333333; font-family: Aria-Medium; font-weight: 700; margin-bottom: 5px; display: inline-block; }
+.gral-label { text-transform: uppercase; color: #333333; font-family: $f-aria-medium; font-weight: 700; margin-bottom: 5px; display: inline-block; }
 
 .drow, .drow>* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
@@ -145,3 +145,7 @@ div.user span.dolar { float: right; text-transform: none; font-size: 12px; margi
 		}
 	}
 }
+
+
+/* TERME */
+header .content-header .info-head .logo { max-width: none; min-width: 52px; width: 6%; }

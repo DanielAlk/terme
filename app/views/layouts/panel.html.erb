@@ -16,7 +16,7 @@
 	<section class="page-top">
 		<div class="logo">
 			<a href="<%= request.subdomain[/panel/] ? home_path : root_path %>">
-				<img src="<%= asset_path 'Aria_Logo.png' %>" alt="Aria" title="Aria">
+				<img src="<%= asset_path 'Terme_logo.png' %>" alt="Terme" title="Terme">
 			</a>
 		</div>
 	</section>
@@ -24,7 +24,7 @@
 		<% if admin_signed_in? %>
 			<h1 class="text-center">
 				<i class="fa fa-sliders fa-fh" aria-hidden="true"></i>
-				Panel Aria
+				Panel Terme
 			</h1>
 		<% elsif user_signed_in? %>
 			<h1 class="text-center">

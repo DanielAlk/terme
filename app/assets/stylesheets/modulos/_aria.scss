@@ -10,7 +10,8 @@ body.aria{
         @include clear;
             
         h1{
-            font-family: Aria-Medium;
+            font-family: $f-aria-medium;
+            font-weight: 500;
             padding: 0 0 30px;
         }
         
@@ -34,7 +35,8 @@ body.aria{
             display: inline-block;
             text-align: center;
             padding: 15px 20px;
-            font-family: Aria-Medium;
+            font-family: $f-aria-medium;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             background: $c-verde-link;

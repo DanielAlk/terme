@@ -20,14 +20,15 @@
                 line-height: 0.8;
                 font-size: 80px;
                 color: $c-blanco;
-                font-family: Aria-Demi;
+                font-family: $f-aria-demi;
                 padding: 0;
                 margin: 0 0 20px;
                 letter-spacing: 0;
                 @include text-shadow(rgba($c-negro , 0.4) 1px 1px 4px);
                 
                 span{
-                    font-family: Aria-Book;
+                    font-family: $f-aria-book;
+                    font-weight: 300;
                     font-size: 65px;
                 }
             }
@@ -72,7 +73,7 @@
                 text-transform: uppercase;
                 color: $c-blanco;
                 font-size: 18px;
-                font-family: Aria-Demi;
+                font-family: $f-aria-demi;
                 background: $c-verde-link;
                 margin: 35px 0 0 0;
                 letter-spacing: 0.05em;
@@ -449,14 +450,15 @@
                 line-height: 0.8;
                 font-size: 70px;
                 color: $c-blanco;
-                font-family: Aria-Demi;
+                font-family: $f-aria-demi;
                 padding: 0;
                 margin: 0 0 18px;
                 letter-spacing: 0;
                 @include text-shadow(rgba($c-negro , 0.4) 1px 1px 4px);
                 
                 span{
-                    font-family: Aria-Book;
+                    font-family: $f-aria-book;
+                    font-weight: 300;
                     font-size: 55px;
                     text-transform: none;
                 }
@@ -476,7 +478,7 @@
                 text-transform: uppercase;
                 color: $c-blanco;
                 font-size: 18px;
-                font-family: Aria-Demi;
+                font-family: $f-aria-demi;
                 background: $c-verde-link;
                 margin: 35px 0 0 0;
                 letter-spacing: 0.05em;

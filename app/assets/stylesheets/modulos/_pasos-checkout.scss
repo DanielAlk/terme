@@ -4,14 +4,16 @@
     margin: 0 0 40px 0;
     h1,
     h2{
-        font-family: Aria-Medium;
+        font-family: $f-aria-medium;
+        font-weight: 500;
         font-size: 35px;
         display: inline-block;
         vertical-align: middle;
         padding-right: 40px;
         color: $c-gris-titulo-checkout;
         span{
-            font-family: Aria-Medium;
+            font-family: $f-aria-medium;
+            font-weight: 500;
             font-size: 35px;
             display: inline-block;
             vertical-align: middle;

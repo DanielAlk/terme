@@ -125,7 +125,7 @@ class ContactsController < ApplicationController
       if params[:after_create_notice].present?
         params[:after_create_notice]
       else
-        'Gracias por contactarte con ariaweb.com.ar'
+        'Gracias por contactarte con terme.com.ar'
       end
     end
 
