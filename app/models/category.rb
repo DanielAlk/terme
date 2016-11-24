@@ -3,7 +3,6 @@ class Category < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
 	has_ancestry
   has_many :products, :dependent => :restrict_with_error
-  has_many :payment_products, :dependent => :restrict_with_error
   before_destroy :abort_if_fixed
 
 	validates_presence_of :title
@@ -19,7 +18,7 @@ class Category < ActiveRecord::Base
 	private
 		def abort_if_fixed
 			self.descendants.each do |c|
-				if c.products.present? || c.payment_products.present?
+				if c.products.present?
 					errors.add 'Categoría', 'No se puede eliminar ya que alguna subcategoría tiene productos asociados.'
 					return false
 				end

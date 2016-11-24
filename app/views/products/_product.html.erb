@@ -1,10 +1,5 @@
 <div class="display" id="product_<%= product.id %>">
 	<div class="display-caption">
-		<% if product.payments.present? %>
-			<div class="display-notifications">
-				<span><%= product.payments.count %></span>
-			</div>
-		<% end %>
 		<% if product.contacts.present? && (contacts_count = product.contacts.where(read: false).count) > 0 %>
 			<div class="display-notifications contacts">
 				<span><%= contacts_count %></span>

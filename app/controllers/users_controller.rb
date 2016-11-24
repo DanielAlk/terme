@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @cards = @user.cards
   end
 
   # GET /users/new

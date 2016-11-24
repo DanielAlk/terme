@@ -26,11 +26,6 @@
         <a href="#addresses_tab" aria-controls="addresses_tab" role="tab" data-toggle="tab">Direcciones</a>
       </li>
     <% end %>
-    <% if @cards.present? %>
-      <li role="presentation">
-        <a href="#cards_tab" aria-controls="cards_tab" role="tab" data-toggle="tab">Tarjetas</a>
-      </li>
-    <% end %>
     <% if @user.reset_password_sent_at.present? && @user.reset_password_sent_at > @user.current_sign_in_at %>
       <li role="presentation">
         <a href="#reports_tab" aria-controls="reports_tab" role="tab" data-toggle="tab">Reportes</a>
@@ -63,22 +58,6 @@
         <div class="panel-group" role="tablist" id="group-root" style="margin-top:10px;">
           <% @user.addresses.each do |address| %>
             <%= render 'address', address: address %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-    <% if @cards.present? %>
-      <div role="tabpanel" class="tab-pane" id="cards_tab">
-        <div class="panel-group" role="tablist" id="group-root" style="margin-top:10px;">
-          <% @cards.each do |card| %>
-            <div class="panel panel-success">
-              <div class="panel-heading" role="tab">
-                <h4 class="panel-title">
-                  <%= image_tag card['payment_method']['secure_thumbnail'], style: 'height: 17px;margin-right: 2px;' %>
-                  <%= card['payment_method']['name'].upcase %> terminada en <%= card['last_four_digits'] %>
-                </h4>
-              </div>
-            </div>
           <% end %>
         </div>
       </div>
