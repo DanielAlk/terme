@@ -28,4 +28,3 @@
 //= require alerts
 //= require article_expansible
 //= require pages
-//= require cart

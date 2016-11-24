@@ -1,1 +1,0 @@
-json.extract! @cart, :count, :total, :items, :products

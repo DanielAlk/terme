@@ -35,9 +35,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'redis', '~>3.2'
-gem 'hiredis', '~> 0.6.0'
-
 gem 'sucker_punch'
 gem 'figaro'
 gem 'devise', '3.4.1'
@@ -57,8 +54,6 @@ gem 'tinymce-rails'
 gem 'bootstrap-select-rails'
 gem 'autonumeric-rails'
 gem 'clipboard-rails'
-
-gem 'mercadopago-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

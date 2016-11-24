@@ -68,19 +68,8 @@ Rails.application.routes.draw do
     resources :reviews, path: 'profile/reviews'
     resources :contacts, path: 'profile/soporte', only: :new
     resources :contacts, only: :destroy
-
-    resource :cart, :defaults => { :format => :json }, only: [:show] do
-      get 'stock', to: 'carts#stock', as: :product_stock
-      put 'add', to: 'carts#add', as: :add_to
-      put 'remove', to: 'carts#remove', as: :remove_from
-    end
   end
 
-  resources :payments, only: [ :index, :show, :create ] do
-    collection do
-      post 'notifications', action: :notifications
-    end
-  end
   resources :contacts, only: :create
 
   root 'pages#home'
@@ -90,9 +79,6 @@ Rails.application.routes.draw do
   get 'tag/:tag_id', to: 'pages#tag', as: :tag_page
   get 'producto/:product_id', to: 'pages#product', as: :product_page
   get 'productos-y-servicios', to: 'pages#products_and_services', as: :products_and_services_page
-  get 'carrito', to: 'pages#cart', as: :cart_page
-  get 'checkout', to: 'pages#checkout', as: :checkout_page
-  get 'confirmar', to: 'pages#confirm', as: :confirm_page
   get 'partners', to: 'pages#partners', as: :partners_page
   get 'servicios', to: 'pages#services_index', as: :services_page
   get 'servicios/:article_id', to: 'pages#services', as: :service_page

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823215157) do
+ActiveRecord::Schema.define(version: 20160816050227) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",          limit: 255
@@ -131,49 +131,6 @@ ActiveRecord::Schema.define(version: 20160823215157) do
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
-  create_table "payment_products", force: :cascade do |t|
-    t.integer  "payment_id",    limit: 4
-    t.integer  "product_id",    limit: 4
-    t.integer  "quantity",      limit: 4
-    t.decimal  "price",                     precision: 8, scale: 2
-    t.string   "title",         limit: 255
-    t.string   "key_code",      limit: 255
-    t.string   "brand",         limit: 255
-    t.integer  "category_id",   limit: 4
-    t.integer  "currency",      limit: 4,                           default: 0
-    t.string   "description",   limit: 255
-    t.string   "external_link", limit: 255
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-  end
-
-  add_index "payment_products", ["category_id"], name: "index_payment_products_on_category_id", using: :btree
-  add_index "payment_products", ["payment_id"], name: "index_payment_products_on_payment_id", using: :btree
-  add_index "payment_products", ["product_id"], name: "index_payment_products_on_product_id", using: :btree
-
-  create_table "payments", force: :cascade do |t|
-    t.integer  "user_id",                limit: 4
-    t.decimal  "transaction_amount",                   precision: 8, scale: 2
-    t.integer  "installments",           limit: 4,                             default: 1
-    t.decimal  "shipment_cost",                        precision: 8, scale: 2
-    t.string   "payment_method_id",      limit: 255
-    t.string   "token",                  limit: 255
-    t.text     "additional_info",        limit: 65535
-    t.text     "mercadopago_payment",    limit: 65535
-    t.integer  "mercadopago_payment_id", limit: 8
-    t.string   "status",                 limit: 255
-    t.string   "status_detail",          limit: 255
-    t.integer  "zone_id",                limit: 4
-    t.boolean  "save_address",                                                 default: false
-    t.boolean  "save_card",                                                    default: false
-    t.datetime "created_at",                                                                   null: false
-    t.datetime "updated_at",                                                                   null: false
-    t.decimal  "dolar",                                precision: 8, scale: 2
-  end
-
-  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
-  add_index "payments", ["zone_id"], name: "index_payments_on_zone_id", using: :btree
-
   create_table "products", force: :cascade do |t|
     t.string   "title",                        limit: 255
     t.integer  "status",                       limit: 4,                             default: 0
@@ -268,9 +225,9 @@ ActiveRecord::Schema.define(version: 20160823215157) do
     t.string   "google",     limit: 255
     t.string   "linkedin",   limit: 255
     t.string   "youtube",    limit: 255
-    t.decimal  "dolar",                  precision: 8, scale: 2
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.decimal  "dolar",                  precision: 8, scale: 2
   end
 
   create_table "zones", force: :cascade do |t|
@@ -282,11 +239,6 @@ ActiveRecord::Schema.define(version: 20160823215157) do
   end
 
   add_foreign_key "addresses", "zones"
-  add_foreign_key "payment_products", "categories"
-  add_foreign_key "payment_products", "payments"
-  add_foreign_key "payment_products", "products"
-  add_foreign_key "payments", "users"
-  add_foreign_key "payments", "zones"
   add_foreign_key "products", "categories"
   add_foreign_key "taggings", "tags"
 end

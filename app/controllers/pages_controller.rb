@@ -1,8 +1,5 @@
 class PagesController < ApplicationController
-  include Cart
   include Filterize
-  before_action :authenticate_user!, only: [:cart, :checkout, :confirm]
-  before_action :set_cart, only: [:cart, :checkout]
   before_action :filterize, only: [:products, :tag]
   filterize object: :product, order: :special_desc, scope: :active, param: :f
   layout 'soon', only: :soon
@@ -41,16 +38,6 @@ class PagesController < ApplicationController
   def product
     @product = Product.active.friendly.find(params[:product_id])
     @related_products = @product.category.products.active.where.not(id: @product.id).limit(10).shuffle
-  end
-
-  def cart
-  end
-
-  def checkout
-    redirect_to cart_page_url if @cart[:items].blank?
-  end
-
-  def confirm
   end
 
   def partners

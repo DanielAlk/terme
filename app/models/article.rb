@@ -75,7 +75,7 @@ class Article < ActiveRecord::Base
 		if Rails.env.development?
 			write_attribute :link, url.gsub(/http:\/\/(?:panel\.local\.)?localhost:3000/, '')
 		else
-			write_attribute :link, url.gsub(/https?:\/\/(?:panel\.|www\.)?ariaweb.com.ar/, '')
+			write_attribute :link, url.gsub(/https?:\/\/(?:panel\.|www\.)?terme.com.ar/, '')
 		end
 	end
 

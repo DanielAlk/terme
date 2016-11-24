@@ -7,16 +7,6 @@
   });
 <% end %>
 
-<% if user_signed_in? %>
-  <script type="application/json" id="productJSON">
-    <%= { id: @product.id, stock: @product.stock_available_to_user(current_user.id) }.to_json.html_safe %>
-  </script>
-<% else %>
-  <script type="application/json" id="productJSON">
-    <%= { id: @product.id, stock: @product.stock_available }.to_json.html_safe %>
-  </script>
-<% end %>
-
 <div class="slider">
   <div><img src="<%= asset_path 'imgs_top/img_catalogo.jpg' %>" alt="Catálogo de Productos"></div>
 </div>
@@ -89,7 +79,7 @@
             <div class="code-stock">
               <div class="sku">Código de Producto: <span><%= @product.key_code %></span></div>
               <div class="stock">
-                En stock: <span id="stock_available"><%= user_signed_in? ? @product.stock_available_to_user(current_user.id) : @product.stock_available %></span> u.
+                En stock: <span id="stock_available"><%= @product.stock %></span> u.
               </div>
             </div>
           </div>
@@ -108,33 +98,9 @@
           <% end %>
           <div class="separador"></div>
           <div class="agregar-carrito">
-            <% if @product.price.present? %>
-              <form>
-                <div class="cantidad" id="quantity">
-                  <label >Catidad en carrito:</label>
-                  <span class="menos">-</span>
-                  <input type="text" class="qty" id="quantity_input" name="cantidad" value="0" autocomplete="off"/>
-                  <span class="mas">+</span>
-                </div>
-                <div class="agregar-boton">
-                  <% if request.subdomain[/panel/] %>
-                    <%= link_to 'Agregar al Carrito', 'javascript:Alerts.danger("Para usar el carrito tenés que salir del Panel Aria")' %>
-                  <% elsif user_signed_in? %>
-                    <%= link_to 'Agregar al Carrito', add_to_cart_path, id: 'cart-add' %>
-                  <% else %>
-                    <%= link_to 'Agregar al Carrito', '#modal-login', data: { util: 'modal' } %>
-                  <% end %>
-                </div>
-                <div class="compartir-product" style="display:none;">
-                  <ul>
-                    <li><a href="#">+ Email a un amigo</a></li>
-                    <li><a href="#">+ Compartir en Facebook</a></li>
-                    <li><a href="#">+ Compartir en Twitter</a></li>
-                  </ul>
-                </div>
-              </form>
-              <small>Los productos permanecen en tu carrito por 10 minutos. ¡Confirmá tu compra!</small>
-            <% end %>
+            <div class="agregar-boton">
+              <%= link_to 'Agregar al Carrito', '#modal-ask-product', data: { util: 'modal' } %>
+            </div>
           </div>
         </div>
       </div>
@@ -170,54 +136,52 @@
   </div>
 </div>
 
-<% if @product.ask? %>
-  <% content_for :extra_js do %>
-    $('form#new_contact').validate({
-      submitHandler: function(form) {
-        Pages.loader('Enviando consulta…');
-        form.submit();
-      }
-    });
-  <% end %>
-  <div class="modal fade" tabindex="-1" role="dialog" id="modal-ask-product">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <% contact = Contact.new(subject: 'Consulta por ' + @product.title, contactable: @product) %>
-        <% contact.name = current_user.name if user_signed_in? %>
-        <% contact.email = current_user.email if user_signed_in? %>
-        <%= form_for contact do |f| %>
-          <%= hidden_field_tag :after_create_url, request.path %>
-          <%= f.hidden_field :contactable_id %>
-          <%= f.hidden_field :contactable_type %>
-          <% if user_signed_in? %>
-            <%= f.hidden_field :name %>
-            <%= f.hidden_field :email %>
-          <% end %>
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><%= @product.brand %></h4>
-          </div>
-          <div class="modal-body">
-            <% unless user_signed_in? %>
-              <div class="field">
-                <%= f.text_field :name, placeholder: 'Nombre completo', required: true %>
-              </div>
-              <div class="field">
-                <%= f.email_field :email, autofocus: true, required: true, placeholder: 'Email' %>
-              </div>
-            <% end %>
-            <div class="field">
-              <%= f.text_field :subject, placeholder: 'Asunto', required: true %>
-            </div>
-            <div class="field">
-              <%= f.text_area :message, required: true, style: 'height:100px;min-height:initial;max-height:initial;' %>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <%= f.submit "Consultar" %>
-          </div>
+<% content_for :extra_js do %>
+  $('form#new_contact').validate({
+    submitHandler: function(form) {
+      Pages.loader('Enviando consulta…');
+      form.submit();
+    }
+  });
+<% end %>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-ask-product">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% contact = Contact.new(subject: 'Consulta por ' + @product.title, contactable: @product) %>
+      <% contact.name = current_user.name if user_signed_in? %>
+      <% contact.email = current_user.email if user_signed_in? %>
+      <%= form_for contact do |f| %>
+        <%= hidden_field_tag :after_create_url, request.path %>
+        <%= f.hidden_field :contactable_id %>
+        <%= f.hidden_field :contactable_type %>
+        <% if user_signed_in? %>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :email %>
         <% end %>
-      </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><%= @product.brand %></h4>
+        </div>
+        <div class="modal-body">
+          <% unless user_signed_in? %>
+            <div class="field">
+              <%= f.text_field :name, placeholder: 'Nombre completo', required: true %>
+            </div>
+            <div class="field">
+              <%= f.email_field :email, autofocus: true, required: true, placeholder: 'Email' %>
+            </div>
+          <% end %>
+          <div class="field">
+            <%= f.text_field :subject, placeholder: 'Asunto', required: true %>
+          </div>
+          <div class="field">
+            <%= f.text_area :message, required: true, style: 'height:100px;min-height:initial;max-height:initial;' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Consultar" %>
+        </div>
+      <% end %>
     </div>
   </div>
-<% end %>
+</div>
