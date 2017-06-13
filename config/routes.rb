@@ -51,6 +51,15 @@ Rails.application.routes.draw do
         post '/clone', action: :clone
       end
     end
+    resources :works do
+      collection do
+        put '/', action: :update_many
+        delete '/', action: :destroy_many
+      end
+      member do
+        post '/clone', action: :clone
+      end
+    end
   end
 
   constraints subdomain: lambda { |sd| !sd[/panel/] } do
@@ -77,6 +86,9 @@ Rails.application.routes.draw do
   get 'tag/:tag_id', to: 'pages#tag', as: :tag_page
   get 'producto/:product_id', to: 'pages#product', as: :product_page
   get 'productos-y-servicios', to: 'pages#products_and_services', as: :products_and_services_page
+  get 'obras/(:category_id)', to: 'pages#works', as: :works_page
+  get 'obra/:work_id', to: 'pages#work', as: :work_page
+  get 'obra-tag/:tag_id', to: 'pages#work_tag', as: :work_tag_page
   get 'partners', to: 'pages#partners', as: :partners_page
   get 'servicios', to: 'pages#services_index', as: :services_page
   get 'servicios/:article_id', to: 'pages#services', as: :service_page

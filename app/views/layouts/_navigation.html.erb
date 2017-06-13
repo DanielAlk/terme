@@ -59,6 +59,7 @@
             </li>
             <li> <a href="<%= services_page_path %>">Servicios</a>
               <ul class="level1">
+                <li> <a href="<%= works_page_path %>">Instalación y mantenimiento</a></li>
                 <% Article.services.order(position: :asc).each do |article| %>
                   <li> <a href="<%= service_page_path(article) %>"><%= article.title %></a></li>
                 <% end %>
